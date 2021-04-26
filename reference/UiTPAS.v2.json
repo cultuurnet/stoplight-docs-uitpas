@@ -1,0 +1,939 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "UiTPAS API Reference",
+    "version": "2.0",
+    "contact": {
+      "name": "publiq helpdesk",
+      "email": "vragen@publiq.be"
+    },
+    "description": "With UiTPAS API 2.0 you can retrieve ticket sale prices for specific UiTPAS numbers, and register ticket sales for specific UiTPAS numbers.\n\nFuture versions will also include support for more features like saving points and exchanging them for benefits."
+  },
+  "servers": [
+    {
+      "url": "https://api.uitpas.be",
+      "description": "Production"
+    },
+    {
+      "url": "https://api-test.uitpas.be",
+      "description": "Testing"
+    }
+  ],
+  "tags": [
+    {
+      "name": "TicketSale",
+      "description": "Operations related to ticket sales"
+    }
+  ],
+  "paths": {
+    "/events/{eventId}/prices/{uitpasNumber}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/eventId"
+        },
+        {
+          "$ref": "#/components/parameters/uitpasNumber"
+        }
+      ],
+      "get": {
+        "summary": "PROPOAL A - Get ticket prices",
+        "tags": [
+          "TicketSale"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "description": "",
+                  "minItems": 1,
+                  "uniqueItems": true,
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "category": {
+                        "$ref": "#/components/schemas/priceCategory"
+                      },
+                      "name": {
+                        "$ref": "#/components/schemas/priceName"
+                      },
+                      "price": {
+                        "$ref": "#/components/schemas/price"
+                      },
+                      "priceCurrency": {
+                        "$ref": "#/components/schemas/priceCurrency"
+                      },
+                      "uitpasPrices": {
+                        "type": "array",
+                        "uniqueItems": true,
+                        "minItems": 0,
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "$ref": "#/components/schemas/uitpasPriceId"
+                            },
+                            "name": {
+                              "$ref": "#/components/schemas/priceName"
+                            },
+                            "price": {
+                              "$ref": "#/components/schemas/price"
+                            },
+                            "priceCurrency": {
+                              "$ref": "#/components/schemas/priceCurrency"
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "name",
+                            "price",
+                            "priceCurrency"
+                          ],
+                          "readOnly": true
+                        }
+                      }
+                    },
+                    "required": [
+                      "category",
+                      "name",
+                      "price",
+                      "priceCurrency",
+                      "uitpasPrices"
+                    ],
+                    "readOnly": true
+                  },
+                  "readOnly": true
+                },
+                "examples": {
+                  "Single price": {
+                    "value": [
+                      {
+                        "category": "base",
+                        "name": {
+                          "nl": "Basistarief",
+                          "fr": "Tarif de base",
+                          "en": "Base tariff",
+                          "de": "Basisrate"
+                        },
+                        "price": 10,
+                        "priceCurrency": "EUR",
+                        "uitpasPrices": []
+                      }
+                    ]
+                  },
+                  "Single price with optional \"kansentarief\" reduction": {
+                    "value": [
+                      {
+                        "category": "base",
+                        "name": {
+                          "nl": "Basistarief",
+                          "fr": "Tarif de base",
+                          "en": "Base tariff",
+                          "de": "Basisrate"
+                        },
+                        "price": 10,
+                        "priceCurrency": "EUR",
+                        "uitpasPrices": [
+                          {
+                            "id": 1,
+                            "name": {
+                              "nl": "Kansentarief"
+                            },
+                            "price": 2,
+                            "priceCurrency": "EUR"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "Single price with optional coupon reduction": {
+                    "value": [
+                      {
+                        "category": "base",
+                        "name": {
+                          "nl": "Basistarief",
+                          "fr": "Tarif de base",
+                          "en": "Base tariff",
+                          "de": "Basisrate"
+                        },
+                        "price": 10,
+                        "priceCurrency": "EUR",
+                        "uitpasPrices": [
+                          {
+                            "id": 2,
+                            "name": {
+                              "nl": "Coupon €6 korting"
+                            },
+                            "price": 4,
+                            "priceCurrency": "EUR"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "Single price with multiple optional UiTPAS reductions": {
+                    "value": [
+                      {
+                        "category": "base",
+                        "name": {
+                          "nl": "Basistarief",
+                          "fr": "Tarif de base",
+                          "en": "Base tariff",
+                          "de": "Basisrate"
+                        },
+                        "price": 10,
+                        "priceCurrency": "EUR",
+                        "uitpasPrices": [
+                          {
+                            "id": 1,
+                            "name": {
+                              "nl": "Kansentarief"
+                            },
+                            "price": 2,
+                            "priceCurrency": "EUR"
+                          },
+                          {
+                            "id": 2,
+                            "name": {
+                              "nl": "Coupon €6 korting"
+                            },
+                            "price": 4,
+                            "priceCurrency": "EUR"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "Multiple prices": {
+                    "value": [
+                      {
+                        "category": "base",
+                        "name": {
+                          "nl": "string",
+                          "fr": "string",
+                          "de": "string",
+                          "en": "string"
+                        },
+                        "price": 10,
+                        "priceCurrency": "EUR",
+                        "uitpasPrices": []
+                      },
+                      {
+                        "category": "tariff",
+                        "name": {
+                          "nl": "Senioren"
+                        },
+                        "price": 6,
+                        "priceCurrency": "EUR",
+                        "uitpasPrices": []
+                      }
+                    ]
+                  },
+                  "Multiple prices with optional \"kansentarief\" reduction": {
+                    "value": [
+                      {
+                        "category": "base",
+                        "name": {
+                          "nl": "string",
+                          "fr": "string",
+                          "de": "string",
+                          "en": "string"
+                        },
+                        "price": 10,
+                        "priceCurrency": "EUR",
+                        "uitpasPrices": [
+                          {
+                            "id": 1,
+                            "name": {
+                              "nl": "Kansentarief"
+                            },
+                            "price": 2,
+                            "priceCurrency": "EUR"
+                          }
+                        ]
+                      },
+                      {
+                        "category": "tariff",
+                        "name": {
+                          "nl": "Senioren"
+                        },
+                        "price": 6,
+                        "priceCurrency": "EUR",
+                        "uitpasPrices": [
+                          {
+                            "id": 1,
+                            "name": {
+                              "nl": "Kansentarief"
+                            },
+                            "price": 2,
+                            "priceCurrency": "EUR"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "Multiple prices with optional coupon reduction": {
+                    "value": [
+                      {
+                        "category": "base",
+                        "name": {
+                          "nl": "string",
+                          "fr": "string",
+                          "de": "string",
+                          "en": "string"
+                        },
+                        "price": 10,
+                        "priceCurrency": "EUR",
+                        "uitpasPrices": [
+                          {
+                            "id": 2,
+                            "name": {
+                              "nl": "Coupon €6 korting"
+                            },
+                            "price": 4,
+                            "priceCurrency": "EUR"
+                          }
+                        ]
+                      },
+                      {
+                        "category": "tariff",
+                        "name": {
+                          "nl": "Senioren"
+                        },
+                        "price": 6,
+                        "priceCurrency": "EUR",
+                        "uitpasPrices": [
+                          {
+                            "id": 2,
+                            "name": {
+                              "nl": "Coupon €6 korting"
+                            },
+                            "price": 0,
+                            "priceCurrency": "EUR"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "Multiple prices with multiple optional UiTPAS reductions": {
+                    "value": [
+                      {
+                        "category": "base",
+                        "name": {
+                          "nl": "string",
+                          "fr": "string",
+                          "de": "string",
+                          "en": "string"
+                        },
+                        "price": 10,
+                        "priceCurrency": "EUR",
+                        "uitpasPrices": [
+                          {
+                            "id": 1,
+                            "name": {
+                              "nl": "Kansentarief"
+                            },
+                            "price": 2,
+                            "priceCurrency": "EUR"
+                          },
+                          {
+                            "id": 2,
+                            "name": {
+                              "nl": "Coupon €6 korting"
+                            },
+                            "price": 4,
+                            "priceCurrency": "EUR"
+                          }
+                        ]
+                      },
+                      {
+                        "category": "tariff",
+                        "name": {
+                          "nl": "Senioren"
+                        },
+                        "price": 6,
+                        "priceCurrency": "EUR",
+                        "uitpasPrices": [
+                          {
+                            "id": 1,
+                            "name": {
+                              "nl": "Kansentarief"
+                            },
+                            "price": 2,
+                            "priceCurrency": "EUR"
+                          },
+                          {
+                            "id": 2,
+                            "name": {
+                              "nl": "Coupon €6 korting"
+                            },
+                            "price": 0,
+                            "priceCurrency": "EUR"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-events-eventId-prices",
+        "description": "Returns the possible ticket prices for an event based on an UiTPAS number.\n\nAn event registered in UiTdatabank can have a base price and extra tariffs for e.g. youth, seniors, etc. In UiTPAS, those tariffs can be reduced by \"kansentarief\", special coupons, or other discounts depending on the given UiTPAS number.\n\nThe response for this request will thus contain every UiTdatabank tariff for the given event, enriched with a list of optional reduced prices for the given UiTPAS number.\n\n**If multiple tariffs and/or UiTPAS prices for those tariffs are available**, the user buying a ticket should pick the right one manually. The user is responsible for picking the right tariff to start from, and additionally some discounts are only usable once so it's up to the user to apply them or not.",
+        "security": [
+          {
+            "Client Access Token (see Authentication docs)": []
+          }
+        ]
+      }
+    },
+    "/events/{eventId}/ticketSales": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/eventId"
+        }
+      ],
+      "post": {
+        "summary": "PROPASAL A Register a ticket sale",
+        "operationId": "post-events-eventId-ticketSales",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "TicketSale"
+        ],
+        "description": "Registers a new ticket sale with a reduced UiTPAS price, so the organizer can get reimbursed for the discount.\n\n**If no reduced UiTPAS price is selected by the user, the ticket sale does not have to be registered!**",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "",
+                "type": "object",
+                "properties": {
+                  "uitpasNumber": {
+                    "type": "string"
+                  },
+                  "uitpasPriceId": {
+                    "$ref": "#/components/schemas/uitpasPriceId"
+                  },
+                  "priceCategory": {
+                    "$ref": "#/components/schemas/priceCategory"
+                  },
+                  "chosenTarrif": {
+                    "type": "object",
+                    "description": "If the priceCategory is \"tariff\", the chosen tariff should be specified using its price and currency. To prevent mistakes, UiTPAS will check that the chosen tariff exists for the event.",
+                    "properties": {
+                      "price": {
+                        "$ref": "#/components/schemas/price"
+                      },
+                      "priceCurrency": {
+                        "$ref": "#/components/schemas/priceCurrency"
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "uitpasNumber",
+                  "uitpasPriceId",
+                  "priceCategory"
+                ]
+              },
+              "examples": {
+                "Base price": {
+                  "value": {
+                    "uitpasNumber": "0123456789",
+                    "uitpasPriceId": 1,
+                    "priceCategory": "base"
+                  }
+                },
+                "Tariff": {
+                  "value": {
+                    "uitpasNumber": "0123456789",
+                    "uitpasPriceId": 1,
+                    "priceCategory": "tariff",
+                    "chosenTarrif": {
+                      "price": 10,
+                      "priceCurrency": "EUR"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "description": ""
+        },
+        "security": [
+          {
+            "Client Access Token (see Authentication docs)": []
+          }
+        ]
+      }
+    },
+    "/events/{eventId}/ticketSales/{ticketSaleId}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/eventId"
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "ticketSaleId",
+          "in": "path",
+          "required": true,
+          "description": "Id of the previously registered ticket sale"
+        }
+      ],
+      "delete": {
+        "summary": "Cancel a ticket sale",
+        "operationId": "delete-events-eventId-ticketSales-ticketSaleId",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Cancels a single ticket sale by its id.",
+        "tags": [
+          "TicketSale"
+        ],
+        "security": [
+          {
+            "Client Access Token (see Authentication docs)": []
+          }
+        ]
+      }
+    },
+    "/events/{eventId}/tariffs/{uitpasNumber}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "eventId",
+          "in": "path",
+          "required": true,
+          "description": "UUID of the event for which the ticket is sold"
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "uitpasNumber",
+          "in": "path",
+          "required": true,
+          "description": "UitPAS Number identifying the passholder who wants to buy a ticket"
+        }
+      ],
+      "get": {
+        "summary": "PROPOSAL B: Get UiTPAS Tariffs",
+        "tags": [
+          "TicketSale"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {},
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "regularPrice": {
+                      "type": "number"
+                    },
+                    "eventId": {
+                      "type": "string"
+                    },
+                    "uitpasNumber": {
+                      "type": "string"
+                    },
+                    "uitpasTariffs": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "uitpasTariffId": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "tariff": {
+                            "type": "number"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Single \"Kansentarief\" example": {
+                    "value": {
+                      "regularPrice": 10,
+                      "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
+                      "uitpasNumber": "0230003524312",
+                      "uitpasTariffs": [
+                        {
+                          "uitpasTariffId": "KANSENTARIEF",
+                          "name": "Kansentarief",
+                          "tariff": 1.5
+                        }
+                      ]
+                    }
+                  },
+                  "Multiple tariffs example": {
+                    "value": {
+                      "regularPrice": 10,
+                      "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
+                      "uitpasNumber": "0230003524312",
+                      "uitpasTariffs": [
+                        {
+                          "uitpasTariffId": "KANSENTARIEF",
+                          "name": "Kansentarief",
+                          "tariff": 1.5
+                        },
+                        {
+                          "uitpasTariffId": "COUPON1234",
+                          "name": "Cultuurbon 6 euro",
+                          "tariff": 4
+                        },
+                        {
+                          "uitpasTariffId": "COUPON2345",
+                          "name": "2 euro korting op een specifiek event",
+                          "tariff": 8
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-events-eventId-tariffs",
+        "description": "Returns the possible UiTPAS discounted tariffs for an event, calculated based on the given regular price the passholder would normally pay for this specific ticket.\n\n> **Important**\n> * The given regularPrice should be part of the priceInfo array (in one of the price categories) in the UiTdatabank event.\n> * If no regular price is given, UiTPAS will use the base price of the event as known in UiTDatabank.\n",
+        "security": [
+          {
+            "Client Access Token (see Authentication docs)": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "number"
+            },
+            "in": "query",
+            "name": "regularPrice",
+            "description": "The regular price the passholder would have to pay for the ticket"
+          }
+        ]
+      }
+    },
+    "/events/{eventId}/ticketSalesB": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "eventId",
+          "in": "path",
+          "required": true,
+          "description": "UUID of the event for which the ticket is sold"
+        }
+      ],
+      "post": {
+        "summary": "PROPOSAL B - Register a ticket sale",
+        "tags": [
+          "TicketSale"
+        ],
+        "operationId": "post-events-eventId-ticketSalesB",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "description": "TicketSaleResponse",
+                    "properties": {
+                      "ticketSaleRequest": {
+                        "type": "object",
+                        "description": "TicketSaleRequest",
+                        "required": [
+                          "uitpasNumber",
+                          "uitpasTariffId",
+                          "eventId",
+                          "regularPrice"
+                        ],
+                        "properties": {
+                          "uitpasNumber": {
+                            "type": "string"
+                          },
+                          "uitpasTariffId": {
+                            "type": "string"
+                          },
+                          "eventId": {
+                            "type": "string"
+                          },
+                          "regularPrice": {
+                            "type": "number"
+                          }
+                        }
+                      },
+                      "status": {
+                        "type": "string",
+                        "enum": [
+                          "SUCCESS",
+                          "INVALID_CARD_STATUS",
+                          "INVALID_CARD",
+                          "PASSHOLDER_NO_ACTIVE_CARDSYSTEMS",
+                          "KANSENSTATUUT_EXPIRED",
+                          "MAXIMUM_REACHED"
+                        ]
+                      },
+                      "ticketSale": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "number"
+                          }
+                        }
+                      },
+                      "errorMessage": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "ticketSaleRequest",
+                      "status"
+                    ]
+                  }
+                },
+                "examples": {
+                  "Single ticketsale example": {
+                    "value": [
+                      {
+                        "ticketSaleRequest": {
+                          "uitpasNumber": "0560002624316",
+                          "uitpasTariffId": "COUPON1234",
+                          "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
+                          "regularPrice": 10
+                        },
+                        "status": "SUCCESS",
+                        "ticketSale": {
+                          "id": 1234
+                        }
+                      }
+                    ]
+                  },
+                  "Multiple ticket sales example": {
+                    "value": [
+                      {
+                        "ticketSaleRequest": {
+                          "uitpasNumber": "0560002524314",
+                          "uitpasTariffId": "COUPON1234",
+                          "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
+                          "regularPrice": 10
+                        },
+                        "status": "SUCCESS",
+                        "ticketSale": {
+                          "id": 1234
+                        }
+                      },
+                      {
+                        "ticketSaleRequest": {
+                          "uitpasNumber": "0560002624316",
+                          "uitpasTariffId": "COUPON1234",
+                          "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
+                          "regularPrice": 10
+                        },
+                        "status": "SUCCESS",
+                        "ticketSale": {
+                          "id": 1235
+                        }
+                      }
+                    ]
+                  },
+                  "Example with errors": {
+                    "value": [
+                      {
+                        "ticketSaleRequest": {
+                          "uitpasNumber": "0560002524314",
+                          "uitpasTariffId": "COUPON1234",
+                          "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
+                          "regularPrice": 10
+                        },
+                        "status": "KANSENSTATUUT_EXPIRED",
+                        "errorMessage": "De pashouder kan geen ticket kopen. Kansenpas is verlopen."
+                      },
+                      {
+                        "ticketSaleRequest": {
+                          "uitpasNumber": "0560002624316",
+                          "uitpasTariffId": "COUPON1234",
+                          "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
+                          "regularPrice": 10
+                        },
+                        "status": "MAXIMUM_REACHED",
+                        "errorMessage": "Er zijn reeds 40 tickets verkocht."
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "Registers one or more new ticket sales with a discounted UiTPAS tariff, so the organizer can get reimbursed for the discount.\n\n> **Important**\n> * Only ticket sales using a discounted UiTPAS tariff can be registered.\n\n\n\n",
+        "security": [
+          {
+            "Client Access Token (see Authentication docs)": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "description": "TicketSaleRequest",
+                  "properties": {
+                    "uitpasNumber": {
+                      "type": "string"
+                    },
+                    "uitpasTarrifId": {
+                      "type": "string"
+                    },
+                    "eventId": {
+                      "type": "string"
+                    },
+                    "regularPrice": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "uitpasNumber",
+                    "uitpasTarrifId",
+                    "eventId"
+                  ]
+                }
+              },
+              "examples": {
+                "Example without regularPrice": {
+                  "value": [
+                    {
+                      "uitpasNumber": "0560002524314",
+                      "uitpasTarrifId": "COUPON1234",
+                      "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002"
+                    }
+                  ]
+                },
+                "Example for multiple ticketsales": {
+                  "value": [
+                    {
+                      "uitpasNumber": "0560002524314",
+                      "uitpasTarrifId": "COUPON1234",
+                      "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
+                      "regularPrice": 10
+                    },
+                    {
+                      "uitpasNumber": "0560002624316",
+                      "uitpasTarrifId": "COUPON1234",
+                      "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
+                      "regularPrice": 10
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "priceCurrency": {
+        "type": "string",
+        "title": "priceCurrency",
+        "enum": [
+          "EUR"
+        ],
+        "description": "Currency of the price. Always EUR for now."
+      },
+      "price": {
+        "type": "number",
+        "title": "price",
+        "minimum": 0,
+        "description": "Price value"
+      },
+      "priceCategory": {
+        "type": "string",
+        "title": "priceCategory",
+        "enum": [
+          "base",
+          "tariff"
+        ],
+        "description": "Category of the price. Either \"base\" for the standard price, or \"tariff\" for special tarrifs for specific audiences like youth, seniors, etc."
+      },
+      "uitpasPriceId": {
+        "title": "uitpasPriceId",
+        "type": "number",
+        "description": "Id of a reduced UiTPAS price like \"kansentarief\" or a coupon, etc."
+      },
+      "priceName": {
+        "title": "priceName",
+        "type": "object",
+        "description": "The name of the price tariff. Can contain one or more language keys. For the base price all language keys will always be available. For other tariffs usually the nl key will be available, unless it's an event with a different mainLanguage in UiTdatabank.",
+        "properties": {
+          "nl": {
+            "type": "string"
+          },
+          "fr": {
+            "type": "string"
+          },
+          "en": {
+            "type": "string"
+          },
+          "de": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "Client Access Token (see Authentication docs)": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    },
+    "parameters": {
+      "eventId": {
+        "name": "eventId",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "description": "UUID of the event in UiTdatabank"
+      },
+      "uitpasNumber": {
+        "name": "uitpasNumber",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Number of the UiTPAS card of the passholder"
+      }
+    }
+  }
+}

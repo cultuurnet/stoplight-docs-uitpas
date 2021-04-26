@@ -1,0 +1,127 @@
+# Register discounted ticket sales
+
+This guide illustrates how to register an UiTPAS discounted ticket sale, from requesting possisble tariffs, to registering the ticket sale and even canceling it if needed.
+
+<!-- theme: warning -->
+
+> Carefully read the prerequisites below before you start
+
+## Prerequisites
+
+Before you can request UiTPAS tariffs or register ticket sales, you'll need:
+
+* Client credentials, so you can access the UiTPAS API using a [Client Access Token](/docs/uitpas/docs/Guides/Authentication.md#client-access-token)
+
+* An UiTDatabank event UUID organised by a known UiTPAS organiser (**TODO**: dit kunnen we beter formuleren. misschien moeten we het gewoon een 'UiTPAS event' noemen, en dan ergens in de terminologie sectie opnemen wat dat precies wil zeggen?). There're multiple ways to get such an event UUID:
+  * The event may already exist in UiTDatabank
+  * You could create the event in the [UiTDatabank](https://www.uitdatabank.be) manually 
+  * You can integrate an event registration flow in your application. See [Registering UiTPAS events](Registering-UiTPAS-events.md) for more information. 
+
+
+## Workflow overview
+
+![Auth Diagram](https://acc.uitid.be/api/uitpas-ticketsale-flow.png)
+
+1. A typical workflow starts with a user that wants to buy a ticket. This can work in various ways, specific to your application, but we start this flow when the user expresses his need to apply an UiTPAS discount.
+
+2. The next step your application need to take is determining the UiTPAS event UUID and price. Your application can do this in various ways, see prerequisites. You also need to determine the price for the ticket the user wants to buy if you haven't already done so. 
+
+> It is important that the regular price the user is offered is also available in at least one of the price categories of the UiTdatabank event.
+
+3. Next, your application need to determine the UiTPAS number of the user. Usually simply by requesting user input, but other means like storing the UiTPAS number in a user profile is also possible.
+
+
+4. Using the event UUID, the UiTPAS number and the regular price, you can [request possible UiTPAS tariffs](/docs/uitpas/reference/UiTPAS.v2.json/paths/~1events~1%7BeventId%7D~1tariffs~1%7BuitpasNumber%7D/get).
+
+Example request:
+```
+curl https://api.uitpas.be/events/YOUR_EVENT_UUID/tariffs/USER_UITPAS_NUMBER?regularPrice=10 -H 'Authorization: Bearer YOUR_ACCESS_TOKEN'
+```
+
+Example response:
+```json
+{
+  "regularPrice": 10,
+  "eventId": "YOUR_EVENT_UUID",
+  "uitpasNumber": "USER_UITPAS_NUMBER",
+  "uitpasTariffs": [
+    {
+      "uitpasTariffId": "KANSENTARIEF",
+      "name": "Kansentarief",
+      "tariff": 1.5
+    }
+  ]
+}
+```
+
+5. If the tariffs request returns multiple tariffs, your application needs to show them to the user so he/she can select the appropriate tariff. If there's only one tariff, your application can go straight to step 6.
+
+Example response with multiple tariffs:
+```json
+{
+  "regularPrice": 10,
+  "eventId": "YOUR_EVENT_UUID",
+  "uitpasNumber": "USER_UITPAS_NUMBER",
+  "uitpasTariffs": [
+    {
+      "uitpasTariffId": "KANSENTARIEF",
+      "name": "Kansentarief",
+      "tariff": 1.5
+    },
+    {
+      "uitpasTariffId": "COUPON1234",
+      "name": "Cultuurbon 6 euro",
+      "tariff": 4
+    },
+    {
+      "uitpasTariffId": "COUPON2345",
+      "name": "2 euro korting op een specifiek event",
+      "tariff": 8
+    }
+  ]
+}
+```
+
+
+6. Your application shows the (auto)selected tariff and ask the user for confirmation. 
+
+7. Your application can now continue its regular flow, like asking the user for payment (of the discounted tariff).
+
+8. When your regular flow successfully finishes, you need to [register the ticket sale](/docs/uitpas/reference/UiTPAS.v2.json/paths/~1events~1%7BeventId%7D~1ticketSalesB/post), again using the event UUID, the UiTPAS number of the user, the regular price, combined with the selected uitpasTariffId of the selected tariff.
+
+```
+curl -X POST https://api.uitpas.be/events/YOUR_EVENT_UUD/ticketSales -H 'Authorization: Bearer YOUR_ACCESS_TOKEN'
+[
+  {
+    "uitpasNumber": "0560002524314",
+    "uitpasTarrifId": "KANSENTARIEF",
+    "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
+    "regularPrice": 10
+  }
+]
+```
+
+As you can see, you can include multiple ticket sale registrations at once.
+
+Example response:
+```json
+[
+  {
+    "ticketSaleRequest": {
+      "uitpasNumber": "USER_UITPAS_NUMBER",
+      "uitpasTariffId": "KANSENTARIEF",
+      "eventId": "YOUR_EVENT_UUD",
+      "regularPrice": 10
+    },
+    "status": "SUCCESS",
+    "ticketSale": {
+      "id": 1234
+    }
+  }
+]
+```
+
+In case the ticketsale registrstion fais, the status property will contain more information. 
+
+If for some reason you need to [cancel the ticket sale registration](/docs/uitpas/reference/UiTPAS.v2.json/paths/~1events~1%7BeventId%7D~1ticketSales~1%7BticketSaleId%7D/delete) you can do so using the `id` of the ticketSale from this response.
+

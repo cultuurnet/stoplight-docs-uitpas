@@ -45,6 +45,7 @@ Example response:
 ```http
 HTTP/1.1 200 OK
 Content-Type: application/json
+
 {
   "regularPrice": 10,
   "eventId": "YOUR_EVENT_UUID",
@@ -65,6 +66,7 @@ Example response with multiple tariffs:
 ```http
 HTTP/1.1 200 OK
 Content-Type: application/json
+
 {
   "regularPrice": 10,
   "eventId": "YOUR_EVENT_UUID",
@@ -102,6 +104,7 @@ POST /events/YOUR_EVENT_UUD/ticketSales HTTP/1.1
 Content-Type: application/json
 Host: https://api.uitpas.be
 Authorization: Bearer YOUR_ACCESS_TOKEN'
+
 [
   {
     "uitpasNumber": "0560002524314",
@@ -118,6 +121,7 @@ Example response:
 ```http
 HTTP/1.1 200 OK
 Content-Type: application/json
+
 [
   {
     "ticketSaleRequest": {

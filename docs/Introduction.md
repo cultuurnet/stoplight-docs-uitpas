@@ -16,3 +16,17 @@ In this documentation you'll find:
 UiTPAS is a loyalty card for cultural, sports, and leisure events in Flanders and Brussels. More than 250.000 passholders can save points by attending events and trade them for rewards.
 
 Next to rewards, passholders in need can receive a structural discount ('kansentarief') on UiTPAS events. Those discounts are provided via a third-party payer system in which the organizer of the event, the local government and the passholder each pay a percentage of the ticket price.
+
+
+## Terminology
+
+> TODO
+
+* Passholder
+* Structural discount
+* Coupon
+* UiTPAS Organiser
+* UiTDatabank event
+* Ticketsale
+* Checkin
+

@@ -12,7 +12,7 @@ Before you can request UiTPAS tariffs or register ticket sales, you'll need:
 
 * Client credentials, so you can access the UiTPAS API using a [Client Access Token](/docs/uitpas/docs/Guides/Authentication.md#client-access-token)
 
-* An UiTDatabank event UUID organised by a known UiTPAS organiser (**TODO**: dit kunnen we beter formuleren. misschien moeten we het gewoon een 'UiTPAS event' noemen, en dan ergens in de terminologie sectie opnemen wat dat precies wil zeggen?). There're multiple ways to get such an event UUID:
+* An UiTDatabank event UUID organised by an UiTPAS organiser. There're multiple ways to get such an event UUID:
   * The event may already exist in UiTDatabank
   * You could create the event in the [UiTDatabank](https://www.uitdatabank.be) manually 
   * You can integrate an event registration flow in your application. See [Registering UiTPAS events](Registering-UiTPAS-events.md) for more information. 
@@ -34,12 +34,17 @@ Before you can request UiTPAS tariffs or register ticket sales, you'll need:
 4. Using the event UUID, the UiTPAS number and the regular price, you can [request possible UiTPAS tariffs](/docs/uitpas/reference/UiTPAS.v2.json/paths/~1events~1%7BeventId%7D~1tariffs~1%7BuitpasNumber%7D/get).
 
 Example request:
-```
-curl https://api.uitpas.be/events/YOUR_EVENT_UUID/tariffs/USER_UITPAS_NUMBER?regularPrice=10 -H 'Authorization: Bearer YOUR_ACCESS_TOKEN'
+```http
+GET /events/YOUR_EVENT_UUID/tariffs/USER_UITPAS_NUMBER?regularPrice=10 HTTP/1.1
+Host: https://api.uitpas.be
+Authorization: Bearer YOUR_ACCESS_TOKEN'
 ```
 
+
 Example response:
-```json
+```http
+HTTP/1.1 200 OK
+Content-Type: application/json
 {
   "regularPrice": 10,
   "eventId": "YOUR_EVENT_UUID",
@@ -57,7 +62,9 @@ Example response:
 5. If the tariffs request returns multiple tariffs, your application needs to show them to the user so he/she can select the appropriate tariff. If there's only one tariff, your application can go straight to step 6.
 
 Example response with multiple tariffs:
-```json
+```http
+HTTP/1.1 200 OK
+Content-Type: application/json
 {
   "regularPrice": 10,
   "eventId": "YOUR_EVENT_UUID",
@@ -89,8 +96,12 @@ Example response with multiple tariffs:
 
 8. When your regular flow successfully finishes, you need to [register the ticket sale](/docs/uitpas/reference/UiTPAS.v2.json/paths/~1events~1%7BeventId%7D~1ticketSalesB/post), again using the event UUID, the UiTPAS number of the user, the regular price, combined with the selected uitpasTariffId of the selected tariff.
 
-```
-curl -X POST https://api.uitpas.be/events/YOUR_EVENT_UUD/ticketSales -H 'Authorization: Bearer YOUR_ACCESS_TOKEN'
+
+```http
+POST /events/YOUR_EVENT_UUD/ticketSales HTTP/1.1
+Content-Type: application/json
+Host: https://api.uitpas.be
+Authorization: Bearer YOUR_ACCESS_TOKEN'
 [
   {
     "uitpasNumber": "0560002524314",
@@ -104,7 +115,9 @@ curl -X POST https://api.uitpas.be/events/YOUR_EVENT_UUD/ticketSales -H 'Authori
 As you can see, you can include multiple ticket sale registrations at once.
 
 Example response:
-```json
+```http
+HTTP/1.1 200 OK
+Content-Type: application/json
 [
   {
     "ticketSaleRequest": {

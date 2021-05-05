@@ -26,27 +26,8 @@
     }
   ],
   "paths": {
-    "/events/{eventId}/tariffs/{uitpasNumber}": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "eventId",
-          "in": "path",
-          "required": true,
-          "description": "UUID of the event for which the ticket is sold"
-        },
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "uitpasNumber",
-          "in": "path",
-          "required": true,
-          "description": "UitPAS Number identifying the passholder who wants to buy a ticket"
-        }
-      ],
+    "/tariffs": {
+      "parameters": [],
       "get": {
         "summary": "Get UiTPAS Tariffs",
         "tags": [
@@ -59,34 +40,9 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "regularPrice": {
-                      "type": "number"
-                    },
-                    "eventId": {
-                      "type": "string"
-                    },
-                    "uitpasNumber": {
-                      "type": "string"
-                    },
-                    "uitpasTariffs": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "uitpasTariffId": {
-                            "type": "string"
-                          },
-                          "name": {
-                            "type": "string"
-                          },
-                          "tariff": {
-                            "type": "number"
-                          }
-                        }
-                      }
-                    }
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Tariff"
                   }
                 },
                 "examples": {
@@ -97,9 +53,9 @@
                       "uitpasNumber": "0230003524312",
                       "uitpasTariffs": [
                         {
-                          "uitpasTariffId": "STRUCTURALDISCOUNT",
+                          "id": "STRUCTURALDISCOUNT",
                           "name": "Kansentarief",
-                          "tariff": 1.5
+                          "price": 1.5
                         }
                       ]
                     }
@@ -111,19 +67,19 @@
                       "uitpasNumber": "0230003524312",
                       "uitpasTariffs": [
                         {
-                          "uitpasTariffId": "STRUCTURALDISCOUNT",
+                          "id": "STRUCTURALDISCOUNT",
                           "name": "Kansentarief",
-                          "tariff": 1.5
+                          "price": 1.5
                         },
                         {
-                          "uitpasTariffId": "COUPON1234",
+                          "id": "COUPON1234",
                           "name": "Cultuurbon 6 euro",
-                          "tariff": 4
+                          "price": 4
                         },
                         {
-                          "uitpasTariffId": "COUPON2345",
+                          "id": "COUPON2345",
                           "name": "2 euro korting op een specifiek event",
-                          "tariff": 8
+                          "price": 8
                         }
                       ]
                     }
@@ -131,10 +87,27 @@
                 }
               }
             }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
           }
         },
-        "operationId": "get-events-eventId-tariffs",
-        "description": "Returns the possible UiTPAS discounted **tariffs for an event and a passholder**.\n\nThis UiTPAS tariffs are calculated based on:\n\nThe given `regularPrice` of the ticket.\nThis is the price your user would have to pay for the specific ticket without UiTPAS discount.\n  \nThe `UiTPASnumber` of the passholder.\n  UiTPAS discounts are personal so it's important to identify the passholder to retrieve a list of possible tariffs.\n  \n   The `Event UUID` of the UiTDatabank event\nUiTPAS discounts are limited to specific UiTDatabank events, so it's important to specify the event UUID to retrieve a list of possible tariffs.\n\n\n> **Important**\n> The given regularPrice should be part of the priceInfo array (in one of the price \ncategories) in the UiTdatabank event but can in specific cases differ.\n",
+        "operationId": "get-tariffs",
+        "description": "Returns the possible UiTPAS discounted **tariffs for an event and a passholder**.\n\nThis UiTPAS tariffs are calculated based on:\n\nThe given `regularPrice` of the ticket.\nThis is the price your user would have to pay for the specific ticket without UiTPAS discount.\n  \nThe `UiTPASnumber` of the passholder.\n  UiTPAS discounts are personal so it's important to identify the passholder to retrieve a list of possible tariffs.\n  \n   The `Event UUID` of the UiTdatabank event\nUiTPAS discounts are limited to specific UiTdatabank events, so it's important to specify the event UUID to retrieve a list of possible tariffs.\n\n\n> **Important**\n> The given regularPrice should be part of the priceInfo array (in one of the price \ncategories) in the UiTdatabank event but can in specific cases differ.\n",
         "security": [
           {
             "Client Access Token (see Authentication docs)": []
@@ -149,28 +122,36 @@
             "name": "regularPrice",
             "description": "The regular price the passholder would have to pay for the ticket",
             "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "eventId",
+            "description": "UUID of the event for which the ticket is sold",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "uitpasNumber",
+            "description": "UiTPAS Number identifying the passholder who wants to buy a ticket",
+            "required": true
           }
         ]
       }
     },
-    "/events/{eventId}/ticketSales": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "eventId",
-          "in": "path",
-          "required": true,
-          "description": "UUID of the event for which the TicketSale is registered"
-        }
-      ],
+    "/ticketSales": {
+      "parameters": [],
       "post": {
         "summary": "Register ticket sale(s)",
         "tags": [
           "TicketSale"
         ],
-        "operationId": "post-events-eventId-ticketSalesB",
+        "operationId": "post-ticketsales",
         "responses": {
           "200": {
             "description": "OK",
@@ -307,6 +288,15 @@
                 }
               }
             }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
           }
         },
         "description": "Registers one or more new ticket sales with a discounted UiTPAS tariff, so the UiTPAS organiser can get reimbursed for the discount.\n\n> **Important**\n> * Only ticket sales using a discounted UiTPAS tariff (`uitpasTariffId`) can be registered.\n\nA ticketsale is registered using:\n\nThe `uitpasNumber` of the passholder buying the ticket.\n\nThe `eventId` of the UitDatabank event.\n\nThe chosen `uitpasTariffId` from the [Get UiTPAS Tariffs](TODO) request.\n\nThe `regularPrice` the passholder would normally have to pay for this ticket\n\nOptionally `regularPriceLabel` describing the regular price, which can be useful in the financial reporting overview.\n\n\n\n",
@@ -382,11 +372,8 @@
         }
       }
     },
-    "/events/{eventId}/ticketSales/{ticketSaleId}": {
+    "/ticketSales/{ticketSaleId}": {
       "parameters": [
-        {
-          "$ref": "#/components/parameters/eventId"
-        },
         {
           "schema": {
             "type": "string"
@@ -399,10 +386,19 @@
       ],
       "delete": {
         "summary": "Cancel a ticket sale registration",
-        "operationId": "delete-events-eventId-ticketSales-ticketSaleId",
+        "operationId": "delete-ticketsales",
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
           }
         },
         "description": "Cancels a single ticket sale registration by its id.",
@@ -418,7 +414,31 @@
     }
   },
   "components": {
-    "schemas": {},
+    "schemas": {
+      "Tariff": {
+        "title": "Tariff",
+        "type": "object",
+        "description": "UiTPAS Tariff",
+        "x-internal": false,
+        "x-examples": {},
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "price": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "price"
+        ]
+      }
+    },
     "securitySchemes": {
       "Client Access Token (see Authentication docs)": {
         "type": "http",

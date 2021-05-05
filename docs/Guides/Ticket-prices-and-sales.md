@@ -10,7 +10,7 @@ This guide illustrates how to register an UiTPAS discounted ticket sale, from re
 
 Before you can request UiTPAS tariffs or register ticket sales, you'll need:
 
-* Client credentials, so you can access the UiTPAS API using a [Client Access Token](/docs/uitpas/docs/Guides/Authentication.md#client-access-token)
+* Client credentials, so you can access the UiTPAS API using a [Client Access Token](/docs/authentication/docs/Authentication-methods/Client-access-token.md)
 
 * An UiTDatabank event UUID organised by an UiTPAS organiser. There're multiple ways to get such an event UUID:
   * The event may already exist in UiTDatabank

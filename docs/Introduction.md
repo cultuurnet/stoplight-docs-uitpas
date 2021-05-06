@@ -1,5 +1,7 @@
 # Introduction
 
+![](../../assets/images/uitpas.png)
+
 A warm welcome to our UiTPAS API documentation! 👋
 
 Check out our development quickstart guide to get up and running.

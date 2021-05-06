@@ -1,0 +1,24 @@
+{
+  "title": "Error",
+  "type": "object",
+  "x-tags": [
+    "Errors"
+  ],
+  "description": "RFC7807 error model for all publiq APIs",
+  "properties": {
+    "type": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "status": {
+      "type": "number"
+    }
+  },
+  "required": [
+    "type",
+    "title",
+    "status"
+  ]
+}

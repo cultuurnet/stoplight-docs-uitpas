@@ -29,4 +29,5 @@ Next to rewards, passholders in need can receive a structural discount ('kansent
 * UiTDatabank event
 * Ticketsale
 * Checkin
+* Tariff
 

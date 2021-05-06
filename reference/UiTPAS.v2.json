@@ -29,7 +29,7 @@
     "/tariffs": {
       "parameters": [],
       "get": {
-        "summary": "Get UiTPAS Tariffs",
+        "summary": "Get Tariffs",
         "tags": [
           "TicketSale"
         ],
@@ -47,63 +47,66 @@
                 },
                 "examples": {
                   "Single tariff example": {
-                    "value": {
-                      "regularPrice": 10,
-                      "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
-                      "uitpasNumber": "0230003524312",
-                      "uitpasTariffs": [
-                        {
-                          "id": "STRUCTURALDISCOUNT",
-                          "name": "Kansentarief",
-                          "price": 1.5
-                        }
-                      ]
-                    }
+                    "value": [
+                      {
+                        "id": "STRUCTURALDISCOUNT",
+                        "name": "Kansentarief",
+                        "price": 1.5
+                      }
+                    ]
                   },
                   "Multiple tariffs example": {
-                    "value": {
-                      "regularPrice": 10,
-                      "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
-                      "uitpasNumber": "0230003524312",
-                      "uitpasTariffs": [
-                        {
-                          "id": "STRUCTURALDISCOUNT",
-                          "name": "Kansentarief",
-                          "price": 1.5
-                        },
-                        {
-                          "id": "COUPON1234",
-                          "name": "Cultuurbon 6 euro",
-                          "price": 4
-                        },
-                        {
-                          "id": "COUPON2345",
-                          "name": "2 euro korting op een specifiek event",
-                          "price": 8
-                        }
-                      ]
-                    }
+                    "value": [
+                      {
+                        "id": "STRUCTURALDISCOUNT",
+                        "name": "Kansentarief",
+                        "price": 1.5
+                      },
+                      {
+                        "id": "COUPON1234",
+                        "name": "Cultuurbon 6 euro",
+                        "price": 4
+                      },
+                      {
+                        "id": "COUPON2345",
+                        "name": "2 euro korting op een specifiek event",
+                        "price": 8
+                      }
+                    ]
                   }
                 }
               }
             }
           },
           "400": {
-            "description": "Bad Request",
+            "description": "Bad Request. Possible error types:\n\n* https://api.publiq.be/probs/uitpas/event-not-found\n* https://api.publiq.be/probs/uitpas/invalid-uitpasnumber\n* https://api.publiq.be/probs/uitpas/passholder-not-found\n\n",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {}
+                  "$ref": "../models/Error.yaml"
                 }
               }
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/Error.yaml"
+                }
+              }
+            }
           },
           "403": {
-            "description": "Forbidden"
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/Error.yaml"
+                }
+              }
+            }
           }
         },
         "operationId": "get-tariffs",
@@ -311,58 +314,45 @@
               "schema": {
                 "type": "array",
                 "items": {
-                  "type": "object",
-                  "description": "TicketSaleRequest",
-                  "properties": {
-                    "uitpasNumber": {
-                      "type": "string"
-                    },
-                    "uitpasTarrifId": {
-                      "type": "string"
-                    },
-                    "eventId": {
-                      "type": "string"
-                    },
-                    "regularPrice": {
-                      "type": "number"
-                    },
-                    "regularPriceLabel": {
-                      "type": "string",
-                      "description": "Optional description of the regular price. e.g. a price category. Useful for reporting."
-                    }
-                  },
-                  "required": [
-                    "uitpasNumber",
-                    "uitpasTarrifId",
-                    "eventId",
-                    "regularPrice"
-                  ]
+                  "$ref": "#/components/schemas/TicketSaleRegistration"
                 }
               },
               "examples": {
                 "Example without regularPrice": {
                   "value": [
                     {
+                      "id": 1,
                       "uitpasNumber": "0560002524314",
-                      "uitpasTarrifId": "COUPON1234",
                       "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
-                      "regularPrice": 10
+                      "tariff": {
+                        "id": "STRUCTURALDISCOUNT",
+                        "name": "Kansentarief",
+                        "price": 1.5
+                      }
                     }
                   ]
                 },
                 "Example for multiple ticketsales": {
                   "value": [
                     {
+                      "id": 1,
                       "uitpasNumber": "0560002524314",
-                      "uitpasTarrifId": "COUPON1234",
                       "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
-                      "regularPrice": 10
+                      "tariff": {
+                        "id": "COUPON1234",
+                        "name": "Cultuurbon 6 euro",
+                        "price": 4
+                      }
                     },
                     {
+                      "id": 2,
                       "uitpasNumber": "0560002624316",
-                      "uitpasTarrifId": "COUPON1234",
                       "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
-                      "regularPrice": 10
+                      "tariff": {
+                        "id": "STRUCTURALDISCOUNT",
+                        "name": "Kansentarief",
+                        "price": 1.5
+                      }
                     }
                   ]
                 }
@@ -421,9 +411,13 @@
         "description": "UiTPAS Tariff",
         "x-internal": false,
         "x-examples": {},
+        "x-tags": [
+          "TicketSale"
+        ],
         "properties": {
           "id": {
-            "type": "string"
+            "type": "string",
+            "description": ""
           },
           "name": {
             "type": "string"
@@ -436,6 +430,33 @@
           "id",
           "name",
           "price"
+        ]
+      },
+      "TicketSaleRegistration": {
+        "title": "TicketSaleRegistration",
+        "type": "object",
+        "x-tags": [
+          "TicketSale"
+        ],
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "tariff": {
+            "$ref": "#/components/schemas/Tariff"
+          },
+          "uitpasNumber": {
+            "type": "string"
+          },
+          "eventId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "tariff",
+          "uitpasNumber",
+          "eventId"
         ]
       }
     },

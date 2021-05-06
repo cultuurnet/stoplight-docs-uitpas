@@ -443,6 +443,9 @@
           "tariffId",
           "eventId",
           "regularPrice"
+        ],
+        "x-tags": [
+          "TicketSale"
         ]
       }
     },

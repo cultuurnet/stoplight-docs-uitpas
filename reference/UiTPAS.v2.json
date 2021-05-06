@@ -84,6 +84,15 @@
               "application/json": {
                 "schema": {
                   "$ref": "../models/Error.yaml"
+                },
+                "examples": {
+                  "Event not found": {
+                    "value": {
+                      "type": "https://api.publiq.be/probs/uitpas/event-not-found",
+                      "title": "event not found",
+                      "status": 400
+                    }
+                  }
                 }
               }
             }

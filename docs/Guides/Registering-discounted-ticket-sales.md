@@ -12,10 +12,13 @@ Before you can request UiTPAS tariffs or register ticket sales, you'll need:
 
 * Client credentials, so you can access the UiTPAS API using a [Client Access Token](/docs/authentication/docs/Authentication-methods/Client-access-token.md)
 
-* An UiTDatabank event UUID organised by an UiTPAS organiser. There're multiple ways to get such an event UUID:
+* An UiTDatabank event id organized by an UiTPAS organizer. There are multiple ways to get such an event UUID:
+
   * The event may already exist in UiTDatabank
-  * You could create the event in the [UiTDatabank](https://www.uitdatabank.be) manually 
-  * You can integrate an event registration flow in your application. See [Registering UiTPAS events](Registering-UiTPAS-events.md) for more information. 
+  * You could create the event in the UiTdatabank manually 
+  * You can import the event programmatically through UiTdatabank's Entry API
+
+To learn more about how to register your event in UiTdatabank and turn it into an UiTPAS event, read [our guide on  registering events](/docs/Guides/Registering-events.md).
 
 
 ## Workflow overview

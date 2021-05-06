@@ -1,6 +1,4 @@
-![](../assets/images/uitpas.png)
-
-# Introduction
+# ![UiTPAS](../assets/images/uitpas.png)
 
 A warm welcome to our UiTPAS API documentation! 👋
 

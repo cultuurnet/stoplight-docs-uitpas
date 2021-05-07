@@ -24,7 +24,9 @@ You can register your event in UiTdatabank in two ways: programmatically via **U
 
 To learn how to import your event programmatically through UiTdatabank's Entry API, [consult the UiTdatabank documentation for event imports](https://documentatie.uitdatabank.be/content/json-ld-crud-api/latest/events.html). (This documentation will be moved to this new documentation portal at a later stage.)
 
-You can register your event with all required info in **a single request** to Entry API, for example:
+You can register your event with all required info in **a single request** to Entry API.
+
+### Example request
 
 ```http
 POST /imports/events/ HTTP/1.1
@@ -64,7 +66,9 @@ Content-Type: application/json
 }
 ```
 
-Of these properties, the following are always mandatory in UiTdatabank in general:
+### Required properties
+
+Of the properties in the example above, the following are always mandatory in UiTdatabank in general:
 
 - `mainLanguage`: The language that your event is described in.
 - `name`: The name of your event.
@@ -79,7 +83,7 @@ Additionally, your event requires two more properties to qualify as an UiTPAS ev
 - `priceInfo` with a `base` price that is not `0`
 - `organizer` with the id of an UiTPAS organizer, usually supplied to you by the organizer that you are building an integration for
 
-> ##### Authentication on Entry API
+### Authentication
 > When creating an UiTdatabank event through Entry API, **you can use the same user access token or client access token that you use to communicate with the UiTPAS API**.
 
 ## Via the user interface

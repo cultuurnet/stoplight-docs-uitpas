@@ -498,7 +498,7 @@
         }
       },
       "Forbidden": {
-        "description": "Example response",
+        "description": "Forbidden. Your request was successfully authenticated but you do not have permission to perform this particular request.",
         "content": {
           "application/problem+json": {
             "schema": {
@@ -508,7 +508,7 @@
               "Forbidden": {
                 "value": {
                   "type": "https://api.publiq.be/probs/auth/forbidden",
-                  "title": "unauthorized",
+                  "title": "Forbidden",
                   "status": 403
                 }
               }

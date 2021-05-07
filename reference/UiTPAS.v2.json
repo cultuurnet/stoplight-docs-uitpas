@@ -25,6 +25,11 @@
       "description": "Operations related to ticket sales"
     }
   ],
+  "x-stoplight": {
+    "docs": {
+      "showModels": false
+    }
+  },
   "paths": {
     "/tariffs": {
       "parameters": [],
@@ -345,7 +350,7 @@
         "title": "Tariff",
         "type": "object",
         "description": "The Tariff describes the discounted price a passholder has to pay for a given ticket. ",
-        "x-internal": true,
+        "x-internal": false,
         "x-examples": {},
         "properties": {
           "id": {
@@ -404,7 +409,7 @@
           }
         },
         "description": "The TicketSaleRegistration is a response object of the POST /ticketSales request. It can be used to provide the user with an overview or to identify the ticket sales in case they need to be canceled.",
-        "x-internal": true,
+        "x-internal": false,
         "x-tags": [
           "TicketSale"
         ]
@@ -446,7 +451,7 @@
           "eventId",
           "regularPrice"
         ],
-        "x-internal": true,
+        "x-internal": false,
         "x-tags": [
           "TicketSale"
         ]

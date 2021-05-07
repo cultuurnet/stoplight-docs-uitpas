@@ -25,11 +25,6 @@
       "description": "Operations related to ticket sales"
     }
   ],
-  "x-stoplight": {
-    "docs": {
-      "showModels": false
-    }
-  },
   "paths": {
     "/tariffs": {
       "parameters": [],
@@ -370,7 +365,7 @@
           "price"
         ],
         "x-tags": [
-          "TicketSale"
+          "Model"
         ]
       },
       "TicketSaleRegistration": {
@@ -411,7 +406,7 @@
         "description": "The TicketSaleRegistration is a response object of the POST /ticketSales request. It can be used to provide the user with an overview or to identify the ticket sales in case they need to be canceled.",
         "x-internal": false,
         "x-tags": [
-          "TicketSale"
+          "Model"
         ]
       },
       "TicketSaleRequest": {
@@ -453,7 +448,7 @@
         ],
         "x-internal": false,
         "x-tags": [
-          "TicketSale"
+          "Model"
         ]
       },
       "Error": {
@@ -475,6 +470,9 @@
           "type",
           "title",
           "status"
+        ],
+        "x-tags": [
+          "Model"
         ]
       }
     },

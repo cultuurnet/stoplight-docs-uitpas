@@ -88,7 +88,7 @@
             "content": {
               "application/problem+json": {
                 "schema": {
-                  "$ref": "../models/Error.json"
+                  "$ref": "#/components/schemas/Error"
                 },
                 "examples": {
                   "Event not found": {
@@ -214,7 +214,7 @@
             "content": {
               "application/problem+json": {
                 "schema": {
-                  "$ref": "../models/Error.json"
+                  "$ref": "#/components/schemas/Error"
                 },
                 "examples": {
                   "Structural discount expired": {
@@ -317,7 +317,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "../models/Error.json"
+                  "$ref": "#/components/schemas/Error"
                 },
                 "examples": {
                   "Ticket Sale not found": {
@@ -455,6 +455,27 @@
         "x-tags": [
           "TicketSale"
         ]
+      },
+      "Error": {
+        "title": "Error",
+        "type": "object",
+        "description": "RFC7807 error model for all publiq APIs",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "status": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "type",
+          "title",
+          "status"
+        ]
       }
     },
     "securitySchemes": {
@@ -470,7 +491,7 @@
         "content": {
           "application/problem+json": {
             "schema": {
-              "$ref": "../models/Error.json"
+              "$ref": "#/components/schemas/Error"
             },
             "examples": {
               "Unauthorized": {
@@ -489,7 +510,7 @@
         "content": {
           "application/problem+json": {
             "schema": {
-              "$ref": "../models/Error.json"
+              "$ref": "#/components/schemas/Error"
             },
             "examples": {
               "Forbidden": {

@@ -23,7 +23,12 @@
     {
       "name": "TicketSale",
       "description": "Operations related to ticket sales"
+    },
+    {
+      "name": "Organizers",
+      "description": "Operations related to organizers"
     }
+
   ],
   "paths": {
     "/tariffs": {
@@ -337,6 +342,71 @@
           }
         ]
       }
+    },
+    "/user/organizer-roles": {
+      "get": {
+        "summary": "Get Organizer Roles",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/OrganizerRole"
+                  }
+                },
+                "examples": {
+                  "Example with multiple roles": {
+                    "value": [
+                      {
+                        "type": "member",
+                        "organizer": {
+                          "id": "c097fa2e-d9be-42e6-b41a-ec3d4d4cbad1",
+                          "name": "CC De Werf"
+                        }
+                      },
+                      {
+                        "type": "member",
+                        "organizer": {
+                          "id": "fd7e6177-4add-4fa8-a7fe-6e60127bfb35",
+                          "name": "CC De Schakel"
+                        }
+                      }
+                    ]
+                  },
+                  "Example with one role": {
+                    "value": [
+                      {
+                        "type": "admin",
+                        "organizer": {
+                          "id": "c097fa2e-d9be-42e6-b41a-ec3d4d4cbad1",
+                          "name": "CC De Werf"
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        },
+        "operationId": "get-organizer-admins",
+        "description": "List organizer roles for the current user",
+        "security": [
+          {
+            "User Acces Token (see Authentication docs)": []
+          }
+        ],
+        "tags": [
+          "Organizers"
+        ]
+      },
+      "parameters": []
     }
   },
   "components": {
@@ -474,12 +544,48 @@
         "x-tags": [
           "Model"
         ]
+      },
+      "OrganizerRole": {
+        "title": "OrganizerRole",
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "member",
+              "admin"
+            ]
+          },
+          "organizer": {
+            "$ref": "#/components/schemas/Organizer"
+          }
+        },
+        "required": [
+          "type",
+          "organizer"
+        ]
+      },
+      "Organizer": {
+        "title": "Organizer",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
       }
     },
     "securitySchemes": {
       "Client Access Token (see Authentication docs)": {
         "type": "http",
         "scheme": "bearer"
+      },
+      "User Acces Token (see Authentication docs)": {
+        "type": "http",
+        "scheme": "basic"
       }
     },
     "parameters": {},

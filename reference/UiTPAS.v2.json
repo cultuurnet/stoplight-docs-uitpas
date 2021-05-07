@@ -345,7 +345,7 @@
         "title": "Tariff",
         "type": "object",
         "description": "The Tariff describes the discounted price a passholder has to pay for a given ticket. ",
-        "x-internal": false,
+        "x-internal": true,
         "x-examples": {},
         "properties": {
           "id": {
@@ -363,6 +363,9 @@
           "id",
           "name",
           "price"
+        ],
+        "x-tags": [
+          "TicketSale"
         ]
       },
       "TicketSaleRegistration": {
@@ -400,7 +403,11 @@
             "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002"
           }
         },
-        "description": "The TicketSaleRegistration is a response object of the POST /ticketSales request. It can be used to provide the user with an overview or to identify the ticket sales in case they need to be canceled."
+        "description": "The TicketSaleRegistration is a response object of the POST /ticketSales request. It can be used to provide the user with an overview or to identify the ticket sales in case they need to be canceled.",
+        "x-internal": true,
+        "x-tags": [
+          "TicketSale"
+        ]
       },
       "TicketSaleRequest": {
         "title": "TicketSaleRequest",
@@ -438,6 +445,10 @@
           "tariffId",
           "eventId",
           "regularPrice"
+        ],
+        "x-internal": true,
+        "x-tags": [
+          "TicketSale"
         ]
       }
     },

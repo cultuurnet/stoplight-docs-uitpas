@@ -601,7 +601,14 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedResponse"
+                }
+              }
+            }
           },
           "401": {
             "$ref": "#/components/responses/Unauthorized"
@@ -876,7 +883,7 @@
           "members": {
             "type": "array",
             "items": {
-              "anyOf": [
+              "oneOf": [
                 {
                   "$ref": "#/components/schemas/Organizer"
                 },

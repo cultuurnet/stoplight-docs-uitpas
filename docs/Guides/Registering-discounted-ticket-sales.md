@@ -12,7 +12,7 @@ Before you can request UiTPAS tariffs or register ticket sales, you'll need:
 
 * Client credentials, so you can access the UiTPAS API using a [Client Access Token](/docs/authentication/docs/Authentication-methods/Client-access-token.md)
 
-* An UiTDatabank event id organized by an UiTPAS organizer. There are multiple ways to get such an event UUID:
+* An UiTDatabank event id organized by an UiTPAS organizer. There are multiple ways to get such an event id:
 
   * The event may already exist in UiTDatabank
   * You could create the event in the UiTdatabank manually 
@@ -27,18 +27,18 @@ To learn more about how to register your event in UiTdatabank and turn it into a
 
 1. A typical workflow starts with a user that wants to buy a ticket. This can work in various ways, specific to your application, but we start this flow when the user expresses his need to apply an UiTPAS discount.
 
-2. The next step your application need to take is determining the UiTPAS event UUID and price. Your application can do this in various ways, see prerequisites. You also need to determine the price for the ticket the user wants to buy if you haven't already done so. 
+2. The next step your application need to take is determining the UiTPAS event id and price. Your application can do this in various ways, see prerequisites. You also need to determine the price for the ticket the user wants to buy if you haven't already done so. 
 
 > It is important that the regular price the user is offered is also available in at least one of the price categories of the UiTdatabank event.
 
 3. Next, your application need to determine the UiTPAS number of the user. Usually simply by requesting user input, but other means like storing the UiTPAS number in a user profile is also possible.
 
 
-4. Using the event UUID, the UiTPAS number and the regular price, you can [request possible UiTPAS tariffs](/docs/uitpas/reference/UiTPAS.v2.json/paths/~1tariffs/get).
+4. Using the event id, the UiTPAS number and the regular price, you can [request possible UiTPAS tariffs](/docs/uitpas/reference/UiTPAS.v2.json/paths/~1tariffs/get).
 
 Example request:
 ```http
-GET /events/YOUR_EVENT_UUID/tariffs/USER_UITPAS_NUMBER?regularPrice=10 HTTP/1.1
+GET /events/YOUR_EVENT_ID/tariffs/USER_UITPAS_NUMBER?regularPrice=10 HTTP/1.1
 Host: https://api.uitpas.be
 Authorization: Bearer YOUR_ACCESS_TOKEN'
 ```
@@ -89,11 +89,11 @@ Content-Type: application/json
 
 7. Your application can now continue its regular flow, like asking the user for payment (of the discounted tariff).
 
-8. When your regular flow successfully finishes, you need to [register the ticket sale](/docs/uitpas/reference/UiTPAS.v2.json/paths/~1ticketSales/post), again using the event UUID, the UiTPAS number of the user, the regular price, combined with the selected tariffId of the selected tariff.
+8. When your regular flow successfully finishes, you need to [register the ticket sale](/docs/uitpas/reference/UiTPAS.v2.json/paths/~1ticketSales/post), again using the event id, the UiTPAS number of the user, the regular price, combined with the selected tariffId of the selected tariff.
 
 
 ```http
-POST /events/YOUR_EVENT_UUD/ticketSales HTTP/1.1
+POST /events/YOUR_EVENT_ID/ticketSales HTTP/1.1
 Content-Type: application/json
 Host: https://api.uitpas.be
 Authorization: Bearer YOUR_ACCESS_TOKEN'

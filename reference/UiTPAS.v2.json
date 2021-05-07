@@ -105,7 +105,7 @@
           }
         },
         "operationId": "get-tariffs",
-        "description": "Returns the possible UiTPAS discounted **tariffs for an event and a passholder**.\n\nThis UiTPAS tariffs are calculated based on:\n\nThe given `regularPrice` of the ticket.\nThis is the price your user would have to pay for the specific ticket without UiTPAS discount.\n  \nThe `UiTPASnumber` of the passholder.\n  UiTPAS discounts are personal so it's important to identify the passholder to retrieve a list of possible tariffs.\n  \n   The `Event UUID` of the UiTdatabank event\nUiTPAS discounts are limited to specific UiTdatabank events, so it's important to specify the event UUID to retrieve a list of possible tariffs.\n\n\n> **Important**\n> The given regularPrice should be part of the priceInfo array (in one of the price \ncategories) in the UiTdatabank event but can in specific cases differ.\n",
+        "description": "Returns the possible UiTPAS discounted **tariffs for an event and a passholder**.\n\nThis UiTPAS tariffs are calculated based on:\n\nThe given `regularPrice` of the ticket.\nThis is the price your user would have to pay for the specific ticket without UiTPAS discount.\n  \nThe `UiTPASnumber` of the passholder.\n  UiTPAS discounts are personal so it's important to identify the passholder to retrieve a list of possible tariffs.\n  \n   The `event id` of the UiTdatabank event\nUiTPAS discounts are limited to specific UiTdatabank events, so it's important to specify the event id to retrieve a list of possible tariffs.\n\n\n> **Important**\n> The given regularPrice should be part of the priceInfo array (in one of the price \ncategories) in the UiTdatabank event but can in specific cases differ.\n",
         "security": [
           {
             "Client Access Token (see Authentication docs)": []
@@ -127,7 +127,7 @@
             },
             "in": "query",
             "name": "eventId",
-            "description": "UUID of the event for which the ticket is sold",
+            "description": "id of the event for which the ticket is sold",
             "required": true
           },
           {
@@ -462,9 +462,9 @@
         "required": true,
         "schema": {
           "type": "string",
-          "format": "uuid"
+          "format": "id"
         },
-        "description": "UUID of the event in UiTdatabank"
+        "description": "id of the event in UiTdatabank"
       },
       "uitpasNumber": {
         "name": "uitpasNumber",

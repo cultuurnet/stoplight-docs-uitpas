@@ -347,9 +347,6 @@
         "description": "The Tariff describes the discounted price a passholder has to pay for a given ticket. ",
         "x-internal": false,
         "x-examples": {},
-        "x-tags": [
-          "TicketSale"
-        ],
         "properties": {
           "id": {
             "type": "string",
@@ -371,9 +368,6 @@
       "TicketSaleRegistration": {
         "title": "TicketSaleRegistration",
         "type": "object",
-        "x-tags": [
-          "TicketSale"
-        ],
         "properties": {
           "id": {
             "type": "number"
@@ -444,9 +438,6 @@
           "tariffId",
           "eventId",
           "regularPrice"
-        ],
-        "x-tags": [
-          "TicketSale"
         ]
       }
     },

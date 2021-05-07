@@ -1,6 +1,6 @@
 # Registering discounted ticket sales
 
-This guide illustrates how to register an UiTPAS discounted ticket sale, from requesting possisble tariffs, to registering the ticket sale and even canceling it if needed.
+This guide illustrates how to register an UiTPAS discounted ticket sale, from requesting possisble tariffs to registering the ticket sale and even canceling it if needed.
 
 <!-- theme: warning -->
 
@@ -10,9 +10,9 @@ This guide illustrates how to register an UiTPAS discounted ticket sale, from re
 
 Before you can request UiTPAS tariffs or register ticket sales, you'll need:
 
-* Client credentials, so you can access the UiTPAS API using a [Client Access Token](/docs/authentication/docs/Authentication-methods/Client-access-token.md)
+**Client credentials**, so you can access the UiTPAS API using a [Client Access Token](https://publiq.stoplight.io/docs/authentication/docs/Authentication-methods/Client-access-token.md)
 
-* An UiTDatabank event id organized by an UiTPAS organizer. There are multiple ways to get such an event id:
+**An UiTDatabank event id** organized by an UiTPAS organizer. There are multiple ways to get such an event id:
 
   * The event may already exist in UiTDatabank
   * You could create the event in the UiTdatabank manually 
@@ -27,24 +27,24 @@ To learn more about how to register your event in UiTdatabank and turn it into a
 
 1. A typical workflow starts with a user that wants to buy a ticket. This can work in various ways, specific to your application, but we start this flow when the user expresses his need to apply an UiTPAS discount.
 
-2. The next step your application need to take is determining the UiTPAS event id and price. Your application can do this in various ways, see prerequisites. You also need to determine the price for the ticket the user wants to buy if you haven't already done so. 
+2. The next step your application needs to take is determining the UiTPAS event id and price. Your application can do this in various ways, see prerequisites. You also need to determine the price for the ticket the user wants to buy if you haven't already done so. 
 
 > It is important that the regular price the user is offered is also available in at least one of the price categories of the UiTdatabank event.
 
 3. Next, your application need to determine the UiTPAS number of the user. Usually simply by requesting user input, but other means like storing the UiTPAS number in a user profile is also possible.
 
-
 4. Using the event id, the UiTPAS number and the regular price, you can [request possible UiTPAS tariffs](/docs/uitpas/reference/UiTPAS.v2.json/paths/~1tariffs/get).
 
 Example request:
+
 ```http
 GET /events/YOUR_EVENT_ID/tariffs/USER_UITPAS_NUMBER?regularPrice=10 HTTP/1.1
 Host: https://api.uitpas.be
 Authorization: Bearer YOUR_ACCESS_TOKEN'
 ```
 
-
 Example response:
+
 ```http
 HTTP/1.1 200 OK
 Content-Type: application/json
@@ -61,6 +61,7 @@ Content-Type: application/json
 5. If the tariffs request returns multiple tariffs, your application needs to show them to the user so he/she can select the appropriate tariff. If there's only one tariff, your application can go straight to step 6.
 
 Example response with multiple tariffs:
+
 ```http
 HTTP/1.1 200 OK
 Content-Type: application/json
@@ -140,7 +141,7 @@ Content-Type: application/json
 ]
 ```
 
-In case the ticketsale registration fais, the status property will contain more information. 
+In case the ticketsale registration fails, the status property will contain more information. 
 
 If for some reason you need to [cancel the ticket sale registration](/docs/uitpas/reference/UiTPAS.v2.json/paths/~1ticketSales~1%7BticketSaleId%7D/delete) you can do so using the `id` of the ticketSale from this response.
 

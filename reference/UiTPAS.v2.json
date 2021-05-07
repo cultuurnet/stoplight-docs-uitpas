@@ -29,7 +29,7 @@
     "/tariffs": {
       "parameters": [],
       "get": {
-        "summary": "Get Tariffs",
+        "summary": "Get tariffs",
         "tags": [
           "TicketSale"
         ],

@@ -344,7 +344,7 @@
     },
     "/user/organizer-roles": {
       "get": {
-        "summary": "Get Organizer Roles",
+        "summary": "Get organizer Roles",
         "responses": {
           "200": {
             "description": "OK",
@@ -540,7 +540,9 @@
     "/organizers": {
       "get": {
         "summary": "Get organizers",
-        "tags": [],
+        "tags": [
+          "Organizers"
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -742,6 +744,9 @@
         "required": [
           "type",
           "organizer"
+        ],
+        "x-tags": [
+          "Model"
         ]
       },
       "Organizer": {
@@ -754,7 +759,10 @@
           "name": {
             "type": "string"
           }
-        }
+        },
+        "x-tags": [
+          "Model"
+        ]
       },
       "DistributionKey": {
         "title": "DistributionKey",
@@ -770,6 +778,9 @@
         "required": [
           "id",
           "name"
+        ],
+        "x-tags": [
+          "Model"
         ]
       },
       "PaginatedResponse": {
@@ -788,7 +799,10 @@
               "$ref": "#/components/schemas/Organizer"
             }
           }
-        }
+        },
+        "x-tags": [
+          "Model"
+        ]
       }
     },
     "securitySchemes": {

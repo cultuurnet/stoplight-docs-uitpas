@@ -28,7 +28,6 @@
       "name": "Organizers",
       "description": "Operations related to organizers"
     }
-
   ],
   "paths": {
     "/tariffs": {
@@ -368,7 +367,7 @@
                         }
                       },
                       {
-                        "type": "member",
+                        "type": "admin",
                         "organizer": {
                           "id": "fd7e6177-4add-4fa8-a7fe-6e60127bfb35",
                           "name": "CC De Schakel"
@@ -407,6 +406,136 @@
         ]
       },
       "parameters": []
+    },
+    "/organisers/{organiserId}/distribution-keys": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "organiserId",
+          "in": "path",
+          "required": true,
+          "description": "The id of the organizer"
+        }
+      ],
+      "get": {
+        "summary": "Get distribution keys",
+        "tags": [
+          "Organizers"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DistributionKey"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-organisers-distribution-keys",
+        "security": [
+          {
+            "User Acces Token (see Authentication docs)": []
+          }
+        ],
+        "description": "Get manual distribution keys for an organiser, so it can be set to a specific event using [TODO](#todo)\n\n> WARNING:\n> This endpoint is only needed for exceptional cases. In most cases distribution keys are set automatically."
+      }
+    },
+    "/events/{eventId}/distribution-keys": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "eventId",
+          "in": "path",
+          "required": true,
+          "description": "The id of the event"
+        }
+      ],
+      "put": {
+        "summary": "Update event distribution keys",
+        "operationId": "put-events-distribution-keys",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "description": "Distribution key id",
+                "items": {
+                  "type": "number"
+                }
+              },
+              "examples": {}
+            }
+          }
+        },
+        "description": "Update the distribution keys of the given event",
+        "tags": [
+          "Organizers"
+        ],
+        "security": [
+          {
+            "User Acces Token (see Authentication docs)": []
+          }
+        ]
+      },
+      "get": {
+        "summary": "Get event distribution keys",
+        "operationId": "get-events-distribution-keys",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DistributionKey"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "Get the distribution keys of the given event",
+        "tags": [
+          "Organizers"
+        ],
+        "security": [
+          {
+            "User Acces Token (see Authentication docs)": []
+          }
+        ]
+      }
     }
   },
   "components": {
@@ -576,6 +705,22 @@
             "type": "string"
           }
         }
+      },
+      "DistributionKey": {
+        "title": "DistributionKey",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name"
+        ]
       }
     },
     "securitySchemes": {
@@ -585,7 +730,7 @@
       },
       "User Acces Token (see Authentication docs)": {
         "type": "http",
-        "scheme": "basic"
+        "scheme": "bearer"
       }
     },
     "parameters": {},

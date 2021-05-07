@@ -6,7 +6,7 @@ On this page you can quickly get a grasp of common UiTPAS terminology and concep
 
 One who holds an UiTPAS, the end-user of an UiTPAS.
 
-## Structural discount ('kansentarief’)
+## Structural discount ('kansentarief')
 
 Passholders in need can receive a structural discount ('kansentarief') on their UiTPAS. 
 This structural discount is given by the local government based on local poverty parameters. 

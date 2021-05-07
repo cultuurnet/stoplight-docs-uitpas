@@ -479,7 +479,7 @@
     },
     "responses": {
       "Unauthorized": {
-        "description": "Example response",
+        "description": "Unauthorized. Your request is missing the required credentials to authenticate. See the Authentication documentation for more info.",
         "content": {
           "application/problem+json": {
             "schema": {
@@ -489,7 +489,7 @@
               "Unauthorized": {
                 "value": {
                   "type": "https://api.publiq.be/probs/auth/unauthorized",
-                  "title": "unauthorized",
+                  "title": "Unauthorized",
                   "status": 401
                 }
               }

@@ -74,7 +74,7 @@ If successful, you should receive a `200` response with a JSON body including th
 }
 ```
 
-You can now use this event id to calculate discounted UiTPAS prices for it and register discounted ticket sales for it! 🎉
+You can now use this event id to calculate discounted UiTPAS prices and register discounted ticket sales for it! 🎉
 
 ### Required properties
 

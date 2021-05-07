@@ -79,7 +79,7 @@
             }
           },
           "400": {
-            "description": "Bad Request. Possible error types:\n\n* https://api.publiq.be/probs/uitpas/event-not-found\n* https://api.publiq.be/probs/uitpas/invalid-uitpasnumber\n* https://api.publiq.be/probs/uitpas/passholder-not-found\n\n",
+            "description": "Bad Request. The response will include a JSON body with more details in the form of a RFC7807 error model. Possible error types:\n\n* https://api.publiq.be/probs/uitpas/event-not-found\n* https://api.publiq.be/probs/uitpas/invalid-uitpasnumber\n* https://api.publiq.be/probs/uitpas/passholder-not-found\n\n",
             "content": {
               "application/problem+json": {
                 "schema": {
@@ -89,7 +89,7 @@
                   "Event not found": {
                     "value": {
                       "type": "https://api.publiq.be/probs/uitpas/event-not-found",
-                      "title": "event not found",
+                      "title": "Event id 267B6FCF-46F8-4DA2-8D7D-AADCD2C2715E not found",
                       "status": 400
                     }
                   }
@@ -105,7 +105,7 @@
           }
         },
         "operationId": "get-tariffs",
-        "description": "Returns the possible UiTPAS discounted **tariffs for an event and a passholder**.\n\nThis UiTPAS tariffs are calculated based on:\n\nThe given `regularPrice` of the ticket.\nThis is the price your user would have to pay for the specific ticket without UiTPAS discount.\n  \nThe `UiTPASnumber` of the passholder.\n  UiTPAS discounts are personal so it's important to identify the passholder to retrieve a list of possible tariffs.\n  \n   The `event id` of the UiTdatabank event\nUiTPAS discounts are limited to specific UiTdatabank events, so it's important to specify the event id to retrieve a list of possible tariffs.\n\n\n> **Important**\n> The given regularPrice should be part of the priceInfo array (in one of the price \ncategories) in the UiTdatabank event but can in specific cases differ.\n",
+        "description": "Returns the possible UiTPAS discounted **tariffs for an event and a passholder**.\n\nThis UiTPAS tariffs are calculated based on:\n\n- **The regular price** of the ticket.\nThis is the price your user would have to pay for the specific ticket without UiTPAS discount.\n- **The UiTPAS number** of the passholder. UiTPAS discounts are personal so it's important to identify the passholder to retrieve a list of possible tariffs.\n- **The event id** of the UiTdatabank event. UiTPAS discounts are limited to specific UiTdatabank events, so it's important to specify the event id to retrieve a list of possible tariffs.\n\n> ##### Important\n> The regular price of the ticket should generally be one of the price categories set on the event in UiTdatabank. For some use cases you may also use a price that is not set on the event UiTdatabank, but this should generally be agreed upon first to avoid issues during financial audits.\n",
         "security": [
           {
             "Client Access Token (see Authentication docs)": []
@@ -118,7 +118,7 @@
             },
             "in": "query",
             "name": "regularPrice",
-            "description": "The regular price the passholder would have to pay for the ticket",
+            "description": "The regular price the passholder would have to pay for the ticket if they are not eligible for discounts",
             "required": true
           },
           {
@@ -127,7 +127,7 @@
             },
             "in": "query",
             "name": "eventId",
-            "description": "id of the event for which the ticket is sold",
+            "description": "The id of the event for which the ticket is sold",
             "required": true
           },
           {

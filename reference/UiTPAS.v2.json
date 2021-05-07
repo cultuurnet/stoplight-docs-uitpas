@@ -299,7 +299,7 @@
         "operationId": "delete-ticketsales",
         "responses": {
           "204": {
-            "description": "The ticket sale was successfully canceled"
+            "description": "No content. The ticket sale was successfully canceled."
           },
           "401": {
             "$ref": "#/components/responses/Unauthorized"
@@ -318,7 +318,7 @@
                   "Ticket Sale not found": {
                     "value": {
                       "type": "https://api.publiq.be/probs/uitpas/ticket-sale-not-found",
-                      "title": "ticket sale not found",
+                      "title": "Ticket sale not found",
                       "status": 404
                     }
                   }
@@ -327,7 +327,7 @@
             }
           }
         },
-        "description": "Cancels a single ticket sale registration by its id.",
+        "description": "Cancels a single ticket sale registration by its id. (Returned in the response of the ticket sale registration request.)",
         "tags": [
           "TicketSale"
         ],

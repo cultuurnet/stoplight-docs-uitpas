@@ -11,12 +11,12 @@
   },
   "servers": [
     {
-      "url": "https://api.uitpas.be",
-      "description": "Production"
-    },
-    {
       "url": "https://api-test.uitpas.be",
       "description": "Testing"
+    },
+    {
+      "url": "https://api.uitpas.be",
+      "description": "Production"
     }
   ],
   "tags": [

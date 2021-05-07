@@ -79,17 +79,17 @@
             }
           },
           "400": {
-            "description": "Bad Request. Possible error types:\n\n* https://api.publiq.be/probs/uitpas/event-not-found\n* https://api.publiq.be/probs/uitpas/invalid-uitpasnumber\n* https://api.publiq.be/probs/uitpas/passholder-not-found\n\n",
+            "description": "Bad Request. The response will include a JSON body with more details in the form of a RFC7807 error model. Possible error types:\n\n* https://api.publiq.be/probs/uitpas/event-not-found\n* https://api.publiq.be/probs/uitpas/invalid-uitpasnumber\n* https://api.publiq.be/probs/uitpas/passholder-not-found\n\n",
             "content": {
               "application/problem+json": {
                 "schema": {
-                  "$ref": "../models/Error.json"
+                  "$ref": "#/components/schemas/Error"
                 },
                 "examples": {
                   "Event not found": {
                     "value": {
                       "type": "https://api.publiq.be/probs/uitpas/event-not-found",
-                      "title": "event not found",
+                      "title": "Event id 267B6FCF-46F8-4DA2-8D7D-AADCD2C2715E not found",
                       "status": 400
                     }
                   }
@@ -105,7 +105,7 @@
           }
         },
         "operationId": "get-tariffs",
-        "description": "Returns the possible UiTPAS discounted **tariffs for an event and a passholder**.\n\nThis UiTPAS tariffs are calculated based on:\n\nThe given `regularPrice` of the ticket.\nThis is the price your user would have to pay for the specific ticket without UiTPAS discount.\n  \nThe `UiTPASnumber` of the passholder.\n  UiTPAS discounts are personal so it's important to identify the passholder to retrieve a list of possible tariffs.\n  \n   The `Event UUID` of the UiTdatabank event\nUiTPAS discounts are limited to specific UiTdatabank events, so it's important to specify the event UUID to retrieve a list of possible tariffs.\n\n\n> **Important**\n> The given regularPrice should be part of the priceInfo array (in one of the price \ncategories) in the UiTdatabank event but can in specific cases differ.\n",
+        "description": "Returns the possible UiTPAS discounted **tariffs for an event and a passholder**.\n\nThis UiTPAS tariffs are calculated based on:\n\n- **The regular price** of the ticket.\nThis is the price your user would have to pay for the specific ticket without UiTPAS discount.\n- **The UiTPAS number** of the passholder. UiTPAS discounts are personal so it's important to identify the passholder to retrieve a list of possible tariffs.\n- **The event id** of the UiTdatabank event. UiTPAS discounts are limited to specific UiTdatabank events, so it's important to specify the event id to retrieve a list of possible tariffs.\n\n> ##### Important\n> The regular price of the ticket should generally be one of the price categories set on the event in UiTdatabank. For some use cases you may also use a price that is not set on the event UiTdatabank, but this should generally be agreed upon first to avoid issues during financial audits.\n",
         "security": [
           {
             "Client Access Token (see Authentication docs)": []
@@ -118,7 +118,7 @@
             },
             "in": "query",
             "name": "regularPrice",
-            "description": "The regular price the passholder would have to pay for the ticket",
+            "description": "The regular price the passholder would have to pay for the ticket if they are not eligible for discounts",
             "required": true
           },
           {
@@ -127,7 +127,7 @@
             },
             "in": "query",
             "name": "eventId",
-            "description": "UUID of the event for which the ticket is sold",
+            "description": "The id of the event for which the ticket is sold",
             "required": true
           },
           {
@@ -209,13 +209,13 @@
             "content": {
               "application/problem+json": {
                 "schema": {
-                  "$ref": "../models/Error.json"
+                  "$ref": "#/components/schemas/Error"
                 },
                 "examples": {
                   "Structural discount expired": {
                     "value": {
                       "type": "https://api.publiq.be/probs/uitpas/structural-discount-expired",
-                      "title": "structural discount expired",
+                      "title": "Structural discount expired",
                       "status": 400
                     }
                   }
@@ -230,7 +230,7 @@
             "$ref": "#/components/responses/Forbidden"
           }
         },
-        "description": "Registers one or more new ticket sales with a discounted UiTPAS tariff, so the UiTPAS organiser can get reimbursed for the discount.\n\n> **Important**\n> * Only ticket sales using a discounted UiTPAS tariff (`uitpasTariffId`) can be registered.\n\nA ticketsale is registered using:\n\nThe `uitpasNumber` of the passholder buying the ticket.\n\nThe `eventId` of the UitDatabank event.\n\nThe chosen `uitpasTariffId` from the [Get UiTPAS Tariffs](TODO) request.\n\nThe `regularPrice` the passholder would normally have to pay for this ticket\n\nOptionally `regularPriceLabel` describing the regular price, which can be useful in the financial reporting overview.\n\n\n\n",
+        "description": "Registers one or more new ticket sales **with a discounted UiTPAS tariff**, so the UiTPAS organiser can get reimbursed for the discount.\n\nBefore you can register a discounted ticket sale, you will need to request the possible discounted tariffs from the `GET /tariffs` endpoint and let your end user pick one of the available tariffs. Afterward, you can register a ticket sale using this endpoint. \n\nYou will need:\n\n- The `uitpasNumber` of the passholder buying the ticket.\n- The `eventId` of the UitDatabank event.\n- The chosen `uitpasTariffId` from the `GET /tariffs` request.\n- The `regularPrice` the passholder would normally have to pay for this ticket\n\nOptionally you can include a `regularPriceLabel` describing the regular price if you have multiple price categories, which can be useful in the financial reporting overview.\n\n> ##### Important\n> **If one of the ticket sales is invalid** (for example the chosen tariff is incorrect or expired), **none of the ticket sales will be registered**. You will instead get an error response with more details about the problem, and can then retry the registration without the incorrect ticket sales or ask the end user to change the tickets and tariffs they want.",
         "security": [
           {
             "Client Access Token (see Authentication docs)": []
@@ -246,7 +246,7 @@
                 }
               },
               "examples": {
-                "Example": {
+                "Example for one ticketsale": {
                   "value": [
                     {
                       "uitpasNumber": "0560002524314",
@@ -277,7 +277,8 @@
                 }
               }
             }
-          }
+          },
+          "description": ""
         }
       }
     },
@@ -298,7 +299,7 @@
         "operationId": "delete-ticketsales",
         "responses": {
           "204": {
-            "description": "The ticket sale was successfully canceled"
+            "description": "No content. The ticket sale was successfully canceled."
           },
           "401": {
             "$ref": "#/components/responses/Unauthorized"
@@ -311,13 +312,13 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "../models/Error.json"
+                  "$ref": "#/components/schemas/Error"
                 },
                 "examples": {
                   "Ticket Sale not found": {
                     "value": {
                       "type": "https://api.publiq.be/probs/uitpas/ticket-sale-not-found",
-                      "title": "ticket sale not found",
+                      "title": "Ticket sale not found",
                       "status": 404
                     }
                   }
@@ -326,7 +327,7 @@
             }
           }
         },
-        "description": "Cancels a single ticket sale registration by its id.",
+        "description": "Cancels a single ticket sale registration by its id. (Returned in the response of the ticket sale registration request.)",
         "tags": [
           "TicketSale"
         ],
@@ -346,9 +347,6 @@
         "description": "The Tariff describes the discounted price a passholder has to pay for a given ticket. ",
         "x-internal": false,
         "x-examples": {},
-        "x-tags": [
-          "TicketSale"
-        ],
         "properties": {
           "id": {
             "type": "string",
@@ -365,14 +363,14 @@
           "id",
           "name",
           "price"
+        ],
+        "x-tags": [
+          "Model"
         ]
       },
       "TicketSaleRegistration": {
         "title": "TicketSaleRegistration",
         "type": "object",
-        "x-tags": [
-          "TicketSale"
-        ],
         "properties": {
           "id": {
             "type": "number"
@@ -405,7 +403,11 @@
             "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002"
           }
         },
-        "description": "The TicketSaleRegistration is a response object of the POST /ticketSales request. It can be used to provide the user with an overview or to identify the ticket sales in case they need to be canceled."
+        "description": "The TicketSaleRegistration is a response object of the POST /ticketSales request. It can be used to provide the user with an overview or to identify the ticket sales in case they need to be canceled.",
+        "x-internal": false,
+        "x-tags": [
+          "Model"
+        ]
       },
       "TicketSaleRequest": {
         "title": "TicketSaleRequest",
@@ -444,8 +446,33 @@
           "eventId",
           "regularPrice"
         ],
+        "x-internal": false,
         "x-tags": [
-          "TicketSale"
+          "Model"
+        ]
+      },
+      "Error": {
+        "title": "Error",
+        "type": "object",
+        "description": "RFC7807 error model for all publiq APIs",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "status": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "type",
+          "title",
+          "status"
+        ],
+        "x-tags": [
+          "Model"
         ]
       }
     },
@@ -455,40 +482,20 @@
         "scheme": "bearer"
       }
     },
-    "parameters": {
-      "eventId": {
-        "name": "eventId",
-        "in": "path",
-        "required": true,
-        "schema": {
-          "type": "string",
-          "format": "uuid"
-        },
-        "description": "UUID of the event in UiTdatabank"
-      },
-      "uitpasNumber": {
-        "name": "uitpasNumber",
-        "in": "path",
-        "required": true,
-        "schema": {
-          "type": "string"
-        },
-        "description": "Number of the UiTPAS card of the passholder"
-      }
-    },
+    "parameters": {},
     "responses": {
       "Unauthorized": {
-        "description": "Example response",
+        "description": "Unauthorized. Your request is missing the required credentials to authenticate. See the Authentication documentation for more info.",
         "content": {
           "application/problem+json": {
             "schema": {
-              "$ref": "../models/Error.json"
+              "$ref": "#/components/schemas/Error"
             },
             "examples": {
               "Unauthorized": {
                 "value": {
                   "type": "https://api.publiq.be/probs/auth/unauthorized",
-                  "title": "unauthorized",
+                  "title": "Unauthorized",
                   "status": 401
                 }
               }
@@ -497,17 +504,17 @@
         }
       },
       "Forbidden": {
-        "description": "Example response",
+        "description": "Forbidden. Your request was successfully authenticated but you do not have permission to perform this particular request.",
         "content": {
           "application/problem+json": {
             "schema": {
-              "$ref": "../models/Error.json"
+              "$ref": "#/components/schemas/Error"
             },
             "examples": {
               "Forbidden": {
                 "value": {
                   "type": "https://api.publiq.be/probs/auth/forbidden",
-                  "title": "unauthorized",
+                  "title": "Forbidden",
                   "status": 403
                 }
               }

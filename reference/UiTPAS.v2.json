@@ -27,6 +27,10 @@
     {
       "name": "Organizers",
       "description": "Operations related to organizers"
+    },
+    {
+      "name": "Passholders",
+      "description": "Operations related to passholders"
     }
   ],
   "paths": {
@@ -588,6 +592,79 @@
           }
         ]
       }
+    },
+    "/passholders": {
+      "get": {
+        "summary": "Get passholders",
+        "tags": [
+          "Passholders"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedResponse"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-passholders",
+        "description": "Retrieve passholders based on search parameters",
+        "security": [
+          {
+            "User Acces Token (see Authentication docs)": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "inszNumber"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "uitpasNumber"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "name"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "firstName"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "schoolId"
+          }
+        ]
+      }
     }
   },
   "components": {
@@ -786,6 +863,9 @@
       "PaginatedResponse": {
         "title": "PaginatedResponse",
         "type": "object",
+        "x-tags": [
+          "Model"
+        ],
         "properties": {
           "itemsPerPage": {
             "type": "number"
@@ -796,8 +876,78 @@
           "members": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Organizer"
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/Organizer"
+                },
+                {
+                  "$ref": "#/components/schemas/Passholder"
+                }
+              ]
             }
+          }
+        }
+      },
+      "Passholder": {
+        "title": "Passholder",
+        "type": "object",
+        "x-tags": [
+          "Model"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "inszNumber": {
+            "type": "string"
+          },
+          "cardSsytemMemberships": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CardSystemMembership"
+            }
+          }
+        }
+      },
+      "CardSystemMembership": {
+        "title": "CardSystemMembership",
+        "type": "object",
+        "x-tags": [
+          "Model"
+        ],
+        "properties": {
+          "cardSsytem": {
+            "$ref": "#/components/schemas/CardSystem"
+          },
+          "uitpasNumber": {
+            "type": "string"
+          },
+          "kansenStatuutEndDate": {
+            "type": "string"
+          },
+          "kansenStatuutExpired": {
+            "type": "boolean"
+          },
+          "kansenStatuutInGracePeriod": {
+            "type": "boolean"
+          }
+        }
+      },
+      "CardSystem": {
+        "title": "CardSystem",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
           }
         },
         "x-tags": [

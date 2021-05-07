@@ -456,27 +456,7 @@
         "scheme": "bearer"
       }
     },
-    "parameters": {
-      "eventId": {
-        "name": "eventId",
-        "in": "path",
-        "required": true,
-        "schema": {
-          "type": "string",
-          "format": "id"
-        },
-        "description": "id of the event in UiTdatabank"
-      },
-      "uitpasNumber": {
-        "name": "uitpasNumber",
-        "in": "path",
-        "required": true,
-        "schema": {
-          "type": "string"
-        },
-        "description": "Number of the UiTPAS card of the passholder"
-      }
-    },
+    "parameters": {},
     "responses": {
       "Unauthorized": {
         "description": "Unauthorized. Your request is missing the required credentials to authenticate. See the Authentication documentation for more info.",

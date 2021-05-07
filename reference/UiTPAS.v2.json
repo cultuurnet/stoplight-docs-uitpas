@@ -536,6 +536,56 @@
           }
         ]
       }
+    },
+    "/organizers": {
+      "get": {
+        "summary": "Get organizers",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedResponse"
+                },
+                "examples": {}
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          }
+        },
+        "operationId": "get-organizers",
+        "description": "Retrieve organizers based on search parameters.",
+        "security": [
+          {
+            "User Acces Token (see Authentication docs)": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "number"
+            },
+            "in": "query",
+            "name": "groupId",
+            "description": "Include only organizers in this group"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "name",
+            "description": "Include only organizers with this name (* wildcard allowed)"
+          }
+        ]
+      }
     }
   },
   "components": {
@@ -721,6 +771,24 @@
           "id",
           "name"
         ]
+      },
+      "PaginatedResponse": {
+        "title": "PaginatedResponse",
+        "type": "object",
+        "properties": {
+          "itemsPerPage": {
+            "type": "number"
+          },
+          "totalItems": {
+            "type": "number"
+          },
+          "members": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Organizer"
+            }
+          }
+        }
       }
     },
     "securitySchemes": {

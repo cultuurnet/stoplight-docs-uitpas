@@ -26,29 +26,10 @@
     }
   ],
   "paths": {
-    "/events/{eventId}/tariffs/{uitpasNumber}": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "eventId",
-          "in": "path",
-          "required": true,
-          "description": "UUID of the event for which the ticket is sold"
-        },
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "uitpasNumber",
-          "in": "path",
-          "required": true,
-          "description": "UitPAS Number identifying the passholder who wants to buy a ticket"
-        }
-      ],
+    "/tariffs": {
+      "parameters": [],
       "get": {
-        "summary": "Get UiTPAS Tariffs",
+        "summary": "Get Tariffs",
         "tags": [
           "TicketSale"
         ],
@@ -59,82 +40,72 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "regularPrice": {
-                      "type": "number"
-                    },
-                    "eventId": {
-                      "type": "string"
-                    },
-                    "uitpasNumber": {
-                      "type": "string"
-                    },
-                    "uitpasTariffs": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "uitpasTariffId": {
-                            "type": "string"
-                          },
-                          "name": {
-                            "type": "string"
-                          },
-                          "tariff": {
-                            "type": "number"
-                          }
-                        }
-                      }
-                    }
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Tariff"
                   }
                 },
                 "examples": {
                   "Single tariff example": {
-                    "value": {
-                      "regularPrice": 10,
-                      "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
-                      "uitpasNumber": "0230003524312",
-                      "uitpasTariffs": [
-                        {
-                          "uitpasTariffId": "STRUCTURALDISCOUNT",
-                          "name": "Kansentarief",
-                          "tariff": 1.5
-                        }
-                      ]
-                    }
+                    "value": [
+                      {
+                        "id": "STRUCTURALDISCOUNT",
+                        "name": "Kansentarief",
+                        "price": 1.5
+                      }
+                    ]
                   },
                   "Multiple tariffs example": {
+                    "value": [
+                      {
+                        "id": "STRUCTURALDISCOUNT",
+                        "name": "Kansentarief",
+                        "price": 1.5
+                      },
+                      {
+                        "id": "COUPON1234",
+                        "name": "Cultuurbon 6 euro",
+                        "price": 4
+                      },
+                      {
+                        "id": "COUPON2345",
+                        "name": "2 euro korting op een specifiek event",
+                        "price": 8
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. Possible error types:\n\n* https://api.publiq.be/probs/uitpas/event-not-found\n* https://api.publiq.be/probs/uitpas/invalid-uitpasnumber\n* https://api.publiq.be/probs/uitpas/passholder-not-found\n\n",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "../models/Error.json"
+                },
+                "examples": {
+                  "Event not found": {
                     "value": {
-                      "regularPrice": 10,
-                      "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
-                      "uitpasNumber": "0230003524312",
-                      "uitpasTariffs": [
-                        {
-                          "uitpasTariffId": "STRUCTURALDISCOUNT",
-                          "name": "Kansentarief",
-                          "tariff": 1.5
-                        },
-                        {
-                          "uitpasTariffId": "COUPON1234",
-                          "name": "Cultuurbon 6 euro",
-                          "tariff": 4
-                        },
-                        {
-                          "uitpasTariffId": "COUPON2345",
-                          "name": "2 euro korting op een specifiek event",
-                          "tariff": 8
-                        }
-                      ]
+                      "type": "https://api.publiq.be/probs/uitpas/event-not-found",
+                      "title": "event not found",
+                      "status": 400
                     }
                   }
                 }
               }
             }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
-        "operationId": "get-events-eventId-tariffs",
-        "description": "Returns the possible UiTPAS discounted **tariffs for an event and a passholder**.\n\nThis UiTPAS tariffs are calculated based on:\n\nThe given `regularPrice` of the ticket.\nThis is the price your user would have to pay for the specific ticket without UiTPAS discount.\n  \nThe `UiTPASnumber` of the passholder.\n  UiTPAS discounts are personal so it's important to identify the passholder to retrieve a list of possible tariffs.\n  \n   The `Event UUID` of the UiTDatabank event\nUiTPAS discounts are limited to specific UiTDatabank events, so it's important to specify the event UUID to retrieve a list of possible tariffs.\n\n\n> **Important**\n> The given regularPrice should be part of the priceInfo array (in one of the price \ncategories) in the UiTdatabank event but can in specific cases differ.\n",
+        "operationId": "get-tariffs",
+        "description": "Returns the possible UiTPAS discounted **tariffs for an event and a passholder**.\n\nThis UiTPAS tariffs are calculated based on:\n\nThe given `regularPrice` of the ticket.\nThis is the price your user would have to pay for the specific ticket without UiTPAS discount.\n  \nThe `UiTPASnumber` of the passholder.\n  UiTPAS discounts are personal so it's important to identify the passholder to retrieve a list of possible tariffs.\n  \n   The `Event UUID` of the UiTdatabank event\nUiTPAS discounts are limited to specific UiTdatabank events, so it's important to specify the event UUID to retrieve a list of possible tariffs.\n\n\n> **Important**\n> The given regularPrice should be part of the priceInfo array (in one of the price \ncategories) in the UiTdatabank event but can in specific cases differ.\n",
         "security": [
           {
             "Client Access Token (see Authentication docs)": []
@@ -149,164 +120,114 @@
             "name": "regularPrice",
             "description": "The regular price the passholder would have to pay for the ticket",
             "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "eventId",
+            "description": "UUID of the event for which the ticket is sold",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "uitpasNumber",
+            "description": "UiTPAS Number identifying the passholder who wants to buy a ticket",
+            "required": true
           }
         ]
       }
     },
-    "/events/{eventId}/ticketSales": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "eventId",
-          "in": "path",
-          "required": true,
-          "description": "UUID of the event for which the TicketSale is registered"
-        }
-      ],
+    "/ticketSales": {
+      "parameters": [],
       "post": {
         "summary": "Register ticket sale(s)",
         "tags": [
           "TicketSale"
         ],
-        "operationId": "post-events-eventId-ticketSalesB",
+        "operationId": "post-ticketsales",
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Ticket sale registration(s) succeeded",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "type": "object",
-                    "description": "TicketSaleResponse",
-                    "properties": {
-                      "ticketSaleRequest": {
-                        "type": "object",
-                        "description": "TicketSaleRequest",
-                        "required": [
-                          "uitpasNumber",
-                          "uitpasTariffId",
-                          "eventId",
-                          "regularPrice"
-                        ],
-                        "properties": {
-                          "uitpasNumber": {
-                            "type": "string"
-                          },
-                          "uitpasTariffId": {
-                            "type": "string"
-                          },
-                          "eventId": {
-                            "type": "string"
-                          },
-                          "regularPrice": {
-                            "type": "number"
-                          }
-                        }
-                      },
-                      "status": {
-                        "type": "string",
-                        "enum": [
-                          "SUCCESS",
-                          "INVALID_CARD_STATUS",
-                          "INVALID_CARD",
-                          "PASSHOLDER_NO_ACTIVE_CARDSYSTEMS",
-                          "KANSENSTATUUT_EXPIRED",
-                          "MAXIMUM_REACHED"
-                        ]
-                      },
-                      "ticketSale": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "number"
-                          }
-                        }
-                      },
-                      "errorMessage": {
-                        "type": "string"
-                      }
-                    },
-                    "required": [
-                      "ticketSaleRequest",
-                      "status"
-                    ]
+                    "$ref": "#/components/schemas/TicketSaleRegistration"
                   }
                 },
                 "examples": {
                   "Single ticketsale example": {
                     "value": [
                       {
-                        "ticketSaleRequest": {
-                          "uitpasNumber": "0560002624316",
-                          "uitpasTariffId": "COUPON1234",
-                          "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
-                          "regularPrice": 10
+                        "id": 21345,
+                        "tariff": {
+                          "id": "COUPON1234",
+                          "name": "Cultuurbon 6 euro",
+                          "price": 1.5
                         },
-                        "status": "SUCCESS",
-                        "ticketSale": {
-                          "id": 1234
-                        }
+                        "uitpasNumber": "0560002524314",
+                        "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002"
                       }
                     ]
                   },
                   "Multiple ticket sales example": {
                     "value": [
                       {
-                        "ticketSaleRequest": {
-                          "uitpasNumber": "0560002524314",
-                          "uitpasTariffId": "COUPON1234",
-                          "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
-                          "regularPrice": 10
+                        "id": 21345,
+                        "tariff": {
+                          "id": "COUPON1234",
+                          "name": "Cultuurbon 6 euro",
+                          "price": 4
                         },
-                        "status": "SUCCESS",
-                        "ticketSale": {
-                          "id": 1234
-                        }
+                        "uitpasNumber": "0560002524314",
+                        "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002"
                       },
                       {
-                        "ticketSaleRequest": {
-                          "uitpasNumber": "0560002624316",
-                          "uitpasTariffId": "COUPON1234",
-                          "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
-                          "regularPrice": 10
+                        "id": 21346,
+                        "tariff": {
+                          "id": "STRUCTURALDISCOUNT",
+                          "name": "Kansentarief",
+                          "price": 1.5
                         },
-                        "status": "SUCCESS",
-                        "ticketSale": {
-                          "id": 1235
-                        }
-                      }
-                    ]
-                  },
-                  "Example with errors": {
-                    "value": [
-                      {
-                        "ticketSaleRequest": {
-                          "uitpasNumber": "0560002524314",
-                          "uitpasTariffId": "COUPON1234",
-                          "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
-                          "regularPrice": 10
-                        },
-                        "status": "KANSENSTATUUT_EXPIRED",
-                        "errorMessage": "De pashouder kan geen ticket kopen. Kansenpas is verlopen."
-                      },
-                      {
-                        "ticketSaleRequest": {
-                          "uitpasNumber": "0560002624316",
-                          "uitpasTariffId": "COUPON1234",
-                          "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
-                          "regularPrice": 10
-                        },
-                        "status": "MAXIMUM_REACHED",
-                        "errorMessage": "Er zijn reeds 40 tickets verkocht."
+                        "uitpasNumber": "0940002524123",
+                        "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002"
                       }
                     ]
                   }
                 }
               }
             }
+          },
+          "400": {
+            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/structural-discount-expired\n* https://api.publiq.be/probs/uitpas/maximum-reached\n\nThe type indicates the error on one of the failed ticket sale registrations. All other ticket sale registration in the request will be rolled back in case of an error.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "../models/Error.json"
+                },
+                "examples": {
+                  "Structural discount expired": {
+                    "value": {
+                      "type": "https://api.publiq.be/probs/uitpas/structural-discount-expired",
+                      "title": "structural discount expired",
+                      "status": 400
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
         "description": "Registers one or more new ticket sales with a discounted UiTPAS tariff, so the UiTPAS organiser can get reimbursed for the discount.\n\n> **Important**\n> * Only ticket sales using a discounted UiTPAS tariff (`uitpasTariffId`) can be registered.\n\nA ticketsale is registered using:\n\nThe `uitpasNumber` of the passholder buying the ticket.\n\nThe `eventId` of the UitDatabank event.\n\nThe chosen `uitpasTariffId` from the [Get UiTPAS Tariffs](TODO) request.\n\nThe `regularPrice` the passholder would normally have to pay for this ticket\n\nOptionally `regularPriceLabel` describing the regular price, which can be useful in the financial reporting overview.\n\n\n\n",
@@ -321,42 +242,18 @@
               "schema": {
                 "type": "array",
                 "items": {
-                  "type": "object",
-                  "description": "TicketSaleRequest",
-                  "properties": {
-                    "uitpasNumber": {
-                      "type": "string"
-                    },
-                    "uitpasTarrifId": {
-                      "type": "string"
-                    },
-                    "eventId": {
-                      "type": "string"
-                    },
-                    "regularPrice": {
-                      "type": "number"
-                    },
-                    "regularPriceLabel": {
-                      "type": "string",
-                      "description": "Optional description of the regular price. e.g. a price category. Useful for reporting."
-                    }
-                  },
-                  "required": [
-                    "uitpasNumber",
-                    "uitpasTarrifId",
-                    "eventId",
-                    "regularPrice"
-                  ]
+                  "$ref": "#/components/schemas/TicketSaleRequest"
                 }
               },
               "examples": {
-                "Example without regularPrice": {
+                "Example": {
                   "value": [
                     {
                       "uitpasNumber": "0560002524314",
-                      "uitpasTarrifId": "COUPON1234",
+                      "tariffId": "COUPON1234",
                       "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
-                      "regularPrice": 10
+                      "regularPrice": 10,
+                      "regularPriceLabel": "Optional descriptive label of the regular price. Used in financial reporting."
                     }
                   ]
                 },
@@ -364,15 +261,17 @@
                   "value": [
                     {
                       "uitpasNumber": "0560002524314",
-                      "uitpasTarrifId": "COUPON1234",
+                      "tariffId": "COUPON1234",
                       "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
-                      "regularPrice": 10
+                      "regularPrice": 10,
+                      "regularPriceLabel": "Base tariff"
                     },
                     {
-                      "uitpasNumber": "0560002624316",
-                      "uitpasTarrifId": "COUPON1234",
+                      "uitpasNumber": "0930002523422",
+                      "tariffId": "STRUCTURALDISCOUNT",
                       "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
-                      "regularPrice": 10
+                      "regularPrice": 10,
+                      "regularPriceLabel": "Base tariff"
                     }
                   ]
                 }
@@ -382,11 +281,8 @@
         }
       }
     },
-    "/events/{eventId}/ticketSales/{ticketSaleId}": {
+    "/ticketSales/{ticketSaleId}": {
       "parameters": [
-        {
-          "$ref": "#/components/parameters/eventId"
-        },
         {
           "schema": {
             "type": "string"
@@ -399,10 +295,35 @@
       ],
       "delete": {
         "summary": "Cancel a ticket sale registration",
-        "operationId": "delete-events-eventId-ticketSales-ticketSaleId",
+        "operationId": "delete-ticketsales",
         "responses": {
-          "200": {
-            "description": "OK"
+          "204": {
+            "description": "The ticket sale was successfully canceled"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/Error.json"
+                },
+                "examples": {
+                  "Ticket Sale not found": {
+                    "value": {
+                      "type": "https://api.publiq.be/probs/uitpas/ticket-sale-not-found",
+                      "title": "ticket sale not found",
+                      "status": 404
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "description": "Cancels a single ticket sale registration by its id.",
@@ -418,7 +339,116 @@
     }
   },
   "components": {
-    "schemas": {},
+    "schemas": {
+      "Tariff": {
+        "title": "Tariff",
+        "type": "object",
+        "description": "The Tariff describes the discounted price a passholder has to pay for a given ticket. ",
+        "x-internal": false,
+        "x-examples": {},
+        "x-tags": [
+          "TicketSale"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": ""
+          },
+          "name": {
+            "type": "string"
+          },
+          "price": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "price"
+        ]
+      },
+      "TicketSaleRegistration": {
+        "title": "TicketSaleRegistration",
+        "type": "object",
+        "x-tags": [
+          "TicketSale"
+        ],
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "tariff": {
+            "$ref": "#/components/schemas/Tariff"
+          },
+          "uitpasNumber": {
+            "type": "string"
+          },
+          "eventId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "tariff",
+          "uitpasNumber",
+          "eventId"
+        ],
+        "x-examples": {
+          "Example": {
+            "id": 21345,
+            "tariff": {
+              "id": "COUPON1234",
+              "name": "Cultuurbon 6 euro",
+              "price": 1.5
+            },
+            "uitpasNumber": "0560002524314",
+            "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002"
+          }
+        },
+        "description": "The TicketSaleRegistration is a response object of the POST /ticketSales request. It can be used to provide the user with an overview or to identify the ticket sales in case they need to be canceled."
+      },
+      "TicketSaleRequest": {
+        "title": "TicketSaleRequest",
+        "type": "object",
+        "description": "The TicketSaleRequest is a request object used to register ticket sales in POST /ticketSales.",
+        "x-examples": {
+          "Example ticket sale request": {
+            "uitpasNumber": "0560002524314",
+            "tariffId": "COUPON1234",
+            "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
+            "regularPrice": 10,
+            "regularPriceLabel": "Optional descriptive label of the regular price. Used in financial reporting."
+          }
+        },
+        "properties": {
+          "uitpasNumber": {
+            "type": "string"
+          },
+          "tariffId": {
+            "type": "string"
+          },
+          "eventId": {
+            "type": "string"
+          },
+          "regularPrice": {
+            "type": "number"
+          },
+          "regularPriceLabel": {
+            "type": "string",
+            "description": "Optional descriptive label of the regular price. Used in financial reporting."
+          }
+        },
+        "required": [
+          "uitpasNumber",
+          "tariffId",
+          "eventId",
+          "regularPrice"
+        ],
+        "x-tags": [
+          "TicketSale"
+        ]
+      }
+    },
     "securitySchemes": {
       "Client Access Token (see Authentication docs)": {
         "type": "http",
@@ -444,6 +474,46 @@
           "type": "string"
         },
         "description": "Number of the UiTPAS card of the passholder"
+      }
+    },
+    "responses": {
+      "Unauthorized": {
+        "description": "Example response",
+        "content": {
+          "application/problem+json": {
+            "schema": {
+              "$ref": "../models/Error.json"
+            },
+            "examples": {
+              "Unauthorized": {
+                "value": {
+                  "type": "https://api.publiq.be/probs/auth/unauthorized",
+                  "title": "unauthorized",
+                  "status": 401
+                }
+              }
+            }
+          }
+        }
+      },
+      "Forbidden": {
+        "description": "Example response",
+        "content": {
+          "application/problem+json": {
+            "schema": {
+              "$ref": "../models/Error.json"
+            },
+            "examples": {
+              "Forbidden": {
+                "value": {
+                  "type": "https://api.publiq.be/probs/auth/forbidden",
+                  "title": "unauthorized",
+                  "status": 403
+                }
+              }
+            }
+          }
+        }
       }
     }
   }

@@ -66,6 +66,16 @@ Content-Type: application/json
 }
 ```
 
+If successful, you should receive a `200` response with a JSON body including the id of your newly created event:
+
+```http
+{
+  "id": "100d4f49-d155-4f1c-83cb-064291606e60"
+}
+```
+
+You can now use this event id to calculate discounted UiTPAS prices for it and register discounted ticket sales for it! 🎉
+
 ### Required properties
 
 Of the properties in the example above, the following are always mandatory in UiTdatabank in general:

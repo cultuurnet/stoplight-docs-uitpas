@@ -142,14 +142,14 @@
         ]
       }
     },
-    "/ticketSales": {
+    "/ticket-sales": {
       "parameters": [],
       "post": {
         "summary": "Register ticket sale(s)",
         "tags": [
           "TicketSale"
         ],
-        "operationId": "post-ticketsales",
+        "operationId": "post-ticket-sales",
         "responses": {
           "200": {
             "description": "Ticket sale registration(s) succeeded",
@@ -282,7 +282,7 @@
         }
       }
     },
-    "/ticketSales/{ticketSaleId}": {
+    "/ticket-sales/{ticketSaleId}": {
       "parameters": [
         {
           "schema": {
@@ -296,7 +296,7 @@
       ],
       "delete": {
         "summary": "Cancel a ticket sale registration",
-        "operationId": "delete-ticketsales",
+        "operationId": "delete-ticket-sales",
         "responses": {
           "204": {
             "description": "No content. The ticket sale was successfully canceled."

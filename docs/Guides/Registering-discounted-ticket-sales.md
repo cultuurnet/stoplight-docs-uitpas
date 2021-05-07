@@ -145,3 +145,9 @@ In case the ticketsale registration fails, the status property will contain more
 
 If for some reason you need to [cancel the ticket sale registration](/docs/uitpas/reference/UiTPAS.v2.json/paths/~1ticketSales~1%7BticketSaleId%7D/delete) you can do so using the `id` of the ticketSale from this response.
 
+## F.A.Q.
+
+### Can I get a list of all UiTPAS numbers that have a structural discount ('kansentarief')?
+
+### Can I get a list of discounts instead of a list of tariffs?
+

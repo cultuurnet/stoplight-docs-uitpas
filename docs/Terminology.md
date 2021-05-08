@@ -21,6 +21,3 @@ Based on certain parameters such as the residence of the passholder, this coupon
 For example: the City of Hasselt awards a 5 euro discount to all passholders of Hasselt.
 This discount will automatically be made available to all inhabitants of Hasselt.
 When the UiTPAS-price for an inabitant of Hasselt is checked, this coupon will show up as an option and can then be redeemed.
-
-![](../assets/images/register-UiTPAS-discount-schema.jpg)
-

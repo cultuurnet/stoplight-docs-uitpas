@@ -6,6 +6,10 @@ On this page you can quickly get a grasp of common UiTPAS terminology and concep
 
 One who holds an UiTPAS, the end-user of an UiTPAS.
 
+## UiTPAS Organizer
+
+The organizer of an UiTPAS-event. To pay for the reduced UiTPAS-tariffs for people in need, the organizer is partly reimbursed by the local government. That's why it's important to always create UiTPAS-events with the correct UiTPAS-organizer.
+
 ## Structural discount ('kansentarief')
 
 Passholders in need can receive a structural discount ('kansentarief') on their UiTPAS. 
@@ -21,3 +25,14 @@ Based on certain parameters such as the residence of the passholder, this coupon
 For example: the City of Hasselt awards a 5 euro discount to all passholders of Hasselt.
 This discount will automatically be made available to all inhabitants of Hasselt.
 When the UiTPAS-price for an inabitant of Hasselt is checked, this coupon will show up as an option and can then be redeemed.
+
+## Check-in
+
+When a passholder saves an UiTPAS point, we call this a check-in.
+An UiTPAS point is earned for participating in a specific event, mostly by holding the card to a check-in device located at the organizer of the event.
+
+## Rewards 
+
+After saving UiTPAS points, a passholder can trade them for fun [rewards](https://www.uitpas.be/voordelen-zoeken#/voordelen) provided by local UiTPAS organizers. 
+
+Some rewards can only be traded at the event of the organizer (material rewards like a goodie bag). Other rewards can also be traded online via [UiTPAS.be](http://uitpas.be) (digital rewards such as an e-ticket).

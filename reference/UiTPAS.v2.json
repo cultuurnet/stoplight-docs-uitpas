@@ -574,7 +574,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PaginatedResponse"
+                  "$ref": "#/components/schemas/OrganizersPaginatedResponse"
                 },
                 "examples": {}
               }
@@ -626,7 +626,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PaginatedResponse"
+                  "$ref": "#/components/schemas/PassholdersPaginatedResponse"
                 },
                 "examples": {}
               }
@@ -822,7 +822,7 @@
                   "Example of started export": {
                     "value": {
                       "status": "started",
-                      "reportId": "232432"
+                      "id": 232432
                     }
                   }
                 }
@@ -877,13 +877,13 @@
                 "examples": {
                   "Example of a started report": {
                     "value": {
-                      "reportId": "232432",
+                      "id": 23243,
                       "status": "started"
                     }
                   },
                   "Example of an available report": {
                     "value": {
-                      "reportId": "2332431",
+                      "id": 23244,
                       "status": "available"
                     }
                   }
@@ -1148,12 +1148,13 @@
           "Model"
         ]
       },
-      "PaginatedResponse": {
-        "title": "PaginatedResponse",
+      "PassholdersPaginatedResponse": {
+        "title": "PassholdersPaginatedResponse",
         "type": "object",
         "x-tags": [
           "Model"
         ],
+        "description": "Paginated response object for passholders",
         "properties": {
           "itemsPerPage": {
             "type": "number"
@@ -1161,17 +1162,32 @@
           "totalItems": {
             "type": "number"
           },
-          "members": {
+          "member": {
             "type": "array",
             "items": {
-              "oneOf": [
-                {
-                  "$ref": "#/components/schemas/Organizer"
-                },
-                {
-                  "$ref": "#/components/schemas/Passholder"
-                }
-              ]
+              "$ref": "#/components/schemas/Passholder"
+            }
+          }
+        }
+      },
+      "OrganizersPaginatedResponse": {
+        "title": "OrganizersPaginatedResponse",
+        "type": "object",
+        "x-tags": [
+          "Model"
+        ],
+        "description": "Paginated response object for organizers",
+        "properties": {
+          "itemsPerPage": {
+            "type": "number"
+          },
+          "totalItems": {
+            "type": "number"
+          },
+          "member": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Passholder"
             }
           }
         }
@@ -1263,6 +1279,9 @@
         "title": "ReportStatus",
         "description": "The status of a started report export.",
         "x-examples": {},
+        "x-tags": [
+          "Model"
+        ],
         "properties": {
           "status": {
             "type": "string",
@@ -1271,16 +1290,13 @@
               "available"
             ]
           },
-          "reportId": {
-            "type": "string"
+          "id": {
+            "type": "number"
           }
         },
         "required": [
           "status",
-          "reportId"
-        ],
-        "x-tags": [
-          "Model"
+          "id"
         ]
       },
       "ReportPeriod": {

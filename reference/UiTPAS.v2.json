@@ -1235,7 +1235,7 @@
           }
         },
         "x-tags": [
-          "Models"
+          "Model"
         ]
       },
       "ReportStatus": {
@@ -1260,7 +1260,7 @@
           "reportId"
         ],
         "x-tags": [
-          "Models"
+          "Model"
         ]
       },
       "ReportPeriod": {
@@ -1282,7 +1282,7 @@
           "endDate"
         ],
         "x-tags": [
-          "Models"
+          "Model"
         ]
       }
     },

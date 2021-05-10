@@ -245,7 +245,7 @@
             "$ref": "#/components/responses/Forbidden"
           }
         },
-        "description": "Registers one or more new ticket sales **with a discounted UiTPAS tariff**, so the UiTPAS organiser can get reimbursed for the discount.\n\nBefore you can register a discounted ticket sale, you will need to request the possible discounted tariffs from the `GET /tariffs` endpoint and let your end user pick one of the available tariffs. Afterward, you can register a ticket sale using this endpoint. \n\nYou will need:\n\n- The `uitpasNumber` of the passholder buying the ticket.\n- The `eventId` of the UitDatabank event.\n- The chosen `uitpasTariffId` from the `GET /tariffs` request.\n- The `regularPrice` the passholder would normally have to pay for this ticket\n\nOptionally you can include a `regularPriceLabel` describing the regular price if you have multiple price categories, which can be useful in the financial reporting overview.\n\n> ##### Important\n> **If one of the ticket sales is invalid** (for example the chosen tariff is incorrect or expired), **none of the ticket sales will be registered**. You will instead get an error response with more details about the problem, and can then retry the registration without the incorrect ticket sales or ask the end user to change the tickets and tariffs they want.",
+        "description": "Registers one or more new ticket sales **with a discounted UiTPAS tariff**, so the UiTPAS organizer can get reimbursed for the discount.\n\nBefore you can register a discounted ticket sale, you will need to request the possible discounted tariffs from the `GET /tariffs` endpoint and let your end user pick one of the available tariffs. Afterward, you can register a ticket sale using this endpoint. \n\nYou will need:\n\n- The `uitpasNumber` of the passholder buying the ticket.\n- The `eventId` of the UitDatabank event.\n- The chosen `uitpasTariffId` from the `GET /tariffs` request.\n- The `regularPrice` the passholder would normally have to pay for this ticket\n\nOptionally you can include a `regularPriceLabel` describing the regular price if you have multiple price categories, which can be useful in the financial reporting overview.\n\n> ##### Important\n> **If one of the ticket sales is invalid** (for example the chosen tariff is incorrect or expired), **none of the ticket sales will be registered**. You will instead get an error response with more details about the problem, and can then retry the registration without the incorrect ticket sales or ask the end user to change the tickets and tariffs they want.",
         "security": [
           {
             "Client Access Token (see Authentication docs)": []
@@ -424,20 +424,20 @@
       },
       "parameters": []
     },
-    "/organisers/{organiserId}/distribution-keys": {
+    "/organizers/{organizerId}/distribution-keys": {
       "parameters": [
         {
           "schema": {
             "type": "string"
           },
-          "name": "organiserId",
+          "name": "organizerId",
           "in": "path",
           "required": true,
           "description": "The id of the organizer"
         }
       ],
       "get": {
-        "summary": "Get distribution keys",
+        "summary": "Get organizer distribution keys",
         "tags": [
           "Organizers"
         ],
@@ -472,13 +472,13 @@
             }
           }
         },
-        "operationId": "get-organisers-distribution-keys",
+        "operationId": "get-organizer-distribution-keys",
         "security": [
           {
             "User Acces Token (see Authentication docs)": []
           }
         ],
-        "description": "Get manual distribution keys for an organiser, so it can be set to a specific event using [TODO](#todo)\n\n> WARNING:\n> This endpoint is only needed for exceptional cases. In most cases distribution keys are set automatically."
+        "description": "Get manual distribution keys for an organizer, so it can be set to a specific event using [TODO](#todo)\n\n> WARNING:\n> This endpoint is only needed for exceptional cases. In most cases distribution keys are set automatically."
       }
     },
     "/events/{eventId}/distribution-keys": {

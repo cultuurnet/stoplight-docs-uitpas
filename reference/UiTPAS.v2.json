@@ -35,6 +35,14 @@
     {
       "name": "Financial",
       "description": "Operations related to financial reports"
+    },
+    {
+      "name": "CurrentUser",
+      "description": "Operations related to the current user"
+    },
+    {
+      "name": "DistributionKeys",
+      "description": "Operations related to distribution keys"
     }
   ],
   "paths": {

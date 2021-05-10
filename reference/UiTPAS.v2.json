@@ -478,7 +478,7 @@
             "User Acces Token (see Authentication docs)": []
           }
         ],
-        "description": "Get manual distribution keys for an organizer, so it can be set to a specific event using [TODO](#todo)\n\n> WARNING:\n> This endpoint is only needed for exceptional cases. In most cases distribution keys are set automatically."
+        "description": "Get manual distribution keys for an organizer, so it can be set to a specific event using [TODO](#todo)\n\n<!-- theme: warning -->\n\n> **This endpoint is only needed for exceptional cases.** In most cases distribution keys are set automatically on events, so you don't need to retrieve the possible distribution keys for the event's organizer."
       }
     },
     "/events/{eventId}/distribution-keys": {

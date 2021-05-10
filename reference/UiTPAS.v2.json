@@ -31,6 +31,10 @@
     {
       "name": "Passholders",
       "description": "Operations related to passholders"
+    },
+    {
+      "name": "Financial",
+      "description": "Operations related to financial reports"
     }
   ],
   "paths": {
@@ -593,7 +597,7 @@
         ]
       }
     },
-    "/passholders": {
+    "/passholders/{passholderId}": {
       "get": {
         "summary": "Get passholders",
         "tags": [
@@ -621,7 +625,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PaginatedResponse"
+                  "$ref": "#/components/schemas/Error"
                 }
               }
             }
@@ -671,6 +675,263 @@
             "name": "schoolId"
           }
         ]
+      },
+      "put": {
+        "summary": "Update passholder",
+        "operationId": "put-passholders",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Passholder"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          }          
+        },
+        "description": "Update the passholder.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PassholderUpdateRequest"
+              }
+            }
+          },
+          "description": "The PassholdUpdateRequest object including the fields to be updated."
+        },
+        "tags": [
+          "Passholders"
+        ],
+        "security": [
+          {
+            "User Acces Token (see Authentication docs)": []
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "passholderId",
+          "in": "path",
+          "required": true,
+          "description": "The id of the passholder"
+        }
+      ]
+    },
+    "/financials/organizers/{organizerId}/periods": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "organizerId",
+          "in": "path",
+          "required": true,
+          "description": "The id of the organizer"
+        }
+      ],
+      "get": {
+        "summary": "Get financial report periods for an organizer",
+        "tags": [
+          "Financial"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ReportPeriod"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          }
+        },
+        "operationId": "get-financials-organizer-periods",
+        "security": [
+          {
+            "User Acces Token (see Authentication docs)": []
+          }
+        ],
+        "description": "Retrieve report periods for an organizer"
+      }
+    },
+    "/financials/organizers/{organizerId}/reports": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "organizerId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "post": {
+        "summary": "Start a financial report export for an organizer",
+        "operationId": "post-financials-organizers-reports",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReportStatus"
+                },
+                "examples": {
+                  "Example of started export": {
+                    "value": {
+                      "status": "started",
+                      "reportId": "232432"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          }
+        },
+        "tags": [
+          "Financial"
+        ],
+        "description": "Starts a financial report export. The result of this request is a `reportId` that can be used in the /status and /download requests."
+      }
+    },
+    "/financials/organizers/{organizerId}/report/{reportId}/status": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "organizerId",
+          "in": "path",
+          "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "reportId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Get financial report status",
+        "tags": [
+          "Financial"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReportStatus"
+                },
+                "examples": {
+                  "Example of a started report": {
+                    "value": {
+                      "reportId": "232432",
+                      "status": "started"
+                    }
+                  },
+                  "Example of an available report": {
+                    "value": {
+                      "reportId": "2332431",
+                      "status": "available"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-financials-organizers-reports-status",
+        "description": "Retrieve the status of a previously started report export."
+      }
+    },
+    "/financials/organizers/{organizerId}/reports/{reportId}/download": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "organizerId",
+          "in": "path",
+          "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "reportId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Get financial report data",
+        "tags": [
+          "Financial"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                },
+                "examples": {}
+              }
+            }
+          }
+        },
+        "operationId": "get-financials-organizers-reports-download",
+        "description": "Retrieve the actual report zip file of an `available` report."
       }
     }
   },
@@ -919,6 +1180,9 @@
             "items": {
               "$ref": "#/components/schemas/CardSystemMembership"
             }
+          },
+          "schoolId": {
+            "type": "string"
           }
         }
       },
@@ -959,6 +1223,57 @@
         },
         "x-tags": [
           "Model"
+        ]
+      },
+      "PassholderUpdateRequest": {
+        "title": "PassholderUpdateRequest",
+        "type": "object",
+        "description": "Request object to update a passholder",
+        "properties": {
+          "schoolId": {
+            "type": "string"
+          }
+        }
+      },
+      "ReportStatus": {
+        "type": "object",
+        "title": "ReportStatus",
+        "description": "The status of a started report export.",
+        "x-examples": {},
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "started",
+              "available"
+            ]
+          },
+          "reportId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "status",
+          "reportId"
+        ]
+      },
+      "ReportPeriod": {
+        "title": "ReportPeriod",
+        "type": "object",
+        "description": "Start and end date of the reporting period  ",
+        "properties": {
+          "startDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date"
+          }
+        },
+        "required": [
+          "startDate",
+          "endDate"
         ]
       }
     },

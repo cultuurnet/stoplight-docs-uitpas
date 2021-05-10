@@ -695,7 +695,7 @@
           },
           "403": {
             "$ref": "#/components/responses/Forbidden"
-          }          
+          }
         },
         "description": "Update the passholder.",
         "requestBody": {
@@ -1233,7 +1233,10 @@
           "schoolId": {
             "type": "string"
           }
-        }
+        },
+        "x-tags": [
+          "Models"
+        ]
       },
       "ReportStatus": {
         "type": "object",
@@ -1255,6 +1258,9 @@
         "required": [
           "status",
           "reportId"
+        ],
+        "x-tags": [
+          "Models"
         ]
       },
       "ReportPeriod": {
@@ -1274,6 +1280,9 @@
         "required": [
           "startDate",
           "endDate"
+        ],
+        "x-tags": [
+          "Models"
         ]
       }
     },

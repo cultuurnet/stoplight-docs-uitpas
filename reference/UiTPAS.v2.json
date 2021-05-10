@@ -516,13 +516,13 @@
           }
         },
         "description": "Update the distribution keys of the given event",
-        "tags": [
-          "Organizers"
-        ],
         "security": [
           {
             "User Acces Token (see Authentication docs)": []
           }
+        ],
+        "tags": [
+          "DistributionKeys"
         ]
       },
       "get": {

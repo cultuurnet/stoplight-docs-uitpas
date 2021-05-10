@@ -619,7 +619,8 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/PaginatedResponse"
-                }
+                },
+                "examples": {}
               }
             }
           },
@@ -1186,7 +1187,7 @@
           "inszNumber": {
             "type": "string"
           },
-          "cardSsytemMemberships": {
+          "cardSystemMemberships": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/CardSystemMembership"

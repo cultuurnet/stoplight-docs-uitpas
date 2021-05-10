@@ -121,6 +121,9 @@
         "security": [
           {
             "Client Access Token (see Authentication docs)": []
+          },
+          {
+            "User Acces Token (see Authentication docs)": []
           }
         ],
         "parameters": [
@@ -246,6 +249,9 @@
         "security": [
           {
             "Client Access Token (see Authentication docs)": []
+          },
+          {
+            "User Acces Token (see Authentication docs)": []
           }
         ],
         "requestBody": {
@@ -346,6 +352,9 @@
         "security": [
           {
             "Client Access Token (see Authentication docs)": []
+          },
+          {
+            "User Acces Token (see Authentication docs)": []
           }
         ]
       }

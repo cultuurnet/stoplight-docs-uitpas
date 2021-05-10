@@ -361,7 +361,7 @@
     },
     "/user/organizer-roles": {
       "get": {
-        "summary": "Get organizer Roles",
+        "summary": "Get organizer roles",
         "responses": {
           "200": {
             "description": "OK",
@@ -411,8 +411,8 @@
             "$ref": "#/components/responses/Unauthorized"
           }
         },
-        "operationId": "get-organizer-admins",
-        "description": "List organizer roles for the current user",
+        "operationId": "get-user-organizer-roles",
+        "description": "List of roles that the current user has in relation to organizers. For example a user can be a `member` or an `admin` of an organizer.",
         "security": [
           {
             "User Acces Token (see Authentication docs)": []

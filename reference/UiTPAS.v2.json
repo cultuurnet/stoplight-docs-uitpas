@@ -606,9 +606,9 @@
         ]
       }
     },
-    "/passholders/{passholderId}": {
+    "/passholders": {
       "get": {
-        "summary": "Get passholders",
+        "summary": "Search passholders",
         "tags": [
           "Passholders"
         ],
@@ -684,7 +684,9 @@
             "name": "schoolId"
           }
         ]
-      },
+      }
+    },
+    "/passholders/{passholderId}": {
       "put": {
         "summary": "Update passholder",
         "operationId": "put-passholders",

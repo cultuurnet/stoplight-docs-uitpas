@@ -749,7 +749,7 @@
         }
       ]
     },
-    "/financials/organizers/{organizerId}/periods": {
+    "/organizers/{organizerId}/financial-reports/periods": {
       "parameters": [
         {
           "schema": {
@@ -796,7 +796,7 @@
         "description": "Retrieve report periods for an organizer"
       }
     },
-    "/financials/organizers/{organizerId}/reports": {
+    "/organizers/{organizerId}/financial-reports": {
       "parameters": [
         {
           "schema": {
@@ -842,7 +842,7 @@
         "description": "Starts a financial report export. The result of this request is a `reportId` that can be used in the /status and /download requests."
       }
     },
-    "/financials/organizers/{organizerId}/report/{reportId}/status": {
+    "/organizers/{organizerId}/financial-reports/{reportId}": {
       "parameters": [
         {
           "schema": {
@@ -912,7 +912,7 @@
         "description": "Retrieve the status of a previously started report export."
       }
     },
-    "/financials/organizers/{organizerId}/reports/{reportId}/download": {
+    "/organizers/{organizerId}/financial-reports/{reportId}.zip": {
       "parameters": [
         {
           "schema": {

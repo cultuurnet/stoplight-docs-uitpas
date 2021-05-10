@@ -438,9 +438,6 @@
       ],
       "get": {
         "summary": "Get organizer distribution keys",
-        "tags": [
-          "Organizers"
-        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -478,7 +475,10 @@
             "User Acces Token (see Authentication docs)": []
           }
         ],
-        "description": "Get manual distribution keys for an organizer, so it can be set to a specific event using [TODO](#todo)\n\n<!-- theme: warning -->\n\n> **This endpoint is only needed for exceptional cases.** In most cases distribution keys are set automatically on events, so you don't need to retrieve the possible distribution keys for the event's organizer."
+        "description": "Get manual distribution keys for an organizer, so it can be set to a specific event using [TODO](#todo)\n\n<!-- theme: warning -->\n\n> **This endpoint is only needed for exceptional cases.** In most cases distribution keys are set automatically on events, so you don't need to retrieve the possible distribution keys for the event's organizer.",
+        "tags": [
+          "DistributionKeys"
+        ]
       }
     },
     "/events/{eventId}/distribution-keys": {
@@ -544,13 +544,13 @@
           }
         },
         "description": "Get the distribution keys of the given event",
-        "tags": [
-          "Organizers"
-        ],
         "security": [
           {
             "User Acces Token (see Authentication docs)": []
           }
+        ],
+        "tags": [
+          "DistributionKeys"
         ]
       }
     },

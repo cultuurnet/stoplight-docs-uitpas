@@ -162,7 +162,7 @@
                   }
                 },
                 "examples": {
-                  "Single ticketsale example": {
+                  "Single ticket sale example": {
                     "value": [
                       {
                         "id": 21345,
@@ -246,7 +246,7 @@
                 }
               },
               "examples": {
-                "Example for one ticketsale": {
+                "Example for one ticket sale": {
                   "value": [
                     {
                       "uitpasNumber": "0560002524314",
@@ -257,7 +257,7 @@
                     }
                   ]
                 },
-                "Example for multiple ticketsales": {
+                "Example for multiple ticket sales": {
                   "value": [
                     {
                       "uitpasNumber": "0560002524314",

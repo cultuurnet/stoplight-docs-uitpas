@@ -523,14 +523,14 @@
                 "example-1": {
                   "value": [
                     {
-                      "cardSystem": [
-                        {
-                          "id": "string"
-                        }
-                      ],
+                      "cardSystem": {
+                        "id": "string",
+                        "name": "string"
+                      },
                       "distributionKeys": [
                         {
-                          "id": "string"
+                          "id": "string",
+                          "name": "string"
                         }
                       ]
                     }
@@ -569,12 +569,10 @@
                   "example-1": {
                     "value": [
                       {
-                        "cardSystem": [
-                          {
-                            "id": "string",
-                            "name": "string"
-                          }
-                        ],
+                        "cardSystem": {
+                          "id": "string",
+                          "name": "string"
+                        },
                         "distributionKeys": [
                           {
                             "id": "string",
@@ -1413,12 +1411,10 @@
         "type": "object",
         "x-examples": {
           "example-1": {
-            "cardSystem": [
-              {
-                "id": "string",
-                "name": "string"
-              }
-            ],
+            "cardSystem": {
+              "id": "string",
+              "name": "string"
+            },
             "distributionKeys": [
               {
                 "id": "string",
@@ -1432,10 +1428,7 @@
         ],
         "properties": {
           "cardSystem": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/CardSystem"
-            }
+            "$ref": "#/components/schemas/CardSystem"
           },
           "distributionKeys": {
             "type": "array",

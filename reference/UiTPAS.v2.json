@@ -932,7 +932,7 @@
         }
       ],
       "get": {
-        "summary": "Get financial report data",
+        "summary": "Download financial report",
         "responses": {
           "200": {
             "description": "OK",

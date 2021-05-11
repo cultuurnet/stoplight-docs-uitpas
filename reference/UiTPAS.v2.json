@@ -489,7 +489,7 @@
         ]
       }
     },
-    "/events/{eventId}/distribution-keys": {
+    "/events/{eventId}/config": {
       "parameters": [
         {
           "schema": {
@@ -502,28 +502,46 @@
         }
       ],
       "put": {
-        "summary": "Update event distribution keys",
-        "operationId": "put-events-distribution-keys",
+        "summary": "Update event config",
+        "operationId": "put-events-config",
         "responses": {
-          "200": {
-            "description": "OK"
+          "201": {
+            "description": "Config updated. No content."
           }
         },
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "type": "array",
                 "description": "List of distribution key ids to enable for the event.",
+                "type": "array",
                 "items": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/EventCardSystemConfig"
                 }
               },
-              "examples": {}
+              "examples": {
+                "example-1": {
+                  "value": [
+                    {
+                      "cardSystem": [
+                        {
+                          "id": "string"
+                        }
+                      ],
+                      "distributionKeys": [
+                        {
+                          "id": "string"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
             }
-          }
+          },
+          "description": ""
         },
-        "description": "Update the distribution keys of the given event.\n\n<!-- theme: warning -->\n\n> **This endpoint is only needed for exceptional cases.** In most cases distribution keys are set automatically on events, so you don't need to retrieve or change them.",
+        "description": "Update the config per card system of the given event.\n\n<!-- theme: warning -->\n\n> **This endpoint is only needed for exceptional cases.** In most cases card systems and distribution keys are set automatically on events, so you don't need to retrieve or change them.",
         "security": [
           {
             "USER_ACCESS_TOKEN": []
@@ -534,8 +552,8 @@
         ]
       },
       "get": {
-        "summary": "Get event distribution keys",
-        "operationId": "get-events-distribution-keys",
+        "summary": "Get event config",
+        "operationId": "get-events-config",
         "responses": {
           "200": {
             "description": "OK",
@@ -544,14 +562,50 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/DistributionKey"
+                    "$ref": "#/components/schemas/EventCardSystemConfig"
                   }
+                },
+                "examples": {
+                  "example-1": {
+                    "value": [
+                      {
+                        "cardSystem": [
+                          {
+                            "id": "string",
+                            "name": "string"
+                          }
+                        ],
+                        "distributionKeys": [
+                          {
+                            "id": "string",
+                            "name": "string"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
                 }
               }
             }
           }
         },
-        "description": "Get the distribution keys of the given event\n\n<!-- theme: warning -->\n\n> **This endpoint is only needed for exceptional cases.** In most cases distribution keys are set automatically on events, so you don't need to retrieve or change them.",
+        "description": "Get the config per card system of the given event.\n\n<!-- theme: warning -->\n\n> **This endpoint is only needed for exceptional cases.** In most cases distribution keys are set automatically on events, so you don't need to retrieve or change them.",
         "security": [
           {
             "USER_ACCESS_TOKEN": []
@@ -1163,6 +1217,9 @@
       "DistributionKey": {
         "title": "DistributionKey",
         "type": "object",
+        "x-tags": [
+          "Models"
+        ],
         "properties": {
           "id": {
             "type": "string"
@@ -1172,11 +1229,7 @@
           }
         },
         "required": [
-          "id",
-          "name"
-        ],
-        "x-tags": [
-          "Models"
+          "id"
         ]
       },
       "PassholdersPaginatedResponse": {
@@ -1280,6 +1333,9 @@
       "CardSystem": {
         "title": "CardSystem",
         "type": "object",
+        "x-tags": [
+          "Models"
+        ],
         "properties": {
           "id": {
             "type": "string"
@@ -1288,8 +1344,8 @@
             "type": "string"
           }
         },
-        "x-tags": [
-          "Models"
+        "required": [
+          "id"
         ]
       },
       "PassholderUpdateRequest": {
@@ -1350,6 +1406,46 @@
         ],
         "x-tags": [
           "Models"
+        ]
+      },
+      "EventCardSystemConfig": {
+        "title": "EventCardSystemConfig",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "cardSystem": [
+              {
+                "id": "string",
+                "name": "string"
+              }
+            ],
+            "distributionKeys": [
+              {
+                "id": "string",
+                "name": "string"
+              }
+            ]
+          }
+        },
+        "x-tags": [
+          "Models"
+        ],
+        "properties": {
+          "cardSystem": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CardSystem"
+            }
+          },
+          "distributionKeys": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DistributionKey"
+            }
+          }
+        },
+        "required": [
+          "cardSystem"
         ]
       }
     },

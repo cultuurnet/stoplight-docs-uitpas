@@ -21,7 +21,7 @@
   ],
   "tags": [
     {
-      "name": "TicketSale",
+      "name": "TicketSales",
       "description": "Operations related to ticket sales"
     }
   ],
@@ -31,7 +31,7 @@
       "get": {
         "summary": "Get tariffs",
         "tags": [
-          "TicketSale"
+          "TicketSales"
         ],
         "responses": {
           "200": {
@@ -147,7 +147,7 @@
       "post": {
         "summary": "Register ticket sale(s)",
         "tags": [
-          "TicketSale"
+          "TicketSales"
         ],
         "operationId": "post-ticket-sales",
         "responses": {
@@ -329,7 +329,7 @@
         },
         "description": "Cancels a single ticket sale registration by its id. (Returned in the response of the ticket sale registration request.)",
         "tags": [
-          "TicketSale"
+          "TicketSales"
         ],
         "security": [
           {

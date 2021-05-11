@@ -365,7 +365,7 @@
           "price"
         ],
         "x-tags": [
-          "Model"
+          "Models"
         ]
       },
       "TicketSaleRegistration": {
@@ -406,7 +406,7 @@
         "description": "The TicketSaleRegistration is a response object of the POST /ticketSales request. It can be used to provide the user with an overview or to identify the ticket sales in case they need to be canceled.",
         "x-internal": false,
         "x-tags": [
-          "Model"
+          "Models"
         ]
       },
       "TicketSaleRequest": {
@@ -448,7 +448,7 @@
         ],
         "x-internal": false,
         "x-tags": [
-          "Model"
+          "Models"
         ]
       },
       "Error": {
@@ -472,7 +472,7 @@
           "status"
         ],
         "x-tags": [
-          "Model"
+          "Models"
         ]
       }
     },

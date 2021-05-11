@@ -839,7 +839,7 @@
         "tags": [
           "Financial"
         ],
-        "description": "Starts a financial report export. The result of this request is a `reportId` that can be used in the /status and /download requests."
+        "description": "Starts a financial report export. The result of this request is a `reportId` that can be used to request the status of the report export and the download."
       }
     },
     "/organizers/{organizerId}/financial-reports/{reportId}": {

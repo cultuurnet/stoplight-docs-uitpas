@@ -981,7 +981,7 @@
           "price"
         ],
         "x-tags": [
-          "Model"
+          "Models"
         ]
       },
       "TicketSaleRegistration": {
@@ -1022,7 +1022,7 @@
         "description": "The TicketSaleRegistration is a response object of the POST /ticketSales request. It can be used to provide the user with an overview or to identify the ticket sales in case they need to be canceled.",
         "x-internal": false,
         "x-tags": [
-          "Model"
+          "Models"
         ]
       },
       "TicketSaleRequest": {
@@ -1064,7 +1064,7 @@
         ],
         "x-internal": false,
         "x-tags": [
-          "Model"
+          "Models"
         ]
       },
       "Error": {
@@ -1088,7 +1088,7 @@
           "status"
         ],
         "x-tags": [
-          "Model"
+          "Models"
         ]
       },
       "OrganizerRole": {
@@ -1111,7 +1111,7 @@
           "organizer"
         ],
         "x-tags": [
-          "Model"
+          "Models"
         ]
       },
       "Organizer": {
@@ -1126,7 +1126,7 @@
           }
         },
         "x-tags": [
-          "Model"
+          "Models"
         ]
       },
       "DistributionKey": {
@@ -1145,14 +1145,14 @@
           "name"
         ],
         "x-tags": [
-          "Model"
+          "Models"
         ]
       },
       "PassholdersPaginatedResponse": {
         "title": "PassholdersPaginatedResponse",
         "type": "object",
         "x-tags": [
-          "Model"
+          "Models"
         ],
         "description": "Paginated response object for passholders",
         "properties": {
@@ -1174,7 +1174,7 @@
         "title": "OrganizersPaginatedResponse",
         "type": "object",
         "x-tags": [
-          "Model"
+          "Models"
         ],
         "description": "Paginated response object for organizers",
         "properties": {
@@ -1196,7 +1196,7 @@
         "title": "Passholder",
         "type": "object",
         "x-tags": [
-          "Model"
+          "Models"
         ],
         "properties": {
           "id": {
@@ -1226,7 +1226,7 @@
         "title": "CardSystemMembership",
         "type": "object",
         "x-tags": [
-          "Model"
+          "Models"
         ],
         "properties": {
           "cardSsytem": {
@@ -1258,7 +1258,7 @@
           }
         },
         "x-tags": [
-          "Model"
+          "Models"
         ]
       },
       "PassholderUpdateRequest": {
@@ -1271,7 +1271,7 @@
           }
         },
         "x-tags": [
-          "Model"
+          "Models"
         ]
       },
       "ReportStatus": {
@@ -1280,7 +1280,7 @@
         "description": "The status of a started report export.",
         "x-examples": {},
         "x-tags": [
-          "Model"
+          "Models"
         ],
         "properties": {
           "status": {
@@ -1318,7 +1318,7 @@
           "endDate"
         ],
         "x-tags": [
-          "Model"
+          "Models"
         ]
       }
     },

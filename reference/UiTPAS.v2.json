@@ -21,7 +21,7 @@
   ],
   "tags": [
     {
-      "name": "TicketSale",
+      "name": "TicketSales",
       "description": "Operations related to ticket sales"
     }
   ],
@@ -31,7 +31,7 @@
       "get": {
         "summary": "Get tariffs",
         "tags": [
-          "TicketSale"
+          "TicketSales"
         ],
         "responses": {
           "200": {
@@ -147,7 +147,7 @@
       "post": {
         "summary": "Register ticket sale(s)",
         "tags": [
-          "TicketSale"
+          "TicketSales"
         ],
         "operationId": "post-ticket-sales",
         "responses": {
@@ -162,7 +162,7 @@
                   }
                 },
                 "examples": {
-                  "Single ticketsale example": {
+                  "Single ticket sale example": {
                     "value": [
                       {
                         "id": 21345,
@@ -230,7 +230,7 @@
             "$ref": "#/components/responses/Forbidden"
           }
         },
-        "description": "Registers one or more new ticket sales **with a discounted UiTPAS tariff**, so the UiTPAS organiser can get reimbursed for the discount.\n\nBefore you can register a discounted ticket sale, you will need to request the possible discounted tariffs from the `GET /tariffs` endpoint and let your end user pick one of the available tariffs. Afterward, you can register a ticket sale using this endpoint. \n\nYou will need:\n\n- The `uitpasNumber` of the passholder buying the ticket.\n- The `eventId` of the UitDatabank event.\n- The chosen `uitpasTariffId` from the `GET /tariffs` request.\n- The `regularPrice` the passholder would normally have to pay for this ticket\n\nOptionally you can include a `regularPriceLabel` describing the regular price if you have multiple price categories, which can be useful in the financial reporting overview.\n\n> ##### Important\n> **If one of the ticket sales is invalid** (for example the chosen tariff is incorrect or expired), **none of the ticket sales will be registered**. You will instead get an error response with more details about the problem, and can then retry the registration without the incorrect ticket sales or ask the end user to change the tickets and tariffs they want.",
+        "description": "Registers one or more new ticket sales **with a discounted UiTPAS tariff**, so the UiTPAS organiser can get reimbursed for the discount.\n\nBefore you can register a discounted ticket sale, you will need to request the possible discounted tariffs from the `GET /tariffs` endpoint and let your end user pick one of the available tariffs. Afterward, you can register a ticket sale using this endpoint. \n\nYou will need:\n\n- The `uitpasNumber` of the passholder buying the ticket.\n- The `eventId` of the UiTdatabank event.\n- The chosen `uitpasTariffId` from the `GET /tariffs` request.\n- The `regularPrice` the passholder would normally have to pay for this ticket\n\nOptionally you can include a `regularPriceLabel` describing the regular price if you have multiple price categories, which can be useful in the financial reporting overview.\n\n<!-- theme: warning -->\n\n> ##### Error handling\n> **If one of the ticket sales is invalid** (for example the chosen tariff is incorrect or expired), **none of the ticket sales will be registered**. You will instead get an error response with more details about the problem, and can then retry the registration without the incorrect ticket sales or ask the end user to change the tickets and/or tariffs that they want.",
         "security": [
           {
             "Client Access Token (see Authentication docs)": []
@@ -246,7 +246,7 @@
                 }
               },
               "examples": {
-                "Example for one ticketsale": {
+                "Example for one ticket sale": {
                   "value": [
                     {
                       "uitpasNumber": "0560002524314",
@@ -257,7 +257,7 @@
                     }
                   ]
                 },
-                "Example for multiple ticketsales": {
+                "Example for multiple ticket sales": {
                   "value": [
                     {
                       "uitpasNumber": "0560002524314",
@@ -329,7 +329,7 @@
         },
         "description": "Cancels a single ticket sale registration by its id. (Returned in the response of the ticket sale registration request.)",
         "tags": [
-          "TicketSale"
+          "TicketSales"
         ],
         "security": [
           {
@@ -365,7 +365,7 @@
           "price"
         ],
         "x-tags": [
-          "Model"
+          "Models"
         ]
       },
       "TicketSaleRegistration": {
@@ -406,7 +406,7 @@
         "description": "The TicketSaleRegistration is a response object of the POST /ticketSales request. It can be used to provide the user with an overview or to identify the ticket sales in case they need to be canceled.",
         "x-internal": false,
         "x-tags": [
-          "Model"
+          "Models"
         ]
       },
       "TicketSaleRequest": {
@@ -448,7 +448,7 @@
         ],
         "x-internal": false,
         "x-tags": [
-          "Model"
+          "Models"
         ]
       },
       "Error": {
@@ -472,7 +472,7 @@
           "status"
         ],
         "x-tags": [
-          "Model"
+          "Models"
         ]
       }
     },

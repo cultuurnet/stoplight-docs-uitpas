@@ -13,7 +13,7 @@ This guide will explain how to register an event as an UiTPAS event. This is req
 To register an UiTPAS event, the following criteria have to be met:
 
 1. **The event needs to exist in UiTdatabank.** UiTdatabank is a central database of cultural and leisure activities in Flanders and Brussels, including events of organizers that work with UiTPAS.
-2. The event in UiTdatabank needs to have **a base price that is not 0 EUR**.
+2. The event in UiTdatabank needs to have **a base price**.
 3. The event in UiTdatabank has to be **linked to a known UiTPAS organizer**.
 
 When these criteria are met, the event automatically becomes known in UiTPAS by its UiTdatabank event id.
@@ -74,7 +74,14 @@ If successful, you should receive a `200` response with a JSON body including th
 }
 ```
 
-You can now use this event id to calculate discounted UiTPAS prices and register discounted ticket sales for it! 🎉
+<!-- theme: success -->
+
+> ##### Done!
+> If you used an **UiTPAS organizer id** in the JSON of the event and specified a base price, **your event will automatically become an UiTPAS event**. There can be small delay between the event being created in UiTdatabank and being discovered by UiTPAS, but generally this takes less than a second.
+>
+> You can check that an event has become an UiTPAS event by [fetching it's JSON from UiTdatabank](https://documentatie.uitdatabank.be/content/json-ld/latest/events/event-detail.html) and checking that it has the `UiTPAS` label in its `labels` property.
+>
+>  
 
 ### Required properties
 
@@ -90,8 +97,8 @@ For more info on mandatory properties, see [the Entry API documentation](https:/
 
 Additionally, your event requires two more properties to qualify as an UiTPAS event:
 
-- `priceInfo` with a `base` price that is not `0`
-- `organizer` with the id of an UiTPAS organizer, usually supplied to you by the organizer that you are building an integration for
+- `priceInfo` with a `base` price.
+- `organizer` with the id of an UiTPAS organizer that organizes the event. Usually your client or user access token is coupled to one or more organizer ids inside UiTPAS and you should use one of those.
 
 ### Authentication
 > When creating an UiTdatabank event through Entry API, **you can use the same user access token or client access token that you use to communicate with the UiTPAS API**.

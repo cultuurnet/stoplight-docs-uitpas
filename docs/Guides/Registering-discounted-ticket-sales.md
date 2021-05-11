@@ -94,7 +94,7 @@ Content-Type: application/json
 
 
 ```http
-POST /events/YOUR_EVENT_ID/ticketSales HTTP/1.1
+POST /events/YOUR_EVENT_ID/ticket-sales HTTP/1.1
 Content-Type: application/json
 Host: https://api.uitpas.be
 Authorization: Bearer YOUR_ACCESS_TOKEN'

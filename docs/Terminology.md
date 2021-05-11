@@ -10,10 +10,10 @@ One who holds an UiTPAS, the end-user of an UiTPAS.
 
 The organizer of an UiTPAS-event. To pay for the reduced UiTPAS-tariffs for people in need, the organizer is partly reimbursed by the local government. That's why it's important to always create UiTPAS-events with the correct UiTPAS-organizer.
 
-## Structural discount ('kansentarief')
+## Social Discount ('kansentarief')
 
-Passholders in need can receive a structural discount ('kansentarief') on their UiTPAS. 
-This structural discount is given by the local government based on local poverty parameters. 
+Passholders in need can receive a social discount ('kansentarief') on their UiTPAS. 
+This social discount is given by the local government based on local poverty parameters. 
 
 Those discounts are payed via a third-party payer system in which the organizer of the event, the local government and the passholder each pay a percentage of the ticket price. Payments are organized via a manual financial reporting flow within UiTPAS.
 

@@ -33,7 +33,7 @@
       "description": "Operations related to passholders"
     },
     {
-      "name": "Financial",
+      "name": "FinancialReports",
       "description": "Operations related to financial reports"
     },
     {
@@ -764,7 +764,7 @@
       "get": {
         "summary": "Get financial report periods for an organizer",
         "tags": [
-          "Financial"
+          "FinancialReports"
         ],
         "responses": {
           "200": {
@@ -837,7 +837,7 @@
           }
         },
         "tags": [
-          "Financial"
+          "FinancialReports"
         ],
         "description": "Starts a financial report export. The result of this request is a `reportId` that can be used to request the status of the report export and the download."
       }
@@ -864,7 +864,7 @@
       "get": {
         "summary": "Get financial report status",
         "tags": [
-          "Financial"
+          "FinancialReports"
         ],
         "responses": {
           "200": {
@@ -933,9 +933,6 @@
       ],
       "get": {
         "summary": "Get financial report data",
-        "tags": [
-          "Financial"
-        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -951,7 +948,10 @@
           }
         },
         "operationId": "get-financials-organizers-reports-download",
-        "description": "Retrieve the actual report zip file of an `available` report."
+        "description": "Retrieve the actual report zip file of an `available` report.",
+        "tags": [
+          "FinancialReports"
+        ]
       }
     }
   },

@@ -762,7 +762,7 @@
         }
       ],
       "get": {
-        "summary": "Get financial report periods for an organizer",
+        "summary": "Get suggested financial report periods",
         "tags": [
           "FinancialReports"
         ],
@@ -793,7 +793,7 @@
             "User Acces Token (see Authentication docs)": []
           }
         ],
-        "description": "Retrieve report periods for an organizer"
+        "description": "Retrieve suggested report periods for an organizer."
       }
     },
     "/organizers/{organizerId}/financial-reports": {
@@ -808,7 +808,7 @@
         }
       ],
       "post": {
-        "summary": "Start a financial report export for an organizer",
+        "summary": "Start an export of a financial report",
         "operationId": "post-financials-organizers-reports",
         "responses": {
           "200": {

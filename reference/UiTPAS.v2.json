@@ -185,7 +185,7 @@
                   }
                 },
                 "examples": {
-                  "Single ticketsale example": {
+                  "Single ticket sale example": {
                     "value": [
                       {
                         "id": 21345,
@@ -272,7 +272,7 @@
                 }
               },
               "examples": {
-                "Example for one ticketsale": {
+                "Example for one ticket sale": {
                   "value": [
                     {
                       "uitpasNumber": "0560002524314",
@@ -283,7 +283,7 @@
                     }
                   ]
                 },
-                "Example for multiple ticketsales": {
+                "Example for multiple ticket sales": {
                   "value": [
                     {
                       "uitpasNumber": "0560002524314",
@@ -762,7 +762,7 @@
         }
       ],
       "get": {
-        "summary": "Get financial report periods for an organizer",
+        "summary": "Get suggested financial report periods",
         "tags": [
           "FinancialReports"
         ],
@@ -793,7 +793,7 @@
             "User Acces Token (see Authentication docs)": []
           }
         ],
-        "description": "Retrieve report periods for an organizer"
+        "description": "Retrieve suggested report periods for an organizer."
       }
     },
     "/organizers/{organizerId}/financial-reports": {
@@ -808,7 +808,7 @@
         }
       ],
       "post": {
-        "summary": "Start a financial report export for an organizer",
+        "summary": "Start an export of a financial report",
         "operationId": "post-financials-organizers-reports",
         "responses": {
           "200": {

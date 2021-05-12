@@ -489,7 +489,7 @@
         ]
       }
     },
-    "/events/{eventId}/config": {
+    "/events/{eventId}/card-systems": {
       "parameters": [
         {
           "schema": {
@@ -503,7 +503,7 @@
       ],
       "put": {
         "summary": "Update event config",
-        "operationId": "put-events-config",
+        "operationId": "put-events-card-systems",
         "responses": {
           "204": {
             "description": "Config updated. No content."
@@ -516,23 +516,21 @@
                 "description": "List of distribution key ids to enable for the event.",
                 "type": "array",
                 "items": {
-                  "$ref": "#/components/schemas/EventCardSystemConfig"
+                  "$ref": "#/components/schemas/EventCardSystem"
                 }
               },
               "examples": {
                 "example-1": {
                   "value": [
                     {
-                      "cardSystem": {
-                        "id": "string",
-                        "name": "string"
-                      },
                       "distributionKeys": [
                         {
                           "id": "string",
                           "name": "string"
                         }
-                      ]
+                      ],
+                      "id": "string",
+                      "name": "string"
                     }
                   ]
                 }
@@ -553,7 +551,7 @@
       },
       "get": {
         "summary": "Get event config",
-        "operationId": "get-events-config",
+        "operationId": "get-events-card-systems",
         "responses": {
           "200": {
             "description": "OK",
@@ -562,23 +560,21 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/EventCardSystemConfig"
+                    "$ref": "#/components/schemas/EventCardSystem"
                   }
                 },
                 "examples": {
                   "example-1": {
                     "value": [
                       {
-                        "cardSystem": {
-                          "id": "string",
-                          "name": "string"
-                        },
                         "distributionKeys": [
                           {
                             "id": "string",
                             "name": "string"
                           }
-                        ]
+                        ],
+                        "id": "string",
+                        "name": "string"
                       }
                     ]
                   }
@@ -1411,39 +1407,41 @@
           "Models"
         ]
       },
-      "EventCardSystemConfig": {
-        "title": "EventCardSystemConfig",
+      "EventCardSystem": {
+        "title": "EventCardSystem",
         "type": "object",
         "x-examples": {
           "example-1": {
-            "cardSystem": {
-              "id": "string",
-              "name": "string"
-            },
             "distributionKeys": [
               {
                 "id": "string",
                 "name": "string"
               }
-            ]
+            ],
+            "id": "string",
+            "name": "string"
           }
         },
         "x-tags": [
           "Models"
         ],
+        "description": "CardSystem in an event context, optionally including distributionKeys.",
         "properties": {
-          "cardSystem": {
-            "$ref": "#/components/schemas/CardSystem"
-          },
           "distributionKeys": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/DistributionKey"
             }
+          },
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
           }
         },
         "required": [
-          "cardSystem"
+          "id"
         ]
       }
     },
@@ -1456,7 +1454,7 @@
       "USER_ACCESS_TOKEN": {
         "type": "http",
         "scheme": "bearer",
-        "description": "Client Access Token - see [Authentication docs](https://publiq.stoplight.io/docs/authentication/docs/Authentication-methods/User-access-token.md)"
+        "description": "User Access Token - see [Authentication docs](https://publiq.stoplight.io/docs/authentication/docs/Authentication-methods/User-access-token.md)"
       }
     },
     "parameters": {},

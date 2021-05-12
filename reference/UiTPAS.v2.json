@@ -128,10 +128,10 @@
         "description": "Returns the possible UiTPAS discounted **tariffs for an event and a passholder**.\n\nThis UiTPAS tariffs are calculated based on:\n\n- **The regular price** of the ticket.\nThis is the price your user would have to pay for the specific ticket without UiTPAS discount.\n- **The UiTPAS number** of the passholder. UiTPAS discounts are personal so it's important to identify the passholder to retrieve a list of possible tariffs.\n- **The event id** of the UiTdatabank event. UiTPAS discounts are limited to specific UiTdatabank events, so it's important to specify the event id to retrieve a list of possible tariffs.\n\n> ##### Important\n> The regular price of the ticket should generally be one of the price categories set on the event in UiTdatabank to make financial reporting clearer.\n",
         "security": [
           {
-            "Client Access Token (see Authentication docs)": []
+            "CLIENT_ACCESS_TOKEN": []
           },
           {
-            "User Acces Token (see Authentication docs)": []
+            "USER_ACCESS_TOKEN": []
           }
         ],
         "parameters": [
@@ -228,7 +228,7 @@
             }
           },
           "400": {
-            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/structural-discount-expired\n* https://api.publiq.be/probs/uitpas/maximum-reached\n\nThe type indicates the error on one of the failed ticket sale registrations. All other ticket sale registration in the request will be rolled back in case of an error.",
+            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/structural-discount-expired\n* https://api.publiq.be/probs/uitpas/maximum-reached\n\nThe type indicates the error on one of the failed ticket sale registrations. All other ticket sale registration in the request will be rolled back in case of an error.\n\nThe property `jsonPointer` will a referene to the erroneous `TicketSaleRequest` object if applicable.",
             "content": {
               "application/problem+json": {
                 "schema": {
@@ -256,10 +256,10 @@
         "description": "Registers one or more new ticket sales **with a discounted UiTPAS tariff**, so the UiTPAS organiser can get reimbursed for the discount.\n\nBefore you can register a discounted ticket sale, you will need to request the possible discounted tariffs from the `GET /tariffs` endpoint and let your end user pick one of the available tariffs. Afterward, you can register a ticket sale using this endpoint. \n\nYou will need:\n\n- The `uitpasNumber` of the passholder buying the ticket.\n- The `eventId` of the UiTdatabank event.\n- The chosen `uitpasTariffId` from the `GET /tariffs` request.\n- The `regularPrice` the passholder would normally have to pay for this ticket\n\nOptionally you can include a `regularPriceLabel` describing the regular price if you have multiple price categories, which can be useful in the financial reporting overview.\n\n<!-- theme: warning -->\n\n> ##### Error handling\n> **If one of the ticket sales is invalid** (for example the chosen tariff is incorrect or expired), **none of the ticket sales will be registered**. You will instead get an error response with more details about the problem, and can then retry the registration without the incorrect ticket sales or ask the end user to change the tickets and/or tariffs that they want.",
         "security": [
           {
-            "Client Access Token (see Authentication docs)": []
+            "CLIENT_ACCESS_TOKEN": []
           },
           {
-            "User Acces Token (see Authentication docs)": []
+            "USER_ACCESS_TOKEN": []
           }
         ],
         "requestBody": {
@@ -359,10 +359,10 @@
         ],
         "security": [
           {
-            "Client Access Token (see Authentication docs)": []
+            "CLIENT_ACCESS_TOKEN": []
           },
           {
-            "User Acces Token (see Authentication docs)": []
+            "USER_ACCESS_TOKEN": []
           }
         ]
       }
@@ -423,7 +423,7 @@
         "description": "List of roles that the current user has in relation to organizers. For example a user can be a `member` or an `admin` of an organizer.",
         "security": [
           {
-            "User Acces Token (see Authentication docs)": []
+            "USER_ACCESS_TOKEN": []
           }
         ],
         "tags": [
@@ -480,7 +480,7 @@
         "operationId": "get-organizer-distribution-keys",
         "security": [
           {
-            "User Acces Token (see Authentication docs)": []
+            "USER_ACCESS_TOKEN": []
           }
         ],
         "description": "Get manual distribution keys for an organizer, so it can be set to a specific event using `PUT /events/{eventId}/distribution-keys`\n\n<!-- theme: warning -->\n\n> **This endpoint is only needed for exceptional cases.** In most cases distribution keys are set automatically on events, so you don't need to retrieve or change them.",
@@ -489,7 +489,7 @@
         ]
       }
     },
-    "/events/{eventId}/distribution-keys": {
+    "/events/{eventId}/config": {
       "parameters": [
         {
           "schema": {
@@ -502,31 +502,49 @@
         }
       ],
       "put": {
-        "summary": "Update event distribution keys",
-        "operationId": "put-events-distribution-keys",
+        "summary": "Update event config",
+        "operationId": "put-events-config",
         "responses": {
-          "200": {
-            "description": "OK"
+          "204": {
+            "description": "Config updated. No content."
           }
         },
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "type": "array",
                 "description": "List of distribution key ids to enable for the event.",
+                "type": "array",
                 "items": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/EventCardSystemConfig"
                 }
               },
-              "examples": {}
+              "examples": {
+                "example-1": {
+                  "value": [
+                    {
+                      "cardSystem": {
+                        "id": "string",
+                        "name": "string"
+                      },
+                      "distributionKeys": [
+                        {
+                          "id": "string",
+                          "name": "string"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
             }
-          }
+          },
+          "description": ""
         },
-        "description": "Update the distribution keys of the given event.\n\n<!-- theme: warning -->\n\n> **This endpoint is only needed for exceptional cases.** In most cases distribution keys are set automatically on events, so you don't need to retrieve or change them.",
+        "description": "Update the config per card system of the given event.\n\n<!-- theme: warning -->\n\n> **This endpoint is only needed for exceptional cases.** In most cases card systems and distribution keys are set automatically on events, so you don't need to retrieve or change them.",
         "security": [
           {
-            "User Acces Token (see Authentication docs)": []
+            "USER_ACCESS_TOKEN": []
           }
         ],
         "tags": [
@@ -534,8 +552,8 @@
         ]
       },
       "get": {
-        "summary": "Get event distribution keys",
-        "operationId": "get-events-distribution-keys",
+        "summary": "Get event config",
+        "operationId": "get-events-config",
         "responses": {
           "200": {
             "description": "OK",
@@ -544,17 +562,51 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/DistributionKey"
+                    "$ref": "#/components/schemas/EventCardSystemConfig"
                   }
+                },
+                "examples": {
+                  "example-1": {
+                    "value": [
+                      {
+                        "cardSystem": {
+                          "id": "string",
+                          "name": "string"
+                        },
+                        "distributionKeys": [
+                          {
+                            "id": "string",
+                            "name": "string"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
                 }
               }
             }
           }
         },
-        "description": "Get the distribution keys of the given event\n\n<!-- theme: warning -->\n\n> **This endpoint is only needed for exceptional cases.** In most cases distribution keys are set automatically on events, so you don't need to retrieve or change them.",
+        "description": "Get the config per card system of the given event.\n\n<!-- theme: warning -->\n\n> **This endpoint is only needed for exceptional cases.** In most cases distribution keys are set automatically on events, so you don't need to retrieve or change them.",
         "security": [
           {
-            "User Acces Token (see Authentication docs)": []
+            "USER_ACCESS_TOKEN": []
           }
         ],
         "tags": [
@@ -591,7 +643,7 @@
         "description": "Retrieve organizers based on search parameters.",
         "security": [
           {
-            "User Acces Token (see Authentication docs)": []
+            "USER_ACCESS_TOKEN": []
           }
         ],
         "parameters": [
@@ -653,7 +705,7 @@
         "description": "Retrieve passholders based on search parameters",
         "security": [
           {
-            "User Acces Token (see Authentication docs)": []
+            "USER_ACCESS_TOKEN": []
           }
         ],
         "parameters": [
@@ -733,7 +785,7 @@
         ],
         "security": [
           {
-            "User Acces Token (see Authentication docs)": []
+            "USER_ACCESS_TOKEN": []
           }
         ]
       },
@@ -790,7 +842,7 @@
         "operationId": "get-financials-organizer-periods",
         "security": [
           {
-            "User Acces Token (see Authentication docs)": []
+            "USER_ACCESS_TOKEN": []
           }
         ],
         "description": "Retrieve suggested report periods for an organizer."
@@ -839,7 +891,12 @@
         "tags": [
           "FinancialReports"
         ],
-        "description": "Starts a financial report export. The result of this request is a `reportId` that can be used to request the status of the report export and the download."
+        "description": "Starts a financial report export. The result of this request is a `reportId` that can be used to request the status of the report export and the download.",
+        "security": [
+          {
+            "USER_ACCESS_TOKEN": []
+          }
+        ]
       }
     },
     "/organizers/{organizerId}/financial-reports/{reportId}": {
@@ -909,7 +966,12 @@
           }
         },
         "operationId": "get-financials-organizers-reports-status",
-        "description": "Retrieve the status of a previously started report export."
+        "description": "Retrieve the status of a previously started report export.",
+        "security": [
+          {
+            "USER_ACCESS_TOKEN": []
+          }
+        ]
       }
     },
     "/organizers/{organizerId}/financial-reports/{reportId}.zip": {
@@ -945,12 +1007,33 @@
                 "examples": {}
               }
             }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
           }
         },
         "operationId": "get-financials-organizers-reports-download",
         "description": "Retrieve the actual report zip file of an `available` report.",
         "tags": [
           "FinancialReports"
+        ],
+        "security": [
+          {
+            "CLIENT_ACCESS_TOKEN": []
+          }
         ]
       }
     }
@@ -1071,6 +1154,9 @@
         "title": "Error",
         "type": "object",
         "description": "RFC7807 error model for all publiq APIs",
+        "x-tags": [
+          "Models"
+        ],
         "properties": {
           "type": {
             "type": "string"
@@ -1080,15 +1166,17 @@
           },
           "status": {
             "type": "number"
+          },
+          "jsonPointer": {
+            "type": "string",
+            "description": "Pointer to the erroneous request object in JavaScript Object Notation (JSON) Pointer format.",
+            "format": "json-pointer"
           }
         },
         "required": [
           "type",
           "title",
           "status"
-        ],
-        "x-tags": [
-          "Models"
         ]
       },
       "OrganizerRole": {
@@ -1132,6 +1220,9 @@
       "DistributionKey": {
         "title": "DistributionKey",
         "type": "object",
+        "x-tags": [
+          "Models"
+        ],
         "properties": {
           "id": {
             "type": "string"
@@ -1141,11 +1232,7 @@
           }
         },
         "required": [
-          "id",
-          "name"
-        ],
-        "x-tags": [
-          "Models"
+          "id"
         ]
       },
       "PassholdersPaginatedResponse": {
@@ -1249,6 +1336,9 @@
       "CardSystem": {
         "title": "CardSystem",
         "type": "object",
+        "x-tags": [
+          "Models"
+        ],
         "properties": {
           "id": {
             "type": "string"
@@ -1257,8 +1347,8 @@
             "type": "string"
           }
         },
-        "x-tags": [
-          "Models"
+        "required": [
+          "id"
         ]
       },
       "PassholderUpdateRequest": {
@@ -1320,16 +1410,53 @@
         "x-tags": [
           "Models"
         ]
+      },
+      "EventCardSystemConfig": {
+        "title": "EventCardSystemConfig",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "cardSystem": {
+              "id": "string",
+              "name": "string"
+            },
+            "distributionKeys": [
+              {
+                "id": "string",
+                "name": "string"
+              }
+            ]
+          }
+        },
+        "x-tags": [
+          "Models"
+        ],
+        "properties": {
+          "cardSystem": {
+            "$ref": "#/components/schemas/CardSystem"
+          },
+          "distributionKeys": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DistributionKey"
+            }
+          }
+        },
+        "required": [
+          "cardSystem"
+        ]
       }
     },
     "securitySchemes": {
-      "Client Access Token (see Authentication docs)": {
+      "CLIENT_ACCESS_TOKEN": {
         "type": "http",
-        "scheme": "bearer"
+        "scheme": "bearer",
+        "description": "Client Access Token - see [Authentication docs](https://publiq.stoplight.io/docs/authentication/docs/Authentication-methods/Client-access-token.md)"
       },
-      "User Acces Token (see Authentication docs)": {
+      "USER_ACCESS_TOKEN": {
         "type": "http",
-        "scheme": "bearer"
+        "scheme": "bearer",
+        "description": "Client Access Token - see [Authentication docs](https://publiq.stoplight.io/docs/authentication/docs/Authentication-methods/User-access-token.md)"
       }
     },
     "parameters": {},

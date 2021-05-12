@@ -69,12 +69,9 @@ For example if all the discounted tariffs are based on one-time-use coupons, but
 
 After the user has selected a discounted tariff, your website or application continues with its regular flow for completing the sale like payment (for the discounted price) etc.
 
-When your regular flow successfully finishes, you need to [register the ticket sale](/docs/uitpas/reference/UiTPAS.v2.json/paths/~1ticket-sales/post). You will need to include:
+When your regular flow successfully finishes, you need to [register the ticket sale](/docs/uitpas/reference/UiTPAS.v2.json/paths/~1ticket-sales/post). 
 
-- The UiTPAS number of the user
-- The selected tariff id
-- The event id
-- The regular price
+> If the user had no discounted tariffs, or did not select one, you do not need to register your ticket sale with UiTPAS.
 
 For example:
 
@@ -118,11 +115,15 @@ Content-Type: application/json
 ]
 ```
 
-If for some reason you need to [cancel the ticket sale registration](/docs/uitpas/reference/UiTPAS.v2.json/paths/~1ticketSales~1%7BticketSaleId%7D/delete) you can do so using the `id` of the ticket sale in the response.
+> Note that the response contains an id for every registered ticket sale. **We advise you to store this id** in your application or website for future reference and in case you need to cancel the ticket sale later.
 
 <!-- theme: warning -->
 
 > **If one of the ticket sales is invalid** (for example the chosen tariff is incorrect or expired), **none of the ticket sales will be registered**. You will instead get an error response with more details about the problem, and can then retry the registration without the incorrect ticket sales or ask the end user to change the tickets and/or tariffs that they want.
+
+### 7. Cancelling the ticket sale
+
+If for some reason you need to [cancel the ticket sale registration](/docs/uitpas/reference/UiTPAS.v2.json/paths/~1ticketSales~1%7BticketSaleId%7D/delete) you can do so using the `id` of the ticket sale in the response of the registration.
 
 ## F.A.Q.
 

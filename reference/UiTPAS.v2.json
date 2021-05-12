@@ -228,7 +228,7 @@
             }
           },
           "400": {
-            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/structural-discount-expired\n* https://api.publiq.be/probs/uitpas/maximum-reached\n\nThe type indicates the error on one of the failed ticket sale registrations. All other ticket sale registration in the request will be rolled back in case of an error.\n\nThe Error property `invalidItem` will contain the erroneous `TicketSaleRequest` object if applicable.",
+            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/structural-discount-expired\n* https://api.publiq.be/probs/uitpas/maximum-reached\n\nThe type indicates the error on one of the failed ticket sale registrations. All other ticket sale registration in the request will be rolled back in case of an error.\n\nThe property `jsonPointer` will a referene to the erroneous `TicketSaleRequest` object if applicable.",
             "content": {
               "application/problem+json": {
                 "schema": {
@@ -1167,9 +1167,10 @@
           "status": {
             "type": "number"
           },
-          "invalidItem": {
-            "type": "object",
-            "description": "Only used in specific cases. See response descriptions of the specific end points."
+          "jsonPointer": {
+            "type": "string",
+            "description": "Pointer to the erroneous request object in JavaScript Object Notation (JSON) Pointer format.",
+            "format": "json-pointer"
           }
         },
         "required": [

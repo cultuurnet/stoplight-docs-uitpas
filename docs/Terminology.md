@@ -8,7 +8,7 @@ One who holds an UiTPAS, the end-user of an UiTPAS.
 
 ## UiTPAS Organizer
 
-The organizer of an UiTPAS-event. To pay for the reduced UiTPAS-tariffs for people in need, the organizer is partly reimbursed by the local government. That's why it's important to always create UiTPAS-events with the correct UiTPAS-organizer.
+The organizer of an UiTPAS-event. To pay for the reduced UiTPAS prices for people in need, the organizer is partly reimbursed by the local government. That's why it's important to always create UiTPAS-events with the correct UiTPAS-organizer.
 
 ## Social Discount ('kansentarief')
 

@@ -23,26 +23,6 @@
     {
       "name": "TicketSales",
       "description": "Operations related to ticket sales"
-    },
-    {
-      "name": "Organizers",
-      "description": "Operations related to organizers"
-    },
-    {
-      "name": "Passholders",
-      "description": "Operations related to passholders"
-    },
-    {
-      "name": "FinancialReports",
-      "description": "Operations related to financial reports"
-    },
-    {
-      "name": "CurrentUser",
-      "description": "Operations related to the current user"
-    },
-    {
-      "name": "DistributionKeys",
-      "description": "Operations related to distribution keys"
     }
   ],
   "paths": {
@@ -69,7 +49,7 @@
                   "Single tariff example": {
                     "value": [
                       {
-                        "id": "STRUCTURALDISCOUNT",
+                        "id": "SOCIALTARIFF",
                         "name": "Kansentarief",
                         "price": 1.5
                       }
@@ -78,7 +58,7 @@
                   "Multiple tariffs example": {
                     "value": [
                       {
-                        "id": "STRUCTURALDISCOUNT",
+                        "id": "SOCIALTARIFF",
                         "name": "Kansentarief",
                         "price": 1.5
                       },
@@ -128,10 +108,7 @@
         "description": "Returns the possible UiTPAS discounted **tariffs for an event and a passholder**.\n\nThis UiTPAS tariffs are calculated based on:\n\n- **The regular price** of the ticket.\nThis is the price your user would have to pay for the specific ticket without UiTPAS discount.\n- **The UiTPAS number** of the passholder. UiTPAS discounts are personal so it's important to identify the passholder to retrieve a list of possible tariffs.\n- **The event id** of the UiTdatabank event. UiTPAS discounts are limited to specific UiTdatabank events, so it's important to specify the event id to retrieve a list of possible tariffs.\n\n> ##### Important\n> The regular price of the ticket should generally be one of the price categories set on the event in UiTdatabank to make financial reporting clearer.\n",
         "security": [
           {
-            "CLIENT_ACCESS_TOKEN": []
-          },
-          {
-            "USER_ACCESS_TOKEN": []
+            "Client Access Token (see Authentication docs)": []
           }
         ],
         "parameters": [
@@ -214,7 +191,7 @@
                       {
                         "id": 21346,
                         "tariff": {
-                          "id": "STRUCTURALDISCOUNT",
+                          "id": "SOCIALTARIFF",
                           "name": "Kansentarief",
                           "price": 1.5
                         },
@@ -228,17 +205,17 @@
             }
           },
           "400": {
-            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/structural-discount-expired\n* https://api.publiq.be/probs/uitpas/maximum-reached\n\nThe type indicates the error on one of the failed ticket sale registrations. All other ticket sale registration in the request will be rolled back in case of an error.\n\nThe property `jsonPointer` will a referene to the erroneous `TicketSaleRequest` object if applicable.",
+            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/social-tariff-expired\n* https://api.publiq.be/probs/uitpas/maximum-reached\n\nThe type indicates the error on one of the failed ticket sale registrations. All other ticket sale registration in the request will be rolled back in case of an error.",
             "content": {
               "application/problem+json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 },
                 "examples": {
-                  "Structural discount expired": {
+                  "Social tariff expired": {
                     "value": {
-                      "type": "https://api.publiq.be/probs/uitpas/structural-discount-expired",
-                      "title": "Structural discount expired",
+                      "type": "https://api.publiq.be/probs/uitpas/social-tariff-expired",
+                      "title": "Social tariff expired",
                       "status": 400
                     }
                   }
@@ -256,10 +233,7 @@
         "description": "Registers one or more new ticket sales **with a discounted UiTPAS tariff**, so the UiTPAS organiser can get reimbursed for the discount.\n\nBefore you can register a discounted ticket sale, you will need to request the possible discounted tariffs from the `GET /tariffs` endpoint and let your end user pick one of the available tariffs. Afterward, you can register a ticket sale using this endpoint. \n\nYou will need:\n\n- The `uitpasNumber` of the passholder buying the ticket.\n- The `eventId` of the UiTdatabank event.\n- The chosen `uitpasTariffId` from the `GET /tariffs` request.\n- The `regularPrice` the passholder would normally have to pay for this ticket\n\nOptionally you can include a `regularPriceLabel` describing the regular price if you have multiple price categories, which can be useful in the financial reporting overview.\n\n<!-- theme: warning -->\n\n> ##### Error handling\n> **If one of the ticket sales is invalid** (for example the chosen tariff is incorrect or expired), **none of the ticket sales will be registered**. You will instead get an error response with more details about the problem, and can then retry the registration without the incorrect ticket sales or ask the end user to change the tickets and/or tariffs that they want.",
         "security": [
           {
-            "CLIENT_ACCESS_TOKEN": []
-          },
-          {
-            "USER_ACCESS_TOKEN": []
+            "Client Access Token (see Authentication docs)": []
           }
         ],
         "requestBody": {
@@ -294,7 +268,7 @@
                     },
                     {
                       "uitpasNumber": "0930002523422",
-                      "tariffId": "STRUCTURALDISCOUNT",
+                      "tariffId": "SOCIALTARIFF",
                       "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
                       "regularPrice": 10,
                       "regularPriceLabel": "Base tariff"
@@ -359,676 +333,7 @@
         ],
         "security": [
           {
-            "CLIENT_ACCESS_TOKEN": []
-          },
-          {
-            "USER_ACCESS_TOKEN": []
-          }
-        ]
-      }
-    },
-    "/user/organizer-roles": {
-      "get": {
-        "summary": "Get organizer roles",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/OrganizerRole"
-                  }
-                },
-                "examples": {
-                  "Example with multiple roles": {
-                    "value": [
-                      {
-                        "type": "member",
-                        "organizer": {
-                          "id": "c097fa2e-d9be-42e6-b41a-ec3d4d4cbad1",
-                          "name": "CC De Werf"
-                        }
-                      },
-                      {
-                        "type": "admin",
-                        "organizer": {
-                          "id": "fd7e6177-4add-4fa8-a7fe-6e60127bfb35",
-                          "name": "CC De Schakel"
-                        }
-                      }
-                    ]
-                  },
-                  "Example with one role": {
-                    "value": [
-                      {
-                        "type": "admin",
-                        "organizer": {
-                          "id": "c097fa2e-d9be-42e6-b41a-ec3d4d4cbad1",
-                          "name": "CC De Werf"
-                        }
-                      }
-                    ]
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/components/responses/Unauthorized"
-          }
-        },
-        "operationId": "get-user-organizer-roles",
-        "description": "List of roles that the current user has in relation to organizers. For example a user can be a `member` or an `admin` of an organizer.",
-        "security": [
-          {
-            "USER_ACCESS_TOKEN": []
-          }
-        ],
-        "tags": [
-          "CurrentUser"
-        ]
-      },
-      "parameters": []
-    },
-    "/organizers/{organizerId}/distribution-keys": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "organizerId",
-          "in": "path",
-          "required": true,
-          "description": "The id of the organizer"
-        }
-      ],
-      "get": {
-        "summary": "Get organizer distribution keys",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/DistributionKey"
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/components/responses/Unauthorized"
-          },
-          "403": {
-            "$ref": "#/components/responses/Forbidden"
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "operationId": "get-organizer-distribution-keys",
-        "security": [
-          {
-            "USER_ACCESS_TOKEN": []
-          }
-        ],
-        "description": "Get manual distribution keys for an organizer, so it can be set to a specific event using `PUT /events/{eventId}/distribution-keys`\n\n<!-- theme: warning -->\n\n> **This endpoint is only needed for exceptional cases.** In most cases distribution keys are set automatically on events, so you don't need to retrieve or change them.",
-        "tags": [
-          "DistributionKeys"
-        ]
-      }
-    },
-    "/events/{eventId}/card-systems": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "eventId",
-          "in": "path",
-          "required": true,
-          "description": "The id of the event"
-        }
-      ],
-      "put": {
-        "summary": "Update event config",
-        "operationId": "put-events-card-systems",
-        "responses": {
-          "204": {
-            "description": "Config updated. No content."
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "description": "List of distribution key ids to enable for the event.",
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/EventCardSystem"
-                }
-              },
-              "examples": {
-                "example-1": {
-                  "value": [
-                    {
-                      "distributionKeys": [
-                        {
-                          "id": "string",
-                          "name": "string"
-                        }
-                      ],
-                      "id": "string",
-                      "name": "string"
-                    }
-                  ]
-                }
-              }
-            }
-          },
-          "description": ""
-        },
-        "description": "Update the config per card system of the given event.\n\n<!-- theme: warning -->\n\n> **This endpoint is only needed for exceptional cases.** In most cases card systems and distribution keys are set automatically on events, so you don't need to retrieve or change them.",
-        "security": [
-          {
-            "USER_ACCESS_TOKEN": []
-          }
-        ],
-        "tags": [
-          "DistributionKeys"
-        ]
-      },
-      "get": {
-        "summary": "Get event config",
-        "operationId": "get-events-card-systems",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/EventCardSystem"
-                  }
-                },
-                "examples": {
-                  "example-1": {
-                    "value": [
-                      {
-                        "distributionKeys": [
-                          {
-                            "id": "string",
-                            "name": "string"
-                          }
-                        ],
-                        "id": "string",
-                        "name": "string"
-                      }
-                    ]
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/components/responses/Unauthorized"
-          },
-          "403": {
-            "$ref": "#/components/responses/Forbidden"
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "description": "Get the config per card system of the given event.\n\n<!-- theme: warning -->\n\n> **This endpoint is only needed for exceptional cases.** In most cases distribution keys are set automatically on events, so you don't need to retrieve or change them.",
-        "security": [
-          {
-            "USER_ACCESS_TOKEN": []
-          }
-        ],
-        "tags": [
-          "DistributionKeys"
-        ]
-      }
-    },
-    "/organizers": {
-      "get": {
-        "summary": "Get organizers",
-        "tags": [
-          "Organizers"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/OrganizersPaginatedResponse"
-                },
-                "examples": {}
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/components/responses/Unauthorized"
-          },
-          "403": {
-            "$ref": "#/components/responses/Forbidden"
-          }
-        },
-        "operationId": "get-organizers",
-        "description": "Retrieve organizers based on search parameters.",
-        "security": [
-          {
-            "USER_ACCESS_TOKEN": []
-          }
-        ],
-        "parameters": [
-          {
-            "schema": {
-              "type": "number"
-            },
-            "in": "query",
-            "name": "groupId",
-            "description": "Include only organizers in this group"
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
-            "name": "name",
-            "description": "Include only organizers with this name (* wildcard allowed)"
-          }
-        ]
-      }
-    },
-    "/passholders": {
-      "get": {
-        "summary": "Search passholders",
-        "tags": [
-          "Passholders"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PassholdersPaginatedResponse"
-                },
-                "examples": {}
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/components/responses/Unauthorized"
-          },
-          "403": {
-            "$ref": "#/components/responses/Forbidden"
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "operationId": "get-passholders",
-        "description": "Retrieve passholders based on search parameters",
-        "security": [
-          {
-            "USER_ACCESS_TOKEN": []
-          }
-        ],
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
-            "name": "inszNumber"
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
-            "name": "uitpasNumber"
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
-            "name": "name"
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
-            "name": "firstName"
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
-            "name": "schoolId"
-          }
-        ]
-      }
-    },
-    "/passholders/{passholderId}": {
-      "put": {
-        "summary": "Update passholder",
-        "operationId": "put-passholders",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Passholder"
-                }
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/components/responses/Unauthorized"
-          },
-          "403": {
-            "$ref": "#/components/responses/Forbidden"
-          }
-        },
-        "description": "Update the passholder.",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/PassholderUpdateRequest"
-              }
-            }
-          },
-          "description": "The PassholdUpdateRequest object including the fields to be updated."
-        },
-        "tags": [
-          "Passholders"
-        ],
-        "security": [
-          {
-            "USER_ACCESS_TOKEN": []
-          }
-        ]
-      },
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "passholderId",
-          "in": "path",
-          "required": true,
-          "description": "The id of the passholder"
-        }
-      ]
-    },
-    "/organizers/{organizerId}/financial-reports/periods": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "organizerId",
-          "in": "path",
-          "required": true,
-          "description": "The id of the organizer"
-        }
-      ],
-      "get": {
-        "summary": "Get suggested financial report periods",
-        "tags": [
-          "FinancialReports"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/ReportPeriod"
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/components/responses/Unauthorized"
-          },
-          "403": {
-            "$ref": "#/components/responses/Forbidden"
-          }
-        },
-        "operationId": "get-financials-organizer-periods",
-        "security": [
-          {
-            "USER_ACCESS_TOKEN": []
-          }
-        ],
-        "description": "Retrieve suggested report periods for an organizer."
-      }
-    },
-    "/organizers/{organizerId}/financial-reports": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "organizerId",
-          "in": "path",
-          "required": true
-        }
-      ],
-      "post": {
-        "summary": "Start an export of a financial report",
-        "operationId": "post-financials-organizers-reports",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ReportStatus"
-                },
-                "examples": {
-                  "Example of started export": {
-                    "value": {
-                      "status": "started",
-                      "id": 232432
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/components/responses/Unauthorized"
-          },
-          "403": {
-            "$ref": "#/components/responses/Forbidden"
-          }
-        },
-        "tags": [
-          "FinancialReports"
-        ],
-        "description": "Starts a financial report export. The result of this request is a `reportId` that can be used to request the status of the report export and the download.",
-        "security": [
-          {
-            "USER_ACCESS_TOKEN": []
-          }
-        ]
-      }
-    },
-    "/organizers/{organizerId}/financial-reports/{reportId}": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "organizerId",
-          "in": "path",
-          "required": true
-        },
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "reportId",
-          "in": "path",
-          "required": true
-        }
-      ],
-      "get": {
-        "summary": "Get financial report status",
-        "tags": [
-          "FinancialReports"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ReportStatus"
-                },
-                "examples": {
-                  "Example of a started report": {
-                    "value": {
-                      "id": 23243,
-                      "status": "started"
-                    }
-                  },
-                  "Example of an available report": {
-                    "value": {
-                      "id": 23244,
-                      "status": "available"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/components/responses/Unauthorized"
-          },
-          "403": {
-            "$ref": "#/components/responses/Forbidden"
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "operationId": "get-financials-organizers-reports-status",
-        "description": "Retrieve the status of a previously started report export.",
-        "security": [
-          {
-            "USER_ACCESS_TOKEN": []
-          }
-        ]
-      }
-    },
-    "/organizers/{organizerId}/financial-reports/{reportId}.zip": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "organizerId",
-          "in": "path",
-          "required": true
-        },
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "reportId",
-          "in": "path",
-          "required": true
-        }
-      ],
-      "get": {
-        "summary": "Download financial report",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/octet-stream": {
-                "schema": {
-                  "type": "object",
-                  "properties": {}
-                },
-                "examples": {}
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/components/responses/Unauthorized"
-          },
-          "403": {
-            "$ref": "#/components/responses/Forbidden"
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "operationId": "get-financials-organizers-reports-download",
-        "description": "Retrieve the actual report zip file of an `available` report.",
-        "tags": [
-          "FinancialReports"
-        ],
-        "security": [
-          {
-            "CLIENT_ACCESS_TOKEN": []
+            "Client Access Token (see Authentication docs)": []
           }
         ]
       }
@@ -1150,9 +455,6 @@
         "title": "Error",
         "type": "object",
         "description": "RFC7807 error model for all publiq APIs",
-        "x-tags": [
-          "Models"
-        ],
         "properties": {
           "type": {
             "type": "string"
@@ -1162,299 +464,22 @@
           },
           "status": {
             "type": "number"
-          },
-          "jsonPointer": {
-            "type": "string",
-            "description": "Pointer to the erroneous request object in JavaScript Object Notation (JSON) Pointer format.",
-            "format": "json-pointer"
           }
         },
         "required": [
           "type",
           "title",
           "status"
-        ]
-      },
-      "OrganizerRole": {
-        "title": "OrganizerRole",
-        "type": "object",
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "member",
-              "admin"
-            ]
-          },
-          "organizer": {
-            "$ref": "#/components/schemas/Organizer"
-          }
-        },
-        "required": [
-          "type",
-          "organizer"
         ],
         "x-tags": [
           "Models"
-        ]
-      },
-      "Organizer": {
-        "title": "Organizer",
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          }
-        },
-        "x-tags": [
-          "Models"
-        ]
-      },
-      "DistributionKey": {
-        "title": "DistributionKey",
-        "type": "object",
-        "x-tags": [
-          "Models"
-        ],
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "id"
-        ]
-      },
-      "PassholdersPaginatedResponse": {
-        "title": "PassholdersPaginatedResponse",
-        "type": "object",
-        "x-tags": [
-          "Models"
-        ],
-        "description": "Paginated response object for passholders",
-        "properties": {
-          "itemsPerPage": {
-            "type": "number"
-          },
-          "totalItems": {
-            "type": "number"
-          },
-          "member": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Passholder"
-            }
-          }
-        }
-      },
-      "OrganizersPaginatedResponse": {
-        "title": "OrganizersPaginatedResponse",
-        "type": "object",
-        "x-tags": [
-          "Models"
-        ],
-        "description": "Paginated response object for organizers",
-        "properties": {
-          "itemsPerPage": {
-            "type": "number"
-          },
-          "totalItems": {
-            "type": "number"
-          },
-          "member": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Passholder"
-            }
-          }
-        }
-      },
-      "Passholder": {
-        "title": "Passholder",
-        "type": "object",
-        "x-tags": [
-          "Models"
-        ],
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          },
-          "firstName": {
-            "type": "string"
-          },
-          "inszNumber": {
-            "type": "string"
-          },
-          "cardSystemMemberships": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/CardSystemMembership"
-            }
-          },
-          "schoolId": {
-            "type": "string"
-          }
-        }
-      },
-      "CardSystemMembership": {
-        "title": "CardSystemMembership",
-        "type": "object",
-        "x-tags": [
-          "Models"
-        ],
-        "properties": {
-          "cardSsytem": {
-            "$ref": "#/components/schemas/CardSystem"
-          },
-          "uitpasNumber": {
-            "type": "string"
-          },
-          "kansenStatuutEndDate": {
-            "type": "string"
-          },
-          "kansenStatuutExpired": {
-            "type": "boolean"
-          },
-          "kansenStatuutInGracePeriod": {
-            "type": "boolean"
-          }
-        }
-      },
-      "CardSystem": {
-        "title": "CardSystem",
-        "type": "object",
-        "x-tags": [
-          "Models"
-        ],
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "id"
-        ]
-      },
-      "PassholderUpdateRequest": {
-        "title": "PassholderUpdateRequest",
-        "type": "object",
-        "description": "Request object to update a passholder",
-        "properties": {
-          "schoolId": {
-            "type": "string"
-          }
-        },
-        "x-tags": [
-          "Models"
-        ]
-      },
-      "ReportStatus": {
-        "type": "object",
-        "title": "ReportStatus",
-        "description": "The status of a started report export.",
-        "x-examples": {},
-        "x-tags": [
-          "Models"
-        ],
-        "properties": {
-          "status": {
-            "type": "string",
-            "enum": [
-              "started",
-              "available"
-            ]
-          },
-          "id": {
-            "type": "number"
-          }
-        },
-        "required": [
-          "status",
-          "id"
-        ]
-      },
-      "ReportPeriod": {
-        "title": "ReportPeriod",
-        "type": "object",
-        "description": "Start and end date of the reporting period  ",
-        "properties": {
-          "startDate": {
-            "type": "string",
-            "format": "date"
-          },
-          "endDate": {
-            "type": "string",
-            "format": "date"
-          }
-        },
-        "required": [
-          "startDate",
-          "endDate"
-        ],
-        "x-tags": [
-          "Models"
-        ]
-      },
-      "EventCardSystem": {
-        "title": "EventCardSystem",
-        "type": "object",
-        "x-examples": {
-          "example-1": {
-            "distributionKeys": [
-              {
-                "id": "string",
-                "name": "string"
-              }
-            ],
-            "id": "string",
-            "name": "string"
-          }
-        },
-        "x-tags": [
-          "Models"
-        ],
-        "description": "CardSystem in an event context, optionally including distributionKeys.",
-        "properties": {
-          "distributionKeys": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/DistributionKey"
-            }
-          },
-          "id": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "id"
         ]
       }
     },
     "securitySchemes": {
-      "CLIENT_ACCESS_TOKEN": {
+      "Client Access Token (see Authentication docs)": {
         "type": "http",
-        "scheme": "bearer",
-        "description": "Client Access Token - see [Authentication docs](https://publiq.stoplight.io/docs/authentication/docs/Authentication-methods/Client-access-token.md)"
-      },
-      "USER_ACCESS_TOKEN": {
-        "type": "http",
-        "scheme": "bearer",
-        "description": "User Access Token - see [Authentication docs](https://publiq.stoplight.io/docs/authentication/docs/Authentication-methods/User-access-token.md)"
+        "scheme": "bearer"
       }
     },
     "parameters": {},

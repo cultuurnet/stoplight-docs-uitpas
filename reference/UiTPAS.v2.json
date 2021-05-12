@@ -49,7 +49,7 @@
                   "Single tariff example": {
                     "value": [
                       {
-                        "id": "STRUCTURALDISCOUNT",
+                        "id": "SOCIALTARIFF",
                         "name": "Kansentarief",
                         "price": 1.5
                       }
@@ -58,7 +58,7 @@
                   "Multiple tariffs example": {
                     "value": [
                       {
-                        "id": "STRUCTURALDISCOUNT",
+                        "id": "SOCIALTARIFF",
                         "name": "Kansentarief",
                         "price": 1.5
                       },
@@ -191,7 +191,7 @@
                       {
                         "id": 21346,
                         "tariff": {
-                          "id": "STRUCTURALDISCOUNT",
+                          "id": "SOCIALTARIFF",
                           "name": "Kansentarief",
                           "price": 1.5
                         },
@@ -205,17 +205,17 @@
             }
           },
           "400": {
-            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/structural-discount-expired\n* https://api.publiq.be/probs/uitpas/maximum-reached\n\nThe type indicates the error on one of the failed ticket sale registrations. All other ticket sale registration in the request will be rolled back in case of an error.",
+            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/social-tariff-expired\n* https://api.publiq.be/probs/uitpas/maximum-reached\n\nThe type indicates the error on one of the failed ticket sale registrations. All other ticket sale registration in the request will be rolled back in case of an error.",
             "content": {
               "application/problem+json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 },
                 "examples": {
-                  "Structural discount expired": {
+                  "Social tariff expired": {
                     "value": {
-                      "type": "https://api.publiq.be/probs/uitpas/structural-discount-expired",
-                      "title": "Structural discount expired",
+                      "type": "https://api.publiq.be/probs/uitpas/social-tariff-expired",
+                      "title": "Social tariff expired",
                       "status": 400
                     }
                   }
@@ -268,7 +268,7 @@
                     },
                     {
                       "uitpasNumber": "0930002523422",
-                      "tariffId": "STRUCTURALDISCOUNT",
+                      "tariffId": "SOCIALTARIFF",
                       "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
                       "regularPrice": 10,
                       "regularPriceLabel": "Base tariff"

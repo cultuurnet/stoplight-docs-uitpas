@@ -127,7 +127,7 @@ If for some reason you need to [cancel the ticket sale registration](/docs/uitpa
 
 ## F.A.Q.
 
-### Can I get a list of all UiTPAS numbers that have a structural discount ('kansentarief')?
+### Can I get a list of all UiTPAS numbers that have a sociall tariff ('kansentarief')?
 
 ### Can I get a list of discounts instead of a list of tariffs?
 

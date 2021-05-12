@@ -23,7 +23,7 @@ To learn more about how to register your event in UiTdatabank and turn it into a
 
 ## Workflow overview
 
-![Auth Diagram](https://acc.uitid.be/api/uitpas-ticketsale-flow.png)
+![](../../assets/images/steps-ticketing-UiTPAS-visual.png)
 
 1. A typical workflow starts with a user that wants to buy a ticket. This can work in various ways, specific to your application, but we start this flow when the user expresses his need to apply an UiTPAS discount.
 

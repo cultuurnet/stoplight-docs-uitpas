@@ -21,7 +21,7 @@
   ],
   "tags": [
     {
-      "name": "TicketSale",
+      "name": "TicketSales",
       "description": "Operations related to ticket sales"
     }
   ],
@@ -31,7 +31,7 @@
       "get": {
         "summary": "Get tariffs",
         "tags": [
-          "TicketSale"
+          "TicketSales"
         ],
         "responses": {
           "200": {
@@ -147,7 +147,7 @@
       "post": {
         "summary": "Register ticket sale(s)",
         "tags": [
-          "TicketSale"
+          "TicketSales"
         ],
         "operationId": "post-ticket-sales",
         "responses": {
@@ -162,7 +162,7 @@
                   }
                 },
                 "examples": {
-                  "Single ticketsale example": {
+                  "Single ticket sale example": {
                     "value": [
                       {
                         "id": 21345,
@@ -246,7 +246,7 @@
                 }
               },
               "examples": {
-                "Example for one ticketsale": {
+                "Example for one ticket sale": {
                   "value": [
                     {
                       "uitpasNumber": "0560002524314",
@@ -257,7 +257,7 @@
                     }
                   ]
                 },
-                "Example for multiple ticketsales": {
+                "Example for multiple ticket sales": {
                   "value": [
                     {
                       "uitpasNumber": "0560002524314",
@@ -329,7 +329,7 @@
         },
         "description": "Cancels a single ticket sale registration by its id. (Returned in the response of the ticket sale registration request.)",
         "tags": [
-          "TicketSale"
+          "TicketSales"
         ],
         "security": [
           {
@@ -365,7 +365,7 @@
           "price"
         ],
         "x-tags": [
-          "Model"
+          "Models"
         ]
       },
       "TicketSaleRegistration": {
@@ -406,7 +406,7 @@
         "description": "The TicketSaleRegistration is a response object of the POST /ticketSales request. It can be used to provide the user with an overview or to identify the ticket sales in case they need to be canceled.",
         "x-internal": false,
         "x-tags": [
-          "Model"
+          "Models"
         ]
       },
       "TicketSaleRequest": {
@@ -448,7 +448,7 @@
         ],
         "x-internal": false,
         "x-tags": [
-          "Model"
+          "Models"
         ]
       },
       "Error": {
@@ -472,7 +472,7 @@
           "status"
         ],
         "x-tags": [
-          "Model"
+          "Models"
         ]
       }
     },

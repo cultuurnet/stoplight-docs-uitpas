@@ -10,20 +10,18 @@ This guide illustrates how to register an UiTPAS discounted ticket sale, from re
 
 Before you can request UiTPAS tariffs or register ticket sales, you'll need:
 
-**Client credentials**, so you can access the UiTPAS API using a [Client Access Token](https://publiq.stoplight.io/docs/authentication/docs/Authentication-methods/Client-access-token.md)
+1. **Client credentials**, so you can access the UiTPAS API using a [Client Access Token](https://publiq.stoplight.io/docs/authentication/docs/Authentication-methods/Client-access-token.md)
 
-**An UiTDatabank event id** organized by an UiTPAS organizer. There are multiple ways to get such an event id:
-
-  * The event may already exist in UiTDatabank
-  * You could create the event in the UiTdatabank manually 
-  * You can import the event programmatically through UiTdatabank's Entry API
-
+2. **The id of an UiTdatabank event organized by an UiTPAS organizer**. There are multiple ways to get such an event id:
+    - The event may already exist in UiTDatabank
+    - You could create the event in the UiTdatabank manually 
+    - You can import the event programmatically through UiTdatabank's Entry API
+  
 To learn more about how to register your event in UiTdatabank and turn it into an UiTPAS event, read [our guide on  registering events](/docs/Guides/Registering-events.md).
-
 
 ## Workflow overview
 
-![Auth Diagram](https://acc.uitid.be/api/uitpas-ticketsale-flow.png)
+![](../../assets/images/steps-ticketing-UiTPAS-visual.png)
 
 1. A typical workflow starts with a user that wants to buy a ticket. This can work in various ways, specific to your application, but we start this flow when the user expresses his need to apply an UiTPAS discount.
 

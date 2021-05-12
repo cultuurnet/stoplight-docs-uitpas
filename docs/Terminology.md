@@ -8,12 +8,12 @@ One who holds an UiTPAS, the end-user of an UiTPAS.
 
 ## UiTPAS Organizer
 
-The organizer of an UiTPAS-event. To pay for the reduced UiTPAS prices for people in need, the organizer is partly reimbursed by the local government. That's why it's important to always create UiTPAS-events with the correct UiTPAS-organizer.
+The organizer of an UiTPAS-event. To pay for the social tariff for people in need, the organizer is partly reimbursed by the local government. That's why it's important to always create UiTPAS-events with the correct UiTPAS-organizer.
 
-## Social Discount ('kansentarief')
+## Social Tariff ('kansentarief')
 
-Passholders in need can receive a social discount ('kansentarief') on their UiTPAS. 
-This social discount is given by the local government based on local poverty parameters. 
+Passholders in need can receive a social tariff ('kansentarief') on their UiTPAS. 
+This social tariff is given by the local government based on local poverty parameters. 
 
 Those discounts are payed via a third-party payer system in which the organizer of the event, the local government and the passholder each pay a percentage of the ticket price. Payments are organized via a manual financial reporting flow within UiTPAS.
 
@@ -22,9 +22,9 @@ Those discounts are payed via a third-party payer system in which the organizer 
 An UiTPAS-coupon is a discount that is made available to a subset of passholders.
 Based on certain parameters such as the residence of the passholder, this coupon is automatically made available to the passholder.
 
-For example: the City of Hasselt awards a 5 euro discount to all passholders of Hasselt.
-This discount will automatically be made available to all inhabitants of Hasselt.
-When the UiTPAS-price for an inabitant of Hasselt is checked, this coupon will show up as an option and can then be redeemed.
+For example: the City of Hasselt awards a 5 euro coupon to all passholders of Hasselt.
+This coupon will automatically be made available to all inhabitants of Hasselt.
+When the UiTPAS-tariff for an inabitant of Hasselt is checked, this coupon will show up as an option and can then be redeemed.
 
 ## Check-in
 

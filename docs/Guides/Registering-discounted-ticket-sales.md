@@ -18,7 +18,7 @@ Before you can request UiTPAS tariffs or register ticket sales, you'll need:
   * You could create the event in the UiTdatabank manually 
   * You can import the event programmatically through UiTdatabank's Entry API
 
-To learn more about how to register your event in UiTdatabank and turn it into an UiTPAS event, read [our guide on  registering events](/docs/Guides/Registering-events.md).
+To learn more about how to register your event in UiTdatabank and turn it into an UiTPAS event, read [our guide on  registering events](/uitpas/docs/Guides/Registering-events.md).
 
 
 ## Workflow overview

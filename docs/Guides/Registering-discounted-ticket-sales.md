@@ -90,7 +90,7 @@ Content-Type: application/json
 
 7. Your application can now continue its regular flow, like asking the user for payment (of the discounted tariff).
 
-8. When your regular flow successfully finishes, you need to [register the ticket sale](/docs/uitpas/reference/UiTPAS.v2.json/paths/~1ticketSales/post), again using the event id, the UiTPAS number of the user, the regular price, combined with the selected tariffId of the selected tariff.
+8. When your regular flow successfully finishes, you need to [register the ticket sale](/docs/uitpas/reference/UiTPAS.v2.json/paths/~1ticket-sales/post), again using the event id, the UiTPAS number of the user, the regular price, combined with the selected tariffId of the selected tariff.
 
 
 ```http
@@ -143,7 +143,7 @@ Content-Type: application/json
 
 In case the ticketsale registration fails, the status property will contain more information. 
 
-If for some reason you need to [cancel the ticket sale registration](/docs/uitpas/reference/UiTPAS.v2.json/paths/~1ticketSales~1%7BticketSaleId%7D/delete) you can do so using the `id` of the ticketSale from this response.
+If for some reason you need to [cancel the ticket sale registration](/docs/uitpas/reference/UiTPAS.v2.json/paths/~1ticket-sales~1%7BticketSaleId%7D/delete) you can do so using the `id` of the ticketSale from this response.
 
 ## F.A.Q.
 

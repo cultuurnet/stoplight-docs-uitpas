@@ -502,7 +502,7 @@
         }
       ],
       "put": {
-        "summary": "Update event config",
+        "summary": "Update event card systems",
         "operationId": "put-events-card-systems",
         "responses": {
           "204": {
@@ -550,7 +550,7 @@
         ]
       },
       "get": {
-        "summary": "Get event config",
+        "summary": "Get event card systems",
         "operationId": "get-events-card-systems",
         "responses": {
           "200": {

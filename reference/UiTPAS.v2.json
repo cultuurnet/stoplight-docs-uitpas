@@ -525,11 +525,11 @@
                     {
                       "distributionKeys": [
                         {
-                          "id": "string",
+                          "id": 0,
                           "name": "string"
                         }
                       ],
-                      "id": "string",
+                      "id": 0,
                       "name": "string"
                     }
                   ]
@@ -569,11 +569,11 @@
                       {
                         "distributionKeys": [
                           {
-                            "id": "string",
+                            "id": 0,
                             "name": "string"
                           }
                         ],
-                        "id": "string",
+                        "id": 0,
                         "name": "string"
                       }
                     ]
@@ -1221,7 +1221,7 @@
         ],
         "properties": {
           "id": {
-            "type": "string"
+            "type": "number"
           },
           "name": {
             "type": "string"
@@ -1337,7 +1337,7 @@
         ],
         "properties": {
           "id": {
-            "type": "string"
+            "type": "number"
           },
           "name": {
             "type": "string"
@@ -1434,7 +1434,7 @@
             }
           },
           "id": {
-            "type": "string"
+            "type": "number"
           },
           "name": {
             "type": "string"

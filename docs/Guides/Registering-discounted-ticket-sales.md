@@ -32,7 +32,7 @@ Your application then starts its typical flow of guiding the user through a chec
 
 At some point during the checkout process on your website or application (but **before a payment has happened**), you provide the user a way to enter their UiTPAS number if they have one.
 
-### 4. Determine possible discounted tariffs
+### 4. Determine possible UiTPAS tariffs
 
 Using the event id, the UiTPAS number and the regular price of your event, you can [request possible UiTPAS tariffs](https://publiq.stoplight.io/docs/uitpas/reference/UiTPAS.v2.json/paths/~1tariffs/get).
 
@@ -59,9 +59,9 @@ Content-Type: application/json
 ]
 ```
 
-### 5. User selects a discounted tariff (or none)
+### 5. User selects a tariff (or none)
 
-If the API response contained one or more discounted tariffs, your website or application should present them to the user to select one (or none).
+If the API response contained one or more UiTPAS tariffs, your website or application should present them to the user to select one (or none).
 
 For example if all the discounted tariffs are based on one-time-use coupons, but the user does not wish to use any coupons after all, he/she should be able to not select one.
 

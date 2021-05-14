@@ -34,7 +34,7 @@ At some point during the checkout process on your website or application (but **
 
 ### 4. Determine possible discounted tariffs
 
-Using the event id, the UiTPAS number and the regular price of your event, you can [request possible UiTPAS tariffs](/docs/uitpas/reference/UiTPAS.v2.json/paths/~1tariffs/get).
+Using the event id, the UiTPAS number and the regular price of your event, you can [request possible UiTPAS tariffs](https://publiq.stoplight.io/docs/uitpas/reference/UiTPAS.v2.json/paths/~1tariffs/get).
 
 Example request:
 

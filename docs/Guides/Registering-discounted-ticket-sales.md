@@ -67,11 +67,11 @@ For example if all the discounted tariffs are based on one-time-use coupons, but
 
 ### 6. Register the ticket sale
 
-After the user has selected a discounted tariff, your website or application continues with its regular flow for completing the sale like payment (for the discounted price) etc.
+After the user has selected an UiTPAS tariff, your website or application continues with its regular flow for completing the sale like payment (for the discounted price) etc.
 
 When your regular flow successfully finishes, you need to [register the ticket sale](/docs/uitpas/reference/UiTPAS.v2.json/paths/~1ticket-sales/post). If you don't register the ticketsale correctly, the organizer can not get reimbursed for the discount within the UiTPAS financial flow.
 
-> If the user had no discounted tariffs, or did not select one, you do not need to register your ticket sale with UiTPAS.
+> If the user had no UiTPAS tariffs, or did not select one, you do not need to register your ticket sale with UiTPAS.
 
 For example:
 

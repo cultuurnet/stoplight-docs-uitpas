@@ -12,7 +12,7 @@ Before you can request UiTPAS tariffs or register ticket sales, you'll need **cl
 
 ### 1. UiTdatabank event
 
-Every ticket sale in UiTPAS is coupled to an event in UiTdatabank, for example because some discounts are only applicable to some events.
+Every ticket sale in UiTPAS is coupled to an event in UiTdatabank, for example because some discounts are only applicable to some events. Every UiTPAS-event has an organizer, for which you are registering this ticketsale. 
 
 You can either use an existing UiTdatabank event, or create one manually via UiTdatabank's UI, or import one programmatically through UiTdatabank's API.
   
@@ -69,7 +69,7 @@ For example if all the discounted tariffs are based on one-time-use coupons, but
 
 After the user has selected a discounted tariff, your website or application continues with its regular flow for completing the sale like payment (for the discounted price) etc.
 
-When your regular flow successfully finishes, you need to [register the ticket sale](/docs/uitpas/reference/UiTPAS.v2.json/paths/~1ticket-sales/post). 
+When your regular flow successfully finishes, you need to [register the ticket sale](/docs/uitpas/reference/UiTPAS.v2.json/paths/~1ticket-sales/post). If you don't register the ticketsale correctly, the organizer can not get reimbursed for the discount within the UiTPAS financial flow.
 
 > If the user had no discounted tariffs, or did not select one, you do not need to register your ticket sale with UiTPAS.
 

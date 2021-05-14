@@ -1,6 +1,6 @@
 # Registering discounted ticket sales
 
-This guide illustrates how to register an UiTPAS discounted ticket sale, from requesting possisble tariffs to registering the ticket sale and even canceling it if needed.
+This guide illustrates how to register an UiTPAS discounted ticket sale so end users can receive their UiTPAS discount (tariff) and organizers can be reimbursed within the UiTPAS financial flow. You'll learn how to request possisble UiTPAS tariffs, registering the ticket sale and even canceling it if needed.
 
 ## Authentication
 

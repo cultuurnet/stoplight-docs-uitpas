@@ -123,7 +123,7 @@ Content-Type: application/json
 
 ### 7. Cancelling the ticket sale
 
-If for some reason you need to [cancel the ticket sale registration](/docs/uitpas/reference/UiTPAS.v2.json/paths/~1ticketSales~1%7BticketSaleId%7D/delete) you can do so using the `id` of the ticket sale in the response of the registration.
+If for some reason you need to [cancel the ticket sale registration](/docs/uitpas/reference/UiTPAS.v2.json/paths/~1ticket-sales~1%7BticketSaleId%7D/delete) you can do so using the `id` of the ticket sale in the response of the registration.
 
 ## F.A.Q.
 

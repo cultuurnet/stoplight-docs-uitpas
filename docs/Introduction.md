@@ -4,7 +4,7 @@
 
 A warm welcome to our UiTPAS API documentation! 👋
 
-Check out our [development quickstart guide](/docs/uitpas/docs/Quickstart.md) to get up and running.
+Check out our [development quick start guide](/docs/uitpas/docs/Quickstart.md) to get up and running.
 
 The UiTPAS API is organized around [REST](https://en.wikipedia.org/wiki/Representational_state_transfer). Our API has predictable resource-oriented URLs, returns [JSON](https://www.json.org/json-en.html)-encoded responses, and uses standard HTTP response codes, authentication, and verbs.
 

@@ -1,4 +1,4 @@
-# Quickstart
+# Quick start
 
 **These are the basic steps to integrate your application with UiTPAS:
 **

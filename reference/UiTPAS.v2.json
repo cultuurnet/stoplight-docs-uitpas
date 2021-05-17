@@ -795,6 +795,13 @@
             },
             "in": "query",
             "name": "sort[name]"
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "cardSystem"
           }
         ]
       }
@@ -1355,9 +1362,6 @@
             "items": {
               "$ref": "#/components/schemas/CardSystemMembership"
             }
-          },
-          "schoolId": {
-            "type": "string"
           },
           "email": {
             "type": "string"

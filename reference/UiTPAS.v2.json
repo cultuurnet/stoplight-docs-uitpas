@@ -739,6 +739,23 @@
             },
             "in": "query",
             "name": "schoolId"
+          },
+          {
+            "schema": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "in": "query",
+            "name": "start"
+          },
+          {
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "default": 20
+            },
+            "in": "query",
+            "name": "limit"
           }
         ]
       }
@@ -1312,7 +1329,7 @@
           "Models"
         ],
         "properties": {
-          "cardSsytem": {
+          "cardSystem": {
             "$ref": "#/components/schemas/CardSystem"
           },
           "uitpasNumber": {

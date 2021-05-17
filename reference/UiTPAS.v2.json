@@ -658,6 +658,34 @@
             "in": "query",
             "name": "name",
             "description": "Include only organizers with this name (* wildcard allowed)"
+          },
+          {
+            "schema": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "in": "query",
+            "name": "start"
+          },
+          {
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "default": 20
+            },
+            "in": "query",
+            "name": "limit"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "asc",
+                "desc"
+              ]
+            },
+            "in": "query",
+            "name": "sort[name]"
           }
         ]
       }

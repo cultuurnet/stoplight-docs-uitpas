@@ -766,17 +766,6 @@
               ]
             },
             "in": "query",
-            "name": "sort[creationDate]"
-          },
-          {
-            "schema": {
-              "type": "string",
-              "enum": [
-                "asc",
-                "desc"
-              ]
-            },
-            "in": "query",
             "name": "sort[name]"
           }
         ]
@@ -1344,6 +1333,10 @@
           },
           "email": {
             "type": "string"
+          },
+          "creationDate": {
+            "type": "string",
+            "format": "date-time"
           }
         }
       },

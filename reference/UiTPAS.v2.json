@@ -756,6 +756,28 @@
             },
             "in": "query",
             "name": "limit"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "asc",
+                "desc"
+              ]
+            },
+            "in": "query",
+            "name": "sort[creationDate]"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "asc",
+                "desc"
+              ]
+            },
+            "in": "query",
+            "name": "sort[name]"
           }
         ]
       }
@@ -1318,6 +1340,9 @@
             }
           },
           "schoolId": {
+            "type": "string"
+          },
+          "email": {
             "type": "string"
           }
         }

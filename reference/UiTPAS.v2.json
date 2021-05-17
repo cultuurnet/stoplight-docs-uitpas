@@ -908,7 +908,7 @@
                 "examples": {
                   "Example of started export": {
                     "value": {
-                      "status": "started",
+                      "status": "STARTED",
                       "id": 232432
                     }
                   }
@@ -970,13 +970,13 @@
                   "Example of a started report": {
                     "value": {
                       "id": 23243,
-                      "status": "started"
+                      "status": "STARTED"
                     }
                   },
                   "Example of an available report": {
                     "value": {
                       "id": 23244,
-                      "status": "available"
+                      "status": "AVAILABLE"
                     }
                   }
                 }
@@ -1427,8 +1427,8 @@
           "status": {
             "type": "string",
             "enum": [
-              "started",
-              "available"
+              "STARTED",
+              "AVAILABLE"
             ]
           },
           "id": {

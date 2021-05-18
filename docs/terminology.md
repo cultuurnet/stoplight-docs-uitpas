@@ -8,7 +8,7 @@ One who holds an UiTPAS, the end-user of an UiTPAS.
 
 ## UiTPAS Organizer
 
-The organizer of an UiTPAS-event. To pay for the social tariff for people in need, the organizer is partly reimbursed by the local government. That's why it's important to always create UiTPAS-events with the correct UiTPAS-organizer.
+The organizer of an UiTPAS event. To pay for the social tariff for people in need, the organizer is partly reimbursed by the local government. That's why it's important to always create UiTPAS events with the correct UiTPAS organizer.
 
 ## Social Tariff ('kansentarief')
 
@@ -19,12 +19,12 @@ Those discounts are payed via a third-party payer system in which the organizer 
 
 ## Coupon
 
-An UiTPAS-coupon is a discount that is made available to a subset of passholders.
+An UiTPAS coupon is a discount that is made available to a subset of passholders.
 Based on certain parameters such as the residence of the passholder, this coupon is automatically made available to the passholder.
 
 For example: the City of Hasselt awards a 5 euro coupon to all passholders of Hasselt.
 This coupon will automatically be made available to all inhabitants of Hasselt.
-When the UiTPAS-tariff for an inhabitant of Hasselt is checked, this coupon will show up as an option and can then be redeemed.
+When the UiTPAS tariff for an inhabitant of Hasselt is checked, this coupon will show up as an option and can then be redeemed.
 
 ## Check-in
 

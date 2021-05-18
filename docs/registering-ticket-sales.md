@@ -23,7 +23,7 @@ To decide what kind of token to use, see the [overview of token types](https://p
 
 ### 1. UiTdatabank event
 
-Every ticket sale in UiTPAS is coupled to an event in UiTdatabank, for example because some discounts are only applicable to some events. Every UiTPAS-event has an organizer, for which you are registering this ticketsale. 
+Every ticket sale in UiTPAS is coupled to an event in UiTdatabank, for example because some discounts are only applicable to some events. Every UiTPAS event has an organizer, for which you are registering this ticketsale. 
 
 You can either use an existing UiTdatabank event, or create one manually via UiTdatabank's UI, or import one programmatically through UiTdatabank's API.
   

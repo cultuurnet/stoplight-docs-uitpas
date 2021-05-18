@@ -11,8 +11,8 @@ The UiTPAS API is organized around [REST](https://en.wikipedia.org/wiki/Represen
 In this documentation you'll find:
 
 - Code examples so you can see see how it works in practice.
-- Step-by-step guides to common UiTPAS-integration scenarios.
-- Explanations of relevant UiTPAS-concepts.
+- Step-by-step guides to common UiTPAS integration scenarios.
+- Explanations of relevant UiTPAS concepts.
 
 ## What is UiTPAS?
 UiTPAS is a loyalty card for cultural, sports, and leisure events in Flanders and Brussels. More than 250.000 passholders can save points by attending events and trade them for rewards.

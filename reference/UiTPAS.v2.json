@@ -766,7 +766,8 @@
               "type": "string"
             },
             "in": "query",
-            "name": "schoolId"
+            "name": "schoolId",
+            "description": "Filter passholders that are member of this school (organizerId of the school). Use * to filter passholders that are linked to any school."
           },
           {
             "schema": {

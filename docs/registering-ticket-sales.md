@@ -4,6 +4,8 @@ This guide illustrates how to register an UiTPAS discounted ticket sale so end u
 
 You'll learn how to request possible UiTPAS tariffs, register the ticket sale and even cancel it if needed.
 
+The whole flow consists of approximately two to four API calls depending on your situation.
+
 > ##### Why do I need to register my ticket sales in UiTPAS?
 > If you sell a ticket for an event to an UiTPAS passholder **with an UiTPAS discount**, the ticket sale needs to be registered in UiTPAS so **the organizer can be reimbursed for the discount**.
 >

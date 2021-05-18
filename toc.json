@@ -29,10 +29,6 @@
       "title": "Registering events",
       "uri": "docs/registering-events.md"
     },
-	  {
-      "type": "divider",
-      "title": "API reference"
-    },
     {
       "type": "item",
       "title": "UiTPAS API",

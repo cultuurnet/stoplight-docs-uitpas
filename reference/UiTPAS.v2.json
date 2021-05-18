@@ -798,10 +798,11 @@
           },
           {
             "schema": {
-              "type": "integer"
+              "type": "string"
             },
             "in": "query",
-            "name": "cardSystem"
+            "name": "organiserId",
+            "description": "The id of the organizer performing this request. Query results will be limited based on the permissions of the organizer."
           }
         ]
       }

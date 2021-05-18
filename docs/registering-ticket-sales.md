@@ -45,7 +45,7 @@ At some point during the checkout process on your website or application (but **
 
 ### 4. Determine possible UiTPAS tariffs
 
-Using the event id, the UiTPAS number and the regular price of your event, you can [request possible UiTPAS tariffs](https://publiq.stoplight.io/docs/uitpas/reference/UiTPAS.v2.json/paths/~1tariffs/get).
+Using the event id, the UiTPAS number and the regular price of your event, you can [request possible UiTPAS tariffs](/docs/uitpas/reference/UiTPAS.v2.json/paths/~1tariffs/get).
 
 Example request:
 
@@ -63,7 +63,7 @@ Content-Type: application/json
 
 [
   {
-    "id": "KANSENTARIEF",
+    "id": "SOCIALTARIFF",
     "name": "Kansentarief",
     "price": 1.5
   }
@@ -96,7 +96,7 @@ Authorization: Bearer YOUR_ACCESS_TOKEN'
 [
   {
     "uitpasNumber": "0560002524314",
-    "tarrifId": "KANSENTARIEF",
+    "tarrifId": "SOCIALTARIFF",
     "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
     "regularPrice": 10,
     "regularPriceLabel": "Base tariff"

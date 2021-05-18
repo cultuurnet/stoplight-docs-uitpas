@@ -1,14 +1,16 @@
 # Registering ticket sales
 
-This guide illustrates how to register an UiTPAS discounted ticket sale so end users can receive their UiTPAS discount and organizers can be reimbursed within the UiTPAS financial flow. You'll learn how to request possible UiTPAS tariffs, register the ticket sale and even cancel it if needed.
+This guide illustrates how to register an UiTPAS discounted ticket sale so end users can receive their UiTPAS discount and organizers can be reimbursed within the UiTPAS financial flow. 
+
+You'll learn how to request possible UiTPAS tariffs, register the ticket sale and even cancel it if needed.
 
 ## Authentication
 
-Before you can request UiTPAS tariffs or register ticket sales, you'll need **client credentials**, so you can access the UiTPAS API using a [Client Access Token](https://publiq.stoplight.io/docs/authentication/docs/Authentication-methods/Client-access-token.md)
+Before you can request UiTPAS tariffs or register ticket sales, you'll need **client credentials**, so you can access the UiTPAS API using a [Client Access Token](https://publiq.stoplight.io/docs/authentication/docs/client-access-token.md)
 
 ## Workflow overview
 
-![](../../assets/images/steps-ticketing-UiTPAS-visual.png)
+![](../assets/images/steps-ticketing-UiTPAS-visual.png)
 
 ### 1. UiTdatabank event
 
@@ -16,7 +18,7 @@ Every ticket sale in UiTPAS is coupled to an event in UiTdatabank, for example b
 
 You can either use an existing UiTdatabank event, or create one manually via UiTdatabank's UI, or import one programmatically through UiTdatabank's API.
   
-To learn more about how to register your event in UiTdatabank and turn it into an UiTPAS event, read [our guide on  registering events](/docs/Guides/Registering-events.md).
+To learn more about how to register your event in UiTdatabank and turn it into an UiTPAS event, read [our guide on  registering events](./registering-events.md).
 
 <!-- theme: warning -->
 > ##### Creating events for ticket sales

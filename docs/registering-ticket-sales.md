@@ -4,9 +4,16 @@ This guide illustrates how to register an UiTPAS discounted ticket sale so end u
 
 You'll learn how to request possible UiTPAS tariffs, register the ticket sale and even cancel it if needed.
 
+> ##### Why do I need to register my ticket sales in UiTPAS?
+> If you sell a ticket for an event to an UiTPAS passholder **with an UiTPAS discount**, the ticket sale needs to be registered in UiTPAS so **the organizer can be reimbursed for the discount**.
+>
+> Regular ticket sales, or ticket sales to UiTPAS passholders without a discount, do not need to be registered in UiTPAS as there is no reimbursement needed then.
+
 ## Authentication
 
-Before you can request UiTPAS tariffs or register ticket sales, you'll need **client credentials**, so you can access the UiTPAS API using a [Client Access Token](https://publiq.stoplight.io/docs/authentication/docs/client-access-token.md)
+Before you can request UiTPAS tariffs or register ticket sales, you'll need **client credentials**, so you can access the UiTPAS API using a [Client Access Token](https://publiq.stoplight.io/docs/authentication/docs/client-access-token.md) or [User access Token](https://publiq.stoplight.io/docs/authentication/docs/user-access-token.md).
+
+To decide what kind of token to use, see the [overview of token types](https://publiq.stoplight.io/docs/authentication/docs/methods.md).
 
 ## Workflow overview
 

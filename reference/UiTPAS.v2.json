@@ -21,28 +21,22 @@
   ],
   "tags": [
     {
-      "name": "TicketSales",
-      "description": "Operations related to ticket sales"
+      "name": "Current user"
     },
     {
-      "name": "Organizers",
-      "description": "Operations related to organizers"
+      "name": "Events"
     },
     {
-      "name": "Passholders",
-      "description": "Operations related to passholders"
+      "name": "FinancialReports"
     },
     {
-      "name": "FinancialReports",
-      "description": "Operations related to financial reports"
+      "name": "Organizers"
     },
     {
-      "name": "CurrentUser",
-      "description": "Operations related to the current user"
+      "name": "Passholders"
     },
     {
-      "name": "DistributionKeys",
-      "description": "Operations related to distribution keys"
+      "name": "TicketSales"
     }
   ],
   "paths": {
@@ -385,14 +379,14 @@
                   "Example with multiple roles": {
                     "value": [
                       {
-                        "type": "member",
+                        "type": "MEMBER",
                         "organizer": {
                           "id": "c097fa2e-d9be-42e6-b41a-ec3d4d4cbad1",
                           "name": "CC De Werf"
                         }
                       },
                       {
-                        "type": "admin",
+                        "type": "ADMIN",
                         "organizer": {
                           "id": "fd7e6177-4add-4fa8-a7fe-6e60127bfb35",
                           "name": "CC De Schakel"
@@ -403,7 +397,7 @@
                   "Example with one role": {
                     "value": [
                       {
-                        "type": "admin",
+                        "type": "ADMIN",
                         "organizer": {
                           "id": "c097fa2e-d9be-42e6-b41a-ec3d4d4cbad1",
                           "name": "CC De Werf"
@@ -427,67 +421,10 @@
           }
         ],
         "tags": [
-          "CurrentUser"
+          "Current user"
         ]
       },
       "parameters": []
-    },
-    "/organizers/{organizerId}/distribution-keys": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "organizerId",
-          "in": "path",
-          "required": true,
-          "description": "The id of the organizer"
-        }
-      ],
-      "get": {
-        "summary": "Get organizer distribution keys",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/DistributionKey"
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/components/responses/Unauthorized"
-          },
-          "403": {
-            "$ref": "#/components/responses/Forbidden"
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "operationId": "get-organizer-distribution-keys",
-        "security": [
-          {
-            "USER_ACCESS_TOKEN": []
-          }
-        ],
-        "description": "Get manual distribution keys for an organizer, so it can be set to a specific event using `PUT /events/{eventId}/distribution-keys`\n\n<!-- theme: warning -->\n\n> **This endpoint is only needed for exceptional cases.** In most cases distribution keys are set automatically on events, so you don't need to retrieve or change them.",
-        "tags": [
-          "DistributionKeys"
-        ]
-      }
     },
     "/events/{eventId}/card-systems": {
       "parameters": [
@@ -506,31 +443,35 @@
         "operationId": "put-events-card-systems",
         "responses": {
           "204": {
-            "description": "Config updated. No content."
+            "description": "EventCardSytems updated. No content."
           }
         },
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "description": "List of distribution key ids to enable for the event.",
+                "description": "List of all possible (enabled and disabled) EventCardSystem objects",
                 "type": "array",
                 "items": {
                   "$ref": "#/components/schemas/EventCardSystem"
                 }
               },
               "examples": {
-                "example-1": {
+                "Example": {
                   "value": [
                     {
-                      "distributionKeys": [
+                      "id": 1,
+                      "enabled": true,
+                      "manualDistributionKeys": [
                         {
-                          "id": 0,
-                          "name": "string"
+                          "id": 123,
+                          "enabled": true
                         }
-                      ],
-                      "id": 0,
-                      "name": "string"
+                      ]
+                    },
+                    {
+                      "id": 8,
+                      "enabled": false
                     }
                   ]
                 }
@@ -539,14 +480,14 @@
           },
           "description": ""
         },
-        "description": "Update the config per card system of the given event.\n\n<!-- theme: warning -->\n\n> **This endpoint is only needed for exceptional cases.** In most cases card systems and distribution keys are set automatically on events, so you don't need to retrieve or change them.",
+        "description": "Update the `EventCardSystem` objects of the given event.\n\nThe `EventCardSystem` object specifies that the event is available in\nthis specific card system and optionally what manual distribution keys are enabled.\n\nThis update is used to toggle the `enabled` state for specific card systems or distribution keys.\n\nTo update the `enabled` state, you MUST retrieve the possible `EventCardSystem` objects first using  `GET /events/{eventId}/card-systems`. \nNote that you can reuse the response from the `GET` request, \naltering the `enabled` state, or you can also omit the name properties. \nOnly the required fields are used in this update request.\n\n<!-- theme: warning -->\n\n> **This endpoint is only needed for exceptional cases.** In most cases card systems and distribution keys are set automatically on events, so you don't need to retrieve or change them.",
         "security": [
           {
             "USER_ACCESS_TOKEN": []
           }
         ],
         "tags": [
-          "DistributionKeys"
+          "Events"
         ]
       },
       "get": {
@@ -564,17 +505,24 @@
                   }
                 },
                 "examples": {
-                  "example-1": {
+                  "Example": {
                     "value": [
                       {
-                        "distributionKeys": [
+                        "id": 1,
+                        "name": "UiTPAS Dender",
+                        "enabled": true,
+                        "manualDistributionKeys": [
                           {
-                            "id": 0,
-                            "name": "string"
+                            "id": 123,
+                            "name": "3 euro per dag",
+                            "enabled": true
                           }
-                        ],
-                        "id": 0,
-                        "name": "string"
+                        ]
+                      },
+                      {
+                        "id": 8,
+                        "name": "UiTPAS Gent",
+                        "enabled": true
                       }
                     ]
                   }
@@ -599,14 +547,14 @@
             }
           }
         },
-        "description": "Get the config per card system of the given event.\n\n<!-- theme: warning -->\n\n> **This endpoint is only needed for exceptional cases.** In most cases distribution keys are set automatically on events, so you don't need to retrieve or change them.",
+        "description": "Get all (enabled and disabled) `EventCardSystem` objects of the given event.\n\nThe `EventCardSystem` object specifies that the event is available in\nthis specific card system and optionally what manual distribution keys are enabled.\n\nEvery `EventCardSystem` or `ManualDistributionKey` has an `enabled` property that can be altered using `PUT /events/{eventId}/card-systems`.\n \n<!-- theme: warning -->\n\n> **This endpoint is only needed for exceptional cases.** In most cases card systems and distribution keys are set automatically on events, so you don't need to retrieve or change them.",
         "security": [
           {
             "USER_ACCESS_TOKEN": []
           }
         ],
         "tags": [
-          "DistributionKeys"
+          "Events"
         ]
       }
     },
@@ -889,6 +837,16 @@
                   "items": {
                     "$ref": "#/components/schemas/ReportPeriod"
                   }
+                },
+                "examples": {
+                  "example-1": {
+                    "value": [
+                      {
+                        "startDate": "2019-08-24",
+                        "endDate": "2019-08-24"
+                      }
+                    ]
+                  }
                 }
               }
             }
@@ -956,6 +914,26 @@
         "security": [
           {
             "USER_ACCESS_TOKEN": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "format": "date"
+            },
+            "in": "query",
+            "name": "startDate",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string",
+              "format": "date"
+            },
+            "in": "query",
+            "name": "endDate",
+            "required": true
           }
         ]
       }
@@ -1250,12 +1228,15 @@
       "OrganizerRole": {
         "title": "OrganizerRole",
         "type": "object",
+        "x-tags": [
+          "Models"
+        ],
         "properties": {
           "type": {
             "type": "string",
             "enum": [
-              "member",
-              "admin"
+              "MEMBER",
+              "ADMIN"
             ]
           },
           "organizer": {
@@ -1265,9 +1246,6 @@
         "required": [
           "type",
           "organizer"
-        ],
-        "x-tags": [
-          "Models"
         ]
       },
       "Organizer": {
@@ -1283,24 +1261,6 @@
         },
         "x-tags": [
           "Models"
-        ]
-      },
-      "DistributionKey": {
-        "title": "DistributionKey",
-        "type": "object",
-        "x-tags": [
-          "Models"
-        ],
-        "properties": {
-          "id": {
-            "type": "integer"
-          },
-          "name": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "id"
         ]
       },
       "PassholdersPaginatedResponse": {
@@ -1500,37 +1460,63 @@
         "title": "EventCardSystem",
         "type": "object",
         "x-examples": {
-          "example-1": {
-            "distributionKeys": [
+          "Example": {
+            "id": 1,
+            "name": "UiTPAS Dender",
+            "enabled": true,
+            "manualDistributionKeys": [
               {
-                "id": "string",
-                "name": "string"
+                "id": 123,
+                "name": "€1,5 halve dag",
+                "enabled": true
               }
-            ],
-            "id": "string",
-            "name": "string"
+            ]
           }
         },
         "x-tags": [
           "Models"
         ],
-        "description": "CardSystem in an event context, optionally including distributionKeys.",
+        "description": "CardSystem in an event context, optionally including manual distributionKeys.\n\nThis model is only used in the GET and PUT `/events/{eventId}/card-systems` to configure the card systems and distribution keys for an event.\n\n<!-- theme: warning -->\n\n> **This model and corresponding endpoints are only needed for exceptional cases.** In most cases card systems and distribution keys are set automatically on events, so you don't need to retrieve or change them.\n",
         "properties": {
-          "distributionKeys": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/DistributionKey"
-            }
-          },
           "id": {
-            "type": "integer"
+            "type": "integer",
+            "description": "ID of the card system"
           },
           "name": {
-            "type": "string"
+            "type": "string",
+            "description": "Name of the card system"
+          },
+          "enabled": {
+            "type": "boolean",
+            "description": "State of this card system for the event."
+          },
+          "manualDistributionKeys": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "description": "Manual distribution key",
+              "properties": {
+                "id": {
+                  "type": "integer"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "enabled": {
+                  "type": "boolean",
+                  "description": "State of this manual distribution key in the card system for the event."
+                }
+              },
+              "required": [
+                "id",
+                "enabled"
+              ]
+            }
           }
         },
         "required": [
-          "id"
+          "id",
+          "enabled"
         ]
       }
     },

@@ -916,26 +916,17 @@
             "USER_ACCESS_TOKEN": []
           }
         ],
-        "parameters": [
-          {
-            "schema": {
-              "type": "string",
-              "format": "date"
-            },
-            "in": "query",
-            "name": "startDate",
-            "required": true
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReportPeriod"
+              }
+            }
           },
-          {
-            "schema": {
-              "type": "string",
-              "format": "date"
-            },
-            "in": "query",
-            "name": "endDate",
-            "required": true
-          }
-        ]
+          "description": "The period for which to generate the financial report. \nThe `ReportPeriod` object can be retrieved using `GET /organizers/{organizerId}/financial-reports/periods` or the `startDate` and `endDate` can be customized."
+        }
       }
     },
     "/organizers/{organizerId}/financial-reports/{reportId}": {
@@ -1422,11 +1413,16 @@
             "type": "string",
             "enum": [
               "STARTED",
-              "AVAILABLE"
+              "AVAILABLE",
+              "FAILED"
             ]
           },
           "id": {
             "type": "integer"
+          },
+          "message": {
+            "type": "string",
+            "description": "Optional message describing why the report failed."
           }
         },
         "required": [

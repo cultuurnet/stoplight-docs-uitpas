@@ -880,14 +880,14 @@
       ],
       "post": {
         "summary": "Start an export of a financial report",
-        "operationId": "post-financials-organizers-reports",
+        "operationId": "post-organizers-financial-reports",
         "responses": {
           "200": {
             "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ReportStatus"
+                  "$ref": "#/components/schemas/Report"
                 },
                 "examples": {
                   "Example of started export": {
@@ -922,11 +922,68 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/ReportPeriod"
+              },
+              "examples": {
+                "Example": {
+                  "value": {
+                    "startDate": "2019-07-01",
+                    "endDate": "2019-09-30"
+                  }
+                }
               }
             }
           },
           "description": "The period for which to generate the financial report. \nThe `ReportPeriod` object can be retrieved using `GET /organizers/{organizerId}/financial-reports/periods` or the `startDate` and `endDate` can be customized."
         }
+      },
+      "get": {
+        "summary": "Get financial report exports",
+        "operationId": "get-organizers-financial-reports",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Report"
+                  }
+                },
+                "examples": {
+                  "Example": {
+                    "value": [
+                      {
+                        "status": "STARTED",
+                        "id": 0,
+                        "message": "string",
+                        "period": {
+                          "startDate": "2019-08-24",
+                          "endDate": "2019-08-24"
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          }
+        },
+        "description": "Get previously exported financial reports. \n\n> Note: Reports will only be available for a limited amount of time. When they become unavailable, a new export can be requested using `POST /organizers/{organizerId}/financial-reports`  ",
+        "security": [
+          {
+            "USER_ACCESS_TOKEN": []
+          }
+        ],
+        "tags": [
+          "FinancialReports"
+        ]
       }
     },
     "/organizers/{organizerId}/financial-reports/{reportId}": {
@@ -959,7 +1016,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ReportStatus"
+                  "$ref": "#/components/schemas/Report"
                 },
                 "examples": {
                   "Example of a started report": {
@@ -1400,9 +1457,9 @@
           "Models"
         ]
       },
-      "ReportStatus": {
+      "Report": {
         "type": "object",
-        "title": "ReportStatus",
+        "title": "Report",
         "description": "The status of a started report export.",
         "x-examples": {},
         "x-tags": [
@@ -1423,6 +1480,13 @@
           "message": {
             "type": "string",
             "description": "Optional message describing why the report failed."
+          },
+          "period": {
+            "$ref": "#/components/schemas/ReportPeriod"
+          },
+          "creationDate": {
+            "type": "string",
+            "format": "date-time"
           }
         },
         "required": [

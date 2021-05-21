@@ -444,6 +444,22 @@
         "responses": {
           "204": {
             "description": "EventCardSytems updated. No content."
+          },
+          "400": {
+            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/event-not-found\n* https://api.publiq.be/probs/invalid-card-system\n* https://api.publiq.be/probs/disributionkey-not-found\n* https://api.publiq.be/probs/invalid-disributionkey\n* https://api.publiq.be/probs/action-failed\n\nThe detail property might include more information for the client developer.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
         "requestBody": {
@@ -480,7 +496,7 @@
           },
           "description": ""
         },
-        "description": "Update the `EventCardSystem` objects of the given event.\n\nThe `EventCardSystem` object specifies that the event is available in\nthis specific card system and optionally what manual distribution keys are enabled.\n\nThis update is used to toggle the `enabled` state for specific card systems or distribution keys.\n\nTo update the `enabled` state, you MUST retrieve the possible `EventCardSystem` objects first using  `GET /events/{eventId}/card-systems`. \nNote that you can reuse the response from the `GET` request, \naltering the `enabled` state, or you can also omit the name properties. \nOnly the required fields are used in this update request.\n\n<!-- theme: warning -->\n\n> **This endpoint is only needed for exceptional cases.** In most cases card systems and distribution keys are set automatically on events, so you don't need to retrieve or change them.",
+        "description": "Update the `EventCardSystem` objects of the given event.\n\nThe `EventCardSystem` object specifies that the event is available in\nthis specific card system and optionally what manual distribution keys are enabled.\n\nThis update is used to toggle the `enabled` state for specific card systems or distribution keys.\n\nTo update the `enabled` state, you MUST retrieve the possible `EventCardSystem` objects first using  `GET /events/{eventId}/card-systems`. \nNote that you can reuse the response from the `GET` request, \naltering the `enabled` state, or you can also omit the name properties. \nOnly the required fields are used in this update request.\n\n<!-- theme: warning -->\n\n> **This endpoint is only needed for exceptional cases.** In most cases card systems and distribution keys are set automatically on events, so you don't need to retrieve or change them.\n\nThe caller of this request must have `EVENTS_UPDATE` permission for the organizer of this event.\n",
         "security": [
           {
             "USER_ACCESS_TOKEN": []
@@ -530,14 +546,11 @@
               }
             }
           },
-          "401": {
-            "$ref": "#/components/responses/Unauthorized"
+          "201": {
+            "description": "Created"
           },
-          "403": {
-            "$ref": "#/components/responses/Forbidden"
-          },
-          "404": {
-            "description": "Not Found",
+          "400": {
+            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/event-not-found\n\nThe detail property might include more information for the client developer.\n",
             "content": {
               "application/json": {
                 "schema": {
@@ -545,9 +558,15 @@
                 }
               }
             }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
-        "description": "Get all (enabled and disabled) `EventCardSystem` objects of the given event.\n\nThe `EventCardSystem` object specifies that the event is available in\nthis specific card system and optionally what manual distribution keys are enabled.\n\nEvery `EventCardSystem` or `ManualDistributionKey` has an `enabled` property that can be altered using `PUT /events/{eventId}/card-systems`.\n \n<!-- theme: warning -->\n\n> **This endpoint is only needed for exceptional cases.** In most cases card systems and distribution keys are set automatically on events, so you don't need to retrieve or change them.",
+        "description": "Get all (enabled and disabled) `EventCardSystem` objects of the given event.\n\nThe `EventCardSystem` object specifies that the event is available in\nthis specific card system and optionally what manual distribution keys are enabled.\n\nEvery `EventCardSystem` or `ManualDistributionKey` has an `enabled` property that can be altered using `PUT /events/{eventId}/card-systems`.\n \n<!-- theme: warning -->\n\n> **This endpoint is only needed for exceptional cases.** In most cases card systems and distribution keys are set automatically on events, so you don't need to retrieve or change them.\n\nThe caller of this request must have `EVENTS_READ` permission for the organizer of this event.\n",
         "security": [
           {
             "USER_ACCESS_TOKEN": []
@@ -851,6 +870,16 @@
               }
             }
           },
+          "400": {
+            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/organizer-not-found\n\nThe detail property might include more information for the client developer.\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
           "401": {
             "$ref": "#/components/responses/Unauthorized"
           },
@@ -862,9 +891,12 @@
         "security": [
           {
             "USER_ACCESS_TOKEN": []
+          },
+          {
+            "CLIENT_ACCESS_TOKEN": []
           }
         ],
-        "description": "Retrieve suggested report periods for an organizer."
+        "description": "Retrieve suggested report periods for an organizer.\n\nThe caller of this request must have `ORGANIZER_REPORTS` permission for the given organizer.\n"
       }
     },
     "/organizers/{organizerId}/financial-reports": {
@@ -910,10 +942,13 @@
         "tags": [
           "FinancialReports"
         ],
-        "description": "Starts a financial report export. The result of this request is a `reportId` that can be used to request the status of the report export and the download.",
+        "description": "Starts a financial report export. The result of this request is a `reportId` that can be used to request the status of the report export and the download.\n\nThe caller of this request must have `ORGANIZER_REPORTS` permission for the given organizer.\n",
         "security": [
           {
             "USER_ACCESS_TOKEN": []
+          },
+          {
+            "CLIENT_ACCESS_TOKEN": []
           }
         ],
         "parameters": [],
@@ -968,6 +1003,16 @@
               }
             }
           },
+          "400": {
+            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/organizer-not-found\n\nThe detail property might include more information for the client developer.\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
           "401": {
             "$ref": "#/components/responses/Unauthorized"
           },
@@ -975,10 +1020,13 @@
             "$ref": "#/components/responses/Forbidden"
           }
         },
-        "description": "Get previously exported financial reports. \n\n> Note: Reports will only be available for a limited amount of time. When they become unavailable, a new export can be requested using `POST /organizers/{organizerId}/financial-reports`  ",
+        "description": "Get previously exported financial reports. \n\n> Note: Reports will only be available for a limited amount of time. When they become unavailable, a new export can be requested using `POST /organizers/{organizerId}/financial-reports`  \n\n\nThe caller of this request must have `ORGANIZER_REPORTS` permission for the given organizer.\n",
         "security": [
           {
             "USER_ACCESS_TOKEN": []
+          },
+          {
+            "CLIENT_ACCESS_TOKEN": []
           }
         ],
         "tags": [
@@ -1035,6 +1083,16 @@
               }
             }
           },
+          "400": {
+            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/organizer-not-found\n\nThe detail property might include more information for the client developer.\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
           "401": {
             "$ref": "#/components/responses/Unauthorized"
           },
@@ -1053,10 +1111,13 @@
           }
         },
         "operationId": "get-financials-organizers-reports-status",
-        "description": "Retrieve the status of a previously started report export.",
+        "description": "Retrieve the status of a previously started report export.\n\nThe caller of this request must have `ORGANIZER_REPORTS` permission for the given organizer.\n",
         "security": [
           {
             "USER_ACCESS_TOKEN": []
+          },
+          {
+            "CLIENT_ACCESS_TOKEN": []
           }
         ]
       }
@@ -1095,6 +1156,16 @@
               }
             }
           },
+          "400": {
+            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/organizer-not-found\n\nThe detail property might include more information for the client developer.\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
           "401": {
             "$ref": "#/components/responses/Unauthorized"
           },
@@ -1113,11 +1184,14 @@
           }
         },
         "operationId": "get-financials-organizers-reports-download",
-        "description": "Retrieve the actual report zip file of an `available` report.",
+        "description": "Retrieve the actual report zip file of an `available` report.\n\nThe caller of this request must have `ORGANIZER_REPORTS` permission for the given organizer.\n",
         "tags": [
           "FinancialReports"
         ],
         "security": [
+          {
+            "CLIENT_ACCESS_TOKEN": []
+          },
           {
             "CLIENT_ACCESS_TOKEN": []
           }

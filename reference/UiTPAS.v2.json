@@ -500,6 +500,9 @@
         "security": [
           {
             "USER_ACCESS_TOKEN": []
+          },
+          {
+            "CLIENT_ACCESS_TOKEN": []
           }
         ],
         "tags": [
@@ -570,6 +573,9 @@
         "security": [
           {
             "USER_ACCESS_TOKEN": []
+          },
+          {
+            "CLIENT_ACCESS_TOKEN": []
           }
         ],
         "tags": [

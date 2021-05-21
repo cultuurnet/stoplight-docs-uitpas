@@ -549,9 +549,6 @@
               }
             }
           },
-          "201": {
-            "description": "Created"
-          },
           "400": {
             "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/event-not-found\n\nThe detail property might include more information for the client developer.\n",
             "content": {

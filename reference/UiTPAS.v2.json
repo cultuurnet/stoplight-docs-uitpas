@@ -959,6 +959,16 @@
           },
           "403": {
             "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/organizer-not-found\n\nThe detail property might include more information for the client developer.\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
           }
         },
         "tags": [

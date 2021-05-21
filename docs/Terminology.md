@@ -15,7 +15,7 @@ The organizer of an UiTPAS-event. To pay for the social tariff for people in nee
 Passholders in need can receive a social tariff ('kansentarief') on their UiTPAS. 
 This social tariff is given by the local government based on local poverty parameters. 
 
-Those discounts are payed via a third-party payer system in which the organizer of the event, the local government and the passholder each pay a percentage of the ticket price. Payments are organized via a manual financial reporting flow within UiTPAS.
+Those discounts are paid via a third-party payer system in which the organizer of the event, the local government and the passholder each pay a percentage of the ticket price. Payments are organized via a manual financial reporting flow within UiTPAS.
 
 ## Coupon
 

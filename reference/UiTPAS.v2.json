@@ -798,6 +798,17 @@
       }
     },
     "/passholders/{passholderId}/school": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "passholderId",
+          "in": "path",
+          "required": true,
+          "description": "The id of the passholder"
+        }
+      ],
       "get": {
         "summary": "Get passholder school",
         "operationId": "get-passholders-school",
@@ -906,17 +917,6 @@
           "Schools"
         ]
       },
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "passholderId",
-          "in": "path",
-          "required": true,
-          "description": "The id of the passholder"
-        }
-      ],
       "delete": {
         "summary": "Delete passholder school",
         "operationId": "delete-passholders-school",

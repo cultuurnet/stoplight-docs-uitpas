@@ -892,7 +892,7 @@
               }
             }
           },
-          "description": "The PassholdUpdateRequest object including the fields to be updated."
+          "description": "The Organizer object representing the school, with at least the id present. Name will be ignored."
         },
         "security": [
           {

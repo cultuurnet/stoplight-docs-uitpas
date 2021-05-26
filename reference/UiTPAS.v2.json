@@ -37,6 +37,9 @@
     },
     {
       "name": "TicketSales"
+    },
+    {
+      "name": "Schools"
     }
   ],
   "paths": {
@@ -840,9 +843,6 @@
           },
           "description": "The PassholdUpdateRequest object including the fields to be updated."
         },
-        "tags": [
-          "Passholders"
-        ],
         "security": [
           {
             "USER_ACCESS_TOKEN": []
@@ -850,6 +850,9 @@
           {
             "CLIENT_ACCESS_TOKEN": []
           }
+        ],
+        "tags": [
+          "Schools"
         ]
       },
       "parameters": [
@@ -911,7 +914,7 @@
           }
         ],
         "tags": [
-          "Passholders"
+          "Schools"
         ]
       },
       "delete": {
@@ -948,7 +951,7 @@
           }
         ],
         "tags": [
-          "Passholders"
+          "Schools"
         ]
       }
     },

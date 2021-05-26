@@ -847,7 +847,7 @@
             }
           }
         },
-        "description": "Retrieve the passholder's school.\n\nThe caller of this request must have `PASSHOLDER_SEARCH` permission.\n\n> Note: Passholder schools are used to manage passholder in a very specific case. \nIf you are not explicitly working with UiTPAS schools, you will probably **NOT** need this API. Using `GET`, `PUT` and `DELETE` `/passholders/{passholderId}/school`, the school of a passholder can be retrieved, updated and deleted. All schools are organizers.",
+        "description": "Retrieve the passholder's school.\n\nThe caller of this request must have `PASSHOLDER_SEARCH` permission.\n\n<!-- theme: warning -->\n\n> Passholder schools are used to manage passholders in a very specific case. If you are not explicitly working with UiTPAS schools, you will probably **NOT** need this API. \n\nUsing [GET](/reference/UiTPAS.v2.json/paths/~1passholders~1{passholderId}~1school/get), [PUT](/reference/UiTPAS.v2.json/paths/~1passholders~1{passholderId}~1school/put) and [DELETE](/reference/UiTPAS.v2.json/paths/~1passholders~1{passholderId}~1school/delete) on this endpoint, the school of a passholder can be retrieved, updated and deleted. All schools are organizers.",
         "security": [
           {
             "CLIENT_ACCESS_TOKEN": []
@@ -894,7 +894,7 @@
             }
           }
         },
-        "description": "Update the passholder's school relation.\n\nThe caller of this request must have `PASSHOLDER_UPDATE` permission.\n",
+        "description": "Update the passholder's school relation.\n\nThe caller of this request must have `PASSHOLDER_UPDATE` permission.\n\n<!-- theme: warning -->\n\n> Passholder schools are used to manage passholders in a very specific case. If you are not explicitly working with UiTPAS schools, you will probably **NOT** need this API. \n\nUsing [GET](/reference/UiTPAS.v2.json/paths/~1passholders~1{passholderId}~1school/get), [PUT](/reference/UiTPAS.v2.json/paths/~1passholders~1{passholderId}~1school/put) and [DELETE](/reference/UiTPAS.v2.json/paths/~1passholders~1{passholderId}~1school/delete) on this endpoint, the school of a passholder can be retrieved, updated and deleted. All schools are organizers.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -941,7 +941,7 @@
             }
           }
         },
-        "description": "Delete the passholder's school relation.\n\nThe caller of this request must have `PASSHOLDER_UPDATE` permission.\n",
+        "description": "Delete the passholder's school relation.\n\nThe caller of this request must have `PASSHOLDER_UPDATE` permission.\n\n<!-- theme: warning -->\n\n> Passholder schools are used to manage passholders in a very specific case. If you are not explicitly working with UiTPAS schools, you will probably **NOT** need this API. \n\nUsing [GET](/reference/UiTPAS.v2.json/paths/~1passholders~1{passholderId}~1school/get), [PUT](/reference/UiTPAS.v2.json/paths/~1passholders~1{passholderId}~1school/put) and [DELETE](/reference/UiTPAS.v2.json/paths/~1passholders~1{passholderId}~1school/delete) on this endpoint, the school of a passholder can be retrieved, updated and deleted. All schools are organizers.",
         "security": [
           {
             "CLIENT_ACCESS_TOKEN": []

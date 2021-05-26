@@ -125,12 +125,12 @@
         "description": "Returns the possible UiTPAS discounted **tariffs for an event and a passholder**.\n\nThis UiTPAS tariffs are calculated based on:\n\n- **The regular price** of the ticket.\nThis is the price your user would have to pay for the specific ticket without UiTPAS discount.\n- **The UiTPAS number** of the passholder. UiTPAS discounts are personal so it's important to identify the passholder to retrieve a list of possible tariffs.\n- **The event id** of the UiTdatabank event. UiTPAS discounts are limited to specific UiTdatabank events, so it's important to specify the event id to retrieve a list of possible tariffs.\n\n> ##### Important\n> The regular price of the ticket should generally be one of the price categories set on the event in UiTdatabank to make financial reporting clearer.\n\nThe caller of this request must have `TICKETSALE_REGISTER` permission, \n either for the organizer of the given event, or system globally (only for client access tokens). \n",
         "security": [
           {
-            "User Access Token": [
+            "USER_ACCESS_TOKEN": [
               "https://api.publiq.be/auth/uitpas"
             ]
           },
           {
-            "Client Access Token": [
+            "CLIENT_ACCESS_TOKEN": [
               "https://api.publiq.be/auth/uitpas"
             ]
           }
@@ -257,12 +257,12 @@
         "description": "Registers one or more new ticket sales **with a discounted UiTPAS tariff**, so the UiTPAS organiser can get reimbursed for the discount.\n\nBefore you can register a discounted ticket sale, you will need to request the possible discounted tariffs from the `GET /tariffs` endpoint and let your end user pick one of the available tariffs. Afterward, you can register a ticket sale using this endpoint. \n\nYou will need:\n\n- The `uitpasNumber` of the passholder buying the ticket.\n- The `eventId` of the UiTdatabank event.\n- The chosen `uitpasTariffId` from the `GET /tariffs` request.\n- The `regularPrice` the passholder would normally have to pay for this ticket\n\nOptionally you can include a `regularPriceLabel` describing the regular price if you have multiple price categories, which can be useful in the financial reporting overview.\n\n<!-- theme: warning -->\n\n> ##### Error handling\n> **If one of the ticket sales is invalid** (for example the chosen tariff is incorrect or expired), **none of the ticket sales will be registered**. You will instead get an error response with more details about the problem, and can then retry the registration without the incorrect ticket sales or ask the end user to change the tickets and/or tariffs that they want.\n\nThe caller of this request must have `TICKETSALE_REGISTER` permission, \n either for the organizer of the given event, or system globally (only for client access tokens). ",
         "security": [
           {
-            "User Access Token": [
+            "USER_ACCESS_TOKEN": [
               "https://api.publiq.be/auth/uitpas"
             ]
           },
           {
-            "Client Access Token": [
+            "CLIENT_ACCESS_TOKEN": [
               "https://api.publiq.be/auth/uitpas"
             ]
           }
@@ -364,12 +364,12 @@
         ],
         "security": [
           {
-            "User Access Token": [
+            "USER_ACCESS_TOKEN": [
               "https://api.publiq.be/auth/uitpas"
             ]
           },
           {
-            "Client Access Token": [
+            "CLIENT_ACCESS_TOKEN": [
               "https://api.publiq.be/auth/uitpas"
             ]
           }
@@ -435,7 +435,7 @@
         "description": "List of roles that the current user has in relation to organizers. For example a user can be a `member` or an `admin` of an organizer.",
         "security": [
           {
-            "User Access Token": [
+            "USER_ACCESS_TOKEN": [
               "https://api.publiq.be/auth/uitpas"
             ]
           }
@@ -529,12 +529,12 @@
         "description": "Update the `EventCardSystem` objects of the given event.\n\nThe `EventCardSystem` object specifies that the event is available in\nthis specific card system and optionally what manual distribution keys are enabled.\n\nThis update is used to toggle the `enabled` state for specific card systems or distribution keys.\n\nTo update the `enabled` state, you MUST retrieve the possible `EventCardSystem` objects first using  `GET /events/{eventId}/card-systems`. \nNote that you can reuse the response from the `GET` request, \naltering the `enabled` state, or you can also omit the name properties. \nOnly the required fields are used in this update request.\n\n<!-- theme: warning -->\n\n> **This endpoint is only needed for exceptional cases.** In most cases card systems and distribution keys are set automatically on events, so you don't need to retrieve or change them.\n\nThe caller of this request must have `EVENTS_UPDATE` permission for the organizer of this event.\n",
         "security": [
           {
-            "User Access Token": [
+            "USER_ACCESS_TOKEN": [
               "https://api.publiq.be/auth/uitpas"
             ]
           },
           {
-            "Client Access Token": [
+            "CLIENT_ACCESS_TOKEN": [
               "https://api.publiq.be/auth/uitpas"
             ]
           }
@@ -603,12 +603,12 @@
         "description": "Get all (enabled and disabled) `EventCardSystem` objects of the given event.\n\nThe `EventCardSystem` object specifies that the event is available in\nthis specific card system and optionally what manual distribution keys are enabled.\n\nEvery `EventCardSystem` or `ManualDistributionKey` has an `enabled` property that can be altered using `PUT /events/{eventId}/card-systems`.\n \n<!-- theme: warning -->\n\n> **This endpoint is only needed for exceptional cases.** In most cases card systems and distribution keys are set automatically on events, so you don't need to retrieve or change them.\n\nThe caller of this request must have `EVENTS_READ` permission for the organizer of this event.\n",
         "security": [
           {
-            "User Access Token": [
+            "USER_ACCESS_TOKEN": [
               "https://api.publiq.be/auth/uitpas"
             ]
           },
           {
-            "Client Access Token": [
+            "CLIENT_ACCESS_TOKEN": [
               "https://api.publiq.be/auth/uitpas"
             ]
           }
@@ -647,12 +647,12 @@
         "description": "Retrieve organizers based on search parameters.",
         "security": [
           {
-            "User Access Token": [
+            "USER_ACCESS_TOKEN": [
               "https://api.publiq.be/auth/uitpas"
             ]
           },
           {
-            "Client Access Token": [
+            "CLIENT_ACCESS_TOKEN": [
               "https://api.publiq.be/auth/uitpas"
             ]
           }
@@ -744,12 +744,12 @@
         "description": "Retrieve passholders based on search parameters.\n\nThe caller of this request must have `PASSHOLDER_SEARCH` permission, \n either for the given `organizerId` or system globally (only for client access tokens). \n\nWhen using a `User Access Token` without an `organiserId` parameter, the response will be limited based on the permissions of all the organizers where the current is in `MEMBER` or `ADMIN`.\n",
         "security": [
           {
-            "User Access Token": [
+            "USER_ACCESS_TOKEN": [
               "https://api.publiq.be/auth/uitpas"
             ]
           },
           {
-            "Client Access Token": [
+            "CLIENT_ACCESS_TOKEN": [
               "https://api.publiq.be/auth/uitpas"
             ]
           }
@@ -883,12 +883,12 @@
         "description": "Retrieve the passholder's school.\n\nThe caller of this request must have `PASSHOLDER_SEARCH` permission.\n\n<!-- theme: warning -->\n\n> Passholder schools are used to manage passholders in a very specific case. If you are not explicitly working with UiTPAS schools, you will probably **NOT** need this API. \n\nUsing [GET](/reference/UiTPAS.v2.json/paths/~1passholders~1{passholderId}~1school/get), [PUT](/reference/UiTPAS.v2.json/paths/~1passholders~1{passholderId}~1school/put) and [DELETE](/reference/UiTPAS.v2.json/paths/~1passholders~1{passholderId}~1school/delete) on this endpoint, the school of a passholder can be retrieved, updated and deleted. All schools are organizers.",
         "security": [
           {
-            "User Access Token": [
+            "USER_ACCESS_TOKEN": [
               "https://api.publiq.be/auth/uitpas"
             ]
           },
           {
-            "Client Access Token": [
+            "CLIENT_ACCESS_TOKEN": [
               "https://api.publiq.be/auth/uitpas"
             ]
           }
@@ -944,12 +944,12 @@
         },
         "security": [
           {
-            "User Access Token": [
+            "USER_ACCESS_TOKEN": [
               "https://api.publiq.be/auth/uitpas"
             ]
           },
           {
-            "Client Access Token": [
+            "CLIENT_ACCESS_TOKEN": [
               "https://api.publiq.be/auth/uitpas"
             ]
           }
@@ -985,12 +985,12 @@
         "description": "Delete the passholder's school relation.\n\nThe user or client performing this request must have `PASSHOLDER_UPDATE` permission.\n\n<!-- theme: warning -->\n\n> Passholder schools are used to manage passholders in a very specific case. If you are not explicitly working with UiTPAS schools, you will probably **NOT** need this API. \n\nUsing [GET](/reference/UiTPAS.v2.json/paths/~1passholders~1{passholderId}~1school/get), [PUT](/reference/UiTPAS.v2.json/paths/~1passholders~1{passholderId}~1school/put) and [DELETE](/reference/UiTPAS.v2.json/paths/~1passholders~1{passholderId}~1school/delete) on this endpoint, the school of a passholder can be retrieved, updated and deleted. All schools are organizers.",
         "security": [
           {
-            "User Access Token": [
+            "USER_ACCESS_TOKEN": [
               "https://api.publiq.be/auth/uitpas"
             ]
           },
           {
-            "Client Access Token": [
+            "CLIENT_ACCESS_TOKEN": [
               "https://api.publiq.be/auth/uitpas"
             ]
           }
@@ -1061,12 +1061,12 @@
         "operationId": "get-financials-organizer-periods",
         "security": [
           {
-            "User Access Token": [
+            "USER_ACCESS_TOKEN": [
               "https://api.publiq.be/auth/uitpas"
             ]
           },
           {
-            "Client Access Token": [
+            "CLIENT_ACCESS_TOKEN": [
               "https://api.publiq.be/auth/uitpas"
             ]
           }
@@ -1130,12 +1130,12 @@
         "description": "Starts a financial report export. The result of this request is a `reportId` that can be used to request the status of the report export and the download.\n\nThe caller of this request must have `ORGANIZER_REPORTS` permission for the given organizer.\n",
         "security": [
           {
-            "User Access Token": [
+            "USER_ACCESS_TOKEN": [
               "https://api.publiq.be/auth/uitpas"
             ]
           },
           {
-            "Client Access Token": [
+            "CLIENT_ACCESS_TOKEN": [
               "https://api.publiq.be/auth/uitpas"
             ]
           }
@@ -1212,12 +1212,12 @@
         "description": "Get previously exported financial reports. \n\n> Note: Reports will only be available for a limited amount of time. When they become unavailable, a new export can be requested using `POST /organizers/{organizerId}/financial-reports`  \n\n\nThe caller of this request must have `ORGANIZER_REPORTS` permission for the given organizer.\n",
         "security": [
           {
-            "User Access Token": [
+            "USER_ACCESS_TOKEN": [
               "https://api.publiq.be/auth/uitpas"
             ]
           },
           {
-            "Client Access Token": [
+            "CLIENT_ACCESS_TOKEN": [
               "https://api.publiq.be/auth/uitpas"
             ]
           }
@@ -1297,12 +1297,12 @@
         "description": "Retrieve the status of a previously started report export.\n\nThe caller of this request must have `ORGANIZER_REPORTS` permission for the given organizer.\n",
         "security": [
           {
-            "User Access Token": [
+            "USER_ACCESS_TOKEN": [
               "https://api.publiq.be/auth/uitpas"
             ]
           },
           {
-            "Client Access Token": [
+            "CLIENT_ACCESS_TOKEN": [
               "https://api.publiq.be/auth/uitpas"
             ]
           }
@@ -1368,12 +1368,12 @@
         ],
         "security": [
           {
-            "User Access Token": [
+            "USER_ACCESS_TOKEN": [
               "https://api.publiq.be/auth/uitpas"
             ]
           },
           {
-            "Client Access Token": [
+            "CLIENT_ACCESS_TOKEN": [
               "https://api.publiq.be/auth/uitpas"
             ]
           }
@@ -1827,7 +1827,7 @@
       }
     },
     "securitySchemes": {
-      "User Access Token": {
+      "USER_ACCESS_TOKEN": {
         "type": "oauth2",
         "flows": {
           "authorizationCode": {
@@ -1841,7 +1841,7 @@
         },
         "description": "See [Authentication docs](https://publiq.stoplight.io/docs/authentication/docs/user-access-token.md)"
       },
-      "Client Access Token": {
+      "CLIENT_ACCESS_TOKEN": {
         "type": "oauth2",
         "flows": {
           "clientCredentials": {

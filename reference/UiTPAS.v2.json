@@ -636,6 +636,16 @@
               }
             }
           },
+          "400": {
+            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/group-not-found\n\nThe detail property might include more information for the client developer.\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
           "401": {
             "$ref": "#/components/responses/Unauthorized"
           },
@@ -1334,12 +1344,18 @@
           "200": {
             "description": "OK",
             "content": {
-              "application/octet-stream": {
-                "schema": {
-                  "type": "object",
-                  "properties": {}
-                },
+              "application/x-zip-compressed": {
+                "schema": {},
                 "examples": {}
+              }
+            },
+            "headers": {
+              "Content-Disposition": {
+                "schema": {
+                  "type": "string",
+                  "example": "attachment; filename=\"financialOverview_organizerX_20210526_1512.zip\""
+                },
+                "description": "Header indicating that this response should be handled as a separate file download"
               }
             }
           },
@@ -1609,7 +1625,7 @@
           "member": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Passholder"
+              "$ref": "#/components/schemas/Organizer"
             }
           }
         }

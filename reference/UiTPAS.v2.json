@@ -794,17 +794,20 @@
         ]
       }
     },
-    "/passholders/{passholderId}": {
+    "/passholders/{passholderId}/school": {
       "put": {
-        "summary": "Update passholder",
-        "operationId": "put-passholders",
+        "summary": "Update passholder school",
+        "operationId": "put-passholders-school",
         "responses": {
-          "200": {
-            "description": "OK",
+          "204": {
+            "description": "No Content. Update succeeded."
+          },
+          "400": {
+            "description": "Bad request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/school-not-found\n* https://api.publiq.be/probs/uitpas/action-failed\n\nThe detail property might include more information for the client developer.\n",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Passholder"
+                  "$ref": "#/components/schemas/Error"
                 }
               }
             }
@@ -814,14 +817,24 @@
           },
           "403": {
             "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "description": "Not found. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/passholder-not-found\n\nThe detail property might include more information for the client developer.\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
           }
         },
-        "description": "Update the passholder.\n\n\nThe caller of this request must have `PASSHOLDER_SEARCH` permission.\n",
+        "description": "Update the passholder's school relation.\n\nThe caller of this request must have `PASSHOLDER_UPDATE` permission.\n",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/PassholderUpdateRequest"
+                "$ref": "#/components/schemas/Organizer"
               }
             }
           },
@@ -849,7 +862,95 @@
           "required": true,
           "description": "The id of the passholder"
         }
-      ]
+      ],
+      "get": {
+        "summary": "Get passholder school",
+        "operationId": "get-passholders-school",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Organizer"
+                },
+                "examples": {
+                  "Example": {
+                    "value": {
+                      "id": "9c47936c-bdee-11eb-8529-0242ac130003"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "description": "Not found. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/passholder-not-found\n* https://api.publiq.be/probs/uitpas/school-not-found\n\nThe detail property might include more information for the client developer.\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "description": "Retrieve the passholder's school.\n\nThe caller of this request must have `PASSHOLDER_SEARCH` permission.\n\n> Note: Passholder schools are used to manage passholder in a very specific case. \nIf you are not explicitly working with UiTPAS schools, you will probably **NOT** need this API. Using `GET`, `PUT` and `DELETE` `/passholders/{passholderId}/school`, the school of a passholder can be retrieved, updated and deleted. All schools are organizers.",
+        "security": [
+          {
+            "CLIENT_ACCESS_TOKEN": []
+          },
+          {
+            "USER_ACCESS_TOKEN": []
+          }
+        ],
+        "tags": [
+          "Passholders"
+        ]
+      },
+      "delete": {
+        "summary": "Delete passholder school",
+        "operationId": "delete-passholders-school",
+        "responses": {
+          "204": {
+            "description": "No Content. Delete succeeded."
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "description": "Not found. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/passholder-not-found\n\nThe detail property might include more information for the client developer.\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "description": "Delete the passholder's school relation.\n\nThe caller of this request must have `PASSHOLDER_UPDATE` permission.\n",
+        "security": [
+          {
+            "CLIENT_ACCESS_TOKEN": []
+          },
+          {
+            "USER_ACCESS_TOKEN": []
+          }
+        ],
+        "tags": [
+          "Passholders"
+        ]
+      }
     },
     "/organizers/{organizerId}/financial-reports/periods": {
       "parameters": [
@@ -1386,6 +1487,9 @@
       "Organizer": {
         "title": "Organizer",
         "type": "object",
+        "x-tags": [
+          "Models"
+        ],
         "properties": {
           "id": {
             "type": "string"
@@ -1394,8 +1498,8 @@
             "type": "string"
           }
         },
-        "x-tags": [
-          "Models"
+        "required": [
+          "id"
         ]
       },
       "PassholdersPaginatedResponse": {
@@ -1529,19 +1633,6 @@
         },
         "required": [
           "id"
-        ]
-      },
-      "PassholderUpdateRequest": {
-        "title": "PassholderUpdateRequest",
-        "type": "object",
-        "description": "Request object to update a passholder",
-        "properties": {
-          "schoolId": {
-            "type": "string"
-          }
-        },
-        "x-tags": [
-          "Models"
         ]
       },
       "Report": {

@@ -645,7 +645,7 @@
             },
             "in": "query",
             "name": "groupId",
-            "description": "Include only organizers in this grouphttps://api.publiq.be/probs/uitpas/group-not-found"
+            "description": "Include only organizers in this group"
           },
           {
             "schema": {

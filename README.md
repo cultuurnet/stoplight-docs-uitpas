@@ -15,7 +15,9 @@ Be sure to also check the [internal guidelines](https://publiq.stoplight.io/docs
 
 The automatic checks will be run via GitHub actions for every commit pushed to every branch.
 
-To run them yourself locally, you'll need [node](https://nodejs.org/en/) and [yarn](https://yarnpkg.com/getting-started/install).
+Some examples of automatic checks are dead links in the docs, malformed Markdown in the docs, or invalid JSON in the OpenAPI file(s).
+
+To run them locally, you'll need [node](https://nodejs.org/en/) and [yarn](https://yarnpkg.com/getting-started/install).
 
 ### Installing the required packages
 

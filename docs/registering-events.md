@@ -2,19 +2,20 @@
 
 This guide will explain how to register an event as an UiTPAS event. This is required to be able to:
 
-- **Calculate UiTPAS prices (discounts)** for tickets to attend the event
-- **Register ticket sales** so the organizer of the event can receive compensation for the discount
+*   **Calculate UiTPAS prices (discounts)** for tickets to attend the event
+*   **Register ticket sales** so the organizer of the event can receive compensation for the discount
 
 > ##### Why do I need to register my event with UiTPAS?
+>
 > Some discounts or other advantages for UiTPAS passholders are **only available on specific events**, which is why every price calculation and ticket sale needs to be linked to a known event.
 
 ## Overview
 
 To register an UiTPAS event, the following criteria have to be met:
 
-1. **The event needs to exist in UiTdatabank.** UiTdatabank is a central database of cultural and leisure activities in Flanders and Brussels, including events of organizers that work with UiTPAS.
-2. The event in UiTdatabank needs to have **a base price**.
-3. The event in UiTdatabank has to be **linked to a known UiTPAS organizer**.
+1.  **The event needs to exist in UiTdatabank.** UiTdatabank is a central database of cultural and leisure activities in Flanders and Brussels, including events of organizers that work with UiTPAS.
+2.  The event in UiTdatabank needs to have **a base price**.
+3.  The event in UiTdatabank has to be **linked to a known UiTPAS organizer**.
 
 When these criteria are met, the event automatically becomes known in UiTPAS by its UiTdatabank event id.
 
@@ -77,35 +78,35 @@ If successful, you should receive a `200` response with a JSON body including th
 <!-- theme: success -->
 
 > ##### Done!
+>
 > If you used an **UiTPAS organizer id** in the JSON of the event and specified a base price, **your event will automatically become an UiTPAS event**. There can be small delay between the event being created in UiTdatabank and being discovered by UiTPAS, but generally this takes less than a second.
 >
 > You can check that an event has become an UiTPAS event by [fetching it's JSON from UiTdatabank](https://documentatie.uitdatabank.be/content/json-ld/latest/events/event-detail.html) and checking that it has the `UiTPAS` label in its `labels` property.
->
->  
 
 ### Required properties
 
 Of the properties in the example above, the following are always mandatory in UiTdatabank in general:
 
-- `mainLanguage`: The language that your event is described in.
-- `name`: The name of your event.
-- `calendarType`: Specifies how often your event takes place, and based on this other properties like `startDate` and `endDate` may be required.
-- `location`: The location the event takes place at.
-- `terms`: Describes what categories your event belongs to. At least one event type is required.
+*   `mainLanguage`: The language that your event is described in.
+*   `name`: The name of your event.
+*   `calendarType`: Specifies how often your event takes place, and based on this other properties like `startDate` and `endDate` may be required.
+*   `location`: The location the event takes place at.
+*   `terms`: Describes what categories your event belongs to. At least one event type is required.
 
 For more info on mandatory properties, see [the Entry API documentation](https://documentatie.uitdatabank.be/content/json-ld-crud-api/latest/events.html).
 
 Additionally, your event requires two more properties to qualify as an UiTPAS event:
 
-- `priceInfo` with a `base` price.
-- `organizer` with the id of an UiTPAS organizer that organizes the event. Usually your client or user access token is coupled to one or more organizer ids inside UiTPAS and you should use one of those.
+*   `priceInfo` with a `base` price.
+*   `organizer` with the id of an UiTPAS organizer that organizes the event. Usually your client or user access token is coupled to one or more organizer ids inside UiTPAS and you should use one of those.
 
 ### Authentication
+
 > When creating an UiTdatabank event through Entry API, **you can use the same user access token or client access token that you use to communicate with the UiTPAS API**.
 
 ## Via the user interface
 
-You can manually enter events in UiTdatabank by browsing to [https://www.uitdatabank.be](https://www.uitdatabank.be). This is helpful when you just need an event for testing purposes.
+You can manually enter events in UiTdatabank by browsing to <https://www.uitdatabank.be>. This is helpful when you just need an event for testing purposes.
 
 Registering an UiTPAS event in UiTdatabank's user interface takes just 3 steps!
 
@@ -119,19 +120,19 @@ After you have created an event, **you need to specify some additional info to t
 
 ### 2. Specifying a price
 
-Edit the _Prijs_ field of your event, and provide a _Basistarief_ that is not 0 EUR. For example:
+Edit the *Prijs* field of your event, and provide a *Basistarief* that is not 0 EUR. For example:
 
 ![](../assets/images/uitdatabank-event-price.png)
 
 ### 3. Linking an UiTPAS organizer
 
-Click the _Organisatie toevoegen_ button. You can now look for the organizer of the event by typing its name in the input field that has appeared, and then select it from the list of possible options that appears. If multiple options appear, make sure to select the one that has a grey _UiTPAS_ badge next to it.
+Click the *Organisatie toevoegen* button. You can now look for the organizer of the event by typing its name in the input field that has appeared, and then select it from the list of possible options that appears. If multiple options appear, make sure to select the one that has a grey *UiTPAS* badge next to it.
 
 ![](../assets/images/uitdatabank-event-organizer.png)
 
 ### 4. Done!
 
-Shortly after you have selected an UiTPAS organizer, you should see a new _UiTPAS_ field appear in the form that looks like this:
+Shortly after you have selected an UiTPAS organizer, you should see a new *UiTPAS* field appear in the form that looks like this:
 
 ![](../assets/images/uitdatabank-event-uitpas.png)
 

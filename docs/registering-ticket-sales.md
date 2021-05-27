@@ -1,12 +1,13 @@
 # Registering ticket sales
 
-This guide illustrates how to register an UiTPAS discounted ticket sale so end users can receive their UiTPAS discount and organizers can be reimbursed within the UiTPAS financial flow. 
+This guide illustrates how to register an UiTPAS discounted ticket sale so end users can receive their UiTPAS discount and organizers can be reimbursed within the UiTPAS financial flow.
 
 You'll learn how to request possible UiTPAS tariffs, register the ticket sale and even cancel it if needed.
 
 The whole flow consists of approximately two to four API calls depending on your situation.
 
 > ##### Why do I need to register my ticket sales in UiTPAS?
+>
 > If you sell a ticket for an event to an UiTPAS passholder **with an UiTPAS discount**, the ticket sale needs to be registered in UiTPAS so **the organizer can be reimbursed for the discount**.
 >
 > Regular ticket sales, or ticket sales to UiTPAS passholders without a discount, do not need to be registered in UiTPAS as there is no reimbursement needed then.
@@ -23,19 +24,21 @@ To decide what kind of token to use, see the [overview of token types](https://p
 
 ### 1. UiTdatabank event
 
-Every ticket sale in UiTPAS is coupled to an event in UiTdatabank, for example because some discounts are only applicable to some events. Every UiTPAS event has an organizer, for which you are registering this ticketsale. 
+Every ticket sale in UiTPAS is coupled to an event in UiTdatabank, for example because some discounts are only applicable to some events. Every UiTPAS event has an organizer, for which you are registering this ticketsale.
 
 You can either use an existing UiTdatabank event, or create one manually via UiTdatabank's UI, or import one programmatically through UiTdatabank's API.
-  
+
 To learn more about how to register your event in UiTdatabank and turn it into an UiTPAS event, read [our guide on  registering events](./registering-events.md).
 
 <!-- theme: warning -->
+
 > ##### Creating events for ticket sales
+>
 > If your event is not in UiTdatabank yet, you only need to enter it there once. You should not create a new event in UiTdatabank for every ticket sale!
 
 ### 2. User wants to buy a ticket
 
-Some time _after_ you have registered your event in UiTdatabank, a user on your website or application wants to buy a ticket to the event.
+Some time *after* you have registered your event in UiTdatabank, a user on your website or application wants to buy a ticket to the event.
 
 Your application then starts its typical flow of guiding the user through a checkout process.
 
@@ -85,7 +88,6 @@ When your regular flow successfully finishes, you need to [register the ticket s
 > If the user had no UiTPAS tariffs, or did not select one, you do not need to register your ticket sale with UiTPAS.
 
 For example:
-
 
 ```http
 POST /events/YOUR_EVENT_ID/ticket-sales HTTP/1.1
@@ -141,4 +143,3 @@ If for some reason you need to [cancel the ticket sale registration](/reference/
 ### Can I get a list of all UiTPAS numbers that have a sociall tariff ('kansentarief')?
 
 ### Can I get a list of discounts instead of a list of tariffs?
-

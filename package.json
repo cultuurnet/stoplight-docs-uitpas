@@ -3,6 +3,7 @@
     "api:lint": "spectral lint ./reference/**/*.{json,yml,yaml} --fail-severity warn"
   },
   "dependencies": {
-    "@stoplight/spectral": "^5.9.1"
+    "@stoplight/spectral": "^5.9.1",
+    "remark-cli": "^9.0.0"
   }
 }

@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "api:lint": "spectral lint ./reference/**/*.{json,yml,yaml}"
+    "api:lint": "spectral lint ./reference/**/*.{json,yml,yaml} --fail-severity warn"
   },
   "dependencies": {
     "@stoplight/spectral": "^5.9.1"

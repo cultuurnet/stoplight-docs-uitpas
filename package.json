@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "api:lint": "spectral lint ./reference/**/*.{json,yml,yaml}"
+  },
   "dependencies": {
     "@stoplight/spectral": "^5.9.1"
   }

@@ -2,8 +2,6 @@
 
 # Introduction
 
-[dead url](https://oiwjenoiwejgiowjiwvwiogjihgiwhgiwgjw.com/owgiuweghuwehguwehg.md)
-
 A warm welcome to our UiTPAS API documentation! 👋
 
 Check out our [development quick start guide](https://publiq.stoplight.io/docs/uitpas/docs/quickstart.md) to get up and running.

@@ -1,0 +1,18 @@
+{
+  "extends": "spectral:oas",
+  "formats": ["oas3"],
+  "rules": {
+    "alphabetical-tags": {
+      "description": "Tags should be sorted alphabetically",
+      "given": "$",
+      "then": {
+        "field": "tags",
+        "function": "alphabetical",
+        "functionOptions": {
+          "keyedBy": "name"
+        }
+      },
+      "severity": "error"
+    }
+  }
+}

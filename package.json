@@ -7,13 +7,15 @@
   "remarkConfig": {
     "plugins": [
       "remark-preset-lint-recommended",
-      "remark-lint-no-dead-urls"
+      "remark-lint-no-dead-urls",
+      "remark-validate-links"
     ]
   },
   "dependencies": {
     "@stoplight/spectral": "^5.9.1",
     "remark-cli": "^9.0.0",
     "remark-lint-no-dead-urls": "^1.1.0",
-    "remark-preset-lint-recommended": "^5.0.0"
+    "remark-preset-lint-recommended": "^5.0.0",
+    "remark-validate-links": "^10.0.4"
   }
 }

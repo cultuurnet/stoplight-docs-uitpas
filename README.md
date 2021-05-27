@@ -9,6 +9,8 @@ This is the repository behind https://publiq.stoplight.io/docs/uitpas
 3. Fix any problems detected by the automatic checks
 4. Merge once someone has reviewed and approved your changes
 
+Be sure to also check the [internal guidelines](https://publiq.stoplight.io/docs/guidelines) on how to design APIs and write documentation. **(Login required)**
+
 ## Automatic checks
 
 The automatic checks will be run via GitHub actions for every commit pushed to every branch.

@@ -8,6 +8,6 @@
 
 3.  Start building your application on the UiTPAS testing environment.
     Make use of our step-by-step guides for common integration scenarios
-    such as[How to register discounted ticket sales](./registering-ticket-sales.md) and [How to register UiTPAS events](./registering-events.md).
+    such as [How to register discounted ticket sales](./registering-ticket-sales.md) and [How to register UiTPAS events](./registering-events.md).
 
 4.  Ready for production? [Request your credentials](https://forms.gle/CDdJfmeuNocYPSRc9) for the UiTPAS production environment. Before receiving these, we ask you to send us a short overview of your integration and to give us a quick demo.

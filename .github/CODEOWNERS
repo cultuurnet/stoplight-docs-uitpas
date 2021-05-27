@@ -1,0 +1,7 @@
+# CODEOWNERS are automatically assigned as possible reviewers to new PRs.
+
+# Global owners (also need to be duplicated in later rules)
+* @erwin1 @bertramakers
+
+# Owners of the markdown docs
+/docs/ @erwin1 @bertramakers @JurgenG @brusselsregular

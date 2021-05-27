@@ -36,7 +36,7 @@
       "name": "Passholders"
     },
     {
-      "name": "TicketSales"
+      "name": "Ticket sales"
     },
     {
       "name": "Schools"
@@ -48,7 +48,7 @@
       "get": {
         "summary": "Get tariffs",
         "tags": [
-          "TicketSales"
+          "Ticket sales"
         ],
         "responses": {
           "200": {
@@ -171,7 +171,7 @@
       "post": {
         "summary": "Register ticket sale(s)",
         "tags": [
-          "TicketSales"
+          "Ticket sales"
         ],
         "operationId": "post-ticket-sales",
         "responses": {
@@ -360,7 +360,7 @@
         },
         "description": "Cancels a single ticket sale registration by its id. (Returned in the response of the ticket sale registration request.)",
         "tags": [
-          "TicketSales"
+          "Ticket sales"
         ],
         "security": [
           {

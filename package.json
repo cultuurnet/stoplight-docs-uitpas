@@ -1,6 +1,11 @@
 {
   "scripts": {
-    "api:lint": "spectral lint ./reference/**/*.{json,yml,yaml} --fail-severity warn"
+    "api:lint": "spectral lint ./reference/**/*.{json,yml,yaml} --fail-severity warn",
+    "docs:lint": "remark ./docs/ --frail",
+    "docs:lint:fix": "remark ./docs/ --frail -o"
+  },
+  "remarkConfig": {
+    "plugins": ["remark-preset-lint-recommended"]
   },
   "dependencies": {
     "@stoplight/spectral": "^5.9.1",

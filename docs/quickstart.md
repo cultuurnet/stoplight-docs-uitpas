@@ -1,7 +1,6 @@
 # Quick start
 
-\*\*These are the basic steps to integrate your application with UiTPAS:
-\*\*
+**These are the basic steps to integrate your application with UiTPAS:**
 
 1.  [Fill in the form](https://forms.gle/NcAjVQv1jvEwKzAC9) to tell us a bit more about your application and request your credentials for the UiTPAS testing environment.
 

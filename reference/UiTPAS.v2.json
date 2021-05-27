@@ -27,7 +27,7 @@
       "name": "Events"
     },
     {
-      "name": "FinancialReports"
+      "name": "Financial reports"
     },
     {
       "name": "Organizers"
@@ -1025,7 +1025,7 @@
       "get": {
         "summary": "Get suggested financial report periods",
         "tags": [
-          "FinancialReports"
+          "Financial reports"
         ],
         "responses": {
           "200": {
@@ -1135,7 +1135,7 @@
           }
         },
         "tags": [
-          "FinancialReports"
+          "Financial reports"
         ],
         "description": "Starts a financial report export. The result of this request is a `reportId` that can be used to request the status of the report export and the download.\n\nThe caller of this request must have `ORGANIZER_REPORTS` permission for the given organizer.\n",
         "security": [
@@ -1233,7 +1233,7 @@
           }
         ],
         "tags": [
-          "FinancialReports"
+          "Financial reports"
         ]
       }
     },
@@ -1259,7 +1259,7 @@
       "get": {
         "summary": "Get financial report status",
         "tags": [
-          "FinancialReports"
+          "Financial reports"
         ],
         "responses": {
           "200": {
@@ -1380,7 +1380,7 @@
         "operationId": "get-financials-organizers-reports-download",
         "description": "Retrieve the actual report zip file of an `available` report.\n\nThe caller of this request must have `ORGANIZER_REPORTS` permission for the given organizer.\n",
         "tags": [
-          "FinancialReports"
+          "Financial reports"
         ],
         "security": [
           {

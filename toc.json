@@ -1,0 +1,38 @@
+{
+  "items": [
+    {
+      "type": "item",
+      "title": "Introduction",
+      "uri": "docs/introduction.md"
+    },
+    {
+      "type": "item",
+      "title": "Quickstart",
+      "uri": "docs/quickstart.md"
+    },
+    {
+      "type": "item",
+      "title": "Terminology",
+      "uri": "docs/terminology.md"
+    },
+    {
+      "type": "divider",
+      "title": "Guides"
+    },
+    {
+      "type": "item",
+      "title": "Registering ticket sales",
+      "uri": "docs/registering-ticket-sales.md"
+    },
+    {
+      "type": "item",
+      "title": "Registering events",
+      "uri": "docs/registering-events.md"
+    },
+    {
+      "type": "item",
+      "title": "UiTPAS API",
+      "uri": "reference/UiTPAS.v2.json"
+    }
+  ]
+}

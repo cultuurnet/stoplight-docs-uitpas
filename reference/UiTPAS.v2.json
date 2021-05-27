@@ -21,28 +21,25 @@
   ],
   "tags": [
     {
-      "name": "TicketSales",
-      "description": "Operations related to ticket sales"
+      "name": "Current user"
     },
     {
-      "name": "Organizers",
-      "description": "Operations related to organizers"
+      "name": "Events"
     },
     {
-      "name": "Passholders",
-      "description": "Operations related to passholders"
+      "name": "FinancialReports"
     },
     {
-      "name": "FinancialReports",
-      "description": "Operations related to financial reports"
+      "name": "Organizers"
     },
     {
-      "name": "CurrentUser",
-      "description": "Operations related to the current user"
+      "name": "Passholders"
     },
     {
-      "name": "DistributionKeys",
-      "description": "Operations related to distribution keys"
+      "name": "TicketSales"
+    },
+    {
+      "name": "Schools"
     }
   ],
   "paths": {
@@ -69,7 +66,7 @@
                   "Single tariff example": {
                     "value": [
                       {
-                        "id": "STRUCTURALDISCOUNT",
+                        "id": "SOCIALTARIFF",
                         "name": "Kansentarief",
                         "price": 1.5
                       }
@@ -78,7 +75,7 @@
                   "Multiple tariffs example": {
                     "value": [
                       {
-                        "id": "STRUCTURALDISCOUNT",
+                        "id": "SOCIALTARIFF",
                         "name": "Kansentarief",
                         "price": 1.5
                       },
@@ -125,13 +122,17 @@
           }
         },
         "operationId": "get-tariffs",
-        "description": "Returns the possible UiTPAS discounted **tariffs for an event and a passholder**.\n\nThis UiTPAS tariffs are calculated based on:\n\n- **The regular price** of the ticket.\nThis is the price your user would have to pay for the specific ticket without UiTPAS discount.\n- **The UiTPAS number** of the passholder. UiTPAS discounts are personal so it's important to identify the passholder to retrieve a list of possible tariffs.\n- **The event id** of the UiTdatabank event. UiTPAS discounts are limited to specific UiTdatabank events, so it's important to specify the event id to retrieve a list of possible tariffs.\n\n> ##### Important\n> The regular price of the ticket should generally be one of the price categories set on the event in UiTdatabank to make financial reporting clearer.\n",
+        "description": "Returns the possible UiTPAS discounted **tariffs for an event and a passholder**.\n\nThis UiTPAS tariffs are calculated based on:\n\n- **The regular price** of the ticket.\nThis is the price your user would have to pay for the specific ticket without UiTPAS discount.\n- **The UiTPAS number** of the passholder. UiTPAS discounts are personal so it's important to identify the passholder to retrieve a list of possible tariffs.\n- **The event id** of the UiTdatabank event. UiTPAS discounts are limited to specific UiTdatabank events, so it's important to specify the event id to retrieve a list of possible tariffs.\n\n> ##### Important\n> The regular price of the ticket should generally be one of the price categories set on the event in UiTdatabank to make financial reporting clearer.\n\nThe caller of this request must have `TICKETSALE_REGISTER` permission, \n either for the organizer of the given event, or system globally (only for client access tokens). \n",
         "security": [
           {
-            "CLIENT_ACCESS_TOKEN": []
+            "USER_ACCESS_TOKEN": [
+              "https://api.publiq.be/auth/uitpas"
+            ]
           },
           {
-            "USER_ACCESS_TOKEN": []
+            "CLIENT_ACCESS_TOKEN": [
+              "https://api.publiq.be/auth/uitpas"
+            ]
           }
         ],
         "parameters": [
@@ -214,7 +215,7 @@
                       {
                         "id": 21346,
                         "tariff": {
-                          "id": "STRUCTURALDISCOUNT",
+                          "id": "SOCIALTARIFF",
                           "name": "Kansentarief",
                           "price": 1.5
                         },
@@ -228,17 +229,17 @@
             }
           },
           "400": {
-            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/structural-discount-expired\n* https://api.publiq.be/probs/uitpas/maximum-reached\n\nThe type indicates the error on one of the failed ticket sale registrations. All other ticket sale registration in the request will be rolled back in case of an error.\n\nThe property `jsonPointer` will a referene to the erroneous `TicketSaleRequest` object if applicable.",
+            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/social-tariff-expired\n* https://api.publiq.be/probs/uitpas/maximum-reached\n\nThe type indicates the error on one of the failed ticket sale registrations. All other ticket sale registration in the request will be rolled back in case of an error.\n\nThe property `jsonPointer` will a referene to the erroneous `TicketSaleRequest` object if applicable.",
             "content": {
               "application/problem+json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 },
                 "examples": {
-                  "Structural discount expired": {
+                  "Social tariff discount expired": {
                     "value": {
-                      "type": "https://api.publiq.be/probs/uitpas/structural-discount-expired",
-                      "title": "Structural discount expired",
+                      "type": "https://api.publiq.be/probs/uitpas/social-tariff-discount-expired",
+                      "title": "Social tariff discount expired",
                       "status": 400
                     }
                   }
@@ -253,13 +254,17 @@
             "$ref": "#/components/responses/Forbidden"
           }
         },
-        "description": "Registers one or more new ticket sales **with a discounted UiTPAS tariff**, so the UiTPAS organiser can get reimbursed for the discount.\n\nBefore you can register a discounted ticket sale, you will need to request the possible discounted tariffs from the `GET /tariffs` endpoint and let your end user pick one of the available tariffs. Afterward, you can register a ticket sale using this endpoint. \n\nYou will need:\n\n- The `uitpasNumber` of the passholder buying the ticket.\n- The `eventId` of the UiTdatabank event.\n- The chosen `uitpasTariffId` from the `GET /tariffs` request.\n- The `regularPrice` the passholder would normally have to pay for this ticket\n\nOptionally you can include a `regularPriceLabel` describing the regular price if you have multiple price categories, which can be useful in the financial reporting overview.\n\n<!-- theme: warning -->\n\n> ##### Error handling\n> **If one of the ticket sales is invalid** (for example the chosen tariff is incorrect or expired), **none of the ticket sales will be registered**. You will instead get an error response with more details about the problem, and can then retry the registration without the incorrect ticket sales or ask the end user to change the tickets and/or tariffs that they want.",
+        "description": "Registers one or more new ticket sales **with a discounted UiTPAS tariff**, so the UiTPAS organiser can get reimbursed for the discount.\n\nBefore you can register a discounted ticket sale, you will need to request the possible discounted tariffs from the `GET /tariffs` endpoint and let your end user pick one of the available tariffs. Afterward, you can register a ticket sale using this endpoint. \n\nYou will need:\n\n- The `uitpasNumber` of the passholder buying the ticket.\n- The `eventId` of the UiTdatabank event.\n- The chosen `uitpasTariffId` from the `GET /tariffs` request.\n- The `regularPrice` the passholder would normally have to pay for this ticket\n\nOptionally you can include a `regularPriceLabel` describing the regular price if you have multiple price categories, which can be useful in the financial reporting overview.\n\n<!-- theme: warning -->\n\n> ##### Error handling\n> **If one of the ticket sales is invalid** (for example the chosen tariff is incorrect or expired), **none of the ticket sales will be registered**. You will instead get an error response with more details about the problem, and can then retry the registration without the incorrect ticket sales or ask the end user to change the tickets and/or tariffs that they want.\n\nThe caller of this request must have `TICKETSALE_REGISTER` permission, \n either for the organizer of the given event, or system globally (only for client access tokens). ",
         "security": [
           {
-            "CLIENT_ACCESS_TOKEN": []
+            "USER_ACCESS_TOKEN": [
+              "https://api.publiq.be/auth/uitpas"
+            ]
           },
           {
-            "USER_ACCESS_TOKEN": []
+            "CLIENT_ACCESS_TOKEN": [
+              "https://api.publiq.be/auth/uitpas"
+            ]
           }
         ],
         "requestBody": {
@@ -294,7 +299,7 @@
                     },
                     {
                       "uitpasNumber": "0930002523422",
-                      "tariffId": "STRUCTURALDISCOUNT",
+                      "tariffId": "SOCIALTARIFF",
                       "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
                       "regularPrice": 10,
                       "regularPriceLabel": "Base tariff"
@@ -359,10 +364,14 @@
         ],
         "security": [
           {
-            "CLIENT_ACCESS_TOKEN": []
+            "USER_ACCESS_TOKEN": [
+              "https://api.publiq.be/auth/uitpas"
+            ]
           },
           {
-            "USER_ACCESS_TOKEN": []
+            "CLIENT_ACCESS_TOKEN": [
+              "https://api.publiq.be/auth/uitpas"
+            ]
           }
         ]
       }
@@ -385,14 +394,14 @@
                   "Example with multiple roles": {
                     "value": [
                       {
-                        "type": "member",
+                        "type": "MEMBER",
                         "organizer": {
                           "id": "c097fa2e-d9be-42e6-b41a-ec3d4d4cbad1",
                           "name": "CC De Werf"
                         }
                       },
                       {
-                        "type": "admin",
+                        "type": "ADMIN",
                         "organizer": {
                           "id": "fd7e6177-4add-4fa8-a7fe-6e60127bfb35",
                           "name": "CC De Schakel"
@@ -403,7 +412,7 @@
                   "Example with one role": {
                     "value": [
                       {
-                        "type": "admin",
+                        "type": "ADMIN",
                         "organizer": {
                           "id": "c097fa2e-d9be-42e6-b41a-ec3d4d4cbad1",
                           "name": "CC De Werf"
@@ -417,77 +426,25 @@
           },
           "401": {
             "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
         "operationId": "get-user-organizer-roles",
         "description": "List of roles that the current user has in relation to organizers. For example a user can be a `member` or an `admin` of an organizer.",
         "security": [
           {
-            "USER_ACCESS_TOKEN": []
+            "USER_ACCESS_TOKEN": [
+              "https://api.publiq.be/auth/uitpas"
+            ]
           }
         ],
         "tags": [
-          "CurrentUser"
+          "Current user"
         ]
       },
       "parameters": []
-    },
-    "/organizers/{organizerId}/distribution-keys": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "organizerId",
-          "in": "path",
-          "required": true,
-          "description": "The id of the organizer"
-        }
-      ],
-      "get": {
-        "summary": "Get organizer distribution keys",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/DistributionKey"
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/components/responses/Unauthorized"
-          },
-          "403": {
-            "$ref": "#/components/responses/Forbidden"
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "operationId": "get-organizer-distribution-keys",
-        "security": [
-          {
-            "USER_ACCESS_TOKEN": []
-          }
-        ],
-        "description": "Get manual distribution keys for an organizer, so it can be set to a specific event using `PUT /events/{eventId}/distribution-keys`\n\n<!-- theme: warning -->\n\n> **This endpoint is only needed for exceptional cases.** In most cases distribution keys are set automatically on events, so you don't need to retrieve or change them.",
-        "tags": [
-          "DistributionKeys"
-        ]
-      }
     },
     "/events/{eventId}/card-systems": {
       "parameters": [
@@ -506,31 +463,61 @@
         "operationId": "put-events-card-systems",
         "responses": {
           "204": {
-            "description": "Config updated. No content."
+            "description": "EventCardSytems updated. No content."
+          },
+          "400": {
+            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/invalid-card-system\n* https://api.publiq.be/probs/uitpas/disributionkey-not-found\n* https://api.publiq.be/probs/uitpas/invalid-disributionkey\n* https://api.publiq.be/probs/uitpas/action-failed\n\nThe detail property might include more information for the client developer.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/event-not-found\n\nThe detail property might include more information for the client developer.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
           }
         },
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "description": "List of distribution key ids to enable for the event.",
+                "description": "List of all possible (enabled and disabled) EventCardSystem objects",
                 "type": "array",
                 "items": {
                   "$ref": "#/components/schemas/EventCardSystem"
                 }
               },
               "examples": {
-                "example-1": {
+                "Example": {
                   "value": [
                     {
-                      "distributionKeys": [
+                      "id": 1,
+                      "enabled": true,
+                      "manualDistributionKeys": [
                         {
-                          "id": 0,
-                          "name": "string"
+                          "id": 123,
+                          "enabled": true
                         }
-                      ],
-                      "id": 0,
-                      "name": "string"
+                      ]
+                    },
+                    {
+                      "id": 8,
+                      "enabled": false
                     }
                   ]
                 }
@@ -539,14 +526,21 @@
           },
           "description": ""
         },
-        "description": "Update the config per card system of the given event.\n\n<!-- theme: warning -->\n\n> **This endpoint is only needed for exceptional cases.** In most cases card systems and distribution keys are set automatically on events, so you don't need to retrieve or change them.",
+        "description": "Update the `EventCardSystem` objects of the given event.\n\nThe `EventCardSystem` object specifies that the event is available in\nthis specific card system and optionally what manual distribution keys are enabled.\n\nThis update is used to toggle the `enabled` state for specific card systems or distribution keys.\n\nTo update the `enabled` state, you MUST retrieve the possible `EventCardSystem` objects first using  `GET /events/{eventId}/card-systems`. \nNote that you can reuse the response from the `GET` request, \naltering the `enabled` state, or you can also omit the name properties. \nOnly the required fields are used in this update request.\n\n<!-- theme: warning -->\n\n> **This endpoint is only needed for exceptional cases.** In most cases card systems and distribution keys are set automatically on events, so you don't need to retrieve or change them.\n\nThe caller of this request must have `EVENTS_UPDATE` permission for the organizer of this event.\n",
         "security": [
           {
-            "USER_ACCESS_TOKEN": []
+            "USER_ACCESS_TOKEN": [
+              "https://api.publiq.be/auth/uitpas"
+            ]
+          },
+          {
+            "CLIENT_ACCESS_TOKEN": [
+              "https://api.publiq.be/auth/uitpas"
+            ]
           }
         ],
         "tags": [
-          "DistributionKeys"
+          "Events"
         ]
       },
       "get": {
@@ -564,17 +558,24 @@
                   }
                 },
                 "examples": {
-                  "example-1": {
+                  "Example": {
                     "value": [
                       {
-                        "distributionKeys": [
+                        "id": 1,
+                        "name": "UiTPAS Dender",
+                        "enabled": true,
+                        "manualDistributionKeys": [
                           {
-                            "id": 0,
-                            "name": "string"
+                            "id": 123,
+                            "name": "3 euro per dag",
+                            "enabled": true
                           }
-                        ],
-                        "id": 0,
-                        "name": "string"
+                        ]
+                      },
+                      {
+                        "id": 8,
+                        "name": "UiTPAS Gent",
+                        "enabled": true
                       }
                     ]
                   }
@@ -589,7 +590,7 @@
             "$ref": "#/components/responses/Forbidden"
           },
           "404": {
-            "description": "Not Found",
+            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/event-not-found\n\nThe detail property might include more information for the client developer.\n",
             "content": {
               "application/json": {
                 "schema": {
@@ -599,14 +600,21 @@
             }
           }
         },
-        "description": "Get the config per card system of the given event.\n\n<!-- theme: warning -->\n\n> **This endpoint is only needed for exceptional cases.** In most cases distribution keys are set automatically on events, so you don't need to retrieve or change them.",
+        "description": "Get all (enabled and disabled) `EventCardSystem` objects of the given event.\n\nThe `EventCardSystem` object specifies that the event is available in\nthis specific card system and optionally what manual distribution keys are enabled.\n\nEvery `EventCardSystem` or `ManualDistributionKey` has an `enabled` property that can be altered using `PUT /events/{eventId}/card-systems`.\n \n<!-- theme: warning -->\n\n> **This endpoint is only needed for exceptional cases.** In most cases card systems and distribution keys are set automatically on events, so you don't need to retrieve or change them.\n\nThe caller of this request must have `EVENTS_READ` permission for the organizer of this event.\n",
         "security": [
           {
-            "USER_ACCESS_TOKEN": []
+            "USER_ACCESS_TOKEN": [
+              "https://api.publiq.be/auth/uitpas"
+            ]
+          },
+          {
+            "CLIENT_ACCESS_TOKEN": [
+              "https://api.publiq.be/auth/uitpas"
+            ]
           }
         ],
         "tags": [
-          "DistributionKeys"
+          "Events"
         ]
       }
     },
@@ -628,6 +636,16 @@
               }
             }
           },
+          "400": {
+            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/group-not-found\n\nThe detail property might include more information for the client developer.\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
           "401": {
             "$ref": "#/components/responses/Unauthorized"
           },
@@ -639,13 +657,20 @@
         "description": "Retrieve organizers based on search parameters.",
         "security": [
           {
-            "USER_ACCESS_TOKEN": []
+            "USER_ACCESS_TOKEN": [
+              "https://api.publiq.be/auth/uitpas"
+            ]
+          },
+          {
+            "CLIENT_ACCESS_TOKEN": [
+              "https://api.publiq.be/auth/uitpas"
+            ]
           }
         ],
         "parameters": [
           {
             "schema": {
-              "type": "number"
+              "type": "integer"
             },
             "in": "query",
             "name": "groupId",
@@ -658,6 +683,34 @@
             "in": "query",
             "name": "name",
             "description": "Include only organizers with this name (* wildcard allowed)"
+          },
+          {
+            "schema": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "in": "query",
+            "name": "start"
+          },
+          {
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "default": 20
+            },
+            "in": "query",
+            "name": "limit"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "asc",
+                "desc"
+              ]
+            },
+            "in": "query",
+            "name": "sort[name]"
           }
         ]
       }
@@ -680,14 +733,8 @@
               }
             }
           },
-          "401": {
-            "$ref": "#/components/responses/Unauthorized"
-          },
-          "403": {
-            "$ref": "#/components/responses/Forbidden"
-          },
-          "404": {
-            "description": "Not Found",
+          "400": {
+            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/organizer-not-found\n* https://api.publiq.be/probs/uitpas/invalid-uitpas-number\n* https://api.publiq.be/probs/uitpas/invalid-insz-number\n* https://api.publiq.be/probs/uitpas/school-not-found\n\nThe detail property might include more information for the client developer.\n",
             "content": {
               "application/json": {
                 "schema": {
@@ -695,13 +742,26 @@
                 }
               }
             }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
         "operationId": "get-passholders",
-        "description": "Retrieve passholders based on search parameters",
+        "description": "Retrieve passholders based on search parameters.\n\nThe caller of this request must have `PASSHOLDER_SEARCH` permission, \n either for the given `organizerId` or system globally (only for client access tokens). \n\nWhen using a `User Access Token` without an `organiserId` parameter, the response will be limited based on the permissions of all the organizers where the current is in `MEMBER` or `ADMIN`.\n",
         "security": [
           {
-            "USER_ACCESS_TOKEN": []
+            "USER_ACCESS_TOKEN": [
+              "https://api.publiq.be/auth/uitpas"
+            ]
+          },
+          {
+            "CLIENT_ACCESS_TOKEN": [
+              "https://api.publiq.be/auth/uitpas"
+            ]
           }
         ],
         "parameters": [
@@ -738,53 +798,49 @@
               "type": "string"
             },
             "in": "query",
-            "name": "schoolId"
+            "name": "schoolId",
+            "description": "Filter passholders that are member of this school (organizerId of the school). Use * to filter passholders that are linked to any school."
+          },
+          {
+            "schema": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "in": "query",
+            "name": "start"
+          },
+          {
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "default": 20
+            },
+            "in": "query",
+            "name": "limit"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "asc",
+                "desc"
+              ]
+            },
+            "in": "query",
+            "name": "sort[name]"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "organizerId",
+            "description": "The id of the organizer performing this request. Query results will be limited based on the permissions of the organizer."
           }
         ]
       }
     },
-    "/passholders/{passholderId}": {
-      "put": {
-        "summary": "Update passholder",
-        "operationId": "put-passholders",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Passholder"
-                }
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/components/responses/Unauthorized"
-          },
-          "403": {
-            "$ref": "#/components/responses/Forbidden"
-          }
-        },
-        "description": "Update the passholder.",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/PassholderUpdateRequest"
-              }
-            }
-          },
-          "description": "The PassholdUpdateRequest object including the fields to be updated."
-        },
-        "tags": [
-          "Passholders"
-        ],
-        "security": [
-          {
-            "USER_ACCESS_TOKEN": []
-          }
-        ]
-      },
+    "/passholders/{passholderId}/school": {
       "parameters": [
         {
           "schema": {
@@ -795,7 +851,164 @@
           "required": true,
           "description": "The id of the passholder"
         }
-      ]
+      ],
+      "get": {
+        "summary": "Get passholder school",
+        "operationId": "get-passholders-school",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Organizer"
+                },
+                "examples": {
+                  "Example": {
+                    "value": {
+                      "id": "9c47936c-bdee-11eb-8529-0242ac130003"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "description": "Not found. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/passholder-not-found\n* https://api.publiq.be/probs/uitpas/school-not-found\n\nThe detail property might include more information for the client developer.\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "description": "Retrieve the passholder's school.\n\nThe caller of this request must have `PASSHOLDER_SEARCH` permission.\n\n<!-- theme: warning -->\n\n> Passholder schools are used to manage passholders in a very specific case. If you are not explicitly working with UiTPAS schools, you will probably **NOT** need this API. \n\nUsing [GET](/reference/UiTPAS.v2.json/paths/~1passholders~1{passholderId}~1school/get), [PUT](/reference/UiTPAS.v2.json/paths/~1passholders~1{passholderId}~1school/put) and [DELETE](/reference/UiTPAS.v2.json/paths/~1passholders~1{passholderId}~1school/delete) on this endpoint, the school of a passholder can be retrieved, updated and deleted. All schools are organizers.",
+        "security": [
+          {
+            "USER_ACCESS_TOKEN": [
+              "https://api.publiq.be/auth/uitpas"
+            ]
+          },
+          {
+            "CLIENT_ACCESS_TOKEN": [
+              "https://api.publiq.be/auth/uitpas"
+            ]
+          }
+        ],
+        "tags": [
+          "Schools"
+        ]
+      },
+      "put": {
+        "summary": "Update passholder school",
+        "operationId": "put-passholders-school",
+        "responses": {
+          "204": {
+            "description": "No Content. Update succeeded."
+          },
+          "400": {
+            "description": "Bad request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/school-not-found\n* https://api.publiq.be/probs/uitpas/action-failed\n\nThe detail property might include more information for the client developer.\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "description": "Not found. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/passholder-not-found\n\nThe detail property might include more information for the client developer.\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "description": "Update the passholder's school relation.\n\nThe caller of this request must have `PASSHOLDER_UPDATE` permission.\n\n<!-- theme: warning -->\n\n> Passholder schools are used to manage passholders in a very specific case. If you are not explicitly working with UiTPAS schools, you will probably **NOT** need this API. \n\nUsing [GET](/reference/UiTPAS.v2.json/paths/~1passholders~1{passholderId}~1school/get), [PUT](/reference/UiTPAS.v2.json/paths/~1passholders~1{passholderId}~1school/put) and [DELETE](/reference/UiTPAS.v2.json/paths/~1passholders~1{passholderId}~1school/delete) on this endpoint, the school of a passholder can be retrieved, updated and deleted. All schools are organizers.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Organizer"
+              }
+            }
+          },
+          "description": "The Organizer object representing the school, with at least the id present. Name will be ignored."
+        },
+        "security": [
+          {
+            "USER_ACCESS_TOKEN": [
+              "https://api.publiq.be/auth/uitpas"
+            ]
+          },
+          {
+            "CLIENT_ACCESS_TOKEN": [
+              "https://api.publiq.be/auth/uitpas"
+            ]
+          }
+        ],
+        "tags": [
+          "Schools"
+        ]
+      },
+      "delete": {
+        "summary": "Delete passholder school",
+        "operationId": "delete-passholders-school",
+        "responses": {
+          "204": {
+            "description": "No Content. Delete succeeded."
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "description": "Not found. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/passholder-not-found\n\nThe detail property might include more information for the client developer.\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "description": "Delete the passholder's school relation.\n\nThe user or client performing this request must have `PASSHOLDER_UPDATE` permission.\n\n<!-- theme: warning -->\n\n> Passholder schools are used to manage passholders in a very specific case. If you are not explicitly working with UiTPAS schools, you will probably **NOT** need this API. \n\nUsing [GET](/reference/UiTPAS.v2.json/paths/~1passholders~1{passholderId}~1school/get), [PUT](/reference/UiTPAS.v2.json/paths/~1passholders~1{passholderId}~1school/put) and [DELETE](/reference/UiTPAS.v2.json/paths/~1passholders~1{passholderId}~1school/delete) on this endpoint, the school of a passholder can be retrieved, updated and deleted. All schools are organizers.",
+        "security": [
+          {
+            "USER_ACCESS_TOKEN": [
+              "https://api.publiq.be/auth/uitpas"
+            ]
+          },
+          {
+            "CLIENT_ACCESS_TOKEN": [
+              "https://api.publiq.be/auth/uitpas"
+            ]
+          }
+        ],
+        "tags": [
+          "Schools"
+        ]
+      }
     },
     "/organizers/{organizerId}/financial-reports/periods": {
       "parameters": [
@@ -824,6 +1037,16 @@
                   "items": {
                     "$ref": "#/components/schemas/ReportPeriod"
                   }
+                },
+                "examples": {
+                  "example-1": {
+                    "value": [
+                      {
+                        "startDate": "2019-08-24",
+                        "endDate": "2019-08-24"
+                      }
+                    ]
+                  }
                 }
               }
             }
@@ -833,15 +1056,32 @@
           },
           "403": {
             "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/organizer-not-found\n\nThe detail property might include more information for the client developer.\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
           }
         },
         "operationId": "get-financials-organizer-periods",
         "security": [
           {
-            "USER_ACCESS_TOKEN": []
+            "USER_ACCESS_TOKEN": [
+              "https://api.publiq.be/auth/uitpas"
+            ]
+          },
+          {
+            "CLIENT_ACCESS_TOKEN": [
+              "https://api.publiq.be/auth/uitpas"
+            ]
           }
         ],
-        "description": "Retrieve suggested report periods for an organizer."
+        "description": "Retrieve suggested report periods for an organizer.\n\nThe caller of this request must have `ORGANIZER_REPORTS` permission for the given organizer.\n"
       }
     },
     "/organizers/{organizerId}/financial-reports": {
@@ -857,19 +1097,19 @@
       ],
       "post": {
         "summary": "Start an export of a financial report",
-        "operationId": "post-financials-organizers-reports",
+        "operationId": "post-organizers-financial-reports",
         "responses": {
           "200": {
             "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ReportStatus"
+                  "$ref": "#/components/schemas/Report"
                 },
                 "examples": {
                   "Example of started export": {
                     "value": {
-                      "status": "started",
+                      "status": "STARTED",
                       "id": 232432
                     }
                   }
@@ -882,16 +1122,118 @@
           },
           "403": {
             "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/organizer-not-found\n\nThe detail property might include more information for the client developer.\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
           }
         },
         "tags": [
           "FinancialReports"
         ],
-        "description": "Starts a financial report export. The result of this request is a `reportId` that can be used to request the status of the report export and the download.",
+        "description": "Starts a financial report export. The result of this request is a `reportId` that can be used to request the status of the report export and the download.\n\nThe caller of this request must have `ORGANIZER_REPORTS` permission for the given organizer.\n",
         "security": [
           {
-            "USER_ACCESS_TOKEN": []
+            "USER_ACCESS_TOKEN": [
+              "https://api.publiq.be/auth/uitpas"
+            ]
+          },
+          {
+            "CLIENT_ACCESS_TOKEN": [
+              "https://api.publiq.be/auth/uitpas"
+            ]
           }
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReportPeriod"
+              },
+              "examples": {
+                "Example": {
+                  "value": {
+                    "startDate": "2019-07-01",
+                    "endDate": "2019-09-30"
+                  }
+                }
+              }
+            }
+          },
+          "description": "The period for which to generate the financial report. \nThe `ReportPeriod` object can be retrieved using `GET /organizers/{organizerId}/financial-reports/periods` or the `startDate` and `endDate` can be customized."
+        }
+      },
+      "get": {
+        "summary": "Get financial report exports",
+        "operationId": "get-organizers-financial-reports",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Report"
+                  }
+                },
+                "examples": {
+                  "Example": {
+                    "value": [
+                      {
+                        "status": "STARTED",
+                        "id": 0,
+                        "message": "string",
+                        "period": {
+                          "startDate": "2019-08-24",
+                          "endDate": "2019-08-24"
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/organizer-not-found\n\nThe detail property might include more information for the client developer.\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "description": "Get previously exported financial reports. \n\n> Note: Reports will only be available for a limited amount of time. When they become unavailable, a new export can be requested using `POST /organizers/{organizerId}/financial-reports`  \n\n\nThe caller of this request must have `ORGANIZER_REPORTS` permission for the given organizer.\n",
+        "security": [
+          {
+            "USER_ACCESS_TOKEN": [
+              "https://api.publiq.be/auth/uitpas"
+            ]
+          },
+          {
+            "CLIENT_ACCESS_TOKEN": [
+              "https://api.publiq.be/auth/uitpas"
+            ]
+          }
+        ],
+        "tags": [
+          "FinancialReports"
         ]
       }
     },
@@ -925,19 +1267,19 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ReportStatus"
+                  "$ref": "#/components/schemas/Report"
                 },
                 "examples": {
                   "Example of a started report": {
                     "value": {
                       "id": 23243,
-                      "status": "started"
+                      "status": "STARTED"
                     }
                   },
                   "Example of an available report": {
                     "value": {
                       "id": 23244,
-                      "status": "available"
+                      "status": "AVAILABLE"
                     }
                   }
                 }
@@ -951,7 +1293,7 @@
             "$ref": "#/components/responses/Forbidden"
           },
           "404": {
-            "description": "Not Found",
+            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/organizer-not-found\n* https://api.publiq.be/probs/uitpas/report-not-found\n\nThe detail property might include more information for the client developer.\n",
             "content": {
               "application/json": {
                 "schema": {
@@ -962,10 +1304,17 @@
           }
         },
         "operationId": "get-financials-organizers-reports-status",
-        "description": "Retrieve the status of a previously started report export.",
+        "description": "Retrieve the status of a previously started report export.\n\nThe caller of this request must have `ORGANIZER_REPORTS` permission for the given organizer.\n",
         "security": [
           {
-            "USER_ACCESS_TOKEN": []
+            "USER_ACCESS_TOKEN": [
+              "https://api.publiq.be/auth/uitpas"
+            ]
+          },
+          {
+            "CLIENT_ACCESS_TOKEN": [
+              "https://api.publiq.be/auth/uitpas"
+            ]
           }
         ]
       }
@@ -995,12 +1344,18 @@
           "200": {
             "description": "OK",
             "content": {
-              "application/octet-stream": {
-                "schema": {
-                  "type": "object",
-                  "properties": {}
-                },
+              "application/x-zip-compressed": {
+                "schema": {},
                 "examples": {}
+              }
+            },
+            "headers": {
+              "Content-Disposition": {
+                "schema": {
+                  "type": "string",
+                  "example": "attachment; filename=\"financialOverview_organizerX_20210526_1512.zip\""
+                },
+                "description": "Header indicating that this response should be handled as a separate file download"
               }
             }
           },
@@ -1011,24 +1366,32 @@
             "$ref": "#/components/responses/Forbidden"
           },
           "404": {
-            "description": "Not Found",
+            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/organizer-not-found\n* https://api.publiq.be/probs/uitpas/report-not-found\n\nThe detail property might include more information for the client developer.\n",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
-                }
+                },
+                "examples": {}
               }
             }
           }
         },
         "operationId": "get-financials-organizers-reports-download",
-        "description": "Retrieve the actual report zip file of an `available` report.",
+        "description": "Retrieve the actual report zip file of an `available` report.\n\nThe caller of this request must have `ORGANIZER_REPORTS` permission for the given organizer.\n",
         "tags": [
           "FinancialReports"
         ],
         "security": [
           {
-            "CLIENT_ACCESS_TOKEN": []
+            "USER_ACCESS_TOKEN": [
+              "https://api.publiq.be/auth/uitpas"
+            ]
+          },
+          {
+            "CLIENT_ACCESS_TOKEN": [
+              "https://api.publiq.be/auth/uitpas"
+            ]
           }
         ]
       }
@@ -1068,7 +1431,7 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "number"
+            "type": "integer"
           },
           "tariff": {
             "$ref": "#/components/schemas/Tariff"
@@ -1155,18 +1518,25 @@
         ],
         "properties": {
           "type": {
-            "type": "string"
+            "type": "string",
+            "description": "A URI reference that identifies the problem type."
           },
           "title": {
-            "type": "string"
+            "type": "string",
+            "description": "A short, human-readable summary of the problem type."
           },
           "status": {
-            "type": "number"
+            "type": "integer",
+            "description": "The HTTP status code."
           },
           "jsonPointer": {
             "type": "string",
             "description": "Pointer to the erroneous request object in JavaScript Object Notation (JSON) Pointer format.",
             "format": "json-pointer"
+          },
+          "detail": {
+            "type": "string",
+            "description": "A human-readable explanation specific to this occurrence of the problem. "
           }
         },
         "required": [
@@ -1178,12 +1548,15 @@
       "OrganizerRole": {
         "title": "OrganizerRole",
         "type": "object",
+        "x-tags": [
+          "Models"
+        ],
         "properties": {
           "type": {
             "type": "string",
             "enum": [
-              "member",
-              "admin"
+              "MEMBER",
+              "ADMIN"
             ]
           },
           "organizer": {
@@ -1193,35 +1566,17 @@
         "required": [
           "type",
           "organizer"
-        ],
-        "x-tags": [
-          "Models"
         ]
       },
       "Organizer": {
         "title": "Organizer",
         "type": "object",
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          }
-        },
-        "x-tags": [
-          "Models"
-        ]
-      },
-      "DistributionKey": {
-        "title": "DistributionKey",
-        "type": "object",
         "x-tags": [
           "Models"
         ],
         "properties": {
           "id": {
-            "type": "number"
+            "type": "string"
           },
           "name": {
             "type": "string"
@@ -1240,10 +1595,10 @@
         "description": "Paginated response object for passholders",
         "properties": {
           "itemsPerPage": {
-            "type": "number"
+            "type": "integer"
           },
           "totalItems": {
-            "type": "number"
+            "type": "integer"
           },
           "member": {
             "type": "array",
@@ -1262,15 +1617,15 @@
         "description": "Paginated response object for organizers",
         "properties": {
           "itemsPerPage": {
-            "type": "number"
+            "type": "integer"
           },
           "totalItems": {
-            "type": "number"
+            "type": "integer"
           },
           "member": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Passholder"
+              "$ref": "#/components/schemas/Organizer"
             }
           }
         }
@@ -1300,8 +1655,12 @@
               "$ref": "#/components/schemas/CardSystemMembership"
             }
           },
-          "schoolId": {
+          "email": {
             "type": "string"
+          },
+          "creationDate": {
+            "type": "string",
+            "format": "date-time"
           }
         }
       },
@@ -1312,20 +1671,33 @@
           "Models"
         ],
         "properties": {
-          "cardSsytem": {
+          "cardSystem": {
             "$ref": "#/components/schemas/CardSystem"
           },
           "uitpasNumber": {
             "type": "string"
           },
-          "kansenStatuutEndDate": {
-            "type": "string"
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "BLOCKED"
+            ]
           },
-          "kansenStatuutExpired": {
-            "type": "boolean"
-          },
-          "kansenStatuutInGracePeriod": {
-            "type": "boolean"
+          "socialTariff": {
+            "type": "object",
+            "properties": {
+              "endDate": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "inGracePeriod": {
+                "type": "boolean"
+              },
+              "expired": {
+                "type": "boolean"
+              }
+            }
           }
         }
       },
@@ -1337,7 +1709,7 @@
         ],
         "properties": {
           "id": {
-            "type": "number"
+            "type": "integer"
           },
           "name": {
             "type": "string"
@@ -1347,22 +1719,9 @@
           "id"
         ]
       },
-      "PassholderUpdateRequest": {
-        "title": "PassholderUpdateRequest",
+      "Report": {
         "type": "object",
-        "description": "Request object to update a passholder",
-        "properties": {
-          "schoolId": {
-            "type": "string"
-          }
-        },
-        "x-tags": [
-          "Models"
-        ]
-      },
-      "ReportStatus": {
-        "type": "object",
-        "title": "ReportStatus",
+        "title": "Report",
         "description": "The status of a started report export.",
         "x-examples": {},
         "x-tags": [
@@ -1372,12 +1731,24 @@
           "status": {
             "type": "string",
             "enum": [
-              "started",
-              "available"
+              "STARTED",
+              "AVAILABLE",
+              "FAILED"
             ]
           },
           "id": {
-            "type": "number"
+            "type": "integer"
+          },
+          "message": {
+            "type": "string",
+            "description": "Optional message describing why the report failed."
+          },
+          "period": {
+            "$ref": "#/components/schemas/ReportPeriod"
+          },
+          "creationDate": {
+            "type": "string",
+            "format": "date-time"
           }
         },
         "required": [
@@ -1411,56 +1782,99 @@
         "title": "EventCardSystem",
         "type": "object",
         "x-examples": {
-          "example-1": {
-            "distributionKeys": [
+          "Example": {
+            "id": 1,
+            "name": "UiTPAS Dender",
+            "enabled": true,
+            "manualDistributionKeys": [
               {
-                "id": "string",
-                "name": "string"
+                "id": 123,
+                "name": "€1,5 halve dag",
+                "enabled": true
               }
-            ],
-            "id": "string",
-            "name": "string"
+            ]
           }
         },
         "x-tags": [
           "Models"
         ],
-        "description": "CardSystem in an event context, optionally including distributionKeys.",
+        "description": "CardSystem in an event context, optionally including manual distributionKeys.\n\nThis model is only used in the GET and PUT `/events/{eventId}/card-systems` to configure the card systems and distribution keys for an event.\n\n<!-- theme: warning -->\n\n> **This model and corresponding endpoints are only needed for exceptional cases.** In most cases card systems and distribution keys are set automatically on events, so you don't need to retrieve or change them.\n",
         "properties": {
-          "distributionKeys": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/DistributionKey"
-            }
-          },
           "id": {
-            "type": "number"
+            "type": "integer",
+            "description": "ID of the card system"
           },
           "name": {
-            "type": "string"
+            "type": "string",
+            "description": "Name of the card system"
+          },
+          "enabled": {
+            "type": "boolean",
+            "description": "State of this card system for the event."
+          },
+          "manualDistributionKeys": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "description": "Manual distribution key",
+              "properties": {
+                "id": {
+                  "type": "integer"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "enabled": {
+                  "type": "boolean",
+                  "description": "State of this manual distribution key in the card system for the event."
+                }
+              },
+              "required": [
+                "id",
+                "enabled"
+              ]
+            }
           }
         },
         "required": [
-          "id"
+          "id",
+          "enabled"
         ]
       }
     },
     "securitySchemes": {
-      "CLIENT_ACCESS_TOKEN": {
-        "type": "http",
-        "scheme": "bearer",
-        "description": "Client Access Token - see [Authentication docs](https://publiq.stoplight.io/docs/authentication/docs/Authentication-methods/Client-access-token.md)"
-      },
       "USER_ACCESS_TOKEN": {
-        "type": "http",
-        "scheme": "bearer",
-        "description": "User Access Token - see [Authentication docs](https://publiq.stoplight.io/docs/authentication/docs/Authentication-methods/User-access-token.md)"
+        "type": "oauth2",
+        "flows": {
+          "authorizationCode": {
+            "authorizationUrl": "",
+            "tokenUrl": "",
+            "refreshUrl": "",
+            "scopes": {
+              "https://api.publiq.be/auth/uitpas": "Grants access to the UiTPAS API"
+            }
+          }
+        },
+        "description": "See [Authentication docs](https://publiq.stoplight.io/docs/authentication/docs/user-access-token.md)"
+      },
+      "CLIENT_ACCESS_TOKEN": {
+        "type": "oauth2",
+        "flows": {
+          "clientCredentials": {
+            "tokenUrl": "",
+            "refreshUrl": "",
+            "scopes": {
+              "https://api.publiq.be/auth/uitpas": "Grants access to the UiTPAS API"
+            }
+          }
+        },
+        "description": "See [Authentication docs](https://publiq.stoplight.io/docs/authentication/docs/client-access-token.md)"
       }
     },
     "parameters": {},
     "responses": {
       "Unauthorized": {
-        "description": "Unauthorized. Your request is missing the required credentials to authenticate. See the Authentication documentation for more info.",
+        "description": "Unauthorized. Your request is missing the required credentials to authenticate. See the Authentication documentation for more info.\n\n* type: https://api.publiq.be/probs/auth/unauthorized\n* detail: might contain a developer-readable explanation of the reason",
         "content": {
           "application/problem+json": {
             "schema": {
@@ -1479,7 +1893,7 @@
         }
       },
       "Forbidden": {
-        "description": "Forbidden. Your request was successfully authenticated but you do not have permission to perform this particular request.",
+        "description": "Forbidden. Your request was successfully authenticated but you do not have permission to perform this particular request.\n\n* type: https://api.publiq.be/probs/auth/forbidden\n* detail: might contain a developer-readable explanation of the reason",
         "content": {
           "application/problem+json": {
             "schema": {
@@ -1490,7 +1904,8 @@
                 "value": {
                   "type": "https://api.publiq.be/probs/auth/forbidden",
                   "title": "Forbidden",
-                  "status": 403
+                  "status": 403,
+                  "detail": "user must be admin of organiser abcd1234"
                 }
               }
             }

@@ -105,7 +105,7 @@ Additionally, your event requires two more properties to qualify as an UiTPAS ev
 
 ## Via the user interface
 
-You can manually enter events in UiTdatabank by browsing to https://www.uitdatabank.be. This is helpful when you just need an event for testing purposes.
+You can manually enter events in UiTdatabank by browsing to [https://www.uitdatabank.be](https://www.uitdatabank.be). This is helpful when you just need an event for testing purposes.
 
 Registering an UiTPAS event in UiTdatabank's user interface takes just 3 steps!
 
@@ -121,23 +121,22 @@ After you have created an event, **you need to specify some additional info to t
 
 Edit the _Prijs_ field of your event, and provide a _Basistarief_ that is not 0 EUR. For example:
 
-![](../../assets/images/uitdatabank-event-price.png)
+![](../assets/images/uitdatabank-event-price.png)
 
 ### 3. Linking an UiTPAS organizer
 
 Click the _Organisatie toevoegen_ button. You can now look for the organizer of the event by typing its name in the input field that has appeared, and then select it from the list of possible options that appears. If multiple options appear, make sure to select the one that has a grey _UiTPAS_ badge next to it.
 
-![](../../assets/images/uitdatabank-event-organizer.png)
+![](../assets/images/uitdatabank-event-organizer.png)
 
 ### 4. Done!
 
 Shortly after you have selected an UiTPAS organizer, you should see a new _UiTPAS_ field appear in the form that looks like this:
 
-![](../../assets/images/uitdatabank-event-uitpas.png)
+![](../assets/images/uitdatabank-event-uitpas.png)
 
 **If you see this field, your event is now registered as an UiTPAS event**, and you can optionally change the possible card systems that it belongs to if the UiTPAS organizer is active in multiple card systems.
 
 You can now **use its id in UiTPAS API requests** that require an event id, for example to register a ticket sale for it. You can find this id in the URL of the event's detail or edit page on UiTdatabank.
 
-![](../../assets/images/uitdatabank-event-id.png)
-
+![](../assets/images/uitdatabank-event-id.png)

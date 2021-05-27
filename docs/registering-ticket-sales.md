@@ -1,22 +1,33 @@
-# Registering discounted ticket sales
+# Registering ticket sales
 
-This guide illustrates how to register an UiTPAS discounted ticket sale, from requesting possisble tariffs to registering the ticket sale and even canceling it if needed.
+This guide illustrates how to register an UiTPAS discounted ticket sale so end users can receive their UiTPAS discount and organizers can be reimbursed within the UiTPAS financial flow. 
+
+You'll learn how to request possible UiTPAS tariffs, register the ticket sale and even cancel it if needed.
+
+The whole flow consists of approximately two to four API calls depending on your situation.
+
+> ##### Why do I need to register my ticket sales in UiTPAS?
+> If you sell a ticket for an event to an UiTPAS passholder **with an UiTPAS discount**, the ticket sale needs to be registered in UiTPAS so **the organizer can be reimbursed for the discount**.
+>
+> Regular ticket sales, or ticket sales to UiTPAS passholders without a discount, do not need to be registered in UiTPAS as there is no reimbursement needed then.
 
 ## Authentication
 
-Before you can request UiTPAS tariffs or register ticket sales, you'll need **client credentials**, so you can access the UiTPAS API using a [Client Access Token](https://publiq.stoplight.io/docs/authentication/docs/Authentication-methods/Client-access-token.md)
+Before you can request UiTPAS tariffs or register ticket sales, you'll need **client credentials**, so you can access the UiTPAS API using a [Client Access Token](https://publiq.stoplight.io/docs/authentication/docs/client-access-token.md) or [User access Token](https://publiq.stoplight.io/docs/authentication/docs/user-access-token.md).
+
+To decide what kind of token to use, see the [overview of token types](https://publiq.stoplight.io/docs/authentication/docs/methods.md).
 
 ## Workflow overview
 
-![](../../assets/images/steps-ticketing-UiTPAS-visual.png)
+![](../assets/images/steps-ticketing-UiTPAS-visual.png)
 
 ### 1. UiTdatabank event
 
-Every ticket sale in UiTPAS is coupled to an event in UiTdatabank, for example because some discounts are only applicable to some events.
+Every ticket sale in UiTPAS is coupled to an event in UiTdatabank, for example because some discounts are only applicable to some events. Every UiTPAS event has an organizer, for which you are registering this ticketsale. 
 
 You can either use an existing UiTdatabank event, or create one manually via UiTdatabank's UI, or import one programmatically through UiTdatabank's API.
   
-To learn more about how to register your event in UiTdatabank and turn it into an UiTPAS event, read [our guide on  registering events](/docs/Guides/Registering-events.md).
+To learn more about how to register your event in UiTdatabank and turn it into an UiTPAS event, read [our guide on  registering events](./registering-events.md).
 
 <!-- theme: warning -->
 > ##### Creating events for ticket sales
@@ -32,9 +43,9 @@ Your application then starts its typical flow of guiding the user through a chec
 
 At some point during the checkout process on your website or application (but **before a payment has happened**), you provide the user a way to enter their UiTPAS number if they have one.
 
-### 4. Determine possible discounted tariffs
+### 4. Determine possible UiTPAS tariffs
 
-Using the event id, the UiTPAS number and the regular price of your event, you can [request possible UiTPAS tariffs](/docs/uitpas/reference/UiTPAS.v2.json/paths/~1tariffs/get).
+Using the event id, the UiTPAS number and the regular price of your event, you can [request possible UiTPAS tariffs](/reference/UiTPAS.v2.json/paths/~1tariffs/get).
 
 Example request:
 
@@ -52,26 +63,26 @@ Content-Type: application/json
 
 [
   {
-    "id": "KANSENTARIEF",
+    "id": "SOCIALTARIFF",
     "name": "Kansentarief",
     "price": 1.5
   }
 ]
 ```
 
-### 5. User selects a discounted tariff (or none)
+### 5. User selects a tariff (or none)
 
-If the API response contained one or more discounted tariffs, your website or application should present them to the user to select one (or none).
+If the API response contained one or more UiTPAS tariffs, your website or application should present them to the user to select one (or none).
 
 For example if all the discounted tariffs are based on one-time-use coupons, but the user does not wish to use any coupons after all, he/she should be able to not select one.
 
 ### 6. Register the ticket sale
 
-After the user has selected a discounted tariff, your website or application continues with its regular flow for completing the sale like payment (for the discounted price) etc.
+After the user has selected an UiTPAS tariff, your website or application continues with its regular flow for completing the sale like payment (for the discounted price) etc.
 
-When your regular flow successfully finishes, you need to [register the ticket sale](/docs/uitpas/reference/UiTPAS.v2.json/paths/~1ticket-sales/post). 
+When your regular flow successfully finishes, you need to [register the ticket sale](/reference/UiTPAS.v2.json/paths/~1ticket-sales/post). If you don't register the ticketsale correctly, the organizer can not get reimbursed for the discount within the UiTPAS financial flow.
 
-> If the user had no discounted tariffs, or did not select one, you do not need to register your ticket sale with UiTPAS.
+> If the user had no UiTPAS tariffs, or did not select one, you do not need to register your ticket sale with UiTPAS.
 
 For example:
 
@@ -85,7 +96,7 @@ Authorization: Bearer YOUR_ACCESS_TOKEN'
 [
   {
     "uitpasNumber": "0560002524314",
-    "tarrifId": "KANSENTARIEF",
+    "tarrifId": "SOCIALTARIFF",
     "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
     "regularPrice": 10,
     "regularPriceLabel": "Base tariff"
@@ -123,7 +134,7 @@ Content-Type: application/json
 
 ### 7. Cancelling the ticket sale
 
-If for some reason you need to [cancel the ticket sale registration](/docs/uitpas/reference/UiTPAS.v2.json/paths/~1ticketSales~1%7BticketSaleId%7D/delete) you can do so using the `id` of the ticket sale in the response of the registration.
+If for some reason you need to [cancel the ticket sale registration](/reference/UiTPAS.v2.json/paths/~1ticket-sales~1%7BticketSaleId%7D/delete) you can do so using the `id` of the ticket sale in the response of the registration.
 
 ## F.A.Q.
 

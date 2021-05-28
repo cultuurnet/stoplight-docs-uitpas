@@ -12,8 +12,8 @@ The organizer of an UiTPAS event. To pay for the social tariff for people in nee
 
 ## Social Tariff ('kansentarief')
 
-Passholders in need can receive a social tariff ('kansentarief') on their UiTPAS. 
-This social tariff is given by the local government based on local poverty parameters. 
+Passholders in need can receive a social tariff ('kansentarief') on their UiTPAS.
+This social tariff is given by the local government based on local poverty parameters.
 
 Those discounts are paid via a third-party payer system in which the organizer of the event, the local government and the passholder each pay a percentage of the ticket price. Payments are organized via a manual financial reporting flow within UiTPAS.
 
@@ -31,8 +31,8 @@ When the UiTPAS tariff for an inhabitant of Hasselt is checked, this coupon will
 When a passholder saves an UiTPAS point, we call this a check-in.
 An UiTPAS point is earned for participating in a specific event, mostly by holding the card to a check-in device located at the organizer of the event.
 
-## Rewards 
+## Rewards
 
-After saving UiTPAS points, a passholder can trade them for fun [rewards](https://www.uitpas.be/voordelen-zoeken#/voordelen) provided by local UiTPAS organizers. 
+After saving UiTPAS points, a passholder can trade them for fun [rewards](https://www.uitpas.be/voordelen-zoeken#/voordelen) provided by local UiTPAS organizers.
 
 Some rewards can only be traded at the event of the organizer (material rewards like a goodie bag). Other rewards can also be traded online via [UiTPAS.be](http://uitpas.be) (digital rewards such as an e-ticket).

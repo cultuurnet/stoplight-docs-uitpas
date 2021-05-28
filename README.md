@@ -11,6 +11,18 @@ This is the repository behind https://publiq.stoplight.io/docs/uitpas
 
 Be sure to also check the [internal guidelines](https://publiq.stoplight.io/docs/guidelines) on how to design APIs and write documentation. **(Login required)**
 
+> ### Warning!
+>
+> Never update the following files manually, but use [cultuurnet/stoplight-ci](https://github.com/cultuurnet/stoplight-ci) instead!
+>
+> If you update them manually, your changes will get overwritten in later updates to the CI setup.
+>
+> - `README.md`
+> - `.spectral.json`
+> - `.remarkrc`
+> - `.github/pull_request_template.md`
+> - `.github/workflows/ci.yml`
+
 ## Automatic checks
 
 The automatic checks will be run via GitHub actions for every commit pushed to every branch.
@@ -30,3 +42,4 @@ Run `yarn docs:lint` to check for errors or warnings. If any errors or warnings 
 ### Checking the OpenAPI files for errors
 
 Run `yarn api:lint` to check for errors or warnings. If any errors or warnings are detected, you need to fix them manually for now.
+

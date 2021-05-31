@@ -94,9 +94,9 @@
     safe-stable-stringify "^1.1"
 
 "@stoplight/json@^3.10.2":
-  version "3.13.7"
-  resolved "https://registry.yarnpkg.com/@stoplight/json/-/json-3.13.7.tgz#1ebc67988597aad3d8668f9ea596f846ca37c7f9"
-  integrity sha512-8XGY4aJSu4f0mtzmkET8LUdymk2U8p144e64DnS87rmaczMUzhzQXT0vQZJoF+PnpXbZvdAkjG6XVAINvzi0oQ==
+  version "3.14.0"
+  resolved "https://registry.yarnpkg.com/@stoplight/json/-/json-3.14.0.tgz#ecb43fb78d9221b6a2e1817feb7dc7564d30b568"
+  integrity sha512-tsWcLx2FqjPG8LH9N1mwK3cTdpT4NW9EAXR1zyhQh1CBVUmFM3inzy4zenf1FBGY7W0RlPnBWCDfbdC3GpJ5Pw==
   dependencies:
     "@stoplight/ordered-object-literal" "^1.0.1"
     "@stoplight/types" "^12.2.0"

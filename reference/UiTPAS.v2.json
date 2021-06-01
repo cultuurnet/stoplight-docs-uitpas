@@ -466,7 +466,7 @@
             "description": "EventCardSytems updated. No content."
           },
           "400": {
-            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/invalid-card-system\n* https://api.publiq.be/probs/uitpas/disributionkey-not-found\n* https://api.publiq.be/probs/uitpas/invalid-disributionkey\n* https://api.publiq.be/probs/uitpas/action-failed\n\nThe detail property might include more information for the client developer.",
+            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/invalid-card-system\n* https://api.publiq.be/probs/uitpas/cardsystem-not-found\n* https://api.publiq.be/probs/uitpas/distributionkey-not-found\n* https://api.publiq.be/probs/uitpas/invalid-distributionkey\n* https://api.publiq.be/probs/uitpas/event-already-has-ticketsales\n\nThe detail property might include more information for the client developer.",
             "content": {
               "application/json": {
                 "schema": {

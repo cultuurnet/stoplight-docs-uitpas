@@ -1594,9 +1594,6 @@
         ],
         "description": "Paginated response object for passholders",
         "properties": {
-          "itemsPerPage": {
-            "type": "integer"
-          },
           "totalItems": {
             "type": "integer"
           },
@@ -1616,9 +1613,6 @@
         ],
         "description": "Paginated response object for organizers",
         "properties": {
-          "itemsPerPage": {
-            "type": "integer"
-          },
           "totalItems": {
             "type": "integer"
           },

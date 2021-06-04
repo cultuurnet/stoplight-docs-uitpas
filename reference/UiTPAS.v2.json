@@ -1249,7 +1249,7 @@
         },
         {
           "schema": {
-            "type": "string"
+            "type": "integer"
           },
           "name": "reportId",
           "in": "path",

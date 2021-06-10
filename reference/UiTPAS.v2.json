@@ -96,7 +96,7 @@
             }
           },
           "400": {
-            "description": "Bad Request. The response will include a JSON body with more details in the form of a RFC7807 error model. Possible error types:\n\n* https://api.publiq.be/probs/uitpas/event-not-found\n* https://api.publiq.be/probs/uitpas/invalid-uitpasnumber\n* https://api.publiq.be/probs/uitpas/passholder-not-found\n\n",
+            "description": "Bad Request. The response will include a JSON body with more details in the form of a RFC7807 error model. Possible error types:\n\n* https://api.publiq.be/probs/uitpas/event-not-found\n* https://api.publiq.be/probs/uitpas/invalid-uitpasnumber\n* https://api.publiq.be/probs/uitpas/passholder-not-found\n* https://api.publiq.be/probs/uitpas/social-tariff-expired\n\n",
             "content": {
               "application/problem+json": {
                 "schema": {
@@ -654,7 +654,7 @@
           }
         },
         "operationId": "get-organizers",
-        "description": "Retrieve organizers based on search parameters.",
+        "description": "Retrieve organizers based on search parameters.\n\nThe caller of this request must have `ORGANIZER_SEARCH` permission for the given organizer.",
         "security": [
           {
             "USER_ACCESS_TOKEN": [
@@ -1068,7 +1068,7 @@
             }
           }
         },
-        "operationId": "get-financials-organizer-periods",
+        "operationId": "get-organizers-financial-reports-periods",
         "security": [
           {
             "USER_ACCESS_TOKEN": [
@@ -1303,7 +1303,7 @@
             }
           }
         },
-        "operationId": "get-financials-organizers-reports-status",
+        "operationId": "get-organizers-financial-reports-reportId",
         "description": "Retrieve the status of a previously started report export.\n\nThe caller of this request must have `ORGANIZER_REPORTS` permission for the given organizer.\n",
         "security": [
           {
@@ -1331,7 +1331,7 @@
         },
         {
           "schema": {
-            "type": "string"
+            "type": "integer"
           },
           "name": "reportId",
           "in": "path",
@@ -1377,7 +1377,7 @@
             }
           }
         },
-        "operationId": "get-financials-organizers-reports-download",
+        "operationId": "get-organizers-financial-reports-reportId-zip",
         "description": "Retrieve the actual report zip file of an `available` report.\n\nThe caller of this request must have `ORGANIZER_REPORTS` permission for the given organizer.\n",
         "tags": [
           "Financial reports"

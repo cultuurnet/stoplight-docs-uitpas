@@ -21,9 +21,6 @@
   ],
   "tags": [
     {
-      "name": "Current user"
-    },
-    {
       "name": "Events"
     },
     {
@@ -34,6 +31,9 @@
     },
     {
       "name": "Passholders"
+    },
+    {
+      "name": "Permissions"
     },
     {
       "name": "Schools"
@@ -376,9 +376,9 @@
         ]
       }
     },
-    "/user/organizer-roles": {
+    "/permissions": {
       "get": {
-        "summary": "Get organizer roles",
+        "summary": "Get permissions",
         "responses": {
           "200": {
             "description": "OK",
@@ -387,21 +387,19 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/OrganizerRole"
+                    "$ref": "#/components/schemas/OrganizerPermissions"
                   }
                 },
                 "examples": {
-                  "Example with multiple roles": {
+                  "Example with multiple organizers": {
                     "value": [
                       {
-                        "type": "MEMBER",
                         "organizer": {
                           "id": "c097fa2e-d9be-42e6-b41a-ec3d4d4cbad1",
                           "name": "CC De Werf"
                         }
                       },
                       {
-                        "type": "ADMIN",
                         "organizer": {
                           "id": "fd7e6177-4add-4fa8-a7fe-6e60127bfb35",
                           "name": "CC De Schakel"
@@ -409,10 +407,9 @@
                       }
                     ]
                   },
-                  "Example with one role": {
+                  "Example with one organizer": {
                     "value": [
                       {
-                        "type": "ADMIN",
                         "organizer": {
                           "id": "c097fa2e-d9be-42e6-b41a-ec3d4d4cbad1",
                           "name": "CC De Werf"
@@ -431,17 +428,18 @@
             "$ref": "#/components/responses/Forbidden"
           }
         },
-        "operationId": "get-user-organizer-roles",
-        "description": "List of roles that the current user has in relation to organizers. For example a user can be a `member` or an `admin` of an organizer.",
+        "operationId": "get-permissions",
+        "description": "Lists the organizers that the current user or client (depending on the token) has access to. The possible permissions on each organizer can also differ (will be added later).",
         "security": [
           {
-            "USER_ACCESS_TOKEN": [
-              "https://api.publiq.be/auth/uitpas"
-            ]
+            "USER_ACCESS_TOKEN": []
+          },
+          {
+            "CLIENT_ACCESS_TOKEN": []
           }
         ],
         "tags": [
-          "Current user"
+          "Permissions"
         ]
       },
       "parameters": []
@@ -1545,26 +1543,18 @@
           "status"
         ]
       },
-      "OrganizerRole": {
-        "title": "OrganizerRole",
+      "OrganizerPermissions": {
+        "title": "OrganizerPermissions",
         "type": "object",
         "x-tags": [
           "Models"
         ],
         "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "MEMBER",
-              "ADMIN"
-            ]
-          },
           "organizer": {
             "$ref": "#/components/schemas/Organizer"
           }
         },
         "required": [
-          "type",
           "organizer"
         ]
       },

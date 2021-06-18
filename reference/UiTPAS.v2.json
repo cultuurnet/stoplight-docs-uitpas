@@ -122,7 +122,7 @@
           }
         },
         "operationId": "get-tariffs",
-        "description": "Returns the possible UiTPAS discounted **tariffs for an event and a passholder**.\n\nThis UiTPAS tariffs are calculated based on:\n\n- **The regular price** of the ticket.\nThis is the price your user would have to pay for the specific ticket without UiTPAS discount.\n- **The UiTPAS number** of the passholder. UiTPAS discounts are personal so it's important to identify the passholder to retrieve a list of possible tariffs.\n- **The event id** of the UiTdatabank event. UiTPAS discounts are limited to specific UiTdatabank events, so it's important to specify the event id to retrieve a list of possible tariffs.\n\n> ##### Important\n> The regular price of the ticket should generally be one of the price categories set on the event in UiTdatabank to make financial reporting clearer.\n\nThe caller of this request must have `TICKETSALE_REGISTER` permission, \n either for the organizer of the given event, or system globally (only for client access tokens). \n",
+        "description": "Returns the possible UiTPAS discounted **tariffs for an event and a passholder**.\n\nThis UiTPAS tariffs are calculated based on:\n\n- **The regular price** of the ticket.\nThis is the price your user would have to pay for the specific ticket without UiTPAS discount.\n- **The UiTPAS number** of the passholder. UiTPAS discounts are personal so it's important to identify the passholder to retrieve a list of possible tariffs.\n- **The event id** of the UiTdatabank event. UiTPAS discounts are limited to specific UiTdatabank events, so it's important to specify the event id to retrieve a list of possible tariffs.\n\n> ##### Important\n> The regular price of the ticket should generally be one of the price categories set on the event in UiTdatabank to make financial reporting clearer.\n\nThe caller of this request must have `TICKETSALE_REGISTER` permission for the organizer of the given event.",
         "security": [
           {
             "USER_ACCESS_TOKEN": [
@@ -254,7 +254,7 @@
             "$ref": "#/components/responses/Forbidden"
           }
         },
-        "description": "Registers one or more new ticket sales **with a discounted UiTPAS tariff**, so the UiTPAS organiser can get reimbursed for the discount.\n\nBefore you can register a discounted ticket sale, you will need to request the possible discounted tariffs from the `GET /tariffs` endpoint and let your end user pick one of the available tariffs. Afterward, you can register a ticket sale using this endpoint. \n\nYou will need:\n\n- The `uitpasNumber` of the passholder buying the ticket.\n- The `eventId` of the UiTdatabank event.\n- The chosen `uitpasTariffId` from the `GET /tariffs` request.\n- The `regularPrice` the passholder would normally have to pay for this ticket\n\nOptionally you can include a `regularPriceLabel` describing the regular price if you have multiple price categories, which can be useful in the financial reporting overview.\n\n<!-- theme: warning -->\n\n> ##### Error handling\n> **If one of the ticket sales is invalid** (for example the chosen tariff is incorrect or expired), **none of the ticket sales will be registered**. You will instead get an error response with more details about the problem, and can then retry the registration without the incorrect ticket sales or ask the end user to change the tickets and/or tariffs that they want.\n\nThe caller of this request must have `TICKETSALE_REGISTER` permission, \n either for the organizer of the given event, or system globally (only for client access tokens). ",
+        "description": "Registers one or more new ticket sales **with a discounted UiTPAS tariff**, so the UiTPAS organiser can get reimbursed for the discount.\n\nBefore you can register a discounted ticket sale, you will need to request the possible discounted tariffs from the `GET /tariffs` endpoint and let your end user pick one of the available tariffs. Afterward, you can register a ticket sale using this endpoint. \n\nYou will need:\n\n- The `uitpasNumber` of the passholder buying the ticket.\n- The `eventId` of the UiTdatabank event.\n- The chosen `uitpasTariffId` from the `GET /tariffs` request.\n- The `regularPrice` the passholder would normally have to pay for this ticket\n\nOptionally you can include a `regularPriceLabel` describing the regular price if you have multiple price categories, which can be useful in the financial reporting overview.\n\n<!-- theme: warning -->\n\n> ##### Error handling\n> **If one of the ticket sales is invalid** (for example the chosen tariff is incorrect or expired), **none of the ticket sales will be registered**. You will instead get an error response with more details about the problem, and can then retry the registration without the incorrect ticket sales or ask the end user to change the tickets and/or tariffs that they want.\n\nThe caller of this request must have `TICKETSALE_REGISTER` permission for the organizer of the given event.",
         "security": [
           {
             "USER_ACCESS_TOKEN": [
@@ -751,7 +751,7 @@
           }
         },
         "operationId": "get-passholders",
-        "description": "Retrieve passholders based on search parameters.\n\nThe caller of this request must have `PASSHOLDER_SEARCH` permission, \n either for the given `organizerId` or system globally (only for client access tokens). \n\nWhen using a `User Access Token` without an `organiserId` parameter, the response will be limited based on the permissions of all the organizers where the current is in `MEMBER` or `ADMIN`.\n",
+        "description": "Retrieve passholders based on search parameters.\n\nThe caller of this request must have `PASSHOLDER_SEARCH` permission.",
         "security": [
           {
             "USER_ACCESS_TOKEN": [
@@ -835,7 +835,7 @@
             },
             "in": "query",
             "name": "organizerId",
-            "description": "The id of the organizer performing this request. Query results will be limited based on the permissions of the organizer."
+            "description": "Filter passholders based on the card systems of the give organizer. If omitted, the results will be fitered based on the organizers you have permission to."
           }
         ]
       }

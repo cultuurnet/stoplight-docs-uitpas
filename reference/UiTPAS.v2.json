@@ -1659,7 +1659,8 @@
             "$ref": "#/components/schemas/CardSystem"
           },
           "uitpasNumber": {
-            "type": "string"
+            "type": "string",
+            "description": "The UiTPAS number of the card that is linked to this card system membership. It is possible to have a CardSystemMembership without a card. However, a passholder always has at least one CardSystemMembership with a card."
           },
           "status": {
             "type": "string",

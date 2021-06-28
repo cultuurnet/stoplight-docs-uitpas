@@ -207,7 +207,8 @@
                         "tariff": {
                           "id": "COUPON1234",
                           "name": "Cultuurbon 6 euro",
-                          "price": 1.5
+                          "price": 1.5,
+                          "numberOfTickets": 1
                         },
                         "uitpasNumber": "0560002524314",
                         "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002"
@@ -221,7 +222,8 @@
                         "tariff": {
                           "id": "COUPON1234",
                           "name": "Cultuurbon 6 euro",
-                          "price": 4
+                          "price": 4,
+                          "numberOfTickets": 1
                         },
                         "uitpasNumber": "0560002524314",
                         "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002"
@@ -231,7 +233,8 @@
                         "tariff": {
                           "id": "SOCIALTARIFF",
                           "name": "Kansentarief",
-                          "price": 1.5
+                          "price": 1.5,
+                          "numberOfTickets": 1
                         },
                         "uitpasNumber": "0940002524123",
                         "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002"
@@ -1449,13 +1452,14 @@
           "numberOfTickets": {
             "type": "integer",
             "minimum": 1,
-            "description": "Number of ticket sales that can be registered at this tariff. Default 1."
+            "description": "Number of ticket sales that can be registered at this tariff."
           }
         },
         "required": [
           "id",
           "name",
-          "price"
+          "price",
+          "numberOfTickets"
         ]
       },
       "TicketSaleRegistration": {

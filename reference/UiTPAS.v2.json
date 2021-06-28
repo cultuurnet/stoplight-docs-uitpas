@@ -387,7 +387,7 @@
             }
           }
         },
-        "description": "Cancels a single ticket sale registration by its id. (Returned in the response of the ticket sale registration request.)\n\n\n\nThe caller of this request must have `TICKETSALE_REGISTER` permission for the organizer of the event of the ticketsale.",
+        "description": "Cancels a single ticket sale registration by its id. (Returned in the response of the ticket sale registration request.)\n\nThe caller of this request must have `TICKETSALE_REGISTER` permission for the organizer of the event of the ticketsale.",
         "tags": [
           "Ticket sales"
         ],

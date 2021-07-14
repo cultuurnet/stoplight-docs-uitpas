@@ -142,7 +142,7 @@ If for some reason you need to [cancel the ticket sale registration](/reference/
 
 ### Will the UiTPAS API be able to handle all of my requests? I'm worried about a realtime dependency on UiTPAS at check out.
 
-Only a small percentage of your requests should be accessing the UiTPAS API, as you only show [UiTPAS tariffs](/reference/UiTPAS.v2.json/paths/~1tariffs/get) for those users who entered an UiTPAS number or have an UiTPAS number saved in their user profile. Numerous applications are already successfully accessing the UiTPAS API every day, which which has been running since 2012 with very low downtime.
+Only a small percentage of your requests should be accessing the UiTPAS API, as you only show [UiTPAS tariffs](/reference/UiTPAS.v2.json/paths/~1tariffs/get) for those users who entered an UiTPAS number or have an UiTPAS number saved in their user profile. Numerous applications are already successfully accessing the UiTPAS API every day, which has been running since 2012 with very low downtime.
 
 ### Can the regularPrice sent in /ticket-sales differ from the prices listed in the UiTdatabank event?
 

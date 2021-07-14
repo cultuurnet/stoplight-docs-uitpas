@@ -16,6 +16,8 @@ Those events need to exist in [UiTdatabank](https://www.uitdatabank.be/). UiTdat
 
 The organizer of an UiTPAS event. To pay for the social tariff for people in need, the organizer is partly reimbursed by the local government. That's why it's important to always create UiTPAS events with the correct UiTPAS organizer.
 
+Just like events, organizers are saved in [UiTdatabank](https://www.uitdatabank.be/manage/organizations).
+
 ## UiTPAS Tariffs
 
 UiTPAS [tariffs](/reference/UiTPAS.v2.json/paths/~1tariffs/get) are the discounted prices a specific passholder may receive for a specific UiTPAS event. For example, a passholder may receive a social tariff or may have a redeemable coupon.

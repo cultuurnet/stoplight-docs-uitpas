@@ -68,7 +68,8 @@
                       {
                         "id": "SOCIALTARIFF",
                         "name": "Kansentarief",
-                        "price": 1.5
+                        "price": 1.5,
+                        "numberOfTickets": 1
                       }
                     ]
                   },
@@ -77,17 +78,30 @@
                       {
                         "id": "SOCIALTARIFF",
                         "name": "Kansentarief",
-                        "price": 1.5
+                        "price": 1.5,
+                        "numberOfTickets": 1
                       },
                       {
                         "id": "COUPON1234",
                         "name": "Cultuurbon 6 euro",
-                        "price": 4
+                        "price": 4,
+                        "numberOfTickets": 1
                       },
                       {
                         "id": "COUPON2345",
                         "name": "2 euro korting op een specifiek event",
-                        "price": 8
+                        "price": 8,
+                        "numberOfTickets": 1
+                      }
+                    ]
+                  },
+                  "Single tariff with multiple number of tickets": {
+                    "value": [
+                      {
+                        "id": "SOCIALTARIFF",
+                        "name": "Kansentarief",
+                        "price": 1.5,
+                        "numberOfTickets": 20
                       }
                     ]
                   }
@@ -193,7 +207,8 @@
                         "tariff": {
                           "id": "COUPON1234",
                           "name": "Cultuurbon 6 euro",
-                          "price": 1.5
+                          "price": 1.5,
+                          "numberOfTickets": 1
                         },
                         "uitpasNumber": "0560002524314",
                         "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002"
@@ -207,7 +222,8 @@
                         "tariff": {
                           "id": "COUPON1234",
                           "name": "Cultuurbon 6 euro",
-                          "price": 4
+                          "price": 4,
+                          "numberOfTickets": 1
                         },
                         "uitpasNumber": "0560002524314",
                         "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002"
@@ -217,7 +233,8 @@
                         "tariff": {
                           "id": "SOCIALTARIFF",
                           "name": "Kansentarief",
-                          "price": 1.5
+                          "price": 1.5,
+                          "numberOfTickets": 1
                         },
                         "uitpasNumber": "0940002524123",
                         "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002"
@@ -229,7 +246,7 @@
             }
           },
           "400": {
-            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/social-tariff-expired\n* https://api.publiq.be/probs/uitpas/maximum-reached\n\nThe type indicates the error on one of the failed ticket sale registrations. All other ticket sale registration in the request will be rolled back in case of an error.\n\nThe property `jsonPointer` will a referene to the erroneous `TicketSaleRequest` object if applicable.",
+            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/social-tariff-expired\n* https://api.publiq.be/probs/uitpas/maximum-reached\n* https://api.publiq.be/probs/uitpas/invalid-number-of-tickets\n\nThe type indicates the error on one of the failed ticket sale registrations. All other ticket sale registration in the request will be rolled back in case of an error.\n\nThe property `jsonPointer` will a referene to the erroneous `TicketSaleRequest` object if applicable.",
             "content": {
               "application/problem+json": {
                 "schema": {
@@ -254,7 +271,7 @@
             "$ref": "#/components/responses/Forbidden"
           }
         },
-        "description": "Registers one or more new ticket sales **with a discounted UiTPAS tariff**, so the UiTPAS organiser can get reimbursed for the discount.\n\nBefore you can register a discounted ticket sale, you will need to request the possible discounted tariffs from the `GET /tariffs` endpoint and let your end user pick one of the available tariffs. Afterward, you can register a ticket sale using this endpoint. \n\nYou will need:\n\n- The `uitpasNumber` of the passholder buying the ticket.\n- The `eventId` of the UiTdatabank event.\n- The chosen `uitpasTariffId` from the `GET /tariffs` request.\n- The `regularPrice` the passholder would normally have to pay for this ticket\n\nOptionally you can include a `regularPriceLabel` describing the regular price if you have multiple price categories, which can be useful in the financial reporting overview.\n\n<!-- theme: warning -->\n\n> ##### Error handling\n> **If one of the ticket sales is invalid** (for example the chosen tariff is incorrect or expired), **none of the ticket sales will be registered**. You will instead get an error response with more details about the problem, and can then retry the registration without the incorrect ticket sales or ask the end user to change the tickets and/or tariffs that they want.\n\nThe caller of this request must have `TICKETSALE_REGISTER` permission for the organizer of the given event.",
+        "description": "Registers one or more new ticket sales **with a discounted UiTPAS tariff**, so the UiTPAS organiser can get reimbursed for the discount.\n\nBefore you can register a discounted ticket sale, you will need to request the possible discounted tariffs from the `GET /tariffs` endpoint and let your end user pick one of the available tariffs. Afterward, you can register a ticket sale using this endpoint. \n\nYou will need:\n\n- The `uitpasNumber` of the passholder buying the ticket.\n- The `eventId` of the UiTdatabank event.\n- The chosen `uitpasTariffId` from the `GET /tariffs` request.\n- The `regularPrice` the passholder would normally have to pay for this ticket\n\nOptionally you can include:\n- a `regularPriceLabel` describing the regular price if you have multiple price \ncategories, which can be useful in the financial reporting overview.\n- the `numberOfTickets` that are registered for the same passholder, for the same event, at the same tariff. This value 1 by default and can never be higher than the numberOfTickets from the GET /tariffs response.\n\n<!-- theme: warning -->\n\n> ##### Error handling\n> **If one of the ticket sales is invalid** (for example the chosen tariff is incorrect or expired), **none of the ticket sales will be registered**. You will instead get an error response with more details about the problem, and can then retry the registration without the incorrect ticket sales or ask the end user to change the tickets and/or tariffs that they want.\n\nThe caller of this request must have `TICKETSALE_REGISTER`  permission for the organizer of the given event.\n",
         "security": [
           {
             "USER_ACCESS_TOKEN": [
@@ -284,7 +301,8 @@
                       "tariffId": "COUPON1234",
                       "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
                       "regularPrice": 10,
-                      "regularPriceLabel": "Optional descriptive label of the regular price. Used in financial reporting."
+                      "regularPriceLabel": "Optional descriptive label of the regular price. Used in financial reporting.",
+                      "numberOfTickets": 1
                     }
                   ]
                 },
@@ -295,14 +313,28 @@
                       "tariffId": "COUPON1234",
                       "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
                       "regularPrice": 10,
-                      "regularPriceLabel": "Base tariff"
+                      "regularPriceLabel": "Base tariff",
+                      "numberOfTickets": 1
                     },
                     {
                       "uitpasNumber": "0930002523422",
                       "tariffId": "SOCIALTARIFF",
                       "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
                       "regularPrice": 10,
-                      "regularPriceLabel": "Base tariff"
+                      "regularPriceLabel": "Base tariff",
+                      "numberOfTickets": 1
+                    }
+                  ]
+                },
+                "Example for multiple ticket sales at the same tariff": {
+                  "value": [
+                    {
+                      "uitpasNumber": "0560002524314",
+                      "tariffId": "SOCIALTARIFF",
+                      "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
+                      "regularPrice": 10,
+                      "regularPriceLabel": "Optional descriptive label of the regular price. Used in financial reporting.",
+                      "numberOfTickets": 5
                     }
                   ]
                 }
@@ -358,7 +390,7 @@
             }
           }
         },
-        "description": "Cancels a single ticket sale registration by its id. (Returned in the response of the ticket sale registration request.)",
+        "description": "Cancels a single ticket sale registration by its id. (Returned in the response of the ticket sale registration request.)\n\nThe caller of this request must have `TICKETSALE_REGISTER` permission for the organizer of the event of the ticketsale.",
         "tags": [
           "Ticket sales"
         ],
@@ -1403,6 +1435,9 @@
         "description": "The Tariff describes the discounted price a passholder has to pay for a given ticket. ",
         "x-internal": false,
         "x-examples": {},
+        "x-tags": [
+          "Models"
+        ],
         "properties": {
           "id": {
             "type": "string",
@@ -1413,15 +1448,18 @@
           },
           "price": {
             "type": "number"
+          },
+          "numberOfTickets": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Number of ticket sales that can be registered at this tariff."
           }
         },
         "required": [
           "id",
           "name",
-          "price"
-        ],
-        "x-tags": [
-          "Models"
+          "price",
+          "numberOfTickets"
         ]
       },
       "TicketSaleRegistration": {
@@ -1478,6 +1516,10 @@
             "regularPriceLabel": "Optional descriptive label of the regular price. Used in financial reporting."
           }
         },
+        "x-internal": false,
+        "x-tags": [
+          "Models"
+        ],
         "properties": {
           "uitpasNumber": {
             "type": "string"
@@ -1494,6 +1536,11 @@
           "regularPriceLabel": {
             "type": "string",
             "description": "Optional descriptive label of the regular price. Used in financial reporting."
+          },
+          "numberOfTickets": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Number of ticket sales to register at this tariff. This property is by default 1, can never be lower than 1 and must never exceed the numberOfTickets value from GET /tariffs"
           }
         },
         "required": [
@@ -1501,10 +1548,6 @@
           "tariffId",
           "eventId",
           "regularPrice"
-        ],
-        "x-internal": false,
-        "x-tags": [
-          "Models"
         ]
       },
       "Error": {

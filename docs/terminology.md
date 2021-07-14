@@ -8,7 +8,7 @@ One who holds an UiTPAS, the end-user of an UiTPAS, identified by an UiTPAS numb
 
 ## UiTPAS Event
 
-Certain actions within UiTPAS are linked to specific events, for example when[registering a ticket sale](./registering-ticket-sales.md) at a discounted UiTPAS tariff.
+Certain actions within UiTPAS are linked to specific events, for example when [registering a ticket sale](./registering-ticket-sales.md) at a discounted UiTPAS tariff.
 
 Those events need to exist in [UiTdatabank](https://www.uitdatabank.be/). UiTdatabank is a central database of cultural and leisure activities in Flanders and Brussels. [To register an UiTPAS event](./registering-events.md), the event in UiTdatabank needs to have a base price and has to be linked to a known UiTPAS organizer.
 

@@ -57,53 +57,61 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Tariff"
-                  }
+                  "$ref": "#/components/schemas/TariffsResponse"
                 },
                 "examples": {
                   "Single tariff example": {
-                    "value": [
-                      {
-                        "id": "SOCIALTARIFF",
-                        "name": "Kansentarief",
-                        "price": 1.5,
-                        "numberOfTickets": 1
-                      }
-                    ]
+                    "value": {
+                      "available": [
+                        {
+                          "id": "SOCIALTARIFF",
+                          "name": "Kansentarief",
+                          "price": 1.5,
+                          "numberOfTickets": 1,
+                          "type": "SOCIALTARIFF"
+                        }
+                      ]
+                    }
                   },
                   "Multiple tariffs example": {
-                    "value": [
-                      {
-                        "id": "SOCIALTARIFF",
-                        "name": "Kansentarief",
-                        "price": 1.5,
-                        "numberOfTickets": 1
-                      },
-                      {
-                        "id": "COUPON1234",
-                        "name": "Cultuurbon 6 euro",
-                        "price": 4,
-                        "numberOfTickets": 1
-                      },
-                      {
-                        "id": "COUPON2345",
-                        "name": "2 euro korting op een specifiek event",
-                        "price": 8,
-                        "numberOfTickets": 1
-                      }
-                    ]
+                    "value": {
+                      "available": [
+                        {
+                          "id": "SOCIALTARIFF",
+                          "name": "Kansentarief",
+                          "price": 1.5,
+                          "numberOfTickets": 1,
+                          "type": "SOCIALTARIFF"
+                        },
+                        {
+                          "id": "COUPON1234",
+                          "name": "Cultuurbon 6 euro",
+                          "price": 4,
+                          "numberOfTickets": 1,
+                          "type": "COUPON"
+                        },
+                        {
+                          "id": "COUPON2345",
+                          "name": "2 euro korting op een specifiek event",
+                          "price": 8,
+                          "numberOfTickets": 1,
+                          "type": "COUPON"
+                        }
+                      ]
+                    }
                   },
                   "Single tariff with multiple number of tickets": {
-                    "value": [
-                      {
-                        "id": "SOCIALTARIFF",
-                        "name": "Kansentarief",
-                        "price": 1.5,
-                        "numberOfTickets": 20
-                      }
-                    ]
+                    "value": {
+                      "available": [
+                        {
+                          "id": "SOCIALTARIFF",
+                          "name": "Kansentarief",
+                          "price": 1.5,
+                          "numberOfTickets": 20,
+                          "type": "SOCIALTARIFF"
+                        }
+                      ]
+                    }
                   }
                 }
               }
@@ -208,7 +216,8 @@
                           "id": "COUPON1234",
                           "name": "Cultuurbon 6 euro",
                           "price": 1.5,
-                          "numberOfTickets": 1
+                          "numberOfTickets": 1,
+                          "type": "COUPON"
                         },
                         "uitpasNumber": "0560002524314",
                         "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002"
@@ -223,7 +232,8 @@
                           "id": "COUPON1234",
                           "name": "Cultuurbon 6 euro",
                           "price": 4,
-                          "numberOfTickets": 1
+                          "numberOfTickets": 1,
+                          "type": "COUPON"
                         },
                         "uitpasNumber": "0560002524314",
                         "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002"
@@ -234,7 +244,8 @@
                           "id": "SOCIALTARIFF",
                           "name": "Kansentarief",
                           "price": 1.5,
-                          "numberOfTickets": 1
+                          "numberOfTickets": 1,
+                          "type": "SOCIALTARIFF"
                         },
                         "uitpasNumber": "0940002524123",
                         "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002"
@@ -1434,7 +1445,16 @@
         "type": "object",
         "description": "The Tariff describes the discounted price a passholder has to pay for a given ticket. ",
         "x-internal": false,
-        "x-examples": {},
+        "x-examples": {
+          "example-1": {
+            "value": {
+              "id": "string",
+              "name": "string",
+              "price": 0,
+              "numberOfTickets": 1
+            }
+          }
+        },
         "x-tags": [
           "Models"
         ],
@@ -1453,13 +1473,21 @@
             "type": "integer",
             "minimum": 1,
             "description": "Number of ticket sales that can be registered at this tariff."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "SOCIALTARIFF",
+              "COUPON"
+            ]
           }
         },
         "required": [
           "id",
           "name",
           "price",
-          "numberOfTickets"
+          "numberOfTickets",
+          "type"
         ]
       },
       "TicketSaleRegistration": {
@@ -1868,6 +1896,31 @@
           "id",
           "enabled"
         ]
+      },
+      "TariffsResponse": {
+        "title": "TariffsResponse",
+        "description": "Response object for tariffs",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "value": {
+              "available": {
+                "id": "string",
+                "name": "string",
+                "price": 0,
+                "numberOfTickets": 1
+              }
+            }
+          }
+        },
+        "properties": {
+          "available": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Tariff"
+            }
+          }
+        }
       }
     },
     "securitySchemes": {

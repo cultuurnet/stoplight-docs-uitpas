@@ -211,7 +211,7 @@
                   "Single ticket sale example": {
                     "value": [
                       {
-                        "id": 21345,
+                        "id": "21345",
                         "tariff": {
                           "id": "COUPON1234",
                           "name": "Cultuurbon 6 euro",
@@ -227,7 +227,7 @@
                   "Multiple ticket sales example": {
                     "value": [
                       {
-                        "id": 21345,
+                        "id": "21345",
                         "tariff": {
                           "id": "COUPON1234",
                           "name": "Cultuurbon 6 euro",
@@ -239,7 +239,7 @@
                         "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002"
                       },
                       {
-                        "id": 21346,
+                        "id": "21346",
                         "tariff": {
                           "id": "SOCIALTARIFF",
                           "name": "Kansentarief",
@@ -1493,26 +1493,6 @@
       "TicketSaleRegistration": {
         "title": "TicketSaleRegistration",
         "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer"
-          },
-          "tariff": {
-            "$ref": "#/components/schemas/Tariff"
-          },
-          "uitpasNumber": {
-            "type": "string"
-          },
-          "eventId": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "id",
-          "tariff",
-          "uitpasNumber",
-          "eventId"
-        ],
         "x-examples": {
           "Example": {
             "id": 21345,
@@ -1529,6 +1509,26 @@
         "x-internal": false,
         "x-tags": [
           "Models"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "tariff": {
+            "$ref": "#/components/schemas/Tariff"
+          },
+          "uitpasNumber": {
+            "type": "string"
+          },
+          "eventId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "tariff",
+          "uitpasNumber",
+          "eventId"
         ]
       },
       "TicketSaleRequest": {

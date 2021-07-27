@@ -57,60 +57,68 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Tariff"
-                  }
+                  "$ref": "#/components/schemas/TariffsResponse"
                 },
                 "examples": {
                   "Single tariff example": {
-                    "value": [
-                      {
-                        "id": "SOCIALTARIFF",
-                        "name": "Kansentarief",
-                        "price": 1.5,
-                        "numberOfTickets": 1
-                      }
-                    ]
+                    "value": {
+                      "available": [
+                        {
+                          "id": "SOCIALTARIFF",
+                          "name": "Kansentarief",
+                          "price": 1.5,
+                          "numberOfTickets": 1,
+                          "type": "SOCIALTARIFF"
+                        }
+                      ]
+                    }
                   },
                   "Multiple tariffs example": {
-                    "value": [
-                      {
-                        "id": "SOCIALTARIFF",
-                        "name": "Kansentarief",
-                        "price": 1.5,
-                        "numberOfTickets": 1
-                      },
-                      {
-                        "id": "COUPON1234",
-                        "name": "Cultuurbon 6 euro",
-                        "price": 4,
-                        "numberOfTickets": 1
-                      },
-                      {
-                        "id": "COUPON2345",
-                        "name": "2 euro korting op een specifiek event",
-                        "price": 8,
-                        "numberOfTickets": 1
-                      }
-                    ]
+                    "value": {
+                      "available": [
+                        {
+                          "id": "SOCIALTARIFF",
+                          "name": "Kansentarief",
+                          "price": 1.5,
+                          "numberOfTickets": 1,
+                          "type": "SOCIALTARIFF"
+                        },
+                        {
+                          "id": "COUPON1234",
+                          "name": "Cultuurbon 6 euro",
+                          "price": 4,
+                          "numberOfTickets": 1,
+                          "type": "COUPON"
+                        },
+                        {
+                          "id": "COUPON2345",
+                          "name": "2 euro korting op een specifiek event",
+                          "price": 8,
+                          "numberOfTickets": 1,
+                          "type": "COUPON"
+                        }
+                      ]
+                    }
                   },
                   "Single tariff with multiple number of tickets": {
-                    "value": [
-                      {
-                        "id": "SOCIALTARIFF",
-                        "name": "Kansentarief",
-                        "price": 1.5,
-                        "numberOfTickets": 20
-                      }
-                    ]
+                    "value": {
+                      "available": [
+                        {
+                          "id": "SOCIALTARIFF",
+                          "name": "Kansentarief",
+                          "price": 1.5,
+                          "numberOfTickets": 20,
+                          "type": "SOCIALTARIFF"
+                        }
+                      ]
+                    }
                   }
                 }
               }
             }
           },
           "400": {
-            "description": "Bad Request. The response will include a JSON body with more details in the form of a RFC7807 error model. Possible error types:\n\n* https://api.publiq.be/probs/uitpas/event-not-found\n* https://api.publiq.be/probs/uitpas/invalid-uitpasnumber\n* https://api.publiq.be/probs/uitpas/passholder-not-found\n* https://api.publiq.be/probs/uitpas/social-tariff-expired\n\n",
+            "description": "Bad Request. The response will include a JSON body with more details in the form of a RFC7807 error model. Possible error types:\n\n* https://api.publiq.be/probs/uitpas/event-not-found\n* https://api.publiq.be/probs/uitpas/passholder-not-found\n* https://api.publiq.be/probs/uitpas/passholder-no-active-cardsystems\n* https://api.publiq.be/probs/uitpas/social-tariff-expired\n* https://api.publiq.be/probs/uitpas/invalid-uitpasnumber\n* https://api.publiq.be/probs/uitpas/invalid-card\n* https://api.publiq.be/probs/uitpas/invalid-card-status\n\n",
             "content": {
               "application/problem+json": {
                 "schema": {
@@ -203,12 +211,13 @@
                   "Single ticket sale example": {
                     "value": [
                       {
-                        "id": 21345,
+                        "id": "21345",
                         "tariff": {
                           "id": "COUPON1234",
                           "name": "Cultuurbon 6 euro",
                           "price": 1.5,
-                          "numberOfTickets": 1
+                          "numberOfTickets": 1,
+                          "type": "COUPON"
                         },
                         "uitpasNumber": "0560002524314",
                         "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002"
@@ -218,23 +227,25 @@
                   "Multiple ticket sales example": {
                     "value": [
                       {
-                        "id": 21345,
+                        "id": "21345",
                         "tariff": {
                           "id": "COUPON1234",
                           "name": "Cultuurbon 6 euro",
                           "price": 4,
-                          "numberOfTickets": 1
+                          "numberOfTickets": 1,
+                          "type": "COUPON"
                         },
                         "uitpasNumber": "0560002524314",
                         "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002"
                       },
                       {
-                        "id": 21346,
+                        "id": "21346",
                         "tariff": {
                           "id": "SOCIALTARIFF",
                           "name": "Kansentarief",
                           "price": 1.5,
-                          "numberOfTickets": 1
+                          "numberOfTickets": 1,
+                          "type": "SOCIALTARIFF"
                         },
                         "uitpasNumber": "0940002524123",
                         "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002"
@@ -246,7 +257,7 @@
             }
           },
           "400": {
-            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/social-tariff-expired\n* https://api.publiq.be/probs/uitpas/maximum-reached\n* https://api.publiq.be/probs/uitpas/invalid-number-of-tickets\n\nThe type indicates the error on one of the failed ticket sale registrations. All other ticket sale registration in the request will be rolled back in case of an error.\n\nThe property `jsonPointer` will a referene to the erroneous `TicketSaleRequest` object if applicable.",
+            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/social-tariff-expired\n* https://api.publiq.be/probs/uitpas/maximum-reached\n* https://api.publiq.be/probs/uitpas/invalid-number-of-tickets\n* https://api.publiq.be/probs/uitpas/event-not-found\n* https://api.publiq.be/probs/uitpas/passholder-not-found\n* https://api.publiq.be/probs/uitpas/invalid-uitpasnumber\n* https://api.publiq.be/probs/uitpas/invalid-card\n* https://api.publiq.be/probs/uitpas/invalid-card-status\n* https://api.publiq.be/probs/uitpas/passholder-no-active-cardsystems\n* https://api.publiq.be/probs/uitpas/invalid-coupon\n\n\nThe type indicates the error on one of the failed ticket sale registrations. All other ticket sale registration in the request will be rolled back in case of an error.\n\nThe property `jsonPointer` will a referene to the erroneous `TicketSaleRequest` object if applicable.",
             "content": {
               "application/problem+json": {
                 "schema": {
@@ -1434,7 +1445,16 @@
         "type": "object",
         "description": "The Tariff describes the discounted price a passholder has to pay for a given ticket. ",
         "x-internal": false,
-        "x-examples": {},
+        "x-examples": {
+          "example-1": {
+            "value": {
+              "id": "string",
+              "name": "string",
+              "price": 0,
+              "numberOfTickets": 1
+            }
+          }
+        },
         "x-tags": [
           "Models"
         ],
@@ -1453,38 +1473,26 @@
             "type": "integer",
             "minimum": 1,
             "description": "Number of ticket sales that can be registered at this tariff."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "SOCIALTARIFF",
+              "COUPON"
+            ]
           }
         },
         "required": [
           "id",
           "name",
           "price",
-          "numberOfTickets"
+          "numberOfTickets",
+          "type"
         ]
       },
       "TicketSaleRegistration": {
         "title": "TicketSaleRegistration",
         "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer"
-          },
-          "tariff": {
-            "$ref": "#/components/schemas/Tariff"
-          },
-          "uitpasNumber": {
-            "type": "string"
-          },
-          "eventId": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "id",
-          "tariff",
-          "uitpasNumber",
-          "eventId"
-        ],
         "x-examples": {
           "Example": {
             "id": 21345,
@@ -1501,6 +1509,26 @@
         "x-internal": false,
         "x-tags": [
           "Models"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "tariff": {
+            "$ref": "#/components/schemas/Tariff"
+          },
+          "uitpasNumber": {
+            "type": "string"
+          },
+          "eventId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "tariff",
+          "uitpasNumber",
+          "eventId"
         ]
       },
       "TicketSaleRequest": {
@@ -1868,6 +1896,31 @@
           "id",
           "enabled"
         ]
+      },
+      "TariffsResponse": {
+        "title": "TariffsResponse",
+        "description": "Response object for tariffs",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "value": {
+              "available": {
+                "id": "string",
+                "name": "string",
+                "price": 0,
+                "numberOfTickets": 1
+              }
+            }
+          }
+        },
+        "properties": {
+          "available": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Tariff"
+            }
+          }
+        }
       }
     },
     "securitySchemes": {

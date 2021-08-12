@@ -96,7 +96,7 @@ When your regular flow successfully finishes, you need to [register the ticket s
 For example:
 
 ```http
-POST /events/YOUR_EVENT_ID/ticket-sales HTTP/1.1
+POST /ticket-sales HTTP/1.1
 Content-Type: application/json
 Host: https://api.uitpas.be
 Authorization: Bearer YOUR_ACCESS_TOKEN'

@@ -68,10 +68,16 @@ Content-Type: application/json
   {
     "id": "SOCIALTARIFF",
     "name": "Kansentarief",
-    "price": 1.5
+    "price": 1.5,
+    "numberOfTickets": 1
   }
 ]
 ```
+
+In this example the passholder can select one possible UiTPAS discount, the social tariff. The discount is valid for one ticket for this event for this passholder, and the discounted price the passholder has to pay is €1.5.
+
+> ##### numberOfTickets
+> For regular passholders, the `numberOfTickets` in a tariff will always be 1. However some UiTPAS passes are "group passes". They are not bound to one specific person, but to an organisation for example. These passes can be used to buy multiple tickets for the same discounted price, instead of just one. In that case the `numberOfTickets` will indicate how many tickets they can buy at a specific tariff.
 
 ### 5. User selects a tariff (or none)
 
@@ -101,12 +107,15 @@ Authorization: Bearer YOUR_ACCESS_TOKEN'
     "tarrifId": "SOCIALTARIFF",
     "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
     "regularPrice": 10,
-    "regularPriceLabel": "Base tariff"
+    "regularPriceLabel": "Base tariff", # Optional
+    "numberOfTickets": 1 # Optional
   }
 ]
 ```
 
 As you can see, you can include multiple ticket sale registrations at once. This can be helpful when you want to provide your users a way to buy multiple tickets at once.
+
+For more information about each property, see the documentation for the [POST /ticket-sales](/reference/UiTPAS.v2.json/paths/~1ticket-sales/post) endpoint.
 
 Example response:
 

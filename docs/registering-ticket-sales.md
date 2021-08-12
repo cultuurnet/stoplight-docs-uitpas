@@ -69,21 +69,29 @@ Content-Type: application/json
     "id": "SOCIALTARIFF",
     "name": "Kansentarief",
     "price": 1.5,
-    "numberOfTickets": 1
+    "numberOfTickets": 1,
+    "type": "SOCIALTARIFF"
+  },
+  {
+    "id": "COUPON1234",
+    "name": "Cultuurbon 6 euro",
+    "price": 4,
+    "numberOfTickets": 1,
+    "type": "COUPON"
   }
 ]
 ```
 
-In this example the passholder can select one possible UiTPAS discount, the social tariff. The discount is valid for one ticket for this event for this passholder, and the discounted price the passholder has to pay is €1.5.
+In this example the passholder can select two possible UiTPAS discounts. The social tariff (1), and a coupon (2). Both tariffs are valid for one ticket for this event for this passholder.
 
 > ##### numberOfTickets
 > For regular passholders, the `numberOfTickets` in a tariff will always be 1. However some UiTPAS passes are "group passes". They are not bound to one specific person, but to an organisation for example. These passes can be used to buy multiple tickets for the same discounted price, instead of just one. In that case the `numberOfTickets` will indicate how many tickets they can buy at a specific tariff.
 
 ### 5. User selects a tariff (or none)
 
-If the API response contained one or more UiTPAS tariffs, your website or application should present them to the user to select one (or none).
+If the API response contained one or more UiTPAS tariffs, your website or application should present them to the user to select one (or none). Since some discounts are only usable once, it's important that passholders can choose for themselves what discount to use when.
 
-For example if all the discounted tariffs are based on one-time-use coupons, but the user does not wish to use any coupons after all, he/she should be able to not select one.
+For example if all the discounted tariffs are based on one-time-use coupons, but the passholder does not wish to use any coupons after all, he/she should be able to not select one.
 
 ### 6. Register the ticket sale
 

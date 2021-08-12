@@ -1,6 +1,6 @@
 # Registering ticket sales
 
-This guide illustrates how to register an UiTPAS discounted ticket sale so end users can receive their UiTPAS discount and organizers can be reimbursed within the UiTPAS financial flow.
+This guide illustrates how to register an UiTPAS discounted ticket sale so passholders can receive their UiTPAS discount and organizers can be reimbursed within the UiTPAS financial flow.
 
 You'll learn how to request possible UiTPAS tariffs, register the ticket sale and even cancel it if needed.
 
@@ -36,15 +36,15 @@ To learn more about how to register your event in UiTdatabank and turn it into a
 >
 > If your event is not in UiTdatabank yet, you only need to enter it there once. You should not create a new event in UiTdatabank for every ticket sale!
 
-### 2. User wants to buy a ticket
+### 2. Passholder wants to buy a ticket
 
-Some time *after* you have registered your event in UiTdatabank, a user on your website or application wants to buy a ticket to the event.
+Some time *after* you have registered your event in UiTdatabank, a passholder on your website or application wants to buy a ticket to the event.
 
-Your application then starts its typical flow of guiding the user through a checkout process.
+Your application then starts its typical flow of guiding the passholder through a checkout process.
 
-### 3. Determine UiTPAS number of the user
+### 3. Determine UiTPAS number of the passholder
 
-At some point during the checkout process on your website or application (but **before a payment has happened**), you provide the user a way to enter their UiTPAS number if they have one.
+At some point during the checkout process on your website or application (but **before a payment has happened**), you provide the passholder a way to enter their UiTPAS number if they have one.
 
 ### 4. Determine possible UiTPAS tariffs
 
@@ -87,19 +87,19 @@ In this example the passholder can select two possible UiTPAS discounts. The soc
 > ##### numberOfTickets
 > For regular passholders, the `numberOfTickets` in a tariff will always be 1. However some UiTPAS passes are "group passes". They are not bound to one specific person, but to an organisation for example. These passes can be used to buy multiple tickets for the same discounted price, instead of just one. In that case the `numberOfTickets` will indicate how many tickets they can buy at a specific tariff.
 
-### 5. User selects a tariff (or none)
+### 5. Passholder selects a tariff (or none)
 
-If the API response contained one or more UiTPAS tariffs, your website or application should present them to the user to select one (or none). Since some discounts are only usable once, it's important that passholders can choose for themselves what discount to use when.
+If the API response contained one or more UiTPAS tariffs, your website or application should present them to the passholder to select one (or none). Since some discounts are only usable once, it's important that passholders can choose for themselves what discount to use when.
 
 For example if all the discounted tariffs are based on one-time-use coupons, but the passholder does not wish to use any coupons after all, he/she should be able to not select one.
 
 ### 6. Register the ticket sale
 
-After the user has selected an UiTPAS tariff, your website or application continues with its regular flow for completing the sale like payment (for the discounted price) etc.
+After the passholder has selected an UiTPAS tariff, your website or application continues with its regular flow for completing the sale like payment (for the discounted price) etc.
 
 When your regular flow successfully finishes, you need to [register the ticket sale](/reference/UiTPAS.v2.json/paths/~1ticket-sales/post). If you don't register the ticket sale correctly, the organizer can not get reimbursed for the discount within the UiTPAS financial flow.
 
-> If the user had no UiTPAS tariffs, or did not select one, you do not need to register your ticket sale with UiTPAS.
+> If the passholder had no UiTPAS tariffs, or did not select one, you do not need to register your ticket sale with UiTPAS.
 
 For example:
 
@@ -121,7 +121,7 @@ Authorization: Bearer YOUR_ACCESS_TOKEN'
 ]
 ```
 
-As you can see, you can include multiple ticket sale registrations at once. This can be helpful when you want to provide your users a way to buy multiple tickets at once.
+As you can see, you can include multiple ticket sale registrations at once. This can be helpful when you want to provide your passholders a way to buy multiple tickets at once.
 
 For more information about each property, see the documentation for the [POST /ticket-sales](/reference/UiTPAS.v2.json/paths/~1ticket-sales/post) endpoint.
 
@@ -149,7 +149,7 @@ Content-Type: application/json
 
 <!-- theme: warning -->
 
-> **If one of the ticket sales is invalid** (for example the chosen tariff is incorrect or expired), **none of the ticket sales will be registered**. You will instead get an error response with more details about the problem, and can then retry the registration without the incorrect ticket sales or ask the end user to change the tickets and/or tariffs that they want.
+> **If one of the ticket sales is invalid** (for example the chosen tariff is incorrect or expired), **none of the ticket sales will be registered**. You will instead get an error response with more details about the problem, and can then retry the registration without the incorrect ticket sales or ask the passholder to change the tickets and/or tariffs that they want.
 
 ### 7. Cancelling the ticket sale
 

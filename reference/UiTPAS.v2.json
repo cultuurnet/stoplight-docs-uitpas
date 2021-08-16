@@ -1579,40 +1579,7 @@
         ]
       },
       "Error": {
-        "title": "Error",
-        "type": "object",
-        "description": "RFC7807 error model for all publiq APIs",
-        "x-tags": [
-          "Models"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "description": "A URI reference that identifies the problem type."
-          },
-          "title": {
-            "type": "string",
-            "description": "A short, human-readable summary of the problem type."
-          },
-          "status": {
-            "type": "integer",
-            "description": "The HTTP status code."
-          },
-          "jsonPointer": {
-            "type": "string",
-            "description": "Pointer to the erroneous request object in JavaScript Object Notation (JSON) Pointer format.",
-            "format": "json-pointer"
-          },
-          "detail": {
-            "type": "string",
-            "description": "A human-readable explanation specific to this occurrence of the problem. "
-          }
-        },
-        "required": [
-          "type",
-          "title",
-          "status"
-        ]
+        "$ref": "https://raw.githubusercontent.com/cultuurnet/stoplight-docs-errors/main/models/Error.json"
       },
       "OrganizerPermissions": {
         "title": "OrganizerPermissions",

@@ -1519,6 +1519,10 @@
             "passHolder": {}
           }
         },
+        "title": "TicketSale",
+        "x-tags": [
+          "Models"
+        ],
         "properties": {
           "id": {
             "type": "string",
@@ -1576,12 +1580,7 @@
           "regularPrice",
           "tariff",
           "eventId",
-          "uitpasNumber",
-          "passHolder"
-        ],
-        "title": "TicketSale",
-        "x-tags": [
-          "Models"
+          "uitpasNumber"
         ]
       },
       "TicketSaleRegistration": {

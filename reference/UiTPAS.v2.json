@@ -1498,9 +1498,7 @@
             "regularPrice": 10,
             "regularPriceLabel": "Volwassenen",
             "tariff": {
-              "id": "COUPON1234",
-              "name": "Cultuurbon 6 euro",
-              "price": 1.5
+              "id": "COUPON1234"
             },
             "eventId": "CBA2D826-9E85-47BD-8E0B-2BC7882E68FB",
             "uitpasNumber": "1234567890"

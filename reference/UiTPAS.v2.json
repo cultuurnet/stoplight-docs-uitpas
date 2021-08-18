@@ -1490,6 +1490,72 @@
           "type"
         ]
       },
+      "TicketSale": {
+        "description": "Model used both for registering new ticket sales and when searching for past ticket sales.",
+        "type": "object",
+        "x-examples": {},
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique id of a registered ticket sale. Not required for new ticket sale registrations",
+            "readOnly": true
+          },
+          "regularPrice": {
+            "type": "number",
+            "description": "Regular price of the ticket before UiTPAS discounts"
+          },
+          "regularPriceLabel": {
+            "type": "string",
+            "description": "Optional descriptive label of the regular price. Used in financial reporting"
+          },
+          "tariff": {
+            "type": "object",
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Id of the chosen tariff, required for registering a ticket sale"
+              },
+              "name": {
+                "type": "string",
+                "description": "Automatically included in ticket sale responses, ignored for ticket sale registrations",
+                "readOnly": true
+              },
+              "price": {
+                "type": "number",
+                "description": "Automatically included in ticket sale responses, ignored for ticket sale registrations",
+                "readOnly": true
+              }
+            }
+          },
+          "eventId": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Id of the event that the ticket sale was for"
+          },
+          "uitpasNumber": {
+            "type": "string",
+            "minLength": 1,
+            "description": "The passholder's UiTPAS number used to register this ticket sale"
+          },
+          "passHolder": {
+            "type": "object",
+            "description": "Automatically included in responses if you have permission to view passholder details. Not required for ticket sale registrations",
+            "readOnly": true
+          }
+        },
+        "required": [
+          "regularPrice",
+          "tariff",
+          "eventId",
+          "uitpasNumber",
+          "passHolder"
+        ],
+        "title": "TicketSale"
+      },
       "TicketSaleRegistration": {
         "title": "TicketSaleRegistration",
         "type": "object",
@@ -1512,7 +1578,8 @@
         ],
         "properties": {
           "id": {
-            "type": "string"
+            "type": "string",
+            "readOnly": true
           },
           "tariff": {
             "$ref": "#/components/schemas/Tariff"

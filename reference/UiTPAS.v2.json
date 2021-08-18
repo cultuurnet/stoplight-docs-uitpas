@@ -1554,7 +1554,10 @@
           "uitpasNumber",
           "passHolder"
         ],
-        "title": "TicketSale"
+        "title": "TicketSale",
+        "x-tags": [
+          "Models"
+        ]
       },
       "TicketSaleRegistration": {
         "title": "TicketSaleRegistration",

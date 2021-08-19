@@ -204,7 +204,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/TicketSaleRegistration"
+                    "$ref": "#/components/schemas/TicketSale"
                   }
                 },
                 "examples": {
@@ -216,11 +216,33 @@
                           "id": "COUPON1234",
                           "name": "Cultuurbon 6 euro",
                           "price": 1.5,
-                          "numberOfTickets": 1,
                           "type": "COUPON"
                         },
                         "uitpasNumber": "0560002524314",
-                        "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002"
+                        "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
+                        "regularPrice": 10,
+                        "regularPriceLabel": "Optional descriptive label of the regular price. Used in financial reporting.",
+                        "passHolder": {
+                          "id": "string",
+                          "name": "string",
+                          "firstName": "string",
+                          "inszNumber": "string",
+                          "cardSystemMemberships": [
+                            {
+                              "cardSystem": {
+                                "id": 1,
+                                "name": "UiTPAS Dender"
+                              },
+                              "uitpasNumber": "0560002524314",
+                              "status": "ACTIVE",
+                              "socialTariff": {
+                                "endDate": "2022-08-24T14:15:22Z",
+                                "inGracePeriod": false,
+                                "expired": false
+                              }
+                            }
+                          ]
+                        }
                       }
                     ]
                   },
@@ -232,11 +254,33 @@
                           "id": "COUPON1234",
                           "name": "Cultuurbon 6 euro",
                           "price": 4,
-                          "numberOfTickets": 1,
                           "type": "COUPON"
                         },
                         "uitpasNumber": "0560002524314",
-                        "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002"
+                        "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
+                        "regularPrice": 10,
+                        "regularPriceLabel": "Optional descriptive label of the regular price. Used in financial reporting.",
+                        "passHolder": {
+                          "id": "string",
+                          "name": "string",
+                          "firstName": "string",
+                          "inszNumber": "string",
+                          "cardSystemMemberships": [
+                            {
+                              "cardSystem": {
+                                "id": 1,
+                                "name": "UiTPAS Dender"
+                              },
+                              "uitpasNumber": "0560002524314",
+                              "status": "ACTIVE",
+                              "socialTariff": {
+                                "endDate": "2022-08-24T14:15:22Z",
+                                "inGracePeriod": false,
+                                "expired": false
+                              }
+                            }
+                          ]
+                        }
                       },
                       {
                         "id": "21346",
@@ -244,11 +288,33 @@
                           "id": "SOCIALTARIFF",
                           "name": "Kansentarief",
                           "price": 1.5,
-                          "numberOfTickets": 1,
                           "type": "SOCIALTARIFF"
                         },
                         "uitpasNumber": "0940002524123",
-                        "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002"
+                        "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
+                        "regularPrice": 10,
+                        "regularPriceLabel": "Optional descriptive label of the regular price. Used in financial reporting.",
+                        "passHolder": {
+                          "id": "string",
+                          "name": "string",
+                          "firstName": "string",
+                          "inszNumber": "string",
+                          "cardSystemMemberships": [
+                            {
+                              "cardSystem": {
+                                "id": 1,
+                                "name": "UiTPAS Dender"
+                              },
+                              "uitpasNumber": "0940002524123",
+                              "status": "ACTIVE",
+                              "socialTariff": {
+                                "endDate": "2022-08-24T14:15:22Z",
+                                "inGracePeriod": false,
+                                "expired": false
+                              }
+                            }
+                          ]
+                        }
                       }
                     ]
                   }
@@ -301,39 +367,42 @@
               "schema": {
                 "type": "array",
                 "items": {
-                  "$ref": "#/components/schemas/TicketSaleRequest"
+                  "$ref": "#/components/schemas/TicketSale"
                 }
               },
               "examples": {
                 "Example for one ticket sale": {
                   "value": [
                     {
+                      "tariff": {
+                        "id": "COUPON1234"
+                      },
                       "uitpasNumber": "0560002524314",
-                      "tariffId": "COUPON1234",
                       "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
                       "regularPrice": 10,
-                      "regularPriceLabel": "Optional descriptive label of the regular price. Used in financial reporting.",
-                      "numberOfTickets": 1
+                      "regularPriceLabel": "Optional descriptive label of the regular price. Used in financial reporting."
                     }
                   ]
                 },
                 "Example for multiple ticket sales": {
                   "value": [
                     {
+                      "tariff": {
+                        "id": "COUPON1234"
+                      },
                       "uitpasNumber": "0560002524314",
-                      "tariffId": "COUPON1234",
                       "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
                       "regularPrice": 10,
-                      "regularPriceLabel": "Base tariff",
-                      "numberOfTickets": 1
+                      "regularPriceLabel": "Base tariff"
                     },
                     {
+                      "tariff": {
+                        "id": "SOCIALTARIFF"
+                      },
                       "uitpasNumber": "0930002523422",
-                      "tariffId": "SOCIALTARIFF",
                       "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
                       "regularPrice": 10,
-                      "regularPriceLabel": "Base tariff",
-                      "numberOfTickets": 1
+                      "regularPriceLabel": "Base tariff"
                     }
                   ]
                 },
@@ -341,7 +410,9 @@
                   "value": [
                     {
                       "uitpasNumber": "0560002524314",
-                      "tariffId": "SOCIALTARIFF",
+                      "tariff": {
+                        "id": "SOCIALTARIFF"
+                      },
                       "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
                       "regularPrice": 10,
                       "regularPriceLabel": "Optional descriptive label of the regular price. Used in financial reporting.",
@@ -354,6 +425,132 @@
           },
           "description": ""
         }
+      },
+      "get": {
+        "summary": "Retrieve existing ticket sales",
+        "tags": [
+          "Ticket sales"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TicketSalesPaginatedResponse"
+                },
+                "examples": {
+                  "Example": {
+                    "value": {
+                      "totalItems": 2,
+                      "member": [
+                        {
+                          "id": "21345",
+                          "tariff": {
+                            "id": "COUPON1234",
+                            "name": "Cultuurbon 6 euro",
+                            "price": 1.5,
+                            "type": "COUPON"
+                          },
+                          "uitpasNumber": "0560002524314",
+                          "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
+                          "regularPrice": 10,
+                          "regularPriceLabel": "Optional descriptive label of the regular price. Used in financial reporting.",
+                          "passHolder": {
+                            "id": "string",
+                            "name": "string",
+                            "firstName": "string",
+                            "inszNumber": "string",
+                            "cardSystemMemberships": [
+                              {
+                                "cardSystem": {
+                                  "id": 1,
+                                  "name": "UiTPAS Dender"
+                                },
+                                "uitpasNumber": "string",
+                                "status": "ACTIVE",
+                                "socialTariff": {
+                                  "endDate": "2022-08-24T14:15:22Z",
+                                  "inGracePeriod": false,
+                                  "expired": false
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "id": "21346",
+                          "tariff": {
+                            "id": "COUPON1234",
+                            "name": "Cultuurbon 6 euro",
+                            "price": 1.5,
+                            "type": "COUPON"
+                          },
+                          "uitpasNumber": "0560002524314",
+                          "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
+                          "regularPrice": 10,
+                          "regularPriceLabel": "Optional descriptive label of the regular price. Used in financial reporting.",
+                          "passHolder": {
+                            "id": "string",
+                            "name": "string",
+                            "firstName": "string",
+                            "inszNumber": "string",
+                            "cardSystemMemberships": [
+                              {
+                                "cardSystem": {
+                                  "id": 1,
+                                  "name": "UiTPAS Dender"
+                                },
+                                "uitpasNumber": "string",
+                                "status": "ACTIVE",
+                                "socialTariff": {
+                                  "endDate": "2022-08-24T14:15:22Z",
+                                  "inGracePeriod": false,
+                                  "expired": false
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          }
+        },
+        "operationId": "get-ticket-sales",
+        "description": "Retrieve ticket sales based on search parameters.\n\nThe caller of this request must have `TICKETSALE_READ` permission for the organizer of the given event.",
+        "security": [
+          {
+            "USER_ACCESS_TOKEN": [
+              "https://api.publiq.be/auth/uitpas"
+            ]
+          },
+          {
+            "CLIENT_ACCESS_TOKEN": [
+              "https://api.publiq.be/auth/uitpas"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "eventId",
+            "description": "The ID of the UiTdatabank event.",
+            "required": true
+          }
+        ]
       }
     },
     "/ticket-sales/{ticketSaleId}": {
@@ -770,7 +967,38 @@
                 "schema": {
                   "$ref": "#/components/schemas/PassholdersPaginatedResponse"
                 },
-                "examples": {}
+                "examples": {
+                  "Example": {
+                    "value": {
+                      "totalItems": 1,
+                      "member": [
+                        {
+                          "id": "string",
+                          "name": "string",
+                          "firstName": "string",
+                          "inszNumber": "string",
+                          "cardSystemMemberships": [
+                            {
+                              "cardSystem": {
+                                "id": 0,
+                                "name": "string"
+                              },
+                              "uitpasNumber": "string",
+                              "status": "ACTIVE",
+                              "socialTariff": {
+                                "endDate": "2019-08-24T14:15:22Z",
+                                "inGracePeriod": true,
+                                "expired": true
+                              }
+                            }
+                          ],
+                          "email": "string",
+                          "creationDate": "2019-08-24T14:15:22Z"
+                        }
+                      ]
+                    }
+                  }
+                }
               }
             }
           },
@@ -1486,7 +1714,6 @@
           "id",
           "name",
           "price",
-          "numberOfTickets",
           "type"
         ]
       },
@@ -1535,6 +1762,10 @@
             "type": "string",
             "description": "Optional descriptive label of the regular price. Used in financial reporting"
           },
+          "tariffId": {
+            "type": "string",
+            "deprecated": true
+          },
           "tariff": {
             "type": "object",
             "required": [
@@ -1579,95 +1810,6 @@
           "tariff",
           "eventId",
           "uitpasNumber"
-        ]
-      },
-      "TicketSaleRegistration": {
-        "title": "TicketSaleRegistration",
-        "type": "object",
-        "x-examples": {
-          "Example": {
-            "id": 21345,
-            "tariff": {
-              "id": "COUPON1234",
-              "name": "Cultuurbon 6 euro",
-              "price": 1.5
-            },
-            "uitpasNumber": "0560002524314",
-            "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002"
-          }
-        },
-        "description": "The TicketSaleRegistration is a response object of the POST /ticketSales request. It can be used to provide the user with an overview or to identify the ticket sales in case they need to be canceled.",
-        "x-internal": false,
-        "x-tags": [
-          "Models"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "readOnly": true
-          },
-          "tariff": {
-            "$ref": "#/components/schemas/Tariff"
-          },
-          "uitpasNumber": {
-            "type": "string"
-          },
-          "eventId": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "id",
-          "tariff",
-          "uitpasNumber",
-          "eventId"
-        ]
-      },
-      "TicketSaleRequest": {
-        "title": "TicketSaleRequest",
-        "type": "object",
-        "description": "The TicketSaleRequest is a request object used to register ticket sales in POST /ticketSales.",
-        "x-examples": {
-          "Example ticket sale request": {
-            "uitpasNumber": "0560002524314",
-            "tariffId": "COUPON1234",
-            "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
-            "regularPrice": 10,
-            "regularPriceLabel": "Optional descriptive label of the regular price. Used in financial reporting."
-          }
-        },
-        "x-internal": false,
-        "x-tags": [
-          "Models"
-        ],
-        "properties": {
-          "uitpasNumber": {
-            "type": "string"
-          },
-          "tariffId": {
-            "type": "string"
-          },
-          "eventId": {
-            "type": "string"
-          },
-          "regularPrice": {
-            "type": "number"
-          },
-          "regularPriceLabel": {
-            "type": "string",
-            "description": "Optional descriptive label of the regular price. Used in financial reporting."
-          },
-          "numberOfTickets": {
-            "type": "integer",
-            "minimum": 1,
-            "description": "Number of ticket sales to register at this tariff. This property is by default 1, can never be lower than 1 and must never exceed the numberOfTickets value from GET /tariffs"
-          }
-        },
-        "required": [
-          "uitpasNumber",
-          "tariffId",
-          "eventId",
-          "regularPrice"
         ]
       },
       "Error": {
@@ -1773,6 +1915,25 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Organizer"
+            }
+          }
+        }
+      },
+      "TicketSalesPaginatedResponse": {
+        "title": "TicketSalesPaginatedResponse",
+        "type": "object",
+        "x-tags": [
+          "Models"
+        ],
+        "description": "Paginated response object for ticket sales",
+        "properties": {
+          "totalItems": {
+            "type": "integer"
+          },
+          "member": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TicketSale"
             }
           }
         }

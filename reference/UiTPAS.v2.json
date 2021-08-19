@@ -1700,7 +1700,7 @@
           "numberOfTickets": {
             "type": "integer",
             "minimum": 1,
-            "description": "Number of ticket sales that can be registered at this tariff."
+            "description": "Maximum number of ticket sales that can still be registered at this tariff."
           },
           "type": {
             "type": "string",
@@ -1741,6 +1741,19 @@
             },
             "eventId": "CBA2D826-9E85-47BD-8E0B-2BC7882E68FB",
             "uitpasNumber": "1234567890",
+            "passHolder": {}
+          },
+          "example-3": {
+            "id": "string",
+            "regularPrice": 0,
+            "regularPriceLabel": "string",
+            "tariff": {
+              "id": "string",
+              "name": "string",
+              "price": 0
+            },
+            "eventId": "string",
+            "uitpasNumber": "string",
             "passHolder": {}
           }
         },

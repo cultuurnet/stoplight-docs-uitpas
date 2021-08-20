@@ -67,7 +67,7 @@
                           "id": "SOCIALTARIFF",
                           "name": "Kansentarief",
                           "price": 1.5,
-                          "numberOfTickets": 1,
+                          "remaining": 1,
                           "type": "SOCIALTARIFF"
                         }
                       ]
@@ -80,21 +80,21 @@
                           "id": "SOCIALTARIFF",
                           "name": "Kansentarief",
                           "price": 1.5,
-                          "numberOfTickets": 1,
+                          "remaining": 1,
                           "type": "SOCIALTARIFF"
                         },
                         {
                           "id": "COUPON1234",
                           "name": "Cultuurbon 6 euro",
                           "price": 4,
-                          "numberOfTickets": 1,
+                          "remaining": 1,
                           "type": "COUPON"
                         },
                         {
                           "id": "COUPON2345",
                           "name": "2 euro korting op een specifiek event",
                           "price": 8,
-                          "numberOfTickets": 1,
+                          "remaining": 1,
                           "type": "COUPON"
                         }
                       ]
@@ -107,7 +107,7 @@
                           "id": "SOCIALTARIFF",
                           "name": "Kansentarief",
                           "price": 1.5,
-                          "numberOfTickets": 20,
+                          "remaining": 20,
                           "type": "SOCIALTARIFF"
                         }
                       ]
@@ -449,7 +449,7 @@
                           "tariff": {
                             "id": "COUPON1234",
                             "name": "Cultuurbon 6 euro",
-                            "price": 1.5,
+                            "price": 4,
                             "type": "COUPON"
                           },
                           "uitpasNumber": "0560002524314",
@@ -1669,8 +1669,8 @@
   "components": {
     "schemas": {
       "Tariff": {
-        "title": "Tariff",
         "type": "object",
+        "title": "Tariff",
         "description": "The Tariff describes the discounted price a passholder has to pay for a given ticket. ",
         "x-internal": false,
         "x-examples": {
@@ -1679,42 +1679,38 @@
               "id": "string",
               "name": "string",
               "price": 0,
-              "numberOfTickets": 1
+              "type": "SOCIALTARIFF"
             }
           }
         },
         "x-tags": [
           "Models"
         ],
+        "additionalProperties": false,
         "properties": {
           "id": {
             "type": "string",
             "description": ""
           },
           "name": {
-            "type": "string"
+            "type": "string",
+            "readOnly": true
           },
           "price": {
-            "type": "number"
-          },
-          "numberOfTickets": {
-            "type": "integer",
-            "minimum": 1,
-            "description": "Maximum number of ticket sales that can still be registered at this tariff."
+            "type": "number",
+            "readOnly": true
           },
           "type": {
             "type": "string",
             "enum": [
               "SOCIALTARIFF",
               "COUPON"
-            ]
+            ],
+            "readOnly": true
           }
         },
         "required": [
-          "id",
-          "name",
-          "price",
-          "type"
+          "id"
         ]
       },
       "TicketSale": {
@@ -1767,27 +1763,7 @@
             "deprecated": true
           },
           "tariff": {
-            "type": "object",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string",
-                "minLength": 1,
-                "description": "Id of the chosen tariff, required for registering a ticket sale"
-              },
-              "name": {
-                "type": "string",
-                "description": "Automatically included in ticket sale responses, ignored for ticket sale registrations",
-                "readOnly": true
-              },
-              "price": {
-                "type": "number",
-                "description": "Automatically included in ticket sale responses, ignored for ticket sale registrations",
-                "readOnly": true
-              }
-            }
+            "$ref": "#/components/schemas/Tariff"
           },
           "eventId": {
             "type": "string",
@@ -1800,9 +1776,7 @@
             "description": "The passholder's UiTPAS number used to register this ticket sale"
           },
           "passHolder": {
-            "type": "object",
-            "description": "Automatically included in responses if you have permission to view passholder details. Not required for ticket sale registrations",
-            "readOnly": true
+            "$ref": "#/components/schemas/Passholder"
           }
         },
         "required": [
@@ -1847,7 +1821,7 @@
         "required": [
           "id"
         ]
-      },
+    },
       "PassholdersPaginatedResponse": {
         "title": "PassholdersPaginatedResponse",
         "type": "object",
@@ -2128,7 +2102,7 @@
                 "id": "string",
                 "name": "string",
                 "price": 0,
-                "numberOfTickets": 1
+                "remaining": 1
               }
             }
           }
@@ -2137,10 +2111,40 @@
           "available": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Tariff"
+              "$ref": "#/components/schemas/TariffAvailibility"
             }
           }
         }
+      },
+      "TariffAvailibility": {
+        "x-examples": {
+          "Example": {
+            "id": "string",
+            "name": "string",
+            "price": 0,
+            "type": "SOCIALTARIFF",
+            "remaining": 1
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Tariff"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "remaining": {
+                "type": "integer",
+                "description": "The remaining number of tickets the Passholder can buy for the event at this Tariff. This field is 1 by default and can be higher for Group passes.",
+                "exclusiveMinimum": false,
+                "example": 1,
+                "readOnly": true
+              }
+            }
+          }
+        ],
+        "description": "The `TariffAvailibility` includes all information about the `Tariff`, which describes the discounted price a passholder has to pay for a given ticket, and the `remaining` number of tickets this Passholder can buy for this event at this Tariff.",
+        "title": "TariffAvailibility"
       }
     },
     "securitySchemes": {

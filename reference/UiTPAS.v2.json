@@ -2127,7 +2127,7 @@
         },
         "description": "The `TariffAvailibility` includes all information about the `Tariff`, which describes the discounted price a passholder has to pay for a given ticket, and the `remaining` number of tickets this Passholder can buy for this event at this Tariff.",
         "title": "TariffAvailibility",
-        "anyOf": [
+        "allOf": [
           {
             "$ref": "#/components/schemas/Tariff"
           },

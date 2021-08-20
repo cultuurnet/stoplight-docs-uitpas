@@ -67,8 +67,8 @@
                           "id": "SOCIALTARIFF",
                           "name": "Kansentarief",
                           "price": 1.5,
-                          "remaining": 1,
-                          "type": "SOCIALTARIFF"
+                          "type": "SOCIALTARIFF",
+                          "remaining": 1
                         }
                       ]
                     }
@@ -1686,7 +1686,6 @@
         "x-tags": [
           "Models"
         ],
-        "additionalProperties": false,
         "properties": {
           "id": {
             "type": "string",
@@ -1821,7 +1820,7 @@
         "required": [
           "id"
         ]
-    },
+      },
       "PassholdersPaginatedResponse": {
         "title": "PassholdersPaginatedResponse",
         "type": "object",
@@ -2126,7 +2125,9 @@
             "remaining": 1
           }
         },
-        "allOf": [
+        "description": "The `TariffAvailibility` includes all information about the `Tariff`, which describes the discounted price a passholder has to pay for a given ticket, and the `remaining` number of tickets this Passholder can buy for this event at this Tariff.",
+        "title": "TariffAvailibility",
+        "anyOf": [
           {
             "$ref": "#/components/schemas/Tariff"
           },
@@ -2135,16 +2136,15 @@
             "properties": {
               "remaining": {
                 "type": "integer",
-                "description": "The remaining number of tickets the Passholder can buy for the event at this Tariff. This field is 1 by default and can be higher for Group passes.",
-                "exclusiveMinimum": false,
                 "example": 1,
                 "readOnly": true
               }
-            }
+            },
+            "required": [
+              "remaining"
+            ]
           }
-        ],
-        "description": "The `TariffAvailibility` includes all information about the `Tariff`, which describes the discounted price a passholder has to pay for a given ticket, and the `remaining` number of tickets this Passholder can buy for this event at this Tariff.",
-        "title": "TariffAvailibility"
+        ]
       }
     },
     "securitySchemes": {

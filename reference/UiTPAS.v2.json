@@ -549,6 +549,21 @@
             "name": "eventId",
             "description": "The ID of the UiTdatabank event.",
             "required": true
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "start"
+          },
+          {
+            "schema": {
+              "type": "integer",
+              "default": 20
+            },
+            "in": "query",
+            "name": "limit"
           }
         ]
       }

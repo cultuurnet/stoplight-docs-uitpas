@@ -993,7 +993,8 @@
                             }
                           ],
                           "email": "string",
-                          "creationDate": "2019-08-24T14:15:22Z"
+                          "creationDate": "2019-08-24T14:15:22Z",
+                          "dateOfBirth": "1986-12-15"
                         }
                       ]
                     }
@@ -1756,7 +1757,7 @@
                   }
                 }
               ]
-            }            
+            }
           }
         },
         "title": "TicketSale",
@@ -1930,6 +1931,10 @@
           "creationDate": {
             "type": "string",
             "format": "date-time"
+          },
+          "dateOfBirth": {
+            "type": "string",
+            "format": "date"
           }
         }
       },

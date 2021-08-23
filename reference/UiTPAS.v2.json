@@ -348,7 +348,7 @@
             "$ref": "#/components/responses/Forbidden"
           }
         },
-        "description": "Registers one or more new ticket sales **with a discounted UiTPAS tariff**, so the UiTPAS organiser can get reimbursed for the discount.\n\nBefore you can register a discounted ticket sale, you will need to request the possible discounted tariffs from the `GET /tariffs` endpoint and let your end user pick one of the available tariffs. Afterward, you can register a ticket sale using this endpoint. \n\nYou will need:\n\n- The `uitpasNumber` of the passholder buying the ticket.\n- The `eventId` of the UiTdatabank event.\n- The chosen `tariff` from the `GET /tariffs` request. (only the `id` is required)\n- The `regularPrice` the passholder would normally have to pay for this ticket\n\nOptionally you can include:\n- a `regularPriceLabel` describing the regular price if you have multiple price \ncategories, which can be useful in the financial reporting overview.\n\nIf you want to register more than one ticket sale for the same passholder, for the same event, at the same tariff, use multiple `TicketSale` objects in this request. Do note this is only possible if `remaining` was higher than one in the `GET /tariffs` request.\n\nThe `passholder` field of `TicketSale` is ignored in the request body. It is included in the response, but only if the caller of this request has `PASSHOLDER_SEARCH` permission.\n\n<!-- theme: warning -->\n\n> ##### Error handling\n> **If one of the ticket sales is invalid** (for example the chosen tariff is incorrect or expired), **none of the ticket sales will be registered**. You will instead get an error response with more details about the problem, and can then retry the registration without the incorrect ticket sales or ask the end user to change the tickets and/or tariffs that they want.\n\nThe caller of this request must have `TICKETSALE_REGISTER`  permission for the organizer of the given event.\n",
+        "description": "Registers one or more new ticket sales **with a discounted UiTPAS tariff**, so the UiTPAS organiser can get reimbursed for the discount.\n\nBefore you can register a discounted ticket sale, you will need to request the possible discounted tariffs from the `GET /tariffs` endpoint and let your end user pick one of the available tariffs. Afterward, you can register a ticket sale using this endpoint. \n\nYou will need:\n\n- The `uitpasNumber` of the passholder buying the ticket.\n- The `eventId` of the UiTdatabank event.\n- The chosen `tariff` from the `GET /tariffs` request. (only the `id` is required)\n- The `regularPrice` the passholder would normally have to pay for this ticket\n\nOptionally you can include:\n- a `regularPriceLabel` describing the regular price if you have multiple price \ncategories, which can be useful in the financial reporting overview.\n\nIf you want to register more than one ticket sale for the same passholder, for the same event, at the same tariff, use multiple `TicketSale` objects in this request. Do note this is only possible if `remaining` was higher than one in the `GET /tariffs` request.\n\nThe `passholder` field of `TicketSale` is ignored in the request body. It is included in the response if applicable (passholder can be empty in some cases, e.g. for group passes), but only if the caller of this request has `PASSHOLDER_SEARCH` permission.\n\n<!-- theme: warning -->\n\n> ##### Error handling\n> **If one of the ticket sales is invalid** (for example the chosen tariff is incorrect or expired), **none of the ticket sales will be registered**. You will instead get an error response with more details about the problem, and can then retry the registration without the incorrect ticket sales or ask the end user to change the tickets and/or tariffs that they want.\n\nThe caller of this request must have `TICKETSALE_REGISTER`  permission for the organizer of the given event.\n",
         "security": [
           {
             "USER_ACCESS_TOKEN": [
@@ -527,7 +527,7 @@
           }
         },
         "operationId": "get-ticket-sales",
-        "description": "Retrieve ticket sales based on search parameters.\n\nThe caller of this request must have `TICKETSALE_READ` permission for the organizer of the given event.",
+        "description": "Retrieve ticket sales based on search parameters.\n\nThe caller of this request must have `TICKETSALE_SEARCH` permission for the organizer of the given event.\n\nThe `passholder` is included in the response if applicable (passholder can be empty in some cases, e.g. for group passes), and only if the caller of this request has PASSHOLDER_SEARCH permission.",
         "security": [
           {
             "USER_ACCESS_TOKEN": [
@@ -1910,7 +1910,8 @@
             "type": "string",
             "format": "date-time"
           }
-        }
+        },
+        "description": "Person who holds an UiTPAS, the end-user of an UiTPAS. \n\nA `Passholder` can be identified by its `id`. However, there are cases where the passholder identifies using one of its UiTPAS numbers. That number is CardSystem specific, so it can be found under `cardSystemMemberships`. Every passholder should have at least one cardsystem membership."
       },
       "CardSystemMembership": {
         "title": "CardSystemMembership",

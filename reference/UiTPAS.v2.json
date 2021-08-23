@@ -1772,7 +1772,7 @@
           "uitpasNumber": {
             "type": "string",
             "minLength": 1,
-            "description": "The passholder's UiTPAS number used to register this ticket sale. Note that the uitpasNumber of a Passholder might change over time. This field will always contain the uitpasNumber used when registering the ticket sale. To identify the passholder, use the passHolder field."
+            "description": "The passholder's UiTPAS number used to register this ticket sale. Note that the uitpasNumber of a Passholder might change over time. This field will always contain the uitpasNumber used when registering the ticket sale. To identify the passholder, use the `passholder` field."
           },
           "passholder": {
             "$ref": "#/components/schemas/Passholder"

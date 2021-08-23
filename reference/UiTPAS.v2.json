@@ -222,7 +222,7 @@
                         "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
                         "regularPrice": 10,
                         "regularPriceLabel": "Optional descriptive label of the regular price. Used in financial reporting.",
-                        "passHolder": {
+                        "passholder": {
                           "id": "string",
                           "name": "string",
                           "firstName": "string",
@@ -260,7 +260,7 @@
                         "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
                         "regularPrice": 10,
                         "regularPriceLabel": "Optional descriptive label of the regular price. Used in financial reporting.",
-                        "passHolder": {
+                        "passholder": {
                           "id": "string",
                           "name": "string",
                           "firstName": "string",
@@ -294,7 +294,7 @@
                         "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
                         "regularPrice": 10,
                         "regularPriceLabel": "Optional descriptive label of the regular price. Used in financial reporting.",
-                        "passHolder": {
+                        "passholder": {
                           "id": "string",
                           "name": "string",
                           "firstName": "string",
@@ -456,7 +456,7 @@
                           "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
                           "regularPrice": 10,
                           "regularPriceLabel": "Optional descriptive label of the regular price. Used in financial reporting.",
-                          "passHolder": {
+                          "passholder": {
                             "id": "string",
                             "name": "string",
                             "firstName": "string",
@@ -490,7 +490,7 @@
                           "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
                           "regularPrice": 10,
                           "regularPriceLabel": "Optional descriptive label of the regular price. Used in financial reporting.",
-                          "passHolder": {
+                          "passholder": {
                             "id": "string",
                             "name": "string",
                             "firstName": "string",
@@ -1736,7 +1736,27 @@
             },
             "eventId": "CBA2D826-9E85-47BD-8E0B-2BC7882E68FB",
             "uitpasNumber": "1234567890",
-            "passHolder": {}
+            "passholder": {
+              "id": "string",
+              "name": "string",
+              "firstName": "string",
+              "inszNumber": "string",
+              "cardSystemMemberships": [
+                {
+                  "cardSystem": {
+                    "id": 1,
+                    "name": "UiTPAS Dender"
+                  },
+                  "uitpasNumber": "0560002524314",
+                  "status": "ACTIVE",
+                  "socialTariff": {
+                    "endDate": "2022-08-24T14:15:22Z",
+                    "inGracePeriod": false,
+                    "expired": false
+                  }
+                }
+              ]
+            }            
           }
         },
         "title": "TicketSale",
@@ -1772,7 +1792,7 @@
           "uitpasNumber": {
             "type": "string",
             "minLength": 1,
-            "description": "The passholder's UiTPAS number used to register this ticket sale. Note that the uitpasNumber of a Passholder might change over time. This field will always contain the uitpasNumber used when registering the ticket sale. To identify the passholder, use the `passholder` field."
+            "description": "The passholder's UiTPAS number used to register this ticket sale. Note that the uitpasNumber of a passholder might change over time. This field will always contain the uitpasNumber used when registering the ticket sale. To identify the passholder, use the `passholder` field."
           },
           "passholder": {
             "$ref": "#/components/schemas/Passholder"
@@ -1884,6 +1904,7 @@
         "x-tags": [
           "Models"
         ],
+        "description": "Person who holds an UiTPAS, the end-user of an UiTPAS. \n\nA `Passholder` can be identified by its `id`. However, there are cases where the passholder identifies using one of its UiTPAS numbers. That number is CardSystem specific, so it can be found under `cardSystemMemberships`. Every passholder should have at least one cardsystem membership.",
         "properties": {
           "id": {
             "type": "string"
@@ -1910,8 +1931,7 @@
             "type": "string",
             "format": "date-time"
           }
-        },
-        "description": "Person who holds an UiTPAS, the end-user of an UiTPAS. \n\nA `Passholder` can be identified by its `id`. However, there are cases where the passholder identifies using one of its UiTPAS numbers. That number is CardSystem specific, so it can be found under `cardSystemMemberships`. Every passholder should have at least one cardsystem membership."
+        }
       },
       "CardSystemMembership": {
         "title": "CardSystemMembership",
@@ -2126,7 +2146,7 @@
             "remaining": 1
           }
         },
-        "description": "The `TariffAvailibility` includes all information about the `Tariff`, which describes the discounted price a passholder has to pay for a given ticket, and the `remaining` number of tickets this Passholder can buy for this event at this Tariff.",
+        "description": "The `TariffAvailibility` includes all information about the `Tariff`, which describes the discounted price a passholder has to pay for a given ticket, and the `remaining` number of tickets this passholder can buy for this event at this Tariff.",
         "title": "TariffAvailibility",
         "allOf": [
           {

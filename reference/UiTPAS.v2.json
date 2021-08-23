@@ -67,8 +67,8 @@
                           "id": "SOCIALTARIFF",
                           "name": "Kansentarief",
                           "price": 1.5,
-                          "numberOfTickets": 1,
-                          "type": "SOCIALTARIFF"
+                          "type": "SOCIALTARIFF",
+                          "remaining": 1
                         }
                       ]
                     }
@@ -80,21 +80,21 @@
                           "id": "SOCIALTARIFF",
                           "name": "Kansentarief",
                           "price": 1.5,
-                          "numberOfTickets": 1,
+                          "remaining": 1,
                           "type": "SOCIALTARIFF"
                         },
                         {
                           "id": "COUPON1234",
                           "name": "Cultuurbon 6 euro",
                           "price": 4,
-                          "numberOfTickets": 1,
+                          "remaining": 1,
                           "type": "COUPON"
                         },
                         {
                           "id": "COUPON2345",
                           "name": "2 euro korting op een specifiek event",
                           "price": 8,
-                          "numberOfTickets": 1,
+                          "remaining": 1,
                           "type": "COUPON"
                         }
                       ]
@@ -107,7 +107,7 @@
                           "id": "SOCIALTARIFF",
                           "name": "Kansentarief",
                           "price": 1.5,
-                          "numberOfTickets": 20,
+                          "remaining": 20,
                           "type": "SOCIALTARIFF"
                         }
                       ]
@@ -204,7 +204,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/TicketSaleRegistration"
+                    "$ref": "#/components/schemas/TicketSale"
                   }
                 },
                 "examples": {
@@ -216,11 +216,33 @@
                           "id": "COUPON1234",
                           "name": "Cultuurbon 6 euro",
                           "price": 1.5,
-                          "numberOfTickets": 1,
                           "type": "COUPON"
                         },
                         "uitpasNumber": "0560002524314",
-                        "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002"
+                        "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
+                        "regularPrice": 10,
+                        "regularPriceLabel": "Optional descriptive label of the regular price. Used in financial reporting.",
+                        "passHolder": {
+                          "id": "string",
+                          "name": "string",
+                          "firstName": "string",
+                          "inszNumber": "string",
+                          "cardSystemMemberships": [
+                            {
+                              "cardSystem": {
+                                "id": 1,
+                                "name": "UiTPAS Dender"
+                              },
+                              "uitpasNumber": "0560002524314",
+                              "status": "ACTIVE",
+                              "socialTariff": {
+                                "endDate": "2022-08-24T14:15:22Z",
+                                "inGracePeriod": false,
+                                "expired": false
+                              }
+                            }
+                          ]
+                        }
                       }
                     ]
                   },
@@ -232,11 +254,33 @@
                           "id": "COUPON1234",
                           "name": "Cultuurbon 6 euro",
                           "price": 4,
-                          "numberOfTickets": 1,
                           "type": "COUPON"
                         },
                         "uitpasNumber": "0560002524314",
-                        "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002"
+                        "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
+                        "regularPrice": 10,
+                        "regularPriceLabel": "Optional descriptive label of the regular price. Used in financial reporting.",
+                        "passHolder": {
+                          "id": "string",
+                          "name": "string",
+                          "firstName": "string",
+                          "inszNumber": "string",
+                          "cardSystemMemberships": [
+                            {
+                              "cardSystem": {
+                                "id": 1,
+                                "name": "UiTPAS Dender"
+                              },
+                              "uitpasNumber": "0560002524314",
+                              "status": "ACTIVE",
+                              "socialTariff": {
+                                "endDate": "2022-08-24T14:15:22Z",
+                                "inGracePeriod": false,
+                                "expired": false
+                              }
+                            }
+                          ]
+                        }
                       },
                       {
                         "id": "21346",
@@ -244,11 +288,33 @@
                           "id": "SOCIALTARIFF",
                           "name": "Kansentarief",
                           "price": 1.5,
-                          "numberOfTickets": 1,
                           "type": "SOCIALTARIFF"
                         },
                         "uitpasNumber": "0940002524123",
-                        "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002"
+                        "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
+                        "regularPrice": 10,
+                        "regularPriceLabel": "Optional descriptive label of the regular price. Used in financial reporting.",
+                        "passHolder": {
+                          "id": "string",
+                          "name": "string",
+                          "firstName": "string",
+                          "inszNumber": "string",
+                          "cardSystemMemberships": [
+                            {
+                              "cardSystem": {
+                                "id": 1,
+                                "name": "UiTPAS Dender"
+                              },
+                              "uitpasNumber": "0940002524123",
+                              "status": "ACTIVE",
+                              "socialTariff": {
+                                "endDate": "2022-08-24T14:15:22Z",
+                                "inGracePeriod": false,
+                                "expired": false
+                              }
+                            }
+                          ]
+                        }
                       }
                     ]
                   }
@@ -282,7 +348,7 @@
             "$ref": "#/components/responses/Forbidden"
           }
         },
-        "description": "Registers one or more new ticket sales **with a discounted UiTPAS tariff**, so the UiTPAS organiser can get reimbursed for the discount.\n\nBefore you can register a discounted ticket sale, you will need to request the possible discounted tariffs from the `GET /tariffs` endpoint and let your end user pick one of the available tariffs. Afterward, you can register a ticket sale using this endpoint. \n\nYou will need:\n\n- The `uitpasNumber` of the passholder buying the ticket.\n- The `eventId` of the UiTdatabank event.\n- The chosen `uitpasTariffId` from the `GET /tariffs` request.\n- The `regularPrice` the passholder would normally have to pay for this ticket\n\nOptionally you can include:\n- a `regularPriceLabel` describing the regular price if you have multiple price \ncategories, which can be useful in the financial reporting overview.\n- the `numberOfTickets` that are registered for the same passholder, for the same event, at the same tariff. This value 1 by default and can never be higher than the numberOfTickets from the GET /tariffs response.\n\n<!-- theme: warning -->\n\n> ##### Error handling\n> **If one of the ticket sales is invalid** (for example the chosen tariff is incorrect or expired), **none of the ticket sales will be registered**. You will instead get an error response with more details about the problem, and can then retry the registration without the incorrect ticket sales or ask the end user to change the tickets and/or tariffs that they want.\n\nThe caller of this request must have `TICKETSALE_REGISTER`  permission for the organizer of the given event.\n",
+        "description": "Registers one or more new ticket sales **with a discounted UiTPAS tariff**, so the UiTPAS organiser can get reimbursed for the discount.\n\nBefore you can register a discounted ticket sale, you will need to request the possible discounted tariffs from the `GET /tariffs` endpoint and let your end user pick one of the available tariffs. Afterward, you can register a ticket sale using this endpoint. \n\nYou will need:\n\n- The `uitpasNumber` of the passholder buying the ticket.\n- The `eventId` of the UiTdatabank event.\n- The chosen `tariff` from the `GET /tariffs` request. (only the `id` is required)\n- The `regularPrice` the passholder would normally have to pay for this ticket\n\nOptionally you can include:\n- a `regularPriceLabel` describing the regular price if you have multiple price \ncategories, which can be useful in the financial reporting overview.\n\nIf you want to register more than one ticket sale for the same passholder, for the same event, at the same tariff, use multiple `TicketSale` objects in this request. Do note this is only possible if `remaining` was higher than one in the `GET /tariffs` request.\n\nThe `passholder` field of `TicketSale` is ignored in the request body. It is included in the response if applicable (passholder can be empty in some cases, e.g. for group passes), but only if the caller of this request has `PASSHOLDER_SEARCH` permission.\n\n<!-- theme: warning -->\n\n> ##### Error handling\n> **If one of the ticket sales is invalid** (for example the chosen tariff is incorrect or expired), **none of the ticket sales will be registered**. You will instead get an error response with more details about the problem, and can then retry the registration without the incorrect ticket sales or ask the end user to change the tickets and/or tariffs that they want.\n\nThe caller of this request must have `TICKETSALE_REGISTER`  permission for the organizer of the given event.\n",
         "security": [
           {
             "USER_ACCESS_TOKEN": [
@@ -301,39 +367,42 @@
               "schema": {
                 "type": "array",
                 "items": {
-                  "$ref": "#/components/schemas/TicketSaleRequest"
+                  "$ref": "#/components/schemas/TicketSale"
                 }
               },
               "examples": {
                 "Example for one ticket sale": {
                   "value": [
                     {
+                      "tariff": {
+                        "id": "COUPON1234"
+                      },
                       "uitpasNumber": "0560002524314",
-                      "tariffId": "COUPON1234",
                       "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
                       "regularPrice": 10,
-                      "regularPriceLabel": "Optional descriptive label of the regular price. Used in financial reporting.",
-                      "numberOfTickets": 1
+                      "regularPriceLabel": "Optional descriptive label of the regular price. Used in financial reporting."
                     }
                   ]
                 },
                 "Example for multiple ticket sales": {
                   "value": [
                     {
+                      "tariff": {
+                        "id": "COUPON1234"
+                      },
                       "uitpasNumber": "0560002524314",
-                      "tariffId": "COUPON1234",
                       "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
                       "regularPrice": 10,
-                      "regularPriceLabel": "Base tariff",
-                      "numberOfTickets": 1
+                      "regularPriceLabel": "Base tariff"
                     },
                     {
+                      "tariff": {
+                        "id": "SOCIALTARIFF"
+                      },
                       "uitpasNumber": "0930002523422",
-                      "tariffId": "SOCIALTARIFF",
                       "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
                       "regularPrice": 10,
-                      "regularPriceLabel": "Base tariff",
-                      "numberOfTickets": 1
+                      "regularPriceLabel": "Base tariff"
                     }
                   ]
                 },
@@ -341,7 +410,9 @@
                   "value": [
                     {
                       "uitpasNumber": "0560002524314",
-                      "tariffId": "SOCIALTARIFF",
+                      "tariff": {
+                        "id": "SOCIALTARIFF"
+                      },
                       "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
                       "regularPrice": 10,
                       "regularPriceLabel": "Optional descriptive label of the regular price. Used in financial reporting.",
@@ -354,6 +425,132 @@
           },
           "description": ""
         }
+      },
+      "get": {
+        "summary": "Retrieve existing ticket sales",
+        "tags": [
+          "Ticket sales"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TicketSalesPaginatedResponse"
+                },
+                "examples": {
+                  "Example": {
+                    "value": {
+                      "totalItems": 2,
+                      "member": [
+                        {
+                          "id": "21345",
+                          "tariff": {
+                            "id": "COUPON1234",
+                            "name": "Cultuurbon 6 euro",
+                            "price": 4,
+                            "type": "COUPON"
+                          },
+                          "uitpasNumber": "0560002524314",
+                          "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
+                          "regularPrice": 10,
+                          "regularPriceLabel": "Optional descriptive label of the regular price. Used in financial reporting.",
+                          "passHolder": {
+                            "id": "string",
+                            "name": "string",
+                            "firstName": "string",
+                            "inszNumber": "string",
+                            "cardSystemMemberships": [
+                              {
+                                "cardSystem": {
+                                  "id": 1,
+                                  "name": "UiTPAS Dender"
+                                },
+                                "uitpasNumber": "string",
+                                "status": "ACTIVE",
+                                "socialTariff": {
+                                  "endDate": "2022-08-24T14:15:22Z",
+                                  "inGracePeriod": false,
+                                  "expired": false
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "id": "21346",
+                          "tariff": {
+                            "id": "COUPON1234",
+                            "name": "Cultuurbon 6 euro",
+                            "price": 1.5,
+                            "type": "COUPON"
+                          },
+                          "uitpasNumber": "0560002524314",
+                          "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
+                          "regularPrice": 10,
+                          "regularPriceLabel": "Optional descriptive label of the regular price. Used in financial reporting.",
+                          "passHolder": {
+                            "id": "string",
+                            "name": "string",
+                            "firstName": "string",
+                            "inszNumber": "string",
+                            "cardSystemMemberships": [
+                              {
+                                "cardSystem": {
+                                  "id": 1,
+                                  "name": "UiTPAS Dender"
+                                },
+                                "uitpasNumber": "string",
+                                "status": "ACTIVE",
+                                "socialTariff": {
+                                  "endDate": "2022-08-24T14:15:22Z",
+                                  "inGracePeriod": false,
+                                  "expired": false
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          }
+        },
+        "operationId": "get-ticket-sales",
+        "description": "Retrieve ticket sales based on search parameters.\n\nThe caller of this request must have `TICKETSALE_SEARCH` permission for the organizer of the given event.\n\nThe `passholder` is included in the response if applicable (passholder can be empty in some cases, e.g. for group passes), and only if the caller of this request has PASSHOLDER_SEARCH permission.",
+        "security": [
+          {
+            "USER_ACCESS_TOKEN": [
+              "https://api.publiq.be/auth/uitpas"
+            ]
+          },
+          {
+            "CLIENT_ACCESS_TOKEN": [
+              "https://api.publiq.be/auth/uitpas"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "eventId",
+            "description": "The ID of the UiTdatabank event.",
+            "required": true
+          }
+        ]
       }
     },
     "/ticket-sales/{ticketSaleId}": {
@@ -770,7 +967,38 @@
                 "schema": {
                   "$ref": "#/components/schemas/PassholdersPaginatedResponse"
                 },
-                "examples": {}
+                "examples": {
+                  "Example": {
+                    "value": {
+                      "totalItems": 1,
+                      "member": [
+                        {
+                          "id": "string",
+                          "name": "string",
+                          "firstName": "string",
+                          "inszNumber": "string",
+                          "cardSystemMemberships": [
+                            {
+                              "cardSystem": {
+                                "id": 0,
+                                "name": "string"
+                              },
+                              "uitpasNumber": "string",
+                              "status": "ACTIVE",
+                              "socialTariff": {
+                                "endDate": "2019-08-24T14:15:22Z",
+                                "inGracePeriod": true,
+                                "expired": true
+                              }
+                            }
+                          ],
+                          "email": "string",
+                          "creationDate": "2019-08-24T14:15:22Z"
+                        }
+                      ]
+                    }
+                  }
+                }
               }
             }
           },
@@ -1441,8 +1669,8 @@
   "components": {
     "schemas": {
       "Tariff": {
-        "title": "Tariff",
         "type": "object",
+        "title": "Tariff",
         "description": "The Tariff describes the discounted price a passholder has to pay for a given ticket. ",
         "x-internal": false,
         "x-examples": {
@@ -1451,7 +1679,7 @@
               "id": "string",
               "name": "string",
               "price": 0,
-              "numberOfTickets": 1
+              "type": "SOCIALTARIFF"
             }
           }
         },
@@ -1464,118 +1692,97 @@
             "description": ""
           },
           "name": {
-            "type": "string"
+            "type": "string",
+            "readOnly": true
           },
           "price": {
-            "type": "number"
-          },
-          "numberOfTickets": {
-            "type": "integer",
-            "minimum": 1,
-            "description": "Number of ticket sales that can be registered at this tariff."
+            "type": "number",
+            "readOnly": true
           },
           "type": {
             "type": "string",
             "enum": [
               "SOCIALTARIFF",
               "COUPON"
-            ]
+            ],
+            "readOnly": true
           }
         },
         "required": [
-          "id",
-          "name",
-          "price",
-          "numberOfTickets",
-          "type"
+          "id"
         ]
       },
-      "TicketSaleRegistration": {
-        "title": "TicketSaleRegistration",
+      "TicketSale": {
+        "description": "Model used both for registering new ticket sales and when searching for past ticket sales.\n\nThe `passholder` field is automatically included in responses if you have PASSHOLDER_SEARCH permission. It is not required for ticket sale registrations.",
         "type": "object",
         "x-examples": {
-          "Example": {
-            "id": 21345,
+          "New registration": {
+            "regularPrice": 10,
+            "regularPriceLabel": "Volwassenen",
+            "tariff": {
+              "id": "COUPON1234"
+            },
+            "eventId": "CBA2D826-9E85-47BD-8E0B-2BC7882E68FB",
+            "uitpasNumber": "1234567890"
+          },
+          "After registration": {
+            "id": "12345",
+            "regularPrice": 10,
+            "regularPriceLabel": "Volwassenen",
             "tariff": {
               "id": "COUPON1234",
               "name": "Cultuurbon 6 euro",
               "price": 1.5
             },
-            "uitpasNumber": "0560002524314",
-            "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002"
+            "eventId": "CBA2D826-9E85-47BD-8E0B-2BC7882E68FB",
+            "uitpasNumber": "1234567890",
+            "passHolder": {}
           }
         },
-        "description": "The TicketSaleRegistration is a response object of the POST /ticketSales request. It can be used to provide the user with an overview or to identify the ticket sales in case they need to be canceled.",
-        "x-internal": false,
+        "title": "TicketSale",
         "x-tags": [
           "Models"
         ],
         "properties": {
           "id": {
-            "type": "string"
+            "type": "string",
+            "description": "Unique id of a registered ticket sale. Not required for new ticket sale registrations",
+            "readOnly": true
+          },
+          "regularPrice": {
+            "type": "number",
+            "description": "Regular price of the ticket before UiTPAS discounts"
+          },
+          "regularPriceLabel": {
+            "type": "string",
+            "description": "Optional descriptive label of the regular price. Used in financial reporting"
+          },
+          "tariffId": {
+            "type": "string",
+            "deprecated": true
           },
           "tariff": {
             "$ref": "#/components/schemas/Tariff"
           },
-          "uitpasNumber": {
-            "type": "string"
-          },
           "eventId": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "id",
-          "tariff",
-          "uitpasNumber",
-          "eventId"
-        ]
-      },
-      "TicketSaleRequest": {
-        "title": "TicketSaleRequest",
-        "type": "object",
-        "description": "The TicketSaleRequest is a request object used to register ticket sales in POST /ticketSales.",
-        "x-examples": {
-          "Example ticket sale request": {
-            "uitpasNumber": "0560002524314",
-            "tariffId": "COUPON1234",
-            "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
-            "regularPrice": 10,
-            "regularPriceLabel": "Optional descriptive label of the regular price. Used in financial reporting."
-          }
-        },
-        "x-internal": false,
-        "x-tags": [
-          "Models"
-        ],
-        "properties": {
-          "uitpasNumber": {
-            "type": "string"
-          },
-          "tariffId": {
-            "type": "string"
-          },
-          "eventId": {
-            "type": "string"
-          },
-          "regularPrice": {
-            "type": "number"
-          },
-          "regularPriceLabel": {
             "type": "string",
-            "description": "Optional descriptive label of the regular price. Used in financial reporting."
+            "minLength": 1,
+            "description": "Id of the event that the ticket sale was for"
           },
-          "numberOfTickets": {
-            "type": "integer",
-            "minimum": 1,
-            "description": "Number of ticket sales to register at this tariff. This property is by default 1, can never be lower than 1 and must never exceed the numberOfTickets value from GET /tariffs"
+          "uitpasNumber": {
+            "type": "string",
+            "minLength": 1,
+            "description": "The passholder's UiTPAS number used to register this ticket sale. Note that the uitpasNumber of a Passholder might change over time. This field will always contain the uitpasNumber used when registering the ticket sale. To identify the passholder, use the passHolder field."
+          },
+          "passholder": {
+            "$ref": "#/components/schemas/Passholder"
           }
         },
         "required": [
-          "uitpasNumber",
-          "tariffId",
+          "regularPrice",
+          "tariff",
           "eventId",
-          "regularPrice"
+          "uitpasNumber"
         ]
       },
       "Error": {
@@ -1652,6 +1859,25 @@
           }
         }
       },
+      "TicketSalesPaginatedResponse": {
+        "title": "TicketSalesPaginatedResponse",
+        "type": "object",
+        "x-tags": [
+          "Models"
+        ],
+        "description": "Paginated response object for ticket sales",
+        "properties": {
+          "totalItems": {
+            "type": "integer"
+          },
+          "member": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TicketSale"
+            }
+          }
+        }
+      },
       "Passholder": {
         "title": "Passholder",
         "type": "object",
@@ -1684,7 +1910,8 @@
             "type": "string",
             "format": "date-time"
           }
-        }
+        },
+        "description": "Person who holds an UiTPAS, the end-user of an UiTPAS. \n\nA `Passholder` can be identified by its `id`. However, there are cases where the passholder identifies using one of its UiTPAS numbers. That number is CardSystem specific, so it can be found under `cardSystemMemberships`. Every passholder should have at least one cardsystem membership."
       },
       "CardSystemMembership": {
         "title": "CardSystemMembership",
@@ -1875,7 +2102,7 @@
                 "id": "string",
                 "name": "string",
                 "price": 0,
-                "numberOfTickets": 1
+                "remaining": 1
               }
             }
           }
@@ -1884,10 +2111,41 @@
           "available": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Tariff"
+              "$ref": "#/components/schemas/TariffAvailibility"
             }
           }
         }
+      },
+      "TariffAvailibility": {
+        "x-examples": {
+          "Example": {
+            "id": "string",
+            "name": "string",
+            "price": 0,
+            "type": "SOCIALTARIFF",
+            "remaining": 1
+          }
+        },
+        "description": "The `TariffAvailibility` includes all information about the `Tariff`, which describes the discounted price a passholder has to pay for a given ticket, and the `remaining` number of tickets this Passholder can buy for this event at this Tariff.",
+        "title": "TariffAvailibility",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Tariff"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "remaining": {
+                "type": "integer",
+                "example": 1,
+                "readOnly": true
+              }
+            },
+            "required": [
+              "remaining"
+            ]
+          }
+        ]
       }
     },
     "securitySchemes": {

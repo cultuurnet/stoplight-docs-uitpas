@@ -22,8 +22,6 @@ To decide what kind of token to use, see the [overview of token types](https://p
 
 ![](../assets/images/steps-ticketing-UiTPAS-visual.png)
 
-TODO JM: change the drawing: it's best to register the ticketsale first, then continue with the payment flow, and potentially cancelling the ticketsale if the payment should have failed. So I would at least move 'Proceed regular application flow ...' to step 6.
-
 ### 1. UiTdatabank event
 
 Every ticket sale in UiTPAS is coupled to an event in UiTdatabank, for example because some discounts are only applicable to some events. Every UiTPAS event has an organizer, for which you are registering this ticket sale.

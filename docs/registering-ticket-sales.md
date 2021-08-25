@@ -2,7 +2,7 @@
 
 This guide illustrates how to register an UiTPAS discounted ticket sale so passholders can receive their UiTPAS discount and organizers can be reimbursed within the UiTPAS financial flow.
 
-You'll learn how to request possible UiTPAS tariffs, register the ticket sale and even cancel it if needed.
+You'll learn how to request available UiTPAS tariffs for an event and passholder, register the ticket sale and even cancel it if needed.
 
 The whole flow consists of approximately two to four API calls depending on your situation.
 
@@ -21,6 +21,8 @@ To decide what kind of token to use, see the [overview of token types](https://p
 ## Workflow overview
 
 ![](../assets/images/steps-ticketing-UiTPAS-visual.png)
+
+TODO JM: change the drawing: it's best to register the ticketsale first, then continue with the payment flow, and potentially cancelling the ticketsale if the payment should have failed. So I would at least move 'Proceed regular application flow ...' to step 6.
 
 ### 1. UiTdatabank event
 
@@ -46,9 +48,9 @@ Your application then starts its typical flow of guiding the passholder through 
 
 At some point during the checkout process on your website or application (but **before a payment has happened**), you provide the passholder a way to enter their UiTPAS number if they have one.
 
-### 4. Determine possible UiTPAS tariffs
+### 4. Determine available UiTPAS tariffs
 
-Using the event id, the UiTPAS number and the regular price of your event, you can [request possible UiTPAS tariffs](/reference/UiTPAS.v2.json/paths/~1tariffs/get).
+Using the event id, the UiTPAS number and the regular price of your event, you can [request available UiTPAS tariffs](/reference/UiTPAS.v2.json/paths/~1tariffs/get).
 
 Example request:
 
@@ -69,14 +71,14 @@ Content-Type: application/json
     "id": "SOCIALTARIFF",
     "name": "Kansentarief",
     "price": 1.5,
-    "numberOfTickets": 1,
+    "remaining": 1,
     "type": "SOCIALTARIFF"
   },
   {
     "id": "COUPON1234",
     "name": "Cultuurbon 6 euro",
     "price": 4,
-    "numberOfTickets": 1,
+    "remaining": 1,
     "type": "COUPON"
   }
 ]
@@ -84,8 +86,8 @@ Content-Type: application/json
 
 In this example the passholder can select two possible UiTPAS discounts. The social tariff (1), and a coupon (2). Both tariffs are valid for one ticket for this event for this passholder.
 
-> ##### numberOfTickets
-> For regular passholders, the `numberOfTickets` in a tariff will always be 1. However some UiTPAS passes are "group passes". They are not bound to one specific person, but to an organisation for example. These passes can be used to buy multiple tickets for the same discounted price, instead of just one. In that case the `numberOfTickets` will indicate how many tickets they can buy at a specific tariff.
+> ##### remaining
+> For regular passholders, the `remaining` in a tariff will always be 1. However some UiTPAS passes are "group passes". They are not bound to one specific person, but to an organisation for example. These passes can be used to buy multiple tickets for the same discounted price, instead of just one. In that case the `remaining` will indicate how many tickets they can buy at a specific tariff.
 
 ### 5. Passholder selects a tariff (or none)
 
@@ -93,11 +95,15 @@ If the API response contained one or more UiTPAS tariffs, your website or applic
 
 For example if all the discounted tariffs are based on one-time-use coupons, but the passholder does not wish to use any coupons after all, he/she should be able to not select one.
 
+> ##### type
+> Tariffs can be of different types, e.g. `SOCIALTARIFF` or `COUPON`.
+> _If_ the passholder is entitled to a social tariff, only one such tariff will be available. If your application does not wish to support the use of coupon tariffs, it could auto-select the tariff with type `SOCIALLTARIFF` when available, without asking the pasholder.
+
 ### 6. Register the ticket sale
 
-After the passholder has selected an UiTPAS tariff, your website or application continues with its regular flow for completing the sale like payment (for the discounted price) etc.
+After the passholder has selected an UiTPAS tariff, the [ticket sale(s) must be registered](/reference/UiTPAS.v2.json/paths/~1ticket-sales/post). Only after this registration step, your application can be sure that the UiTPAS discounted price can be granted. If you don't register the ticket sale correctly, the organizer can not get reimbursed for the discount within the UiTPAS financial flow.
 
-When your regular flow successfully finishes, you need to [register the ticket sale](/reference/UiTPAS.v2.json/paths/~1ticket-sales/post). If you don't register the ticket sale correctly, the organizer can not get reimbursed for the discount within the UiTPAS financial flow.
+ 
 
 > If the passholder had no UiTPAS tariffs, or did not select one, you do not need to register your ticket sale with UiTPAS.
 
@@ -112,16 +118,17 @@ Authorization: Bearer YOUR_ACCESS_TOKEN'
 [
   {
     "uitpasNumber": "0560002524314",
-    "tarrifId": "SOCIALTARIFF",
+    "tarrif": {
+       "id": "SOCIALTARIFF"
+    },
     "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
     "regularPrice": 10,
-    "regularPriceLabel": "Base tariff", # Optional
-    "numberOfTickets": 1 # Optional
+    "regularPriceLabel": "Base tariff" # Optional
   }
 ]
 ```
 
-As you can see, you can include multiple ticket sale registrations at once. This can be helpful when you want to provide your passholders a way to buy multiple tickets at once.
+As you can see, the request body is an array of `TicketSale` objects, so you can include multiple ticket sale registrations at once. This can be helpful when you want to provide your passholders a way to buy multiple tickets at once. This can be used to register multiple tickets for the same event and the same uitpas number (when the `remaining` field in the available tariff is more than 1), for the same event and multiple uitpas numbers, or for the same uitpas number and multple events.
 
 For more information about each property, see the documentation for the [POST /ticket-sales](/reference/UiTPAS.v2.json/paths/~1ticket-sales/post) endpoint.
 
@@ -145,11 +152,16 @@ Content-Type: application/json
 ]
 ```
 
+For every `TicketSale` in the request body, there will be a `TicketSale` in the response.
+
 > Note that the response contains an id for every registered ticket sale. **We advise you to store this id** in your application or website for future reference and in case you need to cancel the ticket sale later.
 
 <!-- theme: warning -->
 
 > **If one of the ticket sales is invalid** (for example the chosen tariff is incorrect or expired), **none of the ticket sales will be registered**. You will instead get an error response with more details about the problem, and can then retry the registration without the incorrect ticket sales or ask the passholder to change the tickets and/or tariffs that they want.
+
+After registering the ticket sale, your website or application should continue with its regular flow for completing the sale like payment (for the discounted price) etc.
+
 
 ### 7. Cancelling the ticket sale
 
@@ -199,3 +211,8 @@ If the passholder doesn't end up buying the ticket, you should [cancel the ticke
 ### Can I get a list of all UiTPAS numbers that have a social tariff ('kansentarief')?
 
 The calculation of the correct UiTPAS tariffs is dependent on many factors such as the availability of a social tariff for the passholder and settings within the UiTPAS region. These are checked in realtime by UiTPAS. That's why it's a bad idea to only use UiTPAS numbers without accessing the UiTPAS API.
+
+### My application is used by multiple UiTPAS organizers.  Can I use the same set of credentials?
+
+No, you will receive one set of credentials per organizer. We encourage organizers to request their own credentials and provide them to your application.
+

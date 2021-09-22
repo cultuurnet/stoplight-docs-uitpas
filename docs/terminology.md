@@ -6,6 +6,11 @@ On this page you can quickly get a grasp of common UiTPAS terminology and concep
 
 One who holds an UiTPAS, the end-user of an UiTPAS, identified by an UiTPAS number.
 
+## Group pass
+
+Similar to a passholder, but issued to a group of people in specific circumstances, identified by an UiTPAS number.
+
+
 ## UiTPAS Event
 
 Certain actions within UiTPAS are linked to specific events, for example when [registering a ticket sale](./registering-ticket-sales.md) at a discounted UiTPAS tariff.

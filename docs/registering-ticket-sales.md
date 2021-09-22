@@ -53,10 +53,13 @@ Using the event id, the UiTPAS number and the regular price of your event, you c
 Example request:
 
 ```http
-GET /tariffs/?eventId=EVENT_ID&uitpasNumber=UITPAS_NUMBER&regularPrice=10 HTTP/1.1
+GET /tariffs/?eventId=5a0967f9-cc06-4c3c-9206-30481a767434&uitpasNumber=0900000672312&regularPrice=10 HTTP/1.1
 Host: https://api.uitpas.be
 Authorization: Bearer YOUR_CLIENT_ACCESS_TOKEN'
 ```
+
+Have a look at the [test dataset](https://publiq.stoplight.io/docs/authentication/docs/test-dataset) for more sample passholders or events.
+
 
 Example response:
 
@@ -64,34 +67,42 @@ Example response:
 HTTP/1.1 200 OK
 Content-Type: application/json
 
-[
-  {
-    "id": "SOCIALTARIFF",
-    "name": "Kansentarief",
-    "price": 1.5,
-    "numberOfTickets": 1,
-    "type": "SOCIALTARIFF"
-  },
-  {
-    "id": "COUPON1234",
-    "name": "Cultuurbon 6 euro",
-    "price": 4,
-    "numberOfTickets": 1,
-    "type": "COUPON"
-  }
-]
+{
+  "available": [
+    {
+      "id": "SOCIALTARIFF",
+      "name": "Kansentarief",
+      "price": 2,
+      "type": "SOCIALTARIFF",
+      "remaining": 1
+    },
+    {
+      "id": "COUPON_1079",
+      "name": "[TEST] €1 voor een evenement voor tieners (GENT)",
+      "price": 1,
+      "type": "COUPON",
+      "remaining": 1
+    }
+  ]
+}
 ```
 
-In this example the passholder can select two possible UiTPAS discounts. The social tariff (1), and a coupon (2). Both tariffs are valid for one ticket for this event for this passholder.
+In this example the passholder can select two possible UiTPAS discounts. The social tariff, and a coupon. Both tariffs are valid for one ticket for this event for this passholder.
 
-> ##### numberOfTickets
-> For regular passholders, the `numberOfTickets` in a tariff will always be 1. However some UiTPAS passes are "group passes". They are not bound to one specific person, but to an organisation for example. These passes can be used to buy multiple tickets for the same discounted price, instead of just one. In that case the `numberOfTickets` will indicate how many tickets they can buy at a specific tariff.
 
-### 5. Passholder selects a tariff (or none)
+> ##### remaining tickets at a tariff
+> For regular passholders, the `remaining` value is always 1. Please refer to [registering ticket sales for group passes](https://publiq.stoplight.io/docs/authentication/docs/registering-ticket-sales-group) for more information on group pass ticket sales.
 
-If the API response contained one or more UiTPAS tariffs, your website or application should present them to the passholder to select one (or none). Since some discounts are only usable once, it's important that passholders can choose for themselves what discount to use when.
+### 5. Passholder selects a tariff
+
+If the API response contained one or more UiTPAS tariffs, your website or application should present them to the passholder to select one (or none). Since some discounts are only usable once, it's important that passholders can choose when to use a specific discount.
 
 For example if all the discounted tariffs are based on one-time-use coupons, but the passholder does not wish to use any coupons after all, he/she should be able to not select one.
+
+> ##### Social tariff
+> The list of available tariffs can contain exactly zero or one tariff of type `SOCIALTARIFF`. Tariffs of other types can occur zero or more times.
+> Your application may choose to support only social tariff types, in which case this step can be simplified or even omitted. Be aware that some passholders might expect to see more tariffs, so in that case it should be made clear that only social tariffs are supported by your application.
+
 
 ### 6. Register the ticket sale
 
@@ -111,17 +122,23 @@ Authorization: Bearer YOUR_ACCESS_TOKEN'
 
 [
   {
-    "uitpasNumber": "0560002524314",
-    "tarrifId": "SOCIALTARIFF",
-    "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
     "regularPrice": 10,
     "regularPriceLabel": "Base tariff", # Optional
-    "numberOfTickets": 1 # Optional
+    "tariff": {
+      "id": "SOCIALTARIFF"
+    },
+    "eventId": "5a0967f9-cc06-4c3c-9206-30481a767434",
+    "uitpasNumber": "0900000672312"
   }
 ]
 ```
 
-As you can see, you can include multiple ticket sale registrations at once. This can be helpful when you want to provide your passholders a way to buy multiple tickets at once.
+Have a look at the [test dataset](https://publiq.stoplight.io/docs/authentication/docs/test-dataset) for more sample passholders or events.
+
+As you can see, you can also include multiple ticket sale registrations at once. Read more about this in the [registering multiple ticket sales at once](https://publiq.stoplight.io/docs/authentication/docs/registering-ticket-sales-multiple) mini guide.
+
+
+This can be helpful when you want to provide your passholders a way to buy multiple tickets at once.
 
 For more information about each property, see the documentation for the [POST /ticket-sales](/reference/UiTPAS.v2.json/paths/~1ticket-sales/post) endpoint.
 
@@ -133,19 +150,24 @@ Content-Type: application/json
 
 [
   {
-    "id": 21345,
+    "id": "499853",
+    "regularPriceLabel": "Base tariff",
     "tariff": {
-      "id": "COUPON1234",
-      "name": "Cultuurbon 6 euro",
-      "price": 1.5
+      "id": "SOCIALTARIFF",
+      "name": "Kansentarief",
+      "price": 2,
+      "type": "SOCIALTARIFF"
     },
-    "uitpasNumber": "0560002524314",
-    "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002"
+    "eventId": "5a0967f9-cc06-4c3c-9206-30481a767434",
+    "uitpasNumber": "0900000672312"
   }
 ]
 ```
 
-> Note that the response contains an id for every registered ticket sale. **We advise you to store this id** in your application or website for future reference and in case you need to cancel the ticket sale later.
+Note that depending on your client's permissions, the response can also contain a full passholder object next to the uitpasNumber. In a regular online ticket sale flow, this is usually not needed.
+
+
+> Note that the response contains an id for every registered ticket sale. **We advise you to store this id** in your application in case you need to cancel the ticket sale later.
 
 <!-- theme: warning -->
 
@@ -155,47 +177,7 @@ Content-Type: application/json
 
 If for some reason you need to [cancel the ticket sale registration](/reference/UiTPAS.v2.json/paths/~1ticket-sales~1%7BticketSaleId%7D/delete) you can do so using the `id` of the ticket sale in the response of the registration.
 
-## F.A.Q.
 
-### Will the UiTPAS API be able to handle all of my requests? I'm worried about a realtime dependency on UiTPAS at check out.
+### Frequently asked questions
 
-Only a small percentage of your requests should be accessing the UiTPAS API, as you only show [UiTPAS tariffs](/reference/UiTPAS.v2.json/paths/~1tariffs/get) for those users who entered an UiTPAS number or have an UiTPAS number saved in their user profile. Numerous applications are already successfully accessing the UiTPAS API every day, which has been running since 2012 with very low downtime.
-
-### Can the regularPrice sent in /ticket-sales differ from the prices listed in the UiTdatabank event?
-
-Yes, you can send any price, not only the prices listed in the UiTdatabank event.
-We strongly advice to always update the price of the UiTdatabank event when the price changes, as this price will be listed publicly on websites such as [UiTinVlaanderen.be](http://UiTinVlaanderen.be). 
-Keeping this price up-to-date also helps us fight fraud and makes it easier to audit price changes.
-
-### Why can't I calculate the UiTPAS tariffs in my application?
-
-The calculation of the correct UiTPAS tariff is dependent on many factors such as the availability of a social tariff for the passholder and settings within the UiTPAS region. These are checked in realtime by UiTPAS. You should never calculate the UiTPAS tariff yourself, because only UiTPAS can [give you the correct tariff](/reference/UiTPAS.v2.json/paths/~1tariffs/get) for a specific passholder at the current time.
-
-### Can I get a list of discounts instead of a list of tariffs?
-
-No, [/tariffs](/reference/UiTPAS.v2.json/paths/~1tariffs/get) will give you the discounted tariffs for a given price.
-You shouldn't calculcate these discounts yourself because they can vary from a relative (-50%) or an absolute discount (-5 euro).
-
-### My events are private and I don't want them to be public. How can I do this?
-
-One of the biggest advantages of creating UiTdatabank events, is that your events will be available throughout thousand of local events calendars and websites such as [UiTinVlaanderen.be](http://UiTinVlaanderen.be).
-
-If you don't want your events to be published in this way you [should set the audienceType](https://documentatie.uitdatabank.be/content/json-ld-crud-api/latest/events/event-audience.html) to "members" on your events.
-
-```
-"audience": {
-  "audienceType": "members"
-}
-```
-
-### When should I register the ticket sale?
-
-Within UiTPAS, there are constraints such as the number of tickets that can be sold at a social tariff or how many times a coupon can be used.
-That's why it makes sense to already [register the ticket sale](/reference/UiTPAS.v2.json/paths/~1ticket-sales/post) right before the payment.
-Otherwise if you wait to register the ticket sale until after the passholder has paid, the chosen tariff might not be valid anymore.
-
-If the passholder doesn't end up buying the ticket, you should [cancel the ticket sale registration](/reference/UiTPAS.v2.json/paths/~1ticket-sales~1%7BticketSaleId%7D/delete). 
-
-### Can I get a list of all UiTPAS numbers that have a social tariff ('kansentarief')?
-
-The calculation of the correct UiTPAS tariffs is dependent on many factors such as the availability of a social tariff for the passholder and settings within the UiTPAS region. These are checked in realtime by UiTPAS. That's why it's a bad idea to only use UiTPAS numbers without accessing the UiTPAS API.
+Having questions? Check out our [FAQ](https://publiq.stoplight.io/docs/authentication/docs/faq)!

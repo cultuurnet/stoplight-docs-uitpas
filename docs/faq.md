@@ -42,3 +42,9 @@ If the passholder doesn't end up buying the ticket, you should [cancel the ticke
 ### Can I get a list of all UiTPAS numbers that have a social tariff ('kansentarief')?
 
 The calculation of the correct UiTPAS tariffs is dependent on many factors such as the availability of a social tariff for the passholder and settings within the UiTPAS region. These are checked in realtime by UiTPAS. That's why it's a bad idea to only use UiTPAS numbers without accessing the UiTPAS API.
+
+### My application is used by multiple UiTPAS organizers.  Can I use the same set of credentials?
+
+No, you will receive one set of credentials per organizer. We encourage organizers to request their own credentials and provide them to your application.
+
+

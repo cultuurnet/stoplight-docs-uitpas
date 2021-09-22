@@ -2,7 +2,7 @@
 
 This guide illustrates how to register an UiTPAS discounted ticket sale so passholders can receive their UiTPAS discount and organizers can be reimbursed within the UiTPAS financial flow.
 
-You'll learn how to request possible UiTPAS tariffs, register the ticket sale and even cancel it if needed.
+You'll learn how to request available UiTPAS tariffs for an event and passholder, register the ticket sale and even cancel it if needed.
 
 The whole flow consists of approximately two to four API calls depending on your situation.
 
@@ -46,9 +46,9 @@ Your application then starts its typical flow of guiding the passholder through 
 
 At some point during the checkout process on your website or application (but **before a payment has happened**), you provide the passholder a way to enter their UiTPAS number if they have one.
 
-### 4. Determine possible UiTPAS tariffs
+### 4. Determine available UiTPAS tariffs
 
-Using the event id, the UiTPAS number and the regular price of your event, you can [request possible UiTPAS tariffs](/reference/UiTPAS.v2.json/paths/~1tariffs/get).
+Using the event id, the UiTPAS number and the regular price of your event, you can [request available UiTPAS tariffs](/reference/UiTPAS.v2.json/paths/~1tariffs/get).
 
 Example request:
 
@@ -93,22 +93,23 @@ In this example the passholder can select two possible UiTPAS discounts. The soc
 > ##### remaining tickets at a tariff
 > For regular passholders, the `remaining` value is always 1. Please refer to [registering ticket sales for group passes](https://publiq.stoplight.io/docs/authentication/docs/registering-ticket-sales-group) for more information on group pass ticket sales.
 
+
 ### 5. Passholder selects a tariff
 
 If the API response contained one or more UiTPAS tariffs, your website or application should present them to the passholder to select one (or none). Since some discounts are only usable once, it's important that passholders can choose when to use a specific discount.
 
 For example if all the discounted tariffs are based on one-time-use coupons, but the passholder does not wish to use any coupons after all, he/she should be able to not select one.
 
-> ##### Social tariff
-> The list of available tariffs can contain exactly zero or one tariff of type `SOCIALTARIFF`. Tariffs of other types can occur zero or more times.
-> Your application may choose to support only social tariff types, in which case this step can be simplified or even omitted. Be aware that some passholders might expect to see more tariffs, so in that case it should be made clear that only social tariffs are supported by your application.
+> ##### type
+> Tariffs can be of different types, e.g. `SOCIALTARIFF` or `COUPON`.
+> _If_ the passholder is entitled to a social tariff, only one such tariff will be available. If your application does not wish to support the use of coupon tariffs, it could auto-select the tariff with type `SOCIALLTARIFF` when available, without asking the pasholder.
 
 
 ### 6. Register the ticket sale
 
-After the passholder has selected an UiTPAS tariff, your website or application continues with its regular flow for completing the sale like payment (for the discounted price) etc.
+After the passholder has selected an UiTPAS tariff, the [ticket sale(s) must be registered](/reference/UiTPAS.v2.json/paths/~1ticket-sales/post). Only after this registration step, your application can be sure that the UiTPAS discounted price can be granted. If you don't register the ticket sale correctly, the organizer can not get reimbursed for the discount within the UiTPAS financial flow.
 
-When your regular flow successfully finishes, you need to [register the ticket sale](/reference/UiTPAS.v2.json/paths/~1ticket-sales/post). If you don't register the ticket sale correctly, the organizer can not get reimbursed for the discount within the UiTPAS financial flow.
+ 
 
 > If the passholder had no UiTPAS tariffs, or did not select one, you do not need to register your ticket sale with UiTPAS.
 
@@ -169,9 +170,13 @@ Note that depending on your client's permissions, the response can also contain 
 
 > Note that the response contains an id for every registered ticket sale. **We advise you to store this id** in your application in case you need to cancel the ticket sale later.
 
+
 <!-- theme: warning -->
 
 > **If one of the ticket sales is invalid** (for example the chosen tariff is incorrect or expired), **none of the ticket sales will be registered**. You will instead get an error response with more details about the problem, and can then retry the registration without the incorrect ticket sales or ask the passholder to change the tickets and/or tariffs that they want.
+
+After registering the ticket sale, your website or application should continue with its regular flow for completing the sale like payment (for the discounted price) etc.
+
 
 ### 7. Cancelling the ticket sale
 

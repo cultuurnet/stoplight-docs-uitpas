@@ -21,6 +21,11 @@
       "uri": "docs/faq.md"
     },    
     {
+      "type": "item",
+      "title": "Test dataset",
+      "uri": "docs/test-dataset.md"
+    },    
+    {
       "type": "divider",
       "title": "Guides"
     },

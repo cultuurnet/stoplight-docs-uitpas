@@ -1,15 +1,12 @@
 # Registering ticket sales for group passes
 
-This mini-guide illustrates how to register UiTPAS discounted ticket sales for a group pass. It builds upon the [Registering ticket sales guide](https://publiq.stoplight.io/docs/authentication/docs/registering-ticket-sales-group.md) which you need to read first to learn more about authentication, the work flow and registering events.
+This mini-guide illustrates how to register UiTPAS discounted ticket sales for a group pass. It builds upon the [Registering ticket sales guide](/docs/registering-ticket-sales-group.md) which you need to read first to learn more about authentication, the work flow and registering events.
 
 > ##### What is a group pass?
 >
 > A group pass is very similar to a regular passholder, but it is not bound to one specific person, but to an organisation for example. These passes can be used to buy multiple tickets for the same discounted price, instead of just one. It's also identified by an UiTPAS number. The number of tickets that can be registered at a specific UiTPAS tariff is usually preset when the group pass is issued.
->
-
 
 This mini-guide hooks into the regular flow when an end-user entered the UiTPAS number of a group pass instead of a regular passholder.
-
 
 ### 1. Determine possible UiTPAS tariffs
 
@@ -25,8 +22,7 @@ Host: https://api.uitpas.be
 Authorization: Bearer YOUR_CLIENT_ACCESS_TOKEN'
 ```
 
-Have a look at the [test dataset](https://publiq.stoplight.io/docs/authentication/docs/test-dataset) for more sample passholders or events.
-
+Have a look at the [test dataset](/docs/test-dataset) for more sample passholders or events.
 
 Example response:
 
@@ -49,11 +45,9 @@ Content-Type: application/json
 
 In this example the end-user can select only one possible UiTPAS discount, the social tariff. The difference with a regular passholder tariff however, is the `remaining` property, which is 50 in this case. This means you can register up to 50 tickets for this UiTPAS number, for the given event.
 
-
 ### 2. End-user selects the tariff and number of tickets
 
 If the API response contained one or more UiTPAS tariffs, your website or application should present them to the end-user to select one. In case the `remaining` property is higher than 1, your application can allow to increase the number of tickets, for the same event, for the same UiTPAS number.
-
 
 ### 3. Register the ticket sales
 
@@ -99,7 +93,7 @@ Authorization: Bearer YOUR_ACCESS_TOKEN'
 ]
 ```
 
-Have a look at the [test dataset](https://publiq.stoplight.io/docs/authentication/docs/test-dataset) for more sample passholders or events.
+Have a look at the [test dataset](/docs/test-dataset) for more sample passholders or events.
 
 For more information about each property, see the documentation for the [POST /ticket-sales](/reference/UiTPAS.v2.json/paths/~1ticket-sales/post) endpoint.
 
@@ -156,7 +150,6 @@ Content-Type: application/json
 
 If for some reason you need to [cancel the ticket sale registration](/reference/UiTPAS.v2.json/paths/~1ticket-sales~1%7BticketSaleId%7D/delete) you can do so using the `id` of the ticket sale in the response of the registration.
 
-
 ### Frequently asked questions
 
-Having questions? Check out our [FAQ](https://publiq.stoplight.io/docs/authentication/docs/faq)!
+Having questions? Check out our [FAQ](/docs/faq)!

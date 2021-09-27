@@ -58,8 +58,7 @@ Host: https://api.uitpas.be
 Authorization: Bearer YOUR_CLIENT_ACCESS_TOKEN'
 ```
 
-Have a look at the [test dataset](https://publiq.stoplight.io/docs/authentication/docs/test-dataset) for more sample passholders or events.
-
+Have a look at the [test dataset](/docs/test-dataset) for more sample passholders or events.
 
 Example response:
 
@@ -89,10 +88,9 @@ Content-Type: application/json
 
 In this example the passholder can select two possible UiTPAS discounts. The social tariff, and a coupon. Both tariffs are valid for one ticket for this event for this passholder.
 
-
 > ##### remaining tickets at a tariff
-> For regular passholders, the `remaining` value is always 1. Please refer to [registering ticket sales for group passes](https://publiq.stoplight.io/docs/authentication/docs/registering-ticket-sales-group) for more information on group pass ticket sales.
-
+>
+> For regular passholders, the `remaining` value is always 1. Please refer to [registering ticket sales for group passes](/docs/registering-ticket-sales-group) for more information on group pass ticket sales.
 
 ### 5. Passholder selects a tariff
 
@@ -101,15 +99,13 @@ If the API response contained one or more UiTPAS tariffs, your website or applic
 For example if all the discounted tariffs are based on one-time-use coupons, but the passholder does not wish to use any coupons after all, he/she should be able to not select one.
 
 > ##### type
+>
 > Tariffs can be of different types, e.g. `SOCIALTARIFF` or `COUPON`.
-> _If_ the passholder is entitled to a social tariff, only one such tariff will be available. If your application does not wish to support the use of coupon tariffs, it could auto-select the tariff with type `SOCIALLTARIFF` when available, without asking the pasholder.
-
+> *If* the passholder is entitled to a social tariff, only one such tariff will be available. If your application does not wish to support the use of coupon tariffs, it could auto-select the tariff with type `SOCIALLTARIFF` when available, without asking the pasholder.
 
 ### 6. Register the ticket sale
 
 After the passholder has selected an UiTPAS tariff, the [ticket sale(s) must be registered](/reference/UiTPAS.v2.json/paths/~1ticket-sales/post). Only after this registration step, your application can be sure that the UiTPAS discounted price can be granted. If you don't register the ticket sale correctly, the organizer can not get reimbursed for the discount within the UiTPAS financial flow.
-
- 
 
 > If the passholder had no UiTPAS tariffs, or did not select one, you do not need to register your ticket sale with UiTPAS.
 
@@ -134,10 +130,9 @@ Authorization: Bearer YOUR_ACCESS_TOKEN'
 ]
 ```
 
-Have a look at the [test dataset](https://publiq.stoplight.io/docs/authentication/docs/test-dataset) for more sample passholders or events.
+Have a look at the [test dataset](/docs/test-dataset) for more sample passholders or events.
 
-As you can see, you can also include multiple ticket sale registrations at once. Read more about this in the [registering multiple ticket sales at once](https://publiq.stoplight.io/docs/authentication/docs/registering-ticket-sales-multiple) mini guide.
-
+As you can see, you can also include multiple ticket sale registrations at once. Read more about this in the [registering multiple ticket sales at once](/docs/registering-ticket-sales-multiple) mini guide.
 
 This can be helpful when you want to provide your passholders a way to buy multiple tickets at once.
 
@@ -167,9 +162,7 @@ Content-Type: application/json
 
 Note that depending on your client's permissions, the response can also contain a full passholder object next to the uitpasNumber. In a regular online ticket sale flow, this is usually not needed.
 
-
 > Note that the response contains an id for every registered ticket sale. **We advise you to store this id** in your application in case you need to cancel the ticket sale later.
-
 
 <!-- theme: warning -->
 
@@ -177,12 +170,10 @@ Note that depending on your client's permissions, the response can also contain 
 
 After registering the ticket sale, your website or application should continue with its regular flow for completing the sale like payment (for the discounted price) etc.
 
-
 ### 7. Cancelling the ticket sale
 
 If for some reason you need to [cancel the ticket sale registration](/reference/UiTPAS.v2.json/paths/~1ticket-sales~1%7BticketSaleId%7D/delete) you can do so using the `id` of the ticket sale in the response of the registration.
 
-
 ### Frequently asked questions
 
-Having questions? Check out our [FAQ](https://publiq.stoplight.io/docs/authentication/docs/faq)!
+Having questions? Check out our [FAQ](/docs/faq)!

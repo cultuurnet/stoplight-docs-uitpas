@@ -2494,6 +2494,9 @@
           "description1",
           "points",
           "cashInType"
+        ],
+        "x-tags": [
+          "Models"
         ]
       }
     },

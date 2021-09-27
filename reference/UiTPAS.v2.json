@@ -36,6 +36,9 @@
       "name": "Permissions"
     },
     {
+      "name": "Rewards"
+    },
+    {
       "name": "Schools"
     },
     {
@@ -96,6 +99,13 @@
                           "price": 8,
                           "remaining": 1,
                           "type": "COUPON"
+                        },
+                        {
+                          "id": "REWARD5464",
+                          "name": "50% korting op een specifiek event",
+                          "price": 5,
+                          "remaining": 1,
+                          "type": "REWARD"
                         }
                       ]
                     }
@@ -403,6 +413,14 @@
                       "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
                       "regularPrice": 10,
                       "regularPriceLabel": "Base tariff"
+                    },
+                    {
+                      "tariff": {
+                        "id": "REWARD21343"
+                      },
+                      "uitpasNumber": "0985002524385",
+                      "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
+                      "regularPrice": 10
                     }
                   ]
                 },
@@ -1682,6 +1700,149 @@
           }
         ]
       }
+    },
+    "/rewards/{id}": {
+      "get": {
+        "summary": "Retrieve reward",
+        "tags": [
+          "Rewards"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Reward"
+                },
+                "examples": {}
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "operationId": "get-rewards",
+        "security": [
+          {
+            "USER_ACCESS_TOKEN": []
+          },
+          {
+            "CLIENT_ACCESS_TOKEN": []
+          }
+        ],
+        "description": "Retrieve existing rewards by its ID."
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "put": {
+        "summary": "Update reward",
+        "operationId": "put-rewards-id",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Reward"
+                },
+                "examples": {}
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "USER_ACCESS_TOKEN": []
+          },
+          {
+            "CLIENT_ACCESS_TOKEN": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Reward"
+              },
+              "examples": {}
+            }
+          }
+        },
+        "tags": [
+          "Rewards"
+        ],
+        "description": "Update an existing reward."
+      }
+    },
+    "/rewards": {
+      "post": {
+        "summary": "Create new reward",
+        "operationId": "post-rewards",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Reward"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          }
+        },
+        "security": [
+          {
+            "USER_ACCESS_TOKEN": []
+          },
+          {
+            "CLIENT_ACCESS_TOKEN": []
+          }
+        ],
+        "description": "Create a new Reward.",
+        "tags": [
+          "Rewards"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Reward"
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -1721,7 +1882,8 @@
             "type": "string",
             "enum": [
               "SOCIALTARIFF",
-              "COUPON"
+              "COUPON",
+              "REWARD"
             ],
             "readOnly": true
           }
@@ -2187,6 +2349,151 @@
               "remaining"
             ]
           }
+        ]
+      },
+      "Reward": {
+        "type": "object",
+        "title": "Reward",
+        "description": "",
+        "properties": {
+          "id": {
+            "type": "string",
+            "readOnly": true
+          },
+          "title": {
+            "type": "string"
+          },
+          "owningCardSystem": {
+            "$ref": "#/components/schemas/CardSystem"
+          },
+          "applicableCardSystems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CardSystem"
+            }
+          },
+          "organizers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Organizer"
+            }
+          },
+          "allCardSystems": {
+            "type": "boolean"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "INACTIVE",
+              "DELETED"
+            ]
+          },
+          "maxAvailableUnits": {
+            "type": "integer"
+          },
+          "unitsTaken": {
+            "type": "integer",
+            "readOnly": true
+          },
+          "description1": {
+            "type": "string"
+          },
+          "description2": {
+            "type": "string"
+          },
+          "pictures": {
+            "type": "array",
+            "description": "TODO: will we provide an image upload endpoint?",
+            "items": {
+              "type": "string"
+            }
+          },
+          "publicationPeriodBegin": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "publicationPeriodEnd": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "inSpotlight": {
+            "type": "boolean"
+          },
+          "points": {
+            "type": "number"
+          },
+          "types": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "forKids": {
+            "type": "boolean"
+          },
+          "sport": {
+            "type": "boolean"
+          },
+          "labels": {
+            "type": "string"
+          },
+          "moreInfoURL": {
+            "type": "string"
+          },
+          "cashInType": {
+            "type": "string",
+            "enum": [
+              "PHYSICAL",
+              "ONLINE",
+              "TICKETSALE"
+            ]
+          },
+          "usesCodes": {
+            "type": "boolean"
+          },
+          "ticketSaleDiscount": {
+            "type": "object",
+            "properties": {
+              "amount": {
+                "type": "number"
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "ABSOLUTE",
+                  "PERCENTAGE"
+                ]
+              },
+              "conditions": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "enum": [
+                        "EVENT"
+                      ]
+                    },
+                    "values": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "required": [
+          "title",
+          "owningCardSystem",
+          "description1",
+          "points",
+          "cashInType"
         ]
       }
     },

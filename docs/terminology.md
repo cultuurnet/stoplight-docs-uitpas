@@ -10,7 +10,6 @@ One who holds an UiTPAS, the end-user of an UiTPAS, identified by an UiTPAS numb
 
 Similar to a passholder, but issued to a group of people in specific circumstances, identified by an UiTPAS number.
 
-
 ## UiTPAS Event
 
 Certain actions within UiTPAS are linked to specific events, for example when [registering a ticket sale](./registering-ticket-sales.md) at a discounted UiTPAS tariff.

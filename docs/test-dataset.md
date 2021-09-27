@@ -1,15 +1,12 @@
 # UiTPAS test dataset
 
-
 ## Organizers
 
-| Name   |      ID      | 
+| Name   |      ID      |
 |----------|:-------------:|
-| [TEST] UiTPAS Organisatie (Regio Gent + Paspartoe) |  `0ce87cbc-9299-4528-8d35-92225dc9489f` |
+| \[TEST] UiTPAS Organisatie (Regio Gent + Paspartoe) |  `0ce87cbc-9299-4528-8d35-92225dc9489f` |
 
 Your test client should have permission to this organizer. You can double-check which organizer you have permission to by using [GET /permissions](/reference/UiTPAS.v2.json/paths/~1permissions/get)
-
-
 
 ```http
 GET /permissions HTTP/1.1
@@ -17,29 +14,24 @@ Host: https://api.uitpas.be
 Authorization: Bearer YOUR_ACCESS_TOKEN'
 ```
 
-```
-[
-  {
-    "organizer": {
-      "id": "0ce87cbc-9299-4528-8d35-92225dc9489f",
-      "name": "[TEST] UiTPAS Organisatie (Regio Gent + Paspartoe)"
-    }
-  }
-]
-```
+    [
+      {
+        "organizer": {
+          "id": "0ce87cbc-9299-4528-8d35-92225dc9489f",
+          "name": "[TEST] UiTPAS Organisatie (Regio Gent + Paspartoe)"
+        }
+      }
+    ]
 
-You will need the organizer id when registering events. 
-
-
+You will need the organizer id when registering events.
 
 ## Events
 
 If you want to test ticket-sales without registering your own event, you can use these existing events:
 
-| Name   |      ID      | Details | 
+| Name   |      ID      | Details |
 |----------|:-------------:|:-------------:|
 | Permanente UiTPAS Test Festiviteit | `5a0967f9-cc06-4c3c-9206-30481a767434` | Allows 100 ticket sales per passholder per week |
-
 
 ## Passholders
 
@@ -57,7 +49,6 @@ When testing ticket sale requests, you'll need an UitpasNumber of a passholder. 
 | `0900000007402` | yes (Paspartoe) |  9000 | 2 coupons (Paspartoe) | active |
 | `0900011091916` | yes |  n/a | n/a | unregistered |
 | `0900000008905` | no |  n/a | n/a | unregistered |
-
 
 ## Group passes
 

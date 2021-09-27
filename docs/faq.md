@@ -7,7 +7,7 @@ Only a small percentage of your requests should be accessing the UiTPAS API, as 
 ### Can the regularPrice sent in /ticket-sales differ from the prices listed in the UiTdatabank event?
 
 Yes, you can send any price, not only the prices listed in the UiTdatabank event.
-We strongly advice to always update the price of the UiTdatabank event when the price changes, as this price will be listed publicly on websites such as [UiTinVlaanderen.be](http://UiTinVlaanderen.be). 
+We strongly advice to always update the price of the UiTdatabank event when the price changes, as this price will be listed publicly on websites such as [UiTinVlaanderen.be](http://UiTinVlaanderen.be).
 Keeping this price up-to-date also helps us fight fraud and makes it easier to audit price changes.
 
 ### Why can't I calculate the UiTPAS tariffs in my application?
@@ -25,11 +25,9 @@ One of the biggest advantages of creating UiTdatabank events, is that your event
 
 If you don't want your events to be published in this way you [should set the audienceType](https://documentatie.uitdatabank.be/content/json-ld-crud-api/latest/events/event-audience.html) to "members" on your events.
 
-```
-"audience": {
-  "audienceType": "members"
-}
-```
+    "audience": {
+      "audienceType": "members"
+    }
 
 ### When should I register the ticket sale?
 
@@ -37,7 +35,7 @@ Within UiTPAS, there are constraints such as the number of tickets that can be s
 That's why it makes sense to already [register the ticket sale](/reference/UiTPAS.v2.json/paths/~1ticket-sales/post) right before the payment.
 Otherwise if you wait to register the ticket sale until after the passholder has paid, the chosen tariff might not be valid anymore.
 
-If the passholder doesn't end up buying the ticket, you should [cancel the ticket sale registration](/reference/UiTPAS.v2.json/paths/~1ticket-sales~1%7BticketSaleId%7D/delete). 
+If the passholder doesn't end up buying the ticket, you should [cancel the ticket sale registration](/reference/UiTPAS.v2.json/paths/~1ticket-sales~1%7BticketSaleId%7D/delete).
 
 ### Can I get a list of all UiTPAS numbers that have a social tariff ('kansentarief')?
 
@@ -46,5 +44,3 @@ The calculation of the correct UiTPAS tariffs is dependent on many factors such 
 ### My application is used by multiple UiTPAS organizers.  Can I use the same set of credentials?
 
 No, you will receive one set of credentials per organizer. We encourage organizers to request their own credentials and provide them to your application.
-
-

@@ -16,6 +16,16 @@
       "uri": "docs/terminology.md"
     },
     {
+      "type": "item",
+      "title": "FAQ",
+      "uri": "docs/faq.md"
+    },    
+    {
+      "type": "item",
+      "title": "Test dataset",
+      "uri": "docs/test-dataset.md"
+    },    
+    {
       "type": "divider",
       "title": "Guides"
     },
@@ -28,6 +38,16 @@
       "type": "item",
       "title": "Registering events",
       "uri": "docs/registering-events.md"
+    },
+    {
+      "type": "item",
+      "title": "Registering ticket sales for group passes",
+      "uri": "docs/registering-ticket-sales-group.md"
+    },
+    {
+      "type": "item",
+      "title": "Registering multple ticket sales at once",
+      "uri": "docs/registering-ticket-sales-multiple.md"
     },
     {
       "type": "item",

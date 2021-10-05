@@ -941,7 +941,7 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "integer"
             },
             "in": "query",
             "name": "cardSystemId",

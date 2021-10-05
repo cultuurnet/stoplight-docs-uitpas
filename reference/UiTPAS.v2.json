@@ -946,7 +946,7 @@
             "in": "query",
             "name": "cardSystemId",
             "description": "Include only organizers linked to this card system"
-          },          
+          },
           {
             "schema": {
               "type": "integer",
@@ -1131,6 +1131,24 @@
             "in": "query",
             "name": "organizerId",
             "description": "Filter passholders based on the card systems of the give organizer. If omitted, the results will be fitered based on the organizers you have permission to."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "format": "date"
+            },
+            "in": "query",
+            "name": "dateOfBirthFrom",
+            "description": "Include only passholders with a dateOfBirth of this value (including) or more recent"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "format": "date"
+            },
+            "in": "query",
+            "name": "dateOfBirthTo",
+            "description": "Include only passholders with a dateOfBirth of this value (including) or older"
           }
         ]
       }

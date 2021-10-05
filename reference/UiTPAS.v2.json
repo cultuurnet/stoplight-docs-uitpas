@@ -941,6 +941,14 @@
           },
           {
             "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "cardSystemId",
+            "description": "Include only organizers linked to this card system"
+          },          
+          {
+            "schema": {
               "type": "integer",
               "minimum": 0
             },

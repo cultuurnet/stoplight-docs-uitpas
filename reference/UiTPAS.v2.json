@@ -892,7 +892,7 @@
             }
           },
           "400": {
-            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/group-not-found\n\nThe detail property might include more information for the client developer.\n",
+            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/group-not-found\n* https://api.publiq.be/probs/uitpas/cardsystem-not-found\n\nThe detail property might include more information for the client developer.\n",
             "content": {
               "application/json": {
                 "schema": {
@@ -939,6 +939,14 @@
             "name": "name",
             "description": "Include only organizers with this name (* wildcard allowed)"
           },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "cardSystemId",
+            "description": "Include only organizers linked to this card system"
+          },          
           {
             "schema": {
               "type": "integer",

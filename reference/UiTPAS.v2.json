@@ -892,7 +892,7 @@
             }
           },
           "400": {
-            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/group-not-found\n\nThe detail property might include more information for the client developer.\n",
+            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/group-not-found\n* https://api.publiq.be/probs/uitpas/cardsystem-not-found\n\nThe detail property might include more information for the client developer.\n",
             "content": {
               "application/json": {
                 "schema": {

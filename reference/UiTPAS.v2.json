@@ -1139,7 +1139,7 @@
             },
             "in": "query",
             "name": "dateOfBirthFrom",
-            "description": "Include only passholders with a dateOfBirth of this value (including) or more recent"
+            "description": "Include only passholders with a dateOfBirth of this value (including) or more recent. Format yyyy-mm-dd e.g. 2003-01-01"
           },
           {
             "schema": {
@@ -1148,7 +1148,7 @@
             },
             "in": "query",
             "name": "dateOfBirthTo",
-            "description": "Include only passholders with a dateOfBirth of this value (including) or older"
+            "description": "Include only passholders with a dateOfBirth of this value (including) or older. Format yyyy-mm-dd e.g. 2003-01-01"
           }
         ]
       }

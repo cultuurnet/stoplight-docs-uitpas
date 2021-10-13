@@ -14,14 +14,18 @@ Host: https://api.uitpas.be
 Authorization: Bearer YOUR_ACCESS_TOKEN'
 ```
 
-    [
-      {
-        "organizer": {
-          "id": "0ce87cbc-9299-4528-8d35-92225dc9489f",
-          "name": "[TEST] UiTPAS Organisatie (Regio Gent + Paspartoe)"
-        }
-      }
-    ]
+Example response:
+
+```json
+[
+  {
+    "organizer": {
+      "id": "0ce87cbc-9299-4528-8d35-92225dc9489f",
+      "name": "[TEST] UiTPAS Organisatie (Regio Gent + Paspartoe)"
+    }
+  }
+]
+```
 
 You will need the organizer id when registering events.
 

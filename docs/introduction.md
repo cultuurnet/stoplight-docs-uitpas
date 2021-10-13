@@ -1,6 +1,5 @@
+<!-- focus: false -->
 ![](../assets/images/uitpas.png)
-
-# Introduction
 
 A warm welcome to our UiTPAS API documentation! 👋
 

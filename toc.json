@@ -50,6 +50,10 @@
       "uri": "docs/registering-ticket-sales-multiple.md"
     },
     {
+      "type": "divider",
+      "title": "API references"
+    },
+    {
       "type": "item",
       "title": "UiTPAS API",
       "uri": "reference/UiTPAS.v2.json"

@@ -227,6 +227,12 @@
                           "name": "string",
                           "firstName": "string",
                           "inszNumber": "string",
+                          "dateOfBirth": "2000-01-01",
+                          "postalCode": "9300",
+                          "registrationOrganizer": {
+                            "id": "1234",
+                            "name": "Example UiTPAS Organizer"
+                          },
                           "cardSystemMemberships": [
                             {
                               "cardSystem": {
@@ -265,6 +271,12 @@
                           "name": "string",
                           "firstName": "string",
                           "inszNumber": "string",
+                          "dateOfBirth": "2000-01-01",
+                          "postalCode": "9300",
+                          "registrationOrganizer": {
+                            "id": "1234",
+                            "name": "Example UiTPAS Organizer"
+                          },
                           "cardSystemMemberships": [
                             {
                               "cardSystem": {
@@ -299,6 +311,12 @@
                           "name": "string",
                           "firstName": "string",
                           "inszNumber": "string",
+                          "dateOfBirth": "2000-01-01",
+                          "postalCode": "9300",
+                          "registrationOrganizer": {
+                            "id": "1234",
+                            "name": "Example UiTPAS Organizer"
+                          },
                           "cardSystemMemberships": [
                             {
                               "cardSystem": {
@@ -461,6 +479,12 @@
                             "name": "string",
                             "firstName": "string",
                             "inszNumber": "string",
+                            "dateOfBirth": "2000-01-01",
+                            "postalCode": "9300",
+                            "registrationOrganizer": {
+                              "id": "1234",
+                              "name": "Example UiTPAS Organizer"
+                            },
                             "cardSystemMemberships": [
                               {
                                 "cardSystem": {
@@ -495,6 +519,12 @@
                             "name": "string",
                             "firstName": "string",
                             "inszNumber": "string",
+                            "dateOfBirth": "2000-01-01",
+                            "postalCode": "9300",
+                            "registrationOrganizer": {
+                              "id": "1234",
+                              "name": "Example UiTPAS Organizer"
+                            },
                             "cardSystemMemberships": [
                               {
                                 "cardSystem": {
@@ -1002,6 +1032,12 @@
                           "name": "string",
                           "firstName": "string",
                           "inszNumber": "string",
+                          "dateOfBirth": "2000-01-01",
+                          "postalCode": "9300",
+                          "registrationOrganizer": {
+                            "id": "1234",
+                            "name": "Example UiTPAS Organizer"
+                          },
                           "cardSystemMemberships": [
                             {
                               "cardSystem": {
@@ -1018,8 +1054,7 @@
                             }
                           ],
                           "email": "string",
-                          "creationDate": "2019-08-24T14:15:22Z",
-                          "dateOfBirth": "1986-12-15"
+                          "creationDate": "2019-08-24T14:15:22Z"
                         }
                       ]
                     }
@@ -1046,17 +1081,13 @@
           }
         },
         "operationId": "get-passholders",
-        "description": "Retrieve passholders based on search parameters.\n\nThe caller of this request must have `PASSHOLDER_SEARCH` permission.",
+        "description": "Retrieve passholders based on search parameters.\n\nThe caller of this request must have `PASSHOLDER_SEARCH` permission. In case of a user access token, the user must have either admin rights for at least one organizers. Otherwise the search is limited to the `inszNumber` of the user token.",
         "security": [
           {
-            "USER_ACCESS_TOKEN": [
-              "https://api.publiq.be/auth/uitpas"
-            ]
+            "USER_ACCESS_TOKEN": []
           },
           {
-            "CLIENT_ACCESS_TOKEN": [
-              "https://api.publiq.be/auth/uitpas"
-            ]
+            "CLIENT_ACCESS_TOKEN": []
           }
         ],
         "parameters": [
@@ -1150,6 +1181,96 @@
             "name": "dateOfBirthTo",
             "description": "Include only passholders with a dateOfBirth of this value (including) or older. Format yyyy-mm-dd e.g. 2003-01-01"
           }
+        ]
+      },
+      "post": {
+        "summary": "",
+        "operationId": "post-passholders",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Passholder"
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "id": "string",
+                      "name": "string",
+                      "firstName": "string",
+                      "inszNumber": "string",
+                      "cardSystemMemberships": [
+                        {
+                          "cardSystem": {
+                            "id": 0,
+                            "name": "string"
+                          },
+                          "uitpasNumber": "string",
+                          "status": "ACTIVE"
+                        }
+                      ],
+                      "email": "string",
+                      "creationDate": "2019-08-24T14:15:22Z",
+                      "dateOfBirth": "2019-08-24",
+                      "postalCode": "string",
+                      "city": "string",
+                      "registrationOrganizer": {
+                        "id": "1234",
+                        "name": "Example UiTPAS Organizer"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "<!-- theme: warning -->\n\n> WARNING: Experimental API. Breaking changes might be introduced in future updates\n\nRegister a new passholder.\n\nThe caller of this request must have `PASSHOLDER_CREATE` permission. In case of a user access token, the user must have either admin rights for the `registrationOrganizer` or the INSZ number of the user token must match the INSZ number of the passholder.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Passholder"
+              },
+              "examples": {
+                "example-1": {
+                  "value": {
+                    "name": "string",
+                    "firstName": "string",
+                    "inszNumber": "string",
+                    "cardSystemMemberships": [
+                      {
+                        "cardSystem": {
+                          "id": 0
+                        }
+                      }
+                    ],
+                    "email": "string",
+                    "dateOfBirth": "2019-08-24",
+                    "postalCode": "string",
+                    "city": "string",
+                    "registrationOrganizer": {
+                      "id": "1234",
+                      "name": "Example UiTPAS Organizer"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "USER_ACCESS_TOKEN": []
+          },
+          {
+            "CLIENT_ACCESS_TOKEN": []
+          }
+        ],
+        "tags": [
+          "Passholders"
         ]
       }
     },
@@ -1951,7 +2072,8 @@
         "description": "Person who holds an UiTPAS, the end-user of an UiTPAS. \n\nA `Passholder` can be identified by its `id`. However, there are cases where the passholder identifies using one of its UiTPAS numbers. That number is CardSystem specific, so it can be found under `cardSystemMemberships`. Every passholder should have at least one cardsystem membership.",
         "properties": {
           "id": {
-            "type": "string"
+            "type": "string",
+            "readOnly": true
           },
           "name": {
             "type": "string"
@@ -1973,13 +2095,32 @@
           },
           "creationDate": {
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "readOnly": true
           },
           "dateOfBirth": {
             "type": "string",
             "format": "date"
+          },
+          "postalCode": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string",
+            "readOnly": true
+          },
+          "registrationOrganizer": {
+            "$ref": "#/components/schemas/Organizer"
           }
-        }
+        },
+        "required": [
+          "name",
+          "firstName",
+          "cardSystemMemberships",
+          "dateOfBirth",
+          "postalCode",
+          "registrationOrganizer"
+        ]
       },
       "CardSystemMembership": {
         "title": "CardSystemMembership",
@@ -2000,7 +2141,8 @@
             "enum": [
               "ACTIVE",
               "BLOCKED"
-            ]
+            ],
+            "readOnly": true
           },
           "socialTariff": {
             "type": "object",
@@ -2015,9 +2157,15 @@
               "expired": {
                 "type": "boolean"
               }
-            }
+            },
+            "required": [
+              "endDate"
+            ]
           }
-        }
+        },
+        "required": [
+          "cardSystem"
+        ]
       },
       "CardSystem": {
         "title": "CardSystem",

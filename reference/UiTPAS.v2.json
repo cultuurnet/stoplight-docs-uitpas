@@ -1184,7 +1184,7 @@
         ]
       },
       "post": {
-        "summary": "",
+        "summary": "Create passholder",
         "operationId": "post-passholders",
         "responses": {
           "200": {
@@ -1195,30 +1195,30 @@
                   "$ref": "#/components/schemas/Passholder"
                 },
                 "examples": {
-                  "example-1": {
+                  "Example": {
                     "value": {
-                      "id": "string",
-                      "name": "string",
-                      "firstName": "string",
-                      "inszNumber": "string",
+                      "id": "a1e0a6d9-7272-4214-b3bc-17d43f965b43",
+                      "name": "Lastname",
+                      "firstName": "Firstname",
+                      "inszNumber": "19800101003",
                       "cardSystemMemberships": [
                         {
                           "cardSystem": {
-                            "id": 0,
-                            "name": "string"
+                            "id": 27,
+                            "name": "UiTPAS Example Cardsystem"
                           },
-                          "uitpasNumber": "string",
+                          "uitpasNumber": "0999100000002",
                           "status": "ACTIVE"
                         }
                       ],
-                      "email": "string",
-                      "creationDate": "2019-08-24T14:15:22Z",
-                      "dateOfBirth": "2019-08-24",
-                      "postalCode": "string",
-                      "city": "string",
+                      "postalCode": "9000",
+                      "city": "Gent",
+                      "email": "firstname.lastname@example.com",
+                      "creationDate": "2021-10-15T09:50:51+00:00",
+                      "dateOfBirth": "2000-08-24",
                       "registrationOrganizer": {
-                        "id": "1234",
-                        "name": "Example UiTPAS Organizer"
+                        "id": "d2f898b1-455e-44ee-b08a-c4c05b1ab900",
+                        "name": "UiTPAS Example organizer"
                       }
                     }
                   }
@@ -1235,25 +1235,24 @@
                 "$ref": "#/components/schemas/Passholder"
               },
               "examples": {
-                "example-1": {
+                "Example": {
                   "value": {
-                    "name": "string",
-                    "firstName": "string",
-                    "inszNumber": "string",
+                    "name": "Lastname",
+                    "firstName": "Firstname",
+                    "inszNumber": "19800101003",
                     "cardSystemMemberships": [
                       {
                         "cardSystem": {
-                          "id": 0
+                          "id": 27
                         }
                       }
                     ],
-                    "email": "string",
-                    "dateOfBirth": "2019-08-24",
-                    "postalCode": "string",
-                    "city": "string",
+                    "email": "firstname.lastname@example.com",
+                    "dateOfBirth": "1980-01-01",
+                    "postalCode": "9000",
+                    "city": "Gent",
                     "registrationOrganizer": {
-                      "id": "1234",
-                      "name": "Example UiTPAS Organizer"
+                      "id": "d2f898b1-455e-44ee-b08a-c4c05b1ab900"
                     }
                   }
                 }

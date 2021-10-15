@@ -20,6 +20,7 @@ To decide what kind of token to use, see the [overview of token types](https://p
 
 ## Workflow overview
 
+<!-- focus: false -->
 ![](../assets/images/steps-ticketing-UiTPAS-visual.png)
 
 ### 1. UiTdatabank event

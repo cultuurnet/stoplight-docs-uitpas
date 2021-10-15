@@ -2110,6 +2110,10 @@
           },
           "registrationOrganizer": {
             "$ref": "#/components/schemas/Organizer"
+          },
+          "points": {
+            "type": "integer",
+            "readOnly": true
           }
         },
         "required": [

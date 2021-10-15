@@ -7,7 +7,10 @@
 2.  Carefully read [the authentication guide](https://publiq.stoplight.io/docs/authentication/docs/methods.md) and get a grasp of common UiTPAS [terminology](./terminology.md).
 
 3.  Start building your application on the UiTPAS testing environment.
+
     Make use of our step-by-step guides for common integration scenarios
     such as [How to register discounted ticket sales](./registering-ticket-sales.md) and [How to register UiTPAS events](./registering-events.md).
 
-4.  Ready for production? [Request your credentials](https://forms.gle/CDdJfmeuNocYPSRc9) for the UiTPAS production environment. Before receiving these, we ask you to send us a short overview of your integration and to give us a quick demo.
+    You will receive test credentials including permissions for a test organizer.
+
+4.  Ready for production? [Request your credentials](https://forms.gle/CDdJfmeuNocYPSRc9) for the UiTPAS production environment. These credentials should be requested by the UiTPAS organizer, so the correct permissions can be granted. Before receiving these, we ask you to send us a short overview of your integration and to give us a quick demo.

@@ -1237,7 +1237,7 @@
             "$ref": "#/components/responses/Forbidden"
           }
         },
-        "description": "<!-- theme: warning -->\n\n> WARNING: Experimental API. Breaking changes might be introduced in future updates\n\nRegister a new passholder.\n\nThe caller of this request must have `PASSHOLDER_CREATE` permission. In case of a user access token, the user must have either admin rights for the `registrationOrganizer` or the INSZ number of the user token must match the INSZ number of the passholder.",
+        "description": "<!-- theme: warning -->\n\n> WARNING\n>\n> Experimental API. Breaking changes might be introduced in future updates.\n\nRegister a new passholder.\n\nThe caller of this request must have `PASSHOLDER_CREATE` permission. In case of a user access token, the user must have either admin rights for the `registrationOrganizer` or the INSZ number of the user token must match the INSZ number of the passholder.",
         "requestBody": {
           "content": {
             "application/json": {

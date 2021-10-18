@@ -1311,7 +1311,7 @@
             }
           },
           "400": {
-            "description": "Bad request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/insz-in-token-required\n* https://api.publiq.be/probs/uitpas/action-failed\n* https://api.publiq.be/probs/uitpas/organizer-not-found\n* https://api.publiq.be/probs/uitpas/cardsystem-not-found\n* https://api.publiq.be/probs/uitpas/forbidden-underaged\n* https://api.publiq.be/probs/uitpas/invalid-city\n\nThe detail property might include more information for the client developer."
+            "description": "Bad request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/insz-in-token-required\n* https://api.publiq.be/probs/uitpas/organizer-not-found\n* https://api.publiq.be/probs/uitpas/cardsystem-not-found\n* https://api.publiq.be/probs/uitpas/forbidden-underaged\n* https://api.publiq.be/probs/uitpas/invalid-city\n\nThe detail property might include more information for the client developer."
           },
           "401": {
             "$ref": "#/components/responses/Unauthorized"
@@ -1434,7 +1434,7 @@
             "description": "No Content. Update succeeded."
           },
           "400": {
-            "description": "Bad request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/school-not-found\n* https://api.publiq.be/probs/uitpas/action-failed\n\nThe detail property might include more information for the client developer.\n",
+            "description": "Bad request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/school-not-found\n\nThe detail property might include more information for the client developer.\n",
             "content": {
               "application/json": {
                 "schema": {

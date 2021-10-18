@@ -2455,6 +2455,22 @@
       "PassholderSelfRegistration": {
         "title": "PassholderSelfRegistration",
         "type": "object",
+        "x-examples": {
+          "Example": {
+            "name": "Lastname",
+            "firstName": "Firstname",
+            "cardSystem": {
+              "id": 27
+            },
+            "email": "firstname.lastname@example.com",
+            "dateOfBirth": "1980-01-01",
+            "postalCode": "9000",
+            "city": "Gent",
+            "registrationOrganizer": {
+              "id": "d2f898b1-455e-44ee-b08a-c4c05b1ab900"
+            }
+          }
+        },
         "properties": {
           "name": {
             "type": "string"
@@ -2469,7 +2485,7 @@
           "email": {
             "type": "string"
           },
-          "postcalCode": {
+          "postalCode": {
             "type": "string"
           },
           "city": {
@@ -2486,23 +2502,7 @@
           "name",
           "firstName",
           "dateOfBirth"
-        ],
-        "x-examples": {
-          "Example": {
-            "name": "Lastname",
-            "firstName": "Firstname",
-            "cardSystem": {
-              "id": 27
-            },
-            "email": "firstname.lastname@example.com",
-            "dateOfBirth": "1980-01-01",
-            "postalCode": "9000",
-            "city": "Gent",
-            "registrationOrganizer": {
-              "id": "d2f898b1-455e-44ee-b08a-c4c05b1ab900"
-            }
-          }
-        }
+        ]
       }
     },
     "securitySchemes": {

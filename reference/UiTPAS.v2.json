@@ -1187,7 +1187,7 @@
     },
     "/passholders/me": {
       "get": {
-        "summary": "Retrieve passholder for user",
+        "summary": "Retrieve passholder for the current user",
         "tags": [
           "Passholders"
         ],
@@ -1258,7 +1258,7 @@
           }
         },
         "operationId": "get-passholders-me",
-        "description": "<!-- theme: warning -->\n\n> WARNING\n>\n> Experimental API. Breaking changes might be introduced in future updates.\n\nAllows users to retrieve their passholder using a user access token.\n\nA user access token of a client with `PASSHOLDER_SEARCH` permission is mandatory. Furthermore, the user access token must contain the custom claim `https://publiq.be/rrn` (i.e. user has to login using connection ACM).",
+        "description": "<!-- theme: warning -->\n\n> WARNING\n>\n> Experimental API. Breaking changes might be introduced in future updates.\n\nAllows users to retrieve their passholder using a user access token.\n\nA user access token of a client with `PASSHOLDER_SELF_READ` permission is mandatory. The passholder is retrieved by `inszNumber` if the access token contains the custom claim `https://publiq.be/rrn` (i.e. user has logged in using connection ACM), or by linked UiTID user (`sub` claim of the user access token).",
         "security": [
           {
             "USER_ACCESS_TOKEN": []
@@ -1267,7 +1267,7 @@
         "parameters": []
       },
       "post": {
-        "summary": "Self register passholder",
+        "summary": "Register passholder for the current user",
         "operationId": "post-passholders-me",
         "responses": {
           "200": {
@@ -1320,7 +1320,7 @@
             "$ref": "#/components/responses/Forbidden"
           }
         },
-        "description": "<!-- theme: warning -->\n\n> WARNING\n>\n> Experimental API. Breaking changes might be introduced in future updates.\n\nAllows users to self-register a passholder using a user access token.\n\nA user access token of a client with `PASSHOLDER_CREATE` permission for the `registrationOrganizer` is mandatory. Furthermore, the user access token must contain the custom claim `https://publiq.be/rrn` (i.e. user has to login using connection ACM).\n\nPlease note a user can only self-register one passholder. Use `GET /passholders/me` to check if a passholder already exists for this user.",
+        "description": "<!-- theme: warning -->\n\n> WARNING\n>\n> Experimental API. Breaking changes might be introduced in future updates.\n\nAllows users to self-register a passholder using a user access token.\n\nA user access token of a client with `PASSHOLDER_SELF_REGISTRATION` permission for the `registrationOrganizer` is mandatory. Furthermore, the user access token must contain the custom claim `https://publiq.be/rrn` (i.e. user has to login using connection ACM).\n\nPlease note a user can only self-register one passholder. Use `GET /passholders/me` to check if a passholder already exists for this user.",
         "requestBody": {
           "content": {
             "application/json": {

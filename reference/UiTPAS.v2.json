@@ -1064,7 +1064,7 @@
             }
           },
           "400": {
-            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/organizer-not-found\n* https://api.publiq.be/probs/uitpas/invalid-uitpas-number\n* https://api.publiq.be/probs/uitpas/invalid-insz-number\n* https://api.publiq.be/probs/uitpas/school-not-found\n* https://api.publiq.be/probs/uitpas/insz-in-token-required (only in specific cases)\n* https://api.publiq.be/probs/uitpas/insz-required (only in specific cases)\n* https://api.publiq.be/probs/uitpas/insz-token-mismatch (only in specific cases)\n\nThe detail property might include more information for the client developer.\n",
+            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/organizer-not-found\n* https://api.publiq.be/probs/uitpas/invalid-uitpas-number\n* https://api.publiq.be/probs/uitpas/invalid-insz-number\n* https://api.publiq.be/probs/uitpas/school-not-found\n\nThe detail property might include more information for the client developer.\n",
             "content": {
               "application/json": {
                 "schema": {
@@ -1081,7 +1081,7 @@
           }
         },
         "operationId": "get-passholders",
-        "description": "Retrieve passholders based on search parameters.\n\nThe caller of this request must have `PASSHOLDER_SEARCH` permission. In case of a user access token, the user must have either admin rights for at least one organizers. Otherwise the `inszNumber` parameter is mandatory and must match the corresponding claim in the user token. i.e. the user can only GET their own passholder.",
+        "description": "Retrieve passholders based on search parameters.\n\nThe caller of this request must have `PASSHOLDER_SEARCH` permission.",
         "security": [
           {
             "USER_ACCESS_TOKEN": []
@@ -1183,9 +1183,92 @@
           }
         ]
       },
+      "parameters": []
+    },
+    "/passholders/me": {
+      "get": {
+        "summary": "Retrieve passholder for user",
+        "tags": [
+          "Passholders"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Passholder"
+                },
+                "examples": {
+                  "Example": {
+                    "value": {
+                      "id": "string",
+                      "name": "string",
+                      "firstName": "string",
+                      "inszNumber": "string",
+                      "dateOfBirth": "2000-01-01",
+                      "postalCode": "9300",
+                      "registrationOrganizer": {
+                        "id": "1234",
+                        "name": "Example UiTPAS Organizer"
+                      },
+                      "cardSystemMemberships": [
+                        {
+                          "cardSystem": {
+                            "id": 0,
+                            "name": "string"
+                          },
+                          "uitpasNumber": "string",
+                          "status": "ACTIVE"
+                        }
+                      ],
+                      "email": "string",
+                      "creationDate": "2019-08-24T14:15:22Z"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/insz-in-token-required\n\nThe detail property might include more information for the client developer.\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "description": "Not Found\n\nIf the user does not have a passholder.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-passholders-me",
+        "description": "<!-- theme: warning -->\n\n> WARNING\n>\n> Experimental API. Breaking changes might be introduced in future updates.\n\nAllows users to retrieve their passholder using a user access token.\n\nA user access token of a client with `PASSHOLDER_SEARCH` permission is mandatory. Furthermore, the user access token must contain the custom claim `https://publiq.be/rrn` (i.e. user has to login using connection ACM).",
+        "security": [
+          {
+            "USER_ACCESS_TOKEN": []
+          }
+        ],
+        "parameters": []
+      },
       "post": {
-        "summary": "Create passholder",
-        "operationId": "post-passholders",
+        "summary": "Self register passholder",
+        "operationId": "post-passholders-me",
         "responses": {
           "200": {
             "description": "OK",
@@ -1228,7 +1311,7 @@
             }
           },
           "400": {
-            "description": "Bad request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/insz-in-token-required\n* https://api.publiq.be/probs/uitpas/insz-required\n* https://api.publiq.be/probs/uitpas/insz-token-mismatch\n* https://api.publiq.be/probs/uitpas/action-failed\n* https://api.publiq.be/probs/uitpas/organizer-not-found\n* https://api.publiq.be/probs/uitpas/cardsystem-not-found\n* https://api.publiq.be/probs/uitpas/cardsystem-membership-error (only one membership is allowed when registering)\n* https://api.publiq.be/probs/uitpas/forbidden-underaged\n* https://api.publiq.be/probs/uitpas/invalid-city\n\nThe detail property might include more information for the client developer."
+            "description": "Bad request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/insz-in-token-required\n* https://api.publiq.be/probs/uitpas/action-failed\n* https://api.publiq.be/probs/uitpas/organizer-not-found\n* https://api.publiq.be/probs/uitpas/cardsystem-not-found\n* https://api.publiq.be/probs/uitpas/forbidden-underaged\n* https://api.publiq.be/probs/uitpas/invalid-city\n\nThe detail property might include more information for the client developer."
           },
           "401": {
             "$ref": "#/components/responses/Unauthorized"
@@ -1237,26 +1320,21 @@
             "$ref": "#/components/responses/Forbidden"
           }
         },
-        "description": "<!-- theme: warning -->\n\n> WARNING\n>\n> Experimental API. Breaking changes might be introduced in future updates.\n\nRegister a new passholder.\n\nThe caller of this request must have `PASSHOLDER_CREATE` permission. In case of a user access token, the user must have either admin rights for the `registrationOrganizer` or the INSZ number of the user token must match the INSZ number of the passholder.",
+        "description": "<!-- theme: warning -->\n\n> WARNING\n>\n> Experimental API. Breaking changes might be introduced in future updates.\n\nAllows users to self-register a passholder using a user access token.\n\nA user access token of a client with `PASSHOLDER_CREATE` permission for the `registrationOrganizer` is mandatory. Furthermore, the user access token must contain the custom claim `https://publiq.be/rrn` (i.e. user has to login using connection ACM).\n\nPlease note a user can only self-register one passholder. Use `GET /passholders/me` to check if a passholder already exists for this user.",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Passholder"
+                "$ref": "#/components/schemas/PassholderSelfRegistration"
               },
               "examples": {
                 "Example": {
                   "value": {
                     "name": "Lastname",
                     "firstName": "Firstname",
-                    "inszNumber": "19800101003",
-                    "cardSystemMemberships": [
-                      {
-                        "cardSystem": {
-                          "id": 27
-                        }
-                      }
-                    ],
+                    "cardSystem": {
+                      "id": 27
+                    },
                     "email": "firstname.lastname@example.com",
                     "dateOfBirth": "1980-01-01",
                     "postalCode": "9000",
@@ -1273,15 +1351,13 @@
         "security": [
           {
             "USER_ACCESS_TOKEN": []
-          },
-          {
-            "CLIENT_ACCESS_TOKEN": []
           }
         ],
         "tags": [
           "Passholders"
         ]
-      }
+      },
+      "parameters": []
     },
     "/passholders/{passholderId}/school": {
       "parameters": [
@@ -2375,6 +2451,58 @@
             ]
           }
         ]
+      },
+      "PassholderSelfRegistration": {
+        "title": "PassholderSelfRegistration",
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "dateOfBirth": {
+            "type": "string",
+            "format": "date"
+          },
+          "email": {
+            "type": "string"
+          },
+          "postcalCode": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "cardSystem": {
+            "$ref": "#/components/schemas/CardSystem"
+          },
+          "registrationOrganizer": {
+            "$ref": "#/components/schemas/Organizer"
+          }
+        },
+        "required": [
+          "name",
+          "firstName",
+          "dateOfBirth"
+        ],
+        "x-examples": {
+          "Example": {
+            "name": "Lastname",
+            "firstName": "Firstname",
+            "cardSystem": {
+              "id": 27
+            },
+            "email": "firstname.lastname@example.com",
+            "dateOfBirth": "1980-01-01",
+            "postalCode": "9000",
+            "city": "Gent",
+            "registrationOrganizer": {
+              "id": "d2f898b1-455e-44ee-b08a-c4c05b1ab900"
+            }
+          }
+        }
       }
     },
     "securitySchemes": {
@@ -2447,6 +2575,7 @@
           }
         }
       }
-    }
+    },
+    "requestBodies": {}
   }
 }

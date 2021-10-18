@@ -2501,7 +2501,12 @@
         "required": [
           "name",
           "firstName",
-          "dateOfBirth"
+          "dateOfBirth",
+          "email",
+          "postalCode",
+          "city",
+          "cardSystem",
+          "registrationOrganizer"
         ]
       }
     },

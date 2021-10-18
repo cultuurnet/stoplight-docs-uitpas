@@ -1247,7 +1247,7 @@
             "$ref": "#/components/responses/Forbidden"
           },
           "404": {
-            "description": "Not Found\n\nIf the user does not have a passholder.",
+            "description": "Not Found\n\nIf the user does not have a passholder. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/passholder-not-found\n",
             "content": {
               "application/json": {
                 "schema": {

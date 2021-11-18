@@ -2056,7 +2056,7 @@
         ]
       },
       "Error": {
-        "$ref": "http://t1-do.lodgon.com/erwin/Error.json"
+        "$ref": "https://raw.githubusercontent.com/cultuurnet/stoplight-docs-errors/fix-examples-syntax/models/Error.json"
       },
       "OrganizerPermissions": {
         "title": "OrganizerPermissions",

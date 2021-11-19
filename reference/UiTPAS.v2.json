@@ -1378,6 +1378,115 @@
         ]
       }
     },
+    "/passholders/me/uitid": {
+      "parameters": [],
+      "put": {
+        "summary": "Register UiTID for passholder",
+        "operationId": "put-passholders-me-uitid",
+        "responses": {
+          "201": {
+            "description": "Created. No Content."
+          },
+          "400": {
+            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/invalid-uitpas-validation\n* https://api.publiq.be/probs/uitpas/passholder-already-registered\n* https://api.publiq.be/probs/uitpas/uitid-already-registered\n\nThe detail property might include more information for the client developer.\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "429": {
+            "description": "Too Many Requests\n\nPossbile error types:\n\n* https://api.publiq.be/probs/uitpas/rate-limited\n\nThe detail property might include more information for the client developer.\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "description": "Registers the UiTID for this passholder.\n\nThis request requires a user access token of an UiTID user that doesn't already have a registered passholder linked to it and an UiTPAS that isn't registered already. Use `/passholders/me/validate-uitid-registration` to start to check this.\n\nThe input of this request is `uitpasValidation` in the form of:\n* a combination of uitpas number and a date of birth\n* or a token received via email\n\nA user access token of a client with `PASSHOLDER_REGISTER_UITID` permission is mandatory. Also note this endpoint is rate-limited on IP address to prevent abuse.",
+        "security": [
+          {
+            "USER_ACCESS_TOKEN": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "uitpasValidation": {
+                    "description": "Use either combination of uitpasNumber and dateOfBirth or an emailToken to validate the ownership of the UiTPAS.",
+                    "anyOf": [
+                      {
+                        "properties": {
+                          "uitpasNumber": {
+                            "type": "string"
+                          },
+                          "dateOfBirth": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "uitpasNumber",
+                          "dateOfBirth"
+                        ]
+                      },
+                      {
+                        "properties": {
+                          "emailToken": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "emailToken"
+                        ]
+                      }
+                    ],
+                    "type": "object"
+                  }
+                },
+                "required": [
+                  "uitpasValidation"
+                ]
+              },
+              "examples": {
+                "Example with email token": {
+                  "value": {
+                    "uitpasValidation": {
+                      "emailToken": "8f4f9ec6ee20922578403a0ee8b0c0df1dd1286e"
+                    }
+                  }
+                },
+                "Example with uitpas number and date of birth": {
+                  "value": {
+                    "uitpasValidation": {
+                      "uitpasNumber": "0900000008301",
+                      "dateOfBirth": "1979-08-04"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "description": "OK"
+        },
+        "tags": [
+          "Passholders"
+        ]
+      }
+    },
     "/passholders/me": {
       "get": {
         "summary": "Retrieve passholder for the current user",
@@ -2248,7 +2357,9 @@
           "uitpasNumber"
         ]
       },
-      "Error": { "$ref": "https://raw.githubusercontent.com/cultuurnet/stoplight-docs-errors/fix-examples-syntax/models/Error.json"},
+      "Error": {
+        "$ref": "https://raw.githubusercontent.com/cultuurnet/stoplight-docs-errors/fix-examples-syntax/models/Error.json"
+      },
       "OrganizerPermissions": {
         "title": "OrganizerPermissions",
         "type": "object",

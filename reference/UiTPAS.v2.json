@@ -1185,6 +1185,199 @@
       },
       "parameters": []
     },
+    "/passholders/me/validate-uitid-registration": {
+      "parameters": [],
+      "post": {
+        "summary": "Validate UiTID Registration",
+        "operationId": "post-passholders-me-validate-uitid-registration",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "uitpasNumber": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "UNREGISTERED",
+                        "REGISTERED"
+                      ]
+                    },
+                    "nextStep": {
+                      "type": "string",
+                      "enum": [
+                        "LOGIN",
+                        "REGISTER",
+                        "EMAIL"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "uitpasNumber",
+                    "email",
+                    "status",
+                    "nextStep"
+                  ],
+                  "readOnly": true
+                },
+                "examples": {
+                  "User should login": {
+                    "value": {
+                      "uitpasNumber": "0900000008301",
+                      "email": "john@example.com",
+                      "status": "UNREGISTERED",
+                      "nextStep": "LOGIN"
+                    }
+                  },
+                  "User should register": {
+                    "value": {
+                      "uitpasNumber": "0900000008301",
+                      "email": "john@example.com",
+                      "status": "UNREGISTERED",
+                      "nextStep": "REGISTER"
+                    }
+                  },
+                  "User should choose email": {
+                    "value": {
+                      "uitpasNumber": "0900000008301",
+                      "email": "",
+                      "status": "UNREGISTERED",
+                      "nextStep": "EMAIL"
+                    }
+                  },
+                  "User cannot register": {
+                    "value": {
+                      "uitpasNumber": "0900000008301",
+                      "email": "john@example.com",
+                      "status": "REGISTERED",
+                      "nextStep": "LOGIN"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/invalid-uitpas-validation\n\nThe detail property might include more information for the client developer.\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "429": {
+            "description": "Too Many Requests\n\nPossbile error types:\n\n* https://api.publiq.be/probs/uitpas/rate-limited\n\nThe detail property might include more information for the client developer.\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "description": "Validates the possible UiTID registration of a passholder.\n\nThe input consists of \n* `uitpasValidation` (either a combination of an UiTPAS number and a date of birth, or an email validation token)\n* optional `email` address that the user wants to use to register its UiTID (as a first step, this should be left empty. see `nextStep=EMAIL` below.\n\nThe response contains how the passholder should proceed, based on these fields:\n\n* `uitpasNumber` \n* `email`\n* `status`\n* `nextStep` \n\nIf the status is `REGISTERED`, this passholder cannot proceed UiTID registration, but instead has to authenticate (LOGIN). The `email` field contains the email address of his linked UiTID account.\n\nIf the status is `UNREGISTERED`, the UiTID registration can continue, based on `nextStep`:\n\n* `LOGIN` The user shoud continue by logging in using `email`\n* `REGISTER` The user should continue by registering using `email`\n* `EMAIL` The user must choose (another) email address (because no email address was linked to this passholder or the email address is already in use by another passholder/UiTID combination). This step has to be repeated until `nextStep` is either LOGIN or REGISTER.\n\n\nThis caller of this method (identified with CLIENT_IDENTIFICATION) does not require any permissions, but please note this endpoint is rate-limited on IP address to prevent abuse.",
+        "security": [
+          {
+            "CLIENT_IDENTIFICATION": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "uitpasValidation": {
+                    "description": "Use either combination of uitpasNumber and dateOfBirth or an emailToken to validate the ownership of the UiTPAS.",
+                    "anyOf": [
+                      {
+                        "properties": {
+                          "uitpasNumber": {
+                            "type": "string"
+                          },
+                          "dateOfBirth": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "uitpasNumber",
+                          "dateOfBirth"
+                        ]
+                      },
+                      {
+                        "properties": {
+                          "emailToken": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "emailToken"
+                        ]
+                      }
+                    ],
+                    "type": "object"
+                  },
+                  "email": {
+                    "type": "string",
+                    "description": "Email address of the UiTID. Use this if the nextStep=EMAIL  "
+                  }
+                },
+                "required": [
+                  "uitpasValidation"
+                ]
+              },
+              "examples": {
+                "Example with email token": {
+                  "value": {
+                    "uitpasValidation": {
+                      "emailToken": "8f4f9ec6ee20922578403a0ee8b0c0df1dd1286e"
+                    }
+                  }
+                },
+                "Example with uitpas number and date of birth": {
+                  "value": {
+                    "uitpasValidation": {
+                      "uitpasNumber": "0900000008301",
+                      "dateOfBirth": "1979-08-04"
+                    }
+                  }
+                },
+                "Example with optional email": {
+                  "value": {
+                    "uitpasValidation": {
+                      "uitpasNumber": "0900000008301",
+                      "dateOfBirth": "1979-08-04"
+                    },
+                    "email": "john@example.com"
+                  }
+                }
+              }
+            }
+          },
+          "description": "OK"
+        },
+        "tags": [
+          "Passholders"
+        ]
+      }
+    },
     "/passholders/me": {
       "get": {
         "summary": "Retrieve passholder for the current user",
@@ -2055,9 +2248,7 @@
           "uitpasNumber"
         ]
       },
-      "Error": {
-        "$ref": "https://raw.githubusercontent.com/cultuurnet/stoplight-docs-errors/main/models/Error.json"
-      },
+      "Error": { "$ref": "https://raw.githubusercontent.com/cultuurnet/stoplight-docs-errors/fix-examples-syntax/models/Error.json"},
       "OrganizerPermissions": {
         "title": "OrganizerPermissions",
         "type": "object",
@@ -2419,7 +2610,10 @@
               "$ref": "#/components/schemas/TariffAvailibility"
             }
           }
-        }
+        },
+        "x-tags": [
+          "Models"
+        ]
       },
       "TariffAvailibility": {
         "x-examples": {
@@ -2450,6 +2644,9 @@
               "remaining"
             ]
           }
+        ],
+        "x-tags": [
+          "Models"
         ]
       },
       "PassholderSelfRegistration": {
@@ -2506,6 +2703,9 @@
           "city",
           "cardSystem",
           "registrationOrganizer"
+        ],
+        "x-tags": [
+          "Models"
         ]
       }
     },
@@ -2522,7 +2722,7 @@
             }
           }
         },
-        "description": "See [Authentication docs](https://publiq.stoplight.io/docs/authentication/docs/user-access-token.md)"
+        "description": "See [Authentication docs](https://docs.publiq.be/docs/authentication/ZG9jOjExODE5NTM5-user-access-token)"
       },
       "CLIENT_ACCESS_TOKEN": {
         "type": "oauth2",
@@ -2535,7 +2735,13 @@
             }
           }
         },
-        "description": "See [Authentication docs](https://publiq.stoplight.io/docs/authentication/docs/client-access-token.md)"
+        "description": "See [Authentication docs](https://docs.publiq.be/docs/authentication/ZG9jOjExODE5NDY4-client-access-token)"
+      },
+      "CLIENT_IDENTIFICATION": {
+        "name": "x-client-id",
+        "type": "apiKey",
+        "in": "header",
+        "description": "See [Authentication docs](https://docs.publiq.be/docs/authentication/ZG9jOjExODE5NDY5-client-identification)"
       }
     },
     "parameters": {},
@@ -2547,7 +2753,7 @@
             "schema": {
               "$ref": "#/components/schemas/Error"
             },
-            "examples": {
+            "x-examples": {
               "Unauthorized": {
                 "value": {
                   "type": "https://api.publiq.be/probs/auth/unauthorized",
@@ -2566,7 +2772,7 @@
             "schema": {
               "$ref": "#/components/schemas/Error"
             },
-            "examples": {
+            "x-examples": {
               "Forbidden": {
                 "value": {
                   "type": "https://api.publiq.be/probs/auth/forbidden",

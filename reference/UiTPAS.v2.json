@@ -237,6 +237,12 @@
                           "name": "string",
                           "firstName": "string",
                           "inszNumber": "string",
+                          "dateOfBirth": "2000-01-01",
+                          "postalCode": "9300",
+                          "registrationOrganizer": {
+                            "id": "1234",
+                            "name": "Example UiTPAS Organizer"
+                          },
                           "cardSystemMemberships": [
                             {
                               "cardSystem": {
@@ -275,6 +281,12 @@
                           "name": "string",
                           "firstName": "string",
                           "inszNumber": "string",
+                          "dateOfBirth": "2000-01-01",
+                          "postalCode": "9300",
+                          "registrationOrganizer": {
+                            "id": "1234",
+                            "name": "Example UiTPAS Organizer"
+                          },
                           "cardSystemMemberships": [
                             {
                               "cardSystem": {
@@ -309,6 +321,12 @@
                           "name": "string",
                           "firstName": "string",
                           "inszNumber": "string",
+                          "dateOfBirth": "2000-01-01",
+                          "postalCode": "9300",
+                          "registrationOrganizer": {
+                            "id": "1234",
+                            "name": "Example UiTPAS Organizer"
+                          },
                           "cardSystemMemberships": [
                             {
                               "cardSystem": {
@@ -479,6 +497,12 @@
                             "name": "string",
                             "firstName": "string",
                             "inszNumber": "string",
+                            "dateOfBirth": "2000-01-01",
+                            "postalCode": "9300",
+                            "registrationOrganizer": {
+                              "id": "1234",
+                              "name": "Example UiTPAS Organizer"
+                            },
                             "cardSystemMemberships": [
                               {
                                 "cardSystem": {
@@ -513,6 +537,12 @@
                             "name": "string",
                             "firstName": "string",
                             "inszNumber": "string",
+                            "dateOfBirth": "2000-01-01",
+                            "postalCode": "9300",
+                            "registrationOrganizer": {
+                              "id": "1234",
+                              "name": "Example UiTPAS Organizer"
+                            },
                             "cardSystemMemberships": [
                               {
                                 "cardSystem": {
@@ -910,7 +940,7 @@
             }
           },
           "400": {
-            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/group-not-found\n\nThe detail property might include more information for the client developer.\n",
+            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/group-not-found\n* https://api.publiq.be/probs/uitpas/cardsystem-not-found\n\nThe detail property might include more information for the client developer.\n",
             "content": {
               "application/json": {
                 "schema": {
@@ -956,6 +986,14 @@
             "in": "query",
             "name": "name",
             "description": "Include only organizers with this name (* wildcard allowed)"
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "cardSystemId",
+            "description": "Include only organizers linked to this card system"
           },
           {
             "schema": {
@@ -1012,6 +1050,12 @@
                           "name": "string",
                           "firstName": "string",
                           "inszNumber": "string",
+                          "dateOfBirth": "2000-01-01",
+                          "postalCode": "9300",
+                          "registrationOrganizer": {
+                            "id": "1234",
+                            "name": "Example UiTPAS Organizer"
+                          },
                           "cardSystemMemberships": [
                             {
                               "cardSystem": {
@@ -1028,8 +1072,7 @@
                             }
                           ],
                           "email": "string",
-                          "creationDate": "2019-08-24T14:15:22Z",
-                          "dateOfBirth": "1986-12-15"
+                          "creationDate": "2019-08-24T14:15:22Z"
                         }
                       ]
                     }
@@ -1059,14 +1102,10 @@
         "description": "Retrieve passholders based on search parameters.\n\nThe caller of this request must have `PASSHOLDER_SEARCH` permission.",
         "security": [
           {
-            "USER_ACCESS_TOKEN": [
-              "https://api.publiq.be/auth/uitpas"
-            ]
+            "USER_ACCESS_TOKEN": []
           },
           {
-            "CLIENT_ACCESS_TOKEN": [
-              "https://api.publiq.be/auth/uitpas"
-            ]
+            "CLIENT_ACCESS_TOKEN": []
           }
         ],
         "parameters": [
@@ -1141,9 +1180,202 @@
             "in": "query",
             "name": "organizerId",
             "description": "Filter passholders based on the card systems of the give organizer. If omitted, the results will be fitered based on the organizers you have permission to."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "format": "date"
+            },
+            "in": "query",
+            "name": "dateOfBirthFrom",
+            "description": "Include only passholders with a dateOfBirth of this value (including) or more recent. Format yyyy-mm-dd e.g. 2003-01-01"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "format": "date"
+            },
+            "in": "query",
+            "name": "dateOfBirthTo",
+            "description": "Include only passholders with a dateOfBirth of this value (including) or older. Format yyyy-mm-dd e.g. 2003-01-01"
           }
         ]
-      }
+      },
+      "parameters": []
+    },
+    "/passholders/me": {
+      "get": {
+        "summary": "Retrieve passholder for the current user",
+        "tags": [
+          "Passholders"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Passholder"
+                },
+                "examples": {
+                  "Example": {
+                    "value": {
+                      "id": "string",
+                      "name": "string",
+                      "firstName": "string",
+                      "inszNumber": "string",
+                      "dateOfBirth": "2000-01-01",
+                      "postalCode": "9300",
+                      "registrationOrganizer": {
+                        "id": "1234",
+                        "name": "Example UiTPAS Organizer"
+                      },
+                      "cardSystemMemberships": [
+                        {
+                          "cardSystem": {
+                            "id": 0,
+                            "name": "string"
+                          },
+                          "uitpasNumber": "string",
+                          "status": "ACTIVE"
+                        }
+                      ],
+                      "email": "string",
+                      "creationDate": "2019-08-24T14:15:22Z"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/insz-in-token-required\n\nThe detail property might include more information for the client developer.\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "description": "Not Found\n\nIf the user does not have a passholder. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/passholder-not-found\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-passholders-me",
+        "description": "<!-- theme: warning -->\n\n> WARNING\n>\n> Experimental API. Breaking changes might be introduced in future updates.\n\nAllows users to retrieve their passholder using a user access token.\n\nA user access token of a client with `PASSHOLDER_SELF_READ` permission is mandatory. The passholder is retrieved by `inszNumber` if the access token contains the custom claim `https://publiq.be/rrn` (i.e. user has logged in using connection ACM), or by linked UiTID user (`sub` claim of the user access token).",
+        "security": [
+          {
+            "USER_ACCESS_TOKEN": []
+          }
+        ],
+        "parameters": []
+      },
+      "post": {
+        "summary": "Register passholder for the current user",
+        "operationId": "post-passholders-me",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Passholder"
+                },
+                "examples": {
+                  "Example": {
+                    "value": {
+                      "id": "a1e0a6d9-7272-4214-b3bc-17d43f965b43",
+                      "name": "Lastname",
+                      "firstName": "Firstname",
+                      "inszNumber": "19800101003",
+                      "cardSystemMemberships": [
+                        {
+                          "cardSystem": {
+                            "id": 27,
+                            "name": "UiTPAS Example Cardsystem"
+                          },
+                          "uitpasNumber": "0999100000002",
+                          "status": "ACTIVE"
+                        }
+                      ],
+                      "postalCode": "9000",
+                      "city": "Gent",
+                      "email": "firstname.lastname@example.com",
+                      "creationDate": "2021-10-15T09:50:51+00:00",
+                      "dateOfBirth": "2000-08-24",
+                      "registrationOrganizer": {
+                        "id": "d2f898b1-455e-44ee-b08a-c4c05b1ab900",
+                        "name": "UiTPAS Example organizer"
+                      },
+                      "points": 3
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/insz-in-token-required\n* https://api.publiq.be/probs/uitpas/organizer-not-found\n* https://api.publiq.be/probs/uitpas/cardsystem-not-found\n* https://api.publiq.be/probs/uitpas/forbidden-underaged\n* https://api.publiq.be/probs/uitpas/invalid-city\n\nThe detail property might include more information for the client developer."
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          }
+        },
+        "description": "<!-- theme: warning -->\n\n> WARNING\n>\n> Experimental API. Breaking changes might be introduced in future updates.\n\nAllows users to self-register a passholder using a user access token.\n\nA user access token of a client with `PASSHOLDER_SELF_REGISTRATION` permission for the `registrationOrganizer` is mandatory. Furthermore, the user access token must contain the custom claim `https://publiq.be/rrn` (i.e. user has to login using connection ACM).\n\nPlease note a user can only self-register one passholder. Use `GET /passholders/me` to check if a passholder already exists for this user.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PassholderSelfRegistration"
+              },
+              "examples": {
+                "Example": {
+                  "value": {
+                    "name": "Lastname",
+                    "firstName": "Firstname",
+                    "cardSystem": {
+                      "id": 27
+                    },
+                    "email": "firstname.lastname@example.com",
+                    "dateOfBirth": "1980-01-01",
+                    "postalCode": "9000",
+                    "city": "Gent",
+                    "registrationOrganizer": {
+                      "id": "d2f898b1-455e-44ee-b08a-c4c05b1ab900"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "USER_ACCESS_TOKEN": []
+          }
+        ],
+        "tags": [
+          "Passholders"
+        ]
+      },
+      "parameters": []
     },
     "/passholders/{passholderId}/school": {
       "parameters": [
@@ -1220,7 +1452,7 @@
             "description": "No Content. Update succeeded."
           },
           "400": {
-            "description": "Bad request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/school-not-found\n* https://api.publiq.be/probs/uitpas/action-failed\n\nThe detail property might include more information for the client developer.\n",
+            "description": "Bad request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/school-not-found\n\nThe detail property might include more information for the client developer.\n",
             "content": {
               "application/json": {
                 "schema": {
@@ -2087,7 +2319,8 @@
         "description": "Person who holds an UiTPAS, the end-user of an UiTPAS. \n\nA `Passholder` can be identified by its `id`. However, there are cases where the passholder identifies using one of its UiTPAS numbers. That number is CardSystem specific, so it can be found under `cardSystemMemberships`. Every passholder should have at least one cardsystem membership.",
         "properties": {
           "id": {
-            "type": "string"
+            "type": "string",
+            "readOnly": true
           },
           "name": {
             "type": "string"
@@ -2109,13 +2342,36 @@
           },
           "creationDate": {
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "readOnly": true
           },
           "dateOfBirth": {
             "type": "string",
             "format": "date"
+          },
+          "postalCode": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string",
+            "readOnly": true
+          },
+          "registrationOrganizer": {
+            "$ref": "#/components/schemas/Organizer"
+          },
+          "points": {
+            "type": "integer",
+            "readOnly": true
           }
-        }
+        },
+        "required": [
+          "name",
+          "firstName",
+          "cardSystemMemberships",
+          "dateOfBirth",
+          "postalCode",
+          "registrationOrganizer"
+        ]
       },
       "CardSystemMembership": {
         "title": "CardSystemMembership",
@@ -2136,7 +2392,8 @@
             "enum": [
               "ACTIVE",
               "BLOCKED"
-            ]
+            ],
+            "readOnly": true
           },
           "socialTariff": {
             "type": "object",
@@ -2151,9 +2408,15 @@
               "expired": {
                 "type": "boolean"
               }
-            }
+            },
+            "required": [
+              "endDate"
+            ]
           }
-        }
+        },
+        "required": [
+          "cardSystem"
+        ]
       },
       "CardSystem": {
         "title": "CardSystem",
@@ -2498,6 +2761,62 @@
         "x-tags": [
           "Models"
         ]
+      },
+      "PassholderSelfRegistration": {
+        "title": "PassholderSelfRegistration",
+        "type": "object",
+        "x-examples": {
+          "Example": {
+            "name": "Lastname",
+            "firstName": "Firstname",
+            "cardSystem": {
+              "id": 27
+            },
+            "email": "firstname.lastname@example.com",
+            "dateOfBirth": "1980-01-01",
+            "postalCode": "9000",
+            "city": "Gent",
+            "registrationOrganizer": {
+              "id": "d2f898b1-455e-44ee-b08a-c4c05b1ab900"
+            }
+          }
+        },
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "dateOfBirth": {
+            "type": "string",
+            "format": "date"
+          },
+          "email": {
+            "type": "string"
+          },
+          "postalCode": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "cardSystem": {
+            "$ref": "#/components/schemas/CardSystem"
+          },
+          "registrationOrganizer": {
+            "$ref": "#/components/schemas/Organizer"
+          }
+        },
+        "required": [
+          "name",
+          "firstName",
+          "dateOfBirth",
+          "postalCode",
+          "city",
+          "cardSystem",
+          "registrationOrganizer"
+        ]
       }
     },
     "securitySchemes": {
@@ -2570,6 +2889,7 @@
           }
         }
       }
-    }
+    },
+    "requestBodies": {}
   }
 }

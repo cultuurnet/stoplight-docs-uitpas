@@ -3260,9 +3260,6 @@
       "ExchangedReward": {
         "type": "object",
         "title": "ExchangedReward",
-        "x-tags": [
-          "Rewards"
-        ],
         "properties": {
           "id": {
             "type": "string",
@@ -3302,7 +3299,10 @@
           "reward",
           "exchangeDate"
         ],
-        "readOnly": true
+        "readOnly": true,
+        "x-tags": [
+          "Models"
+        ]
       },
       "PassholderSelfRegistration": {
         "title": "PassholderSelfRegistration",

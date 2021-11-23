@@ -122,6 +122,19 @@
                         }
                       ]
                     }
+                  },
+                  "Example with reward tariff": {
+                    "value": {
+                      "available": [
+                        {
+                          "id": "REWARD5464",
+                          "name": "50% korting op een specifiek event",
+                          "price": 5,
+                          "remaining": 1,
+                          "type": "REWARD"
+                        }
+                      ]
+                    }
                   }
                 }
               }
@@ -345,6 +358,50 @@
                         }
                       }
                     ]
+                  },
+                  "Example using a reward tariff": {
+                    "value": [
+                      {
+                        "id": "489144",
+                        "tariff": {
+                          "id": "REWARD1234",
+                          "name": "50% korting op een specifiek event",
+                          "price": 5,
+                          "type": "REWARD"
+                        },
+                        "uitpasNumber": "0560002524314",
+                        "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
+                        "regularPrice": 10,
+                        "passholder": {
+                          "id": "string",
+                          "name": "string",
+                          "firstName": "string",
+                          "inszNumber": "string",
+                          "dateOfBirth": "2000-01-01",
+                          "postalCode": "9300",
+                          "points": "3",
+                          "registrationOrganizer": {
+                            "id": "1234",
+                            "name": "Example UiTPAS Organizer"
+                          },
+                          "cardSystemMemberships": [
+                            {
+                              "cardSystem": {
+                                "id": 1,
+                                "name": "UiTPAS Dender"
+                              },
+                              "uitpasNumber": "0560002524314",
+                              "status": "ACTIVE",
+                              "socialTariff": {
+                                "endDate": "2022-08-24T14:15:22Z",
+                                "inGracePeriod": false,
+                                "expired": false
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    ]
                   }
                 }
               }
@@ -451,8 +508,55 @@
                       },
                       "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
                       "regularPrice": 10,
-                      "regularPriceLabel": "Optional descriptive label of the regular price. Used in financial reporting.",
-                      "numberOfTickets": 5
+                      "regularPriceLabel": "Optional descriptive label of the regular price. Used in financial reporting."
+                    },
+                    {
+                      "uitpasNumber": "0560002524314",
+                      "tariff": {
+                        "id": "SOCIALTARIFF"
+                      },
+                      "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
+                      "regularPrice": 10,
+                      "regularPriceLabel": "Optional descriptive label of the regular price. Used in financial reporting."
+                    },
+                    {
+                      "uitpasNumber": "0560002524314",
+                      "tariff": {
+                        "id": "SOCIALTARIFF"
+                      },
+                      "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
+                      "regularPrice": 10,
+                      "regularPriceLabel": "Optional descriptive label of the regular price. Used in financial reporting."
+                    },
+                    {
+                      "uitpasNumber": "0560002524314",
+                      "tariff": {
+                        "id": "SOCIALTARIFF"
+                      },
+                      "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
+                      "regularPrice": 10,
+                      "regularPriceLabel": "Optional descriptive label of the regular price. Used in financial reporting."
+                    },
+                    {
+                      "uitpasNumber": "0560002524314",
+                      "tariff": {
+                        "id": "SOCIALTARIFF"
+                      },
+                      "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
+                      "regularPrice": 10,
+                      "regularPriceLabel": "Optional descriptive label of the regular price. Used in financial reporting."
+                    }
+                  ]
+                },
+                "Example using a reward tariff": {
+                  "value": [
+                    {
+                      "tariff": {
+                        "id": "REWARD1234"
+                      },
+                      "uitpasNumber": "0560002524314",
+                      "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
+                      "regularPrice": 10
                     }
                   ]
                 }

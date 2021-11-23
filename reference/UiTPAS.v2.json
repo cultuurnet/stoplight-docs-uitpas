@@ -917,7 +917,7 @@
       ],
       "get": {
         "summary": "Get event social tariffs",
-        "operationId": "get-events-social-tariffs",
+        "operationId": "get-events-eventId-social-tariffs",
         "responses": {
           "200": {
             "description": "OK",
@@ -930,7 +930,7 @@
                   }
                 },
                 "examples": {
-                  "Example with one sociall tariff": {
+                  "Example with one social tariff": {
                     "value": [
                       {
                         "id": "SOCIALTARIFF1",
@@ -940,7 +940,7 @@
                       }
                     ]
                   },
-                  "Example with more sociall tariffs": {
+                  "Example with more social tariffs": {
                     "value": [
                       {
                         "id": "SOCIALTARIFF1",
@@ -980,6 +980,106 @@
         "description": "Get all social tariffs for the given event.\n\n<!-- theme: info   -->\n\n> **This information is also available in the UiTDatabank Event** \n> TODO: add link to UDB docs with new \"category\": \"uitpas\" priceInfo  \n\n\n\n\n\n",
         "tags": [
           "Events"
+        ],
+        "security": [
+          {
+            "CLIENT_IDENTIFICATION": []
+          }
+        ]
+      }
+    },
+    "/events/social-tariffs": {
+      "parameters": [],
+      "get": {
+        "summary": "Get event social tariffs based on organizer",
+        "operationId": "get-events-social-tariffs",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Tariff"
+                  }
+                },
+                "examples": {
+                  "Example with one social tariff": {
+                    "value": [
+                      {
+                        "id": "SOCIALTARIFF1",
+                        "name": "UiTPAS Kansentarief",
+                        "price": 1.5,
+                        "type": "SOCIALTARIFF"
+                      }
+                    ]
+                  },
+                  "Example with more social tariffs": {
+                    "value": [
+                      {
+                        "id": "SOCIALTARIFF1",
+                        "name": "UiTPAS Kansentarief in UiTPAS Gent",
+                        "price": 1.5,
+                        "type": "SOCIALTARIFF"
+                      },
+                      {
+                        "id": "SOCIALTARIFF2",
+                        "name": "UiTPAS Kansentarief in andere regio's",
+                        "price": 3,
+                        "type": "SOCIALTARIFF"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/event-not-found\n\nThe detail property might include more information for the client developer.\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "description": "Get all social tariffs for an event of the given organizer at the given regular price.\n\n<!-- theme: warning   -->\n\n> **This endpoint is typically not needed** If your client implements the flow as described in the guide 'Registering ticket sales' the tariffs will be provided by the `GET /tariffs` request.\n \n\n\n\n\n\n",
+        "tags": [
+          "Events"
+        ],
+        "security": [
+          {
+            "CLIENT_IDENTIFICATION": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "organizerId",
+            "required": true,
+            "description": "ID of the organizer of the event"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "regularPrice",
+            "description": "Regular price of the event",
+            "required": true
+          }
         ]
       }
     },

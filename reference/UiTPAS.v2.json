@@ -903,6 +903,86 @@
         ]
       }
     },
+    "/events/{eventId}/social-tariffs": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "eventId",
+          "in": "path",
+          "required": true,
+          "description": "The id of the event"
+        }
+      ],
+      "get": {
+        "summary": "Get event social tariffs",
+        "operationId": "get-events-social-tariffs",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Tariff"
+                  }
+                },
+                "examples": {
+                  "Example with one sociall tariff": {
+                    "value": [
+                      {
+                        "id": "SOCIALTARIFF1",
+                        "name": "UiTPAS Kansentarief",
+                        "price": 1.5,
+                        "type": "SOCIALTARIFF"
+                      }
+                    ]
+                  },
+                  "Example with more sociall tariffs": {
+                    "value": [
+                      {
+                        "id": "SOCIALTARIFF1",
+                        "name": "UiTPAS Kansentarief in UiTPAS Gent",
+                        "price": 1.5,
+                        "type": "SOCIALTARIFF"
+                      },
+                      {
+                        "id": "SOCIALTARIFF2",
+                        "name": "UiTPAS Kansentarief in andere regio's",
+                        "price": 3,
+                        "type": "SOCIALTARIFF"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/event-not-found\n\nThe detail property might include more information for the client developer.\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "description": "Get all social tariffs for the given event.\n\n<!-- theme: info   -->\n\n> **This information is also available in the UiTDatabank Event** \n> TODO: add link to UDB docs with new \"category\": \"uitpas\" priceInfo  \n\n\n\n\n\n",
+        "tags": [
+          "Events"
+        ]
+      }
+    },
     "/organizers": {
       "get": {
         "summary": "Get organizers",
@@ -2536,6 +2616,11 @@
           }
         },
         "description": "See [Authentication docs](https://publiq.stoplight.io/docs/authentication/docs/client-access-token.md)"
+      },
+      "CLIENT_IDENTIFICATION": {
+        "name": "x-client-id",
+        "type": "apiKey",
+        "in": "header"
       }
     },
     "parameters": {},

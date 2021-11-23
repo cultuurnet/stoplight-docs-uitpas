@@ -379,7 +379,7 @@
                           "inszNumber": "string",
                           "dateOfBirth": "2000-01-01",
                           "postalCode": "9300",
-                          "points": "3",
+                          "points": 3,
                           "registrationOrganizer": {
                             "id": "1234",
                             "name": "Example UiTPAS Organizer"

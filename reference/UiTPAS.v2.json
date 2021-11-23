@@ -1914,6 +1914,89 @@
           }
         ]
       }
+    },
+    "/card-systems": {
+      "get": {
+        "summary": "Retrieve card systems",
+        "tags": [
+          "CardSystems"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CardSystemsPaginatedCollection"
+                },
+                "examples": {
+                  "Example": {
+                    "value": {
+                      "totalItems": 0,
+                      "member": [
+                        {
+                          "id": 0,
+                          "name": "string",
+                          "branding": {
+                            "logo": "string",
+                            "primaryColor": "string",
+                            "secondaryColor": "string"
+                          },
+                          "links": {
+                            "website": "string",
+                            "terms": "string"
+                          },
+                          "cities": [
+                            {
+                              "postalCode": "string",
+                              "name": "string"
+                            }
+                          ],
+                          "permanent": true
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request.Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/invalid-city\n* https://api.publiq.be/probs/uitpas/invalid-postal-code\n\nThe detail property might include more information for the client developer."
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          }
+        },
+        "operationId": "get-card-systems",
+        "description": "Retrieve card systems based on query parameters.  \n\n\nTODO: security client identification",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "postalCode"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "city"
+          },
+          {
+            "schema": {
+              "type": "boolean"
+            },
+            "in": "query",
+            "name": "permanent"
+          }
+        ]
+      }
     }
   },
   "components": {
@@ -2110,6 +2193,25 @@
           }
         }
       },
+      "CardSystemsPaginatedCollection": {
+        "title": "CardSystemsPaginatedCollection",
+        "type": "object",
+        "x-tags": [
+          "Models"
+        ],
+        "description": "Paginated response object for card systems",
+        "properties": {
+          "totalItems": {
+            "type": "integer"
+          },
+          "member": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CardSystem"
+            }
+          }
+        }
+      },
       "OrganizersPaginatedResponse": {
         "title": "OrganizersPaginatedResponse",
         "type": "object",
@@ -2268,6 +2370,42 @@
           },
           "name": {
             "type": "string"
+          },
+          "branding": {
+            "type": "object",
+            "properties": {
+              "logo": {
+                "type": "string",
+                "description": "TODO: blijkbaar bijna nooit ingevuld!"
+              },
+              "primaryColor": {
+                "type": "string"
+              },
+              "secondaryColor": {
+                "type": "string"
+              }
+            }
+          },
+          "links": {
+            "type": "object",
+            "properties": {
+              "website": {
+                "type": "string"
+              },
+              "terms": {
+                "type": "string",
+                "description": "TODO: deze lijkt nergens ingevuld"
+              }
+            }
+          },
+          "cities": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/City"
+            }
+          },
+          "permanent": {
+            "type": "boolean"
           }
         },
         "required": [
@@ -2506,6 +2644,25 @@
           "city",
           "cardSystem",
           "registrationOrganizer"
+        ]
+      },
+      "City": {
+        "title": "City",
+        "type": "object",
+        "x-tags": [
+          "Models"
+        ],
+        "properties": {
+          "postalCode": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "postalCode",
+          "name"
         ]
       }
     },

@@ -2281,6 +2281,161 @@
         "description": "Update reward.\n\nThe caller of this request must have `REWARDS_WRITE` permission for the given organizer."
       }
     },
+    "/rewards/{id}/exchange": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "post": {
+        "summary": "Exchange reward",
+        "operationId": "put-rewards-id-exchange",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExchangedReward"
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "id": "string",
+                      "reward": {
+                        "id": "string",
+                        "title": "string",
+                        "owningCardSystem": {
+                          "id": 0,
+                          "name": "string"
+                        },
+                        "applicableCardSystems": [
+                          {
+                            "id": 0,
+                            "name": "string"
+                          }
+                        ],
+                        "organizers": [
+                          {
+                            "id": "string",
+                            "name": "string"
+                          }
+                        ],
+                        "allCardSystems": true,
+                        "status": "ACTIVE",
+                        "maxAvailableUnits": 0,
+                        "unitsTaken": 0,
+                        "description1": "string",
+                        "description2": "string",
+                        "pictures": [
+                          "string"
+                        ],
+                        "publicationPeriodBegin": "2019-08-24T14:15:22Z",
+                        "publicationPeriodEnd": "2019-08-24T14:15:22Z",
+                        "exchangePeriodBegin": "2019-08-24T14:15:22Z",
+                        "exchangePeriodEnd": "2019-08-24T14:15:22Z",
+                        "points": 0,
+                        "types": [
+                          "string"
+                        ],
+                        "forKids": true,
+                        "sport": true,
+                        "labels": "string",
+                        "moreInfoURL": "string",
+                        "cashInType": "PHYSICAL",
+                        "usesCodes": true,
+                        "ticketSaleDiscount": {
+                          "amount": 0,
+                          "type": "ABSOLUTE",
+                          "conditions": [
+                            {
+                              "type": "EVENT",
+                              "values": [
+                                "string"
+                              ]
+                            }
+                          ]
+                        }
+                      },
+                      "exchangeDate": "2019-08-24T14:15:22Z",
+                      "exchangeLink": "string",
+                      "exchangeInfo": {
+                        "exchangeText": "string",
+                        "exchangeLink": "string",
+                        "exchangeLinkLabel": "string"
+                      },
+                      "exchangeCode": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "Exchange passholder points for a reward.\n\nThe caller of this request must have `REWARDS_EXCHANGE` permission for the given organizer.",
+        "tags": [
+          "Rewards"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "uitpasNumber": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "uitpasNumber"
+                ]
+              },
+              "examples": {
+                "example-1": {
+                  "value": {
+                    "uitpasNumber": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CLIENT_ACCESS_TOKEN": []
+          },
+          {
+            "USER_ACCESS_TOKEN": []
+          }
+        ]
+      },
+      "get": {
+        "summary": "Check reward exchange status for a passholder",
+        "operationId": "get-rewards-id-exchange",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Check the reward exchange status for a passholder\n\n\nThe caller of this request must have `REWARDS_EXCHANGE` permission for the given organizer.",
+        "security": [
+          {
+            "CLIENT_ACCESS_TOKEN": []
+          },
+          {
+            "USER_ACCESS_TOKEN": []
+          }
+        ],
+        "tags": [
+          "Rewards"
+        ]
+      }
+    },
     "/rewards": {
       "post": {
         "summary": "Create new reward",
@@ -3101,6 +3256,53 @@
           "moreInfoURL",
           "cashInType"
         ]
+      },
+      "ExchangedReward": {
+        "type": "object",
+        "title": "ExchangedReward",
+        "x-tags": [
+          "Rewards"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "readOnly": true
+          },
+          "reward": {
+            "$ref": "#/components/schemas/Reward"
+          },
+          "exchangeDate": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "exchangeLink": {
+            "type": "string"
+          },
+          "exchangeInfo": {
+            "type": "object",
+            "properties": {
+              "exchangeText": {
+                "type": "string"
+              },
+              "exchangeLink": {
+                "type": "string"
+              },
+              "exchangeLinkLabel": {
+                "type": "string"
+              }
+            }
+          },
+          "exchangeCode": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "reward",
+          "exchangeDate"
+        ],
+        "readOnly": true
       },
       "PassholderSelfRegistration": {
         "title": "PassholderSelfRegistration",

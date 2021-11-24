@@ -1308,7 +1308,7 @@
     },
     "/passholders/validate-uitid-registration": {
       "get": {
-        "summary": "Retrieve UiTPAS membership options",
+        "summary": "Check UiTID registration status for email",
         "tags": [
           "Passholders"
         ],

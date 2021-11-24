@@ -1183,6 +1183,297 @@
           }
         ]
       },
+      "parameters": [],
+      "post": {
+        "summary": "Register a new passholder",
+        "operationId": "post-passholders",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Passholder"
+                },
+                "examples": {}
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          }
+        },
+        "description": "Register a passholder\n\nThe caller of this request must have `PASSHOLDER_WRITE` permission.",
+        "security": [
+          {
+            "CLIENT_ACCESS_TOKEN": []
+          },
+          {
+            "USER_ACCESS_TOKEN": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PassholderRegistration"
+              }
+            }
+          }
+        },
+        "tags": [
+          "Passholders"
+        ]
+      }
+    },
+    "/passholders/insz": {
+      "get": {
+        "summary": "Retrieve UiTPAS by INSZ number",
+        "tags": [
+          "Passholders"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "REGISTERED",
+                        "UNREGISTERED"
+                      ]
+                    },
+                    "passholder": {
+                      "$ref": "#/components/schemas/Passholder"
+                    },
+                    "registrationUrl": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {}
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/invalid-insz-number\n\nThe detail property might include more information for the client developer.\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          }
+        },
+        "operationId": "get-passholders-insz",
+        "description": "TODO: to be discussed  \n\nThe caller of this request must have `PASSHOLDER_READ` permission.",
+        "security": [
+          {
+            "USER_ACCESS_TOKEN": []
+          },
+          {
+            "CLIENT_ACCESS_TOKEN": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "format": "date"
+            },
+            "in": "query",
+            "name": "inszNumber",
+            "required": true
+          }
+        ]
+      },
+      "parameters": []
+    },
+    "/passholders/validate-uitid-registration": {
+      "get": {
+        "summary": "Retrieve UiTPAS membership options",
+        "tags": [
+          "Passholders"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "AVAILABLE",
+                        "UNAVAILABLE"
+                      ]
+                    },
+                    "nextStep": {
+                      "type": "string",
+                      "enum": [
+                        "LOGIN",
+                        "REGISTER",
+                        "EMAIL"
+                      ]
+                    }
+                  }
+                },
+                "examples": {}
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/invalid-insz-number\n\nThe detail property might include more information for the client developer.\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          }
+        },
+        "operationId": "get-passholders-status",
+        "description": "Retrieve the UiTPAS registration status for a given email.\n\nThe caller of this request must have `PASSHOLDER_WRITE` permission.",
+        "security": [
+          {
+            "USER_ACCESS_TOKEN": []
+          },
+          {
+            "CLIENT_ACCESS_TOKEN": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "format": "date"
+            },
+            "in": "query",
+            "name": "email",
+            "required": true
+          }
+        ]
+      },
+      "parameters": []
+    },
+    "/passholders/membership-options": {
+      "get": {
+        "summary": "Retrieve UiTPAS membership options",
+        "tags": [
+          "Passholders"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK\n\nA sorted list of possible new membership options is returned. The most relevant options (based on postal code) is on top of the list.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "price": {
+                        "type": "number"
+                      },
+                      "cardSystem": {
+                        "$ref": "#/components/schemas/CardSystem"
+                      }
+                    }
+                  }
+                },
+                "examples": {}
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/invalid-insz-number\n\nThe detail property might include more information for the client developer.\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          }
+        },
+        "operationId": "get-passholders-membership-options",
+        "description": "Retrieve the membership options for a given insz number and email address.\n\nThe caller of this request must have `PASSHOLDER_WRITE` permission.",
+        "security": [
+          {
+            "USER_ACCESS_TOKEN": []
+          },
+          {
+            "CLIENT_ACCESS_TOKEN": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "inszNumber",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string",
+              "format": "date"
+            },
+            "in": "query",
+            "name": "dateOfBirth",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "postalCode",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "voucherNumber",
+            "description": "TODO: ALS vouchers ondersteund zouden worden, dan zou dat hier moeten in zitten"
+          }
+        ]
+      },
       "parameters": []
     },
     "/passholders/me": {
@@ -2166,6 +2457,9 @@
           "firstName": {
             "type": "string"
           },
+          "lastName": {
+            "type": "string"
+          },
           "inszNumber": {
             "type": "string"
           },
@@ -2200,6 +2494,58 @@
           "points": {
             "type": "integer",
             "readOnly": true
+          },
+          "uitidStatus": {
+            "type": "string",
+            "enum": [
+              "REGISTERED",
+              "UNREGISTERED"
+            ],
+            "readOnly": true
+          },
+          "address": {
+            "type": "object",
+            "properties": {
+              "street": {
+                "type": "string"
+              },
+              "number": {
+                "type": "string"
+              },
+              "box": {
+                "type": "string"
+              },
+              "postalCode": {
+                "type": "string"
+              },
+              "city": {
+                "type": "string",
+                "description": "TODO: wat met reeds bestaande city en postalCode?!?"
+              }
+            }
+          },
+          "optInPreferences": {
+            "type": "object",
+            "properties": {
+              "serviceMails": {
+                "type": "boolean"
+              },
+              "infoMails": {
+                "type": "boolean"
+              },
+              "milestoneMails": {
+                "type": "boolean"
+              },
+              "sms": {
+                "type": "boolean"
+              },
+              "post": {
+                "type": "boolean"
+              }
+            }
+          },
+          "nationality": {
+            "type": "string"
           }
         },
         "required": [
@@ -2504,6 +2850,128 @@
           "dateOfBirth",
           "postalCode",
           "city",
+          "cardSystem",
+          "registrationOrganizer"
+        ]
+      },
+      "PassholderRegistration": {
+        "title": "PassholderRegistration",
+        "type": "object",
+        "x-examples": {
+          "Example": {
+            "name": "Lastname",
+            "firstName": "Firstname",
+            "cardSystem": {
+              "id": 27
+            },
+            "email": "firstname.lastname@example.com",
+            "dateOfBirth": "1980-01-01",
+            "postalCode": "9000",
+            "city": "Gent",
+            "registrationOrganizer": {
+              "id": "d2f898b1-455e-44ee-b08a-c4c05b1ab900"
+            }
+          }
+        },
+        "description": "",
+        "x-tags": [
+          "Models"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "dateOfBirth": {
+            "type": "string",
+            "format": "date"
+          },
+          "inszNumber": {
+            "type": "string"
+          },
+          "address": {
+            "type": "object",
+            "required": [
+              "street",
+              "number",
+              "box",
+              "postalCode",
+              "city"
+            ],
+            "properties": {
+              "street": {
+                "type": "string"
+              },
+              "number": {
+                "type": "string"
+              },
+              "box": {
+                "type": "string"
+              },
+              "postalCode": {
+                "type": "string"
+              },
+              "city": {
+                "type": "string"
+              }
+            }
+          },
+          "email": {
+            "type": "string"
+          },
+          "cardSystem": {
+            "$ref": "#/components/schemas/CardSystem"
+          },
+          "registrationOrganizer": {
+            "$ref": "#/components/schemas/Organizer"
+          },
+          "gender": {
+            "type": "string",
+            "enum": [
+              "male",
+              "female",
+              "x"
+            ]
+          },
+          "nationality": {
+            "type": "string"
+          },
+          "phoneNumber": {
+            "type": "string"
+          },
+          "optInPreferences": {
+            "type": "object",
+            "properties": {
+              "serviceMails": {
+                "type": "boolean"
+              },
+              "milestoneMails": {
+                "type": "boolean"
+              },
+              "infoMails": {
+                "type": "boolean"
+              },
+              "sms": {
+                "type": "boolean"
+              },
+              "post": {
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "required": [
+          "name",
+          "firstName",
+          "lastName",
+          "dateOfBirth",
+          "inszNumber",
+          "address",
           "cardSystem",
           "registrationOrganizer"
         ]

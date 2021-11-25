@@ -40,6 +40,9 @@
     },
     {
       "name": "Ticket sales"
+    },
+    {
+      "name": "UiTID"
     }
   ],
   "paths": {
@@ -1185,11 +1188,11 @@
       },
       "parameters": []
     },
-    "/passholders/me/validate-uitid-registration": {
+    "/passholders/me/uitid/status": {
       "parameters": [],
       "post": {
         "summary": "Validate UiTID Registration",
-        "operationId": "post-passholders-me-validate-uitid-registration",
+        "operationId": "post-passholders-me-uitid-status",
         "responses": {
           "200": {
             "content": {
@@ -1198,75 +1201,38 @@
                   "type": "object",
                   "properties": {
                     "uitpasNumber": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "UiTPAS number of the validated passholder"
                     },
                     "email": {
-                      "type": "string"
-                    },
-                    "status": {
                       "type": "string",
-                      "enum": [
-                        "UNREGISTERED",
-                        "REGISTERED"
-                      ]
-                    },
-                    "nextStep": {
-                      "type": "string",
-                      "enum": [
-                        "LOGIN",
-                        "REGISTER",
-                        "EMAIL"
-                      ]
+                      "description": "Optionally email address of the validated passholder"
                     }
                   },
                   "required": [
-                    "uitpasNumber",
-                    "email",
-                    "status",
-                    "nextStep"
+                    "uitpasNumber"
                   ],
                   "readOnly": true
                 },
                 "examples": {
-                  "User should login": {
+                  "Passholder without email": {
                     "value": {
-                      "uitpasNumber": "0900000008301",
-                      "email": "john@example.com",
-                      "status": "UNREGISTERED",
-                      "nextStep": "LOGIN"
+                      "uitpasNumber": "0900000008301"
                     }
                   },
-                  "User should register": {
+                  "Passholder including email": {
                     "value": {
                       "uitpasNumber": "0900000008301",
-                      "email": "john@example.com",
-                      "status": "UNREGISTERED",
-                      "nextStep": "REGISTER"
-                    }
-                  },
-                  "User should choose email": {
-                    "value": {
-                      "uitpasNumber": "0900000008301",
-                      "email": "",
-                      "status": "UNREGISTERED",
-                      "nextStep": "EMAIL"
-                    }
-                  },
-                  "User cannot register": {
-                    "value": {
-                      "uitpasNumber": "0900000008301",
-                      "email": "john@example.com",
-                      "status": "REGISTERED",
-                      "nextStep": "LOGIN"
+                      "email": "john@example.org"
                     }
                   }
                 }
               }
             },
-            "description": "OK"
+            "description": "OK\n\nThe passholder can proceed UiTID registration."
           },
           "400": {
-            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/invalid-uitpas-validation\n\nThe detail property might include more information for the client developer.\n",
+            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/invalid-uitpas-validation\n* https://api.publiq.be/probs/uitpas/passholder-already-registered\n\nThe detail property might include more information for the client developer.\n",
             "content": {
               "application/json": {
                 "schema": {
@@ -1292,7 +1258,7 @@
             }
           }
         },
-        "description": "Validates the possible UiTID registration of a passholder.\n\nThe input consists of \n* `uitpasValidation` (either a combination of an UiTPAS number and a date of birth, or an email validation token)\n* optional `email` address that the user wants to use to register its UiTID (as a first step, this should be left empty. see `nextStep=EMAIL` below.\n\nThe response contains how the passholder should proceed, based on these fields:\n\n* `uitpasNumber` \n* `email`\n* `status`\n* `nextStep` \n\nIf the status is `REGISTERED`, this passholder cannot proceed UiTID registration, but instead has to authenticate (LOGIN). The `email` field contains the email address of his linked UiTID account.\n\nIf the status is `UNREGISTERED`, the UiTID registration can continue, based on `nextStep`:\n\n* `LOGIN` The user shoud continue by logging in using `email`\n* `REGISTER` The user should continue by registering using `email`\n* `EMAIL` The user must choose (another) email address (because no email address was linked to this passholder or the email address is already in use by another passholder/UiTID combination). This step has to be repeated until `nextStep` is either LOGIN or REGISTER.\n\n\nThis caller of this method (identified with CLIENT_IDENTIFICATION) does not require any permissions, but please note this endpoint is rate-limited on IP address to prevent abuse.",
+        "description": "Validates the possible UiTID registration of a passholder.\n\nIt needs `uitpasValidation` as input, which is:\n* either a combination of an UiTPAS number and a date of birth\n* or an email validation token (the token the user received via an activation mail)\n\nThe response indicates if the passholder can proceed (in case HTTP status 200), optionally including the linked `email` address, which can be used in the next step of the registration process (`GET /passholders/me/uitid/email`)\n\nThis caller of this method (identified with CLIENT_IDENTIFICATION) does not require any permissions, but please note this endpoint is rate-limited on IP address to prevent abuse.",
         "security": [
           {
             "CLIENT_IDENTIFICATION": []
@@ -1333,10 +1299,6 @@
                       }
                     ],
                     "type": "object"
-                  },
-                  "email": {
-                    "type": "string",
-                    "description": "Email address of the UiTID. Use this if the nextStep=EMAIL  "
                   }
                 },
                 "required": [
@@ -1358,15 +1320,6 @@
                       "dateOfBirth": "1979-08-04"
                     }
                   }
-                },
-                "Example with optional email": {
-                  "value": {
-                    "uitpasValidation": {
-                      "uitpasNumber": "0900000008301",
-                      "dateOfBirth": "1979-08-04"
-                    },
-                    "email": "john@example.com"
-                  }
                 }
               }
             }
@@ -1374,7 +1327,98 @@
           "description": "OK"
         },
         "tags": [
-          "Passholders"
+          "UiTID"
+        ]
+      }
+    },
+    "/passholders/me/uitid/email": {
+      "parameters": [],
+      "get": {
+        "summary": "Validate UiTID email address",
+        "operationId": "post-passholders-me-uitid-email",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "next": {
+                      "type": "string",
+                      "enum": [
+                        "LOGIN",
+                        "REGISTER"
+                      ],
+                      "description": "The next step the user must take to authenticate using UiTID"
+                    }
+                  },
+                  "required": [
+                    "next"
+                  ],
+                  "readOnly": true
+                },
+                "examples": {
+                  "Next login": {
+                    "value": {
+                      "next": "LOGIN"
+                    }
+                  },
+                  "Next register": {
+                    "value": {
+                      "next": "REGISTER"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "OK\n\nThe email address can be used to register the passholder."
+          },
+          "400": {
+            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/email-already-in-use\n\nThe detail property might include more information for the client developer.\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "429": {
+            "description": "Too Many Requests\n\nPossbile error types:\n\n* https://api.publiq.be/probs/uitpas/rate-limited\n\nThe detail property might include more information for the client developer.\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "description": "Validates a given UiTID email for passholder registration.\n\nIf the email can be used for passholder registration, it returns a HTTP 200 including a `next` property that indicates the next step in the regsistration process: either UiTID login or register.\nAfter UiTID authentication, the process should be continued using `PUT /passholder/me/uitid`.\n\n\nIf the email address cannot be used, e.g. because it's already in use by a registered passholder, this request returns an error.\n\nThis caller of this method (identified with CLIENT_IDENTIFICATION) does not require any permissions, but please note this endpoint is rate-limited on IP address to prevent abuse.",
+        "security": [
+          {
+            "CLIENT_IDENTIFICATION": []
+          }
+        ],
+        "tags": [
+          "UiTID"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "email",
+            "required": true,
+            "description": "Email address the passholder wants to use to register"
+          }
         ]
       }
     },
@@ -1483,7 +1527,7 @@
           "description": "OK"
         },
         "tags": [
-          "Passholders"
+          "UiTID"
         ]
       }
     },

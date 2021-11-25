@@ -1422,36 +1422,24 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "hasUitid": {
-                      "type": "boolean"
-                    },
-                    "hasUitpas": {
-                      "type": "boolean"
+                    "state": {
+                      "type": "string",
+                      "enum": [
+                        "UITID_UNREGISTERED",
+                        "UITID_REGISTERED",
+                        "UITPAS_ALREADY_LINKED"
+                      ]
                     }
                   },
                   "required": [
-                    "hasUitid",
-                    "hasUitpas"
+                    "state"
                   ],
                   "readOnly": true
                 },
                 "examples": {
-                  "UiTID exists - continue to UiTID login": {
+                  "Example": {
                     "value": {
-                      "hasUitid": true,
-                      "hasUitpas": false
-                    }
-                  },
-                  "UiTID does not exist - continue to UiTID register": {
-                    "value": {
-                      "hasUitid": false,
-                      "hasUitpas": false
-                    }
-                  },
-                  "UiTPAS exists - choose another email": {
-                    "value": {
-                      "hasUitid": true,
-                      "hasUitpas": true
+                      "state": "UITID_UNREGISTERED"
                     }
                   }
                 }
@@ -1486,7 +1474,7 @@
             }
           }
         },
-        "description": "Retrieves the email address status in UiTPAS and UiTID for a given email address.\n\nThe response contains:\n* `hasUitpas` in case this is true, the user cannot use this email address to register another UiTPAS\n* `hasUitid` in case this is true, the user must continue to login, if false, the user must continue to register.\n\nAfter UiTID authentication, the process should be continued using `PUT /passholder/me/uitid`.\n\nThis caller of this method identified with x-client-id, does not require any permissions, but please note this endpoint is rate-limited on IP address to prevent abuse.",
+        "description": "Retrieves the email address status in UiTPAS and UiTID for a given email address.\n\nThe response contains a state\n\n\n* `UITPAS_ALREADY_LINKED` : the user cannot use this email address to register another UiTPAS\n* `UITID_UNREGISTERED` : the user must continue to register.\n* `UITID_REGISTERED` : the user must continue to login\n\nAfter UiTID authentication, the process should be continued using `PUT /passholder/me/uitid`.\n\nThis caller of this method identified with x-client-id, does not require any permissions, but please note this endpoint is rate-limited on IP address to prevent abuse.",
         "tags": [
           "UiTID"
         ],

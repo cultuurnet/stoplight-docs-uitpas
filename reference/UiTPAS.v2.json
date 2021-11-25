@@ -1297,7 +1297,7 @@
     "/passholders/me/uitid/status": {
       "parameters": [],
       "get": {
-        "summary": "Retrieves UiTID registration status",
+        "summary": "Retrieve UiTID registration status",
         "operationId": "post-passholders-me-uitid-status",
         "responses": {
           "200": {
@@ -1374,7 +1374,7 @@
             }
           }
         },
-        "description": "Retrieves the UiTID registration status of a passholder.\n\nThis endpoint requires a registationToken in the `x-registration-token` header. A client can obtain such a token using `GET /passholders/me/uitid/registration-token`. Alternatively, a token may already be available to the client because the user may have received an email link including it.\n\nThe response indicates if the passholder can proceed (in case HTTP status 200), optionally including the linked `email` address, which can be used in the next step of the registration process (`GET /passholders/me/uitid/email-status`)\n\nThis caller of this method, identified with x-client-id does not require any permissions.",
+        "description": "Retrieves the UiTID registration status of a passholder.\n\nThis endpoint requires a registationToken in the `x-registration-token` header. A client can obtain such a token using `GET /passholders/me/uitid/registration-token`. Alternatively, a token may already be available to the client because the user may have received an email link including it.\n\nThe response indicates if the passholder can proceed (in case HTTP status 200), optionally including the linked `email` address, which can be used in the next step of the registration process (`GET /uitid/emails/{email}`)\n\nThis caller of this method, identified with x-client-id does not require any permissions.",
         "tags": [
           "UiTID"
         ],

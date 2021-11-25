@@ -2402,7 +2402,7 @@
         ]
       },
       "Error": {
-        "$ref": "https://raw.githubusercontent.com/cultuurnet/stoplight-docs-errors/fix-examples-syntax/models/Error.json"
+        "$ref": "https://raw.githubusercontent.com/cultuurnet/stoplight-docs-errors/main/models/Error.json"
       },
       "OrganizerPermissions": {
         "title": "OrganizerPermissions",

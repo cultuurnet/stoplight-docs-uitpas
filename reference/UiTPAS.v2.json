@@ -36,6 +36,9 @@
       "name": "Permissions"
     },
     {
+      "name": "POC"
+    },
+    {
       "name": "Schools"
     },
     {
@@ -1228,16 +1231,13 @@
           }
         },
         "tags": [
-          "Passholders"
+          "POC"
         ]
       }
     },
     "/passholders/state": {
       "get": {
         "summary": "Retrieve UiTPAS state by INSZ number",
-        "tags": [
-          "Passholders"
-        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -1264,7 +1264,7 @@
                 "examples": {
                   "Example": {
                     "value": {
-                      "status": "REGISTERED",
+                      "status": "UNREGISTERED",
                       "passholder": {
                         "id": "string",
                         "name": "string",
@@ -1360,6 +1360,9 @@
             "description": "INSZ number of the passholder",
             "required": true
           }
+        ],
+        "tags": [
+          "POC"
         ]
       },
       "parameters": []
@@ -1437,9 +1440,6 @@
     "/passholders/membership-options": {
       "get": {
         "summary": "Retrieve UiTPAS membership options",
-        "tags": [
-          "Passholders"
-        ],
         "responses": {
           "200": {
             "description": "OK\n\nA sorted list of possible new membership options is returned. The most relevant options (based on postal code) is on top of the list.",
@@ -1531,16 +1531,14 @@
               "format": "date"
             },
             "in": "query",
-            "name": "dateOfBirth",
-            "required": true
+            "name": "dateOfBirth"
           },
           {
             "schema": {
               "type": "string"
             },
             "in": "query",
-            "name": "postalCode",
-            "required": true
+            "name": "postalCode"
           },
           {
             "schema": {
@@ -1549,7 +1547,18 @@
             "in": "query",
             "name": "voucherNumber",
             "description": "TODO: ALS vouchers ondersteund zouden worden, dan zou dat hier moeten in zitten"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "x-insz-number",
+            "description": "The INSZ number of the passholder"
           }
+        ],
+        "tags": [
+          "POC"
         ]
       },
       "parameters": []

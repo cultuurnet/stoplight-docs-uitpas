@@ -1232,9 +1232,9 @@
         ]
       }
     },
-    "/passholders/insz": {
+    "/passholders/state": {
       "get": {
-        "summary": "Retrieve UiTPAS by INSZ number",
+        "summary": "Retrieve UiTPAS state by INSZ number",
         "tags": [
           "Passholders"
         ],
@@ -1256,12 +1256,67 @@
                     "passholder": {
                       "$ref": "#/components/schemas/Passholder"
                     },
-                    "registrationUrl": {
+                    "endUserUrl": {
                       "type": "string"
                     }
                   }
                 },
-                "examples": {}
+                "examples": {
+                  "Example": {
+                    "value": {
+                      "status": "REGISTERED",
+                      "passholder": {
+                        "id": "string",
+                        "name": "string",
+                        "firstName": "string",
+                        "lastName": "string",
+                        "inszNumber": "string",
+                        "cardSystemMemberships": [
+                          {
+                            "cardSystem": {
+                              "id": 0,
+                              "name": "string"
+                            },
+                            "uitpasNumber": "string",
+                            "status": "ACTIVE",
+                            "socialTariff": {
+                              "endDate": "2019-08-24T14:15:22Z",
+                              "inGracePeriod": true,
+                              "expired": true
+                            }
+                          }
+                        ],
+                        "email": "string",
+                        "creationDate": "2019-08-24T14:15:22Z",
+                        "dateOfBirth": "2019-08-24",
+                        "postalCode": "string",
+                        "city": "string",
+                        "registrationOrganizer": {
+                          "id": "string",
+                          "name": "string"
+                        },
+                        "points": 0,
+                        "uitidStatus": "REGISTERED",
+                        "address": {
+                          "street": "string",
+                          "number": "string",
+                          "box": "string",
+                          "postalCode": "string",
+                          "city": "string"
+                        },
+                        "optInPreferences": {
+                          "serviceMails": true,
+                          "infoMails": true,
+                          "milestoneMails": true,
+                          "sms": true,
+                          "post": true
+                        },
+                        "nationality": "string"
+                      },
+                      "endUserUrl": "https://www.uitpas.be"
+                    }
+                  }
+                }
               }
             }
           },
@@ -1280,10 +1335,13 @@
           },
           "403": {
             "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
           }
         },
         "operationId": "get-passholders-insz",
-        "description": "TODO: to be discussed  \n\nThe caller of this request must have `PASSHOLDER_READ` permission.",
+        "description": "Retrieve UiTPAS state by INSZ number.\n\nThe caller of this request must have `PASSHOLDER_READ` permission.",
         "security": [
           {
             "USER_ACCESS_TOKEN": []
@@ -1295,18 +1353,18 @@
         "parameters": [
           {
             "schema": {
-              "type": "string",
-              "format": "date"
+              "type": "string"
             },
-            "in": "query",
-            "name": "inszNumber",
+            "in": "header",
+            "name": "x-insz-number",
+            "description": "INSZ number of the passholder",
             "required": true
           }
         ]
       },
       "parameters": []
     },
-    "/passholders/validate-uitid-registration": {
+    "/uitid/emails/{email}": {
       "get": {
         "summary": "Check UiTID registration status for email",
         "tags": [
@@ -1320,19 +1378,12 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "status": {
+                    "state": {
                       "type": "string",
                       "enum": [
-                        "AVAILABLE",
-                        "UNAVAILABLE"
-                      ]
-                    },
-                    "nextStep": {
-                      "type": "string",
-                      "enum": [
-                        "LOGIN",
-                        "REGISTER",
-                        "EMAIL"
+                        "UITID_UNREGISTERED",
+                        "UITID_REGISTERED",
+                        "UITPAS_ALREADY_LINKED"
                       ]
                     }
                   }
@@ -1341,25 +1392,18 @@
               }
             }
           },
-          "400": {
-            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/invalid-insz-number\n\nThe detail property might include more information for the client developer.\n",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
           "401": {
             "$ref": "#/components/responses/Unauthorized"
           },
           "403": {
             "$ref": "#/components/responses/Forbidden"
+          },
+          "429": {
+            "description": "Too Many Requests"
           }
         },
         "operationId": "get-passholders-status",
-        "description": "Retrieve the UiTPAS registration status for a given email.\n\nThe caller of this request must have `PASSHOLDER_WRITE` permission.",
+        "description": "Retrieves the email address status in UiTPAS and UiTID for a given email address.\n\nThe response contains a state\n\n* UITPAS_ALREADY_LINKED : the user cannot use this email address to register another UiTPAS\n* UITID_UNREGISTERED : the user must continue to register.\n* UITID_REGISTERED : the user must continue to login\n\nThis caller of this method identified with x-client-id or a user of client access token, does not require any permissions, but please note this endpoint is rate-limited on IP address to prevent abuse.",
         "security": [
           {
             "USER_ACCESS_TOKEN": []
@@ -1371,16 +1415,24 @@
         "parameters": [
           {
             "schema": {
-              "type": "string",
-              "format": "date"
+              "type": "string"
             },
-            "in": "query",
-            "name": "email",
-            "required": true
+            "in": "header",
+            "name": "x-client-id",
+            "description": "API key identifying the calling client"
           }
         ]
       },
-      "parameters": []
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "email",
+          "in": "path",
+          "required": true
+        }
+      ]
     },
     "/passholders/membership-options": {
       "get": {
@@ -1407,7 +1459,33 @@
                     }
                   }
                 },
-                "examples": {}
+                "examples": {
+                  "Example": {
+                    "value": [
+                      {
+                        "price": 5,
+                        "cardSystem": {
+                          "id": 1,
+                          "name": "UiTPAS Dender"
+                        }
+                      },
+                      {
+                        "price": 5,
+                        "cardSystem": {
+                          "id": 8,
+                          "name": "UiTPAS Gent"
+                        }
+                      },
+                      {
+                        "price": 5,
+                        "cardSystem": {
+                          "id": 12,
+                          "name": "UiTPAS Oostende"
+                        }
+                      }
+                    ]
+                  }
+                }
               }
             }
           },

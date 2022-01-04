@@ -1516,7 +1516,7 @@
             "$ref": "#/components/responses/Forbidden"
           }
         },
-        "description": "Registers the UiTID for this passholder.\n\nThis request requires a user access token of an UiTID user that doesn't already have a registered passholder linked to it and an UiTPAS that isn't registered already. Use `/passholders/me/validate-uitid-registration` to start to check this.\n\nThe input of this request is `uitpasValidation` in the form of:\n* a combination of uitpas number and a date of birth\n* or a token received via email\n\nA user access token of a client with `PASSHOLDER_REGISTER_UITID` permission is mandatory. Also note this endpoint is rate-limited on IP address to prevent abuse.",
+        "description": "Registers the UiTID for this passholder.\n\nThis request requires a user access token of an UiTID user that doesn't already have a registered passholder linked to it and an UiTPAS that isn't registered already. Use `GET /passholders/me/uitid/status` to start to check this.\n\nThe input of this request is `uitpasValidation` in the form of:\n* a combination of uitpas number and a date of birth\n* or a token received via email\n\nA user access token of a client with `PASSHOLDER_REGISTER_UITID` permission is mandatory. Also note this endpoint is rate-limited on IP address to prevent abuse.",
         "security": [
           {
             "USER_ACCESS_TOKEN": []

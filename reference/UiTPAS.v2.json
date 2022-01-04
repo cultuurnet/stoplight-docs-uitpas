@@ -1192,7 +1192,7 @@
       "parameters": [],
       "get": {
         "summary": "Retrieve UiTID registration token",
-        "operationId": "post-passholders-me-uitid-registration-token",
+        "operationId": "get-uitid-passholder-registration-token",
         "responses": {
           "200": {
             "content": {
@@ -1298,7 +1298,7 @@
       "parameters": [],
       "get": {
         "summary": "Retrieve UiTID registration status",
-        "operationId": "post-passholders-me-uitid-status",
+        "operationId": "get-uitid-passholder-status",
         "responses": {
           "200": {
             "content": {
@@ -1414,7 +1414,7 @@
       ],
       "get": {
         "summary": "Retrieve UiTID email address status",
-        "operationId": "get-uidid-emails-email",
+        "operationId": "get-uitid-email",
         "responses": {
           "200": {
             "content": {
@@ -1494,7 +1494,7 @@
       "parameters": [],
       "put": {
         "summary": "Register UiTID for passholder",
-        "operationId": "put-passholders-me-uitid",
+        "operationId": "register-uitid-passholder",
         "responses": {
           "201": {
             "description": "Created. No Content."

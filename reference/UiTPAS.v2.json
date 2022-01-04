@@ -1268,7 +1268,7 @@
             }
           }
         },
-        "description": "Retrieves the UiTID registration token for a passholder using its UiTPAS number and date of birth.\n\nThis endpoint uses HTTP Basic Authentication using:\n* Username: uitpasNumber \n* Password:dateOfBirth in the form yyyy-mm-dd\n\nIn summary, this header should look like: \n\n> Authorization: Basic _base64(uitpasNumber+dateOfBirth)_\n\n\nThis caller of this method is identified with x-client-id and does not require any permissions, but please note this endpoint is rate-limited on IP address to prevent abuse.",
+        "description": "Retrieves the UiTID registration token for a passholder using its UiTPAS number and date of birth.\n\nThis endpoint uses HTTP Basic Authentication using:\n* Username: uitpasNumber \n* Password: dateOfBirth in the form yyyy-mm-dd\n\nIn summary, this header should look like: \n\n```\nAuthorization: Basic base64(uitpasNumber+dateOfBirth)\n```\n\n\nThis caller of this method is identified with [client identification](https://docs.publiq.be/docs/authentication/ZG9jOjExODE5NDY5-client-identification) and does not require any permissions, but please note this endpoint is rate-limited on IP address to prevent abuse.",
         "tags": [
           "UiTID"
         ],

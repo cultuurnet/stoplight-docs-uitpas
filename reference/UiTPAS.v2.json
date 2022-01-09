@@ -1516,76 +1516,25 @@
             "$ref": "#/components/responses/Forbidden"
           }
         },
-        "description": "Registers the UiTID for this passholder. This is step 4, and the final step, in the process of registering an UiTPAS passholder in UiTID.\n\nThis request requires an `Authorization` header with the [user access token](https://docs.publiq.be/docs/authentication/ZG9jOjExODE5NTM5-user-access-token) of an UiTID user that registered or logged in in step 3.\n\nA user access token of a client with `PASSHOLDER_REGISTER_UITID` permission is mandatory. Also note this endpoint is rate-limited on IP address to prevent abuse.\n\nThe input of this request is `uitpasValidation` in the form of:\n* a combination of uitpas number and a date of birth\n* or a token received via email",
+        "description": "Registers the UiTID for this passholder. This is step 4, and the final step, in the process of registering an UiTPAS passholder in UiTID.\n\nThis request requires an `Authorization` header with the [user access token](https://docs.publiq.be/docs/authentication/ZG9jOjExODE5NTM5-user-access-token) of an authenticated UiTID *and* it requires a `x-registration-token` header containing a valid registration token of the passholder.\n\nA user access token of a client with `PASSHOLDER_REGISTER_UITID` permission is mandatory.",
         "security": [
           {
             "USER_ACCESS_TOKEN": []
           }
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "uitpasValidation": {
-                    "description": "Use either combination of uitpasNumber and dateOfBirth or an emailToken to validate the ownership of the UiTPAS.",
-                    "anyOf": [
-                      {
-                        "properties": {
-                          "uitpasNumber": {
-                            "type": "string"
-                          },
-                          "dateOfBirth": {
-                            "type": "string"
-                          }
-                        },
-                        "required": [
-                          "uitpasNumber",
-                          "dateOfBirth"
-                        ]
-                      },
-                      {
-                        "properties": {
-                          "emailToken": {
-                            "type": "string"
-                          }
-                        },
-                        "required": [
-                          "emailToken"
-                        ]
-                      }
-                    ],
-                    "type": "object"
-                  }
-                },
-                "required": [
-                  "uitpasValidation"
-                ]
-              },
-              "examples": {
-                "Example with email token": {
-                  "value": {
-                    "uitpasValidation": {
-                      "emailToken": "8f4f9ec6ee20922578403a0ee8b0c0df1dd1286e"
-                    }
-                  }
-                },
-                "Example with uitpas number and date of birth": {
-                  "value": {
-                    "uitpasValidation": {
-                      "uitpasNumber": "0900000008301",
-                      "dateOfBirth": "1979-08-04"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "description": "OK"
-        },
         "tags": [
           "UiTID"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "x-registration-token",
+            "description": "the registration token of this passholder",
+            "required": true
+          }
         ]
       }
     },

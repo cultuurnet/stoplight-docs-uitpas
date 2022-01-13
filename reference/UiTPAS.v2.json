@@ -1310,13 +1310,22 @@
                   "readOnly": true
                 },
                 "examples": {
-                  "Passholder without email": {
+                  "Unregistered passholder without email": {
                     "value": {
+                      "state": "UNREGISTERED",
                       "uitpasNumber": "0900000008301"
                     }
                   },
-                  "Passholder including email": {
+                  "Unregistered passholder including email": {
                     "value": {
+                      "state": "UNREGISTERED",
+                      "uitpasNumber": "0900000008301",
+                      "email": "john@example.org"
+                    }
+                  },
+                  "Registered passholder": {
+                    "value": {
+                      "state": "REGISTERED",
                       "uitpasNumber": "0900000008301",
                       "email": "john@example.org"
                     }

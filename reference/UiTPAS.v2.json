@@ -1221,26 +1221,6 @@
             },
             "description": "OK\n\nThe passholder can proceed UiTID registration."
           },
-          "400": {
-            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/passholder-already-registered\n\nThe detail property might include more information for the client developer.\n",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                },
-                "examples": {
-                  "Passholder already registered": {
-                    "value": {
-                      "type": "https://api.publiq.be/probs/uitpas/passholder-already-registered",
-                      "title": "Passholder already registered",
-                      "status": 400,
-                      "detail": "The passholder is already registered"
-                    }
-                  }
-                }
-              }
-            }
-          },
           "401": {
             "$ref": "#/components/responses/Unauthorized"
           },
@@ -1313,10 +1293,19 @@
                     "email": {
                       "type": "string",
                       "description": "Optionally email address of the validated passholder"
+                    },
+                    "state": {
+                      "type": "string",
+                      "enum": [
+                        "REGISTERED",
+                        "UNREGISTERED"
+                      ],
+                      "description": "State of the passholder"
                     }
                   },
                   "required": [
-                    "uitpasNumber"
+                    "uitpasNumber",
+                    "state"
                   ],
                   "readOnly": true
                 },
@@ -1336,16 +1325,6 @@
               }
             },
             "description": "OK\n\nThe passholder can proceed UiTID registration."
-          },
-          "400": {
-            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/invalid-uitpas-validation\n* https://api.publiq.be/probs/uitpas/passholder-already-registered\n\nThe detail property might include more information for the client developer.\n",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
           },
           "401": {
             "$ref": "#/components/responses/Unauthorized"
@@ -1374,7 +1353,7 @@
             }
           }
         },
-        "description": "Retrieves the UiTID registration status of a passholder. This is step 2 in the process of registering an UiTPAS passholder in UiTID.\n\nThis endpoint requires a registation token in the `x-registration-token` header. A client can obtain such a token using `GET /passholders/me/uitid/registration-token` (step 1). Alternatively, a token may already be available to the client because the user may have received an email link including it.\n\nThe response indicates if the passholder can proceed to step 3, retrieving the UiTID email address status (in case of HTTP response status 200).\n\nThe response can include the linked `email` address of the user if one is known. This can be used in the next step of the registration process (`GET /uitid/emails/{email}`). If no email address is included, the client should prompt the user to enter their email address first before proceeding to step 3.\n\nIf the response of this request is not 200, the uitpas number might be incorrect or the passholder is already registered with an UiTID. (See possible error types in the 400 response documentation.)\n\nThis caller of this method, identified with [client identification](https://docs.publiq.be/docs/authentication/ZG9jOjExODE5NDY5-client-identification) does not require any permissions.",
+        "description": "Retrieves the UiTID registration status of a passholder. This is step 2 in the process of registering an UiTPAS passholder in UiTID.\n\nThis endpoint requires a registation token in the `x-registration-token` header. A client can obtain such a token using `GET /passholders/me/uitid/registration-token` (step 1). Alternatively, a token may already be available to the client because the user may have received an email link including it.\n\nBased on the state value, the client can proceed in 2 ways:\n\n- If state is `UNREGISTERED`\n\nThe passholder can proceed to step 3, retrieving the UiTID email address status.\n\nThe response can include the linked `email` address of the passholder if one is known. This can be used in the next step of the registration process (`GET /uitid/emails/{email}`). If no email address is included, the client should prompt the user to enter their email address first before proceeding to step 3.\n\n- If state is `REGISTERED` \n\nThe passholder is already `REGISTERED` so the user must continue by authenticating instead. The `email` address field contains the email address of the linked UiTID account that should be used to authenticate.\n\n\nThis caller of this method, identified with [client identification](https://docs.publiq.be/docs/authentication/ZG9jOjExODE5NDY5-client-identification) does not require any permissions.",
         "tags": [
           "UiTID"
         ],
@@ -1500,7 +1479,7 @@
             "description": "Created. No Content."
           },
           "400": {
-            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/invalid-uitpas-validation\n* https://api.publiq.be/probs/uitpas/passholder-already-registered\n* https://api.publiq.be/probs/uitpas/uitid-already-registered\n\nThe detail property might include more information for the client developer.\n",
+            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/passholder-already-registered\n* https://api.publiq.be/probs/uitpas/uitid-already-registered\n\nThe detail property might include more information for the client developer.\n",
             "content": {
               "application/json": {
                 "schema": {

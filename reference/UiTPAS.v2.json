@@ -1589,7 +1589,7 @@
           }
         },
         "operationId": "get-passholders-me",
-        "description": "Allows users to retrieve their passholder using a user access token.\n\nA user access token of a client with `PASSHOLDER_SELF_READ` permission is mandatory. The passholder is retrieved by `inszNumber` if the access token contains the custom claim `https://publiq.be/rrn` (i.e. user has logged in using connection ACM), or by linked UiTID user (`sub` or `https://publiq.be/uitidv1id` claim of the  user access token).",
+        "description": "Allows users to retrieve their passholder using a user access token.\n\nA user access token of a client with `PASSHOLDER_SELF_READ` permission is mandatory. The passholder is retrieved by `inszNumber` if the access token contains the custom claim `https://publiq.be/rrn` (i.e. user has logged in using connection ACM), or by linked UiTID user (`sub` or `https://publiq.be/uitidv1id` claim of the user access token).",
         "security": [
           {
             "USER_ACCESS_TOKEN": []

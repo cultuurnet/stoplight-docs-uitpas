@@ -2514,8 +2514,8 @@
         "type": "oauth2",
         "flows": {
           "authorizationCode": {
-            "authorizationUrl": "",
-            "tokenUrl": "",
+            "authorizationUrl": "See authentication docs",
+            "tokenUrl": "See authentication docs",
             "refreshUrl": "",
             "scopes": {}
           }
@@ -2526,7 +2526,7 @@
         "type": "oauth2",
         "flows": {
           "clientCredentials": {
-            "tokenUrl": "",
+            "tokenUrl": "See authentication docs",
             "refreshUrl": "",
             "scopes": {}
           }

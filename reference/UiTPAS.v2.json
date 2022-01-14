@@ -2517,9 +2517,7 @@
             "authorizationUrl": "",
             "tokenUrl": "",
             "refreshUrl": "",
-            "scopes": {
-              "https://api.publiq.be/auth/uitpas": "Grants access to the UiTPAS API"
-            }
+            "scopes": {}
           }
         },
         "description": "See [Authentication docs](https://publiq.stoplight.io/docs/authentication/docs/user-access-token.md)"
@@ -2530,9 +2528,7 @@
           "clientCredentials": {
             "tokenUrl": "",
             "refreshUrl": "",
-            "scopes": {
-              "https://api.publiq.be/auth/uitpas": "Grants access to the UiTPAS API"
-            }
+            "scopes": {}
           }
         },
         "description": "See [Authentication docs](https://publiq.stoplight.io/docs/authentication/docs/client-access-token.md)"

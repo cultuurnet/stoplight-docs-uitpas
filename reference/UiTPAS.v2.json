@@ -2520,7 +2520,7 @@
             "scopes": {}
           }
         },
-        "description": "See [Authentication docs](https://publiq.stoplight.io/docs/authentication/docs/user-access-token.md)"
+        "description": "A user access token, obtained by redirecting the end user to publiq's authorization server to login. See the [authentication docs about user access tokens](https://publiq.stoplight.io/docs/authentication/docs/user-access-token.md) for more info."
       },
       "CLIENT_ACCESS_TOKEN": {
         "type": "oauth2",
@@ -2531,7 +2531,7 @@
             "scopes": {}
           }
         },
-        "description": "See [Authentication docs](https://publiq.stoplight.io/docs/authentication/docs/client-access-token.md)"
+        "description": "A client access token, obtained by exchanging your client id and client secret for a token via an HTTP request to publiq's authorization server. See the [authentication docs about client access tokens](https://publiq.stoplight.io/docs/authentication/docs/client-access-token.md) for more info."
       }
     },
     "parameters": {},

@@ -1370,76 +1370,7 @@
       },
       "parameters": []
     },
-    "/uitid/emails/{email}": {
-      "get": {
-        "summary": "Check UiTID registration status for email",
-        "tags": [
-          "Passholders"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "state": {
-                      "type": "string",
-                      "enum": [
-                        "UITID_UNREGISTERED",
-                        "UITID_REGISTERED",
-                        "UITPAS_ALREADY_LINKED"
-                      ]
-                    }
-                  }
-                },
-                "examples": {}
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/components/responses/Unauthorized"
-          },
-          "403": {
-            "$ref": "#/components/responses/Forbidden"
-          },
-          "429": {
-            "description": "Too Many Requests"
-          }
-        },
-        "operationId": "get-passholders-status",
-        "description": "Retrieves the email address status in UiTPAS and UiTID for a given email address.\n\nThe response contains a state\n\n* UITPAS_ALREADY_LINKED : the user cannot use this email address to register another UiTPAS\n* UITID_UNREGISTERED : the user must continue to register.\n* UITID_REGISTERED : the user must continue to login\n\nThis caller of this method identified with x-client-id or a user of client access token, does not require any permissions, but please note this endpoint is rate-limited on IP address to prevent abuse.",
-        "security": [
-          {
-            "USER_ACCESS_TOKEN": []
-          },
-          {
-            "CLIENT_ACCESS_TOKEN": []
-          }
-        ],
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "x-client-id",
-            "description": "API key identifying the calling client"
-          }
-        ]
-      },
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "email",
-          "in": "path",
-          "required": true
-        }
-      ]
-    },
+    
     "/passholders/membership-options": {
       "get": {
         "summary": "Retrieve UiTPAS membership options",

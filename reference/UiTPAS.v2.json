@@ -1478,6 +1478,108 @@
         ]
       }
     },
+    "/passholders/membership-options": {
+      "get": {
+        "summary": "Retrieve UiTPAS membership options",
+        "responses": {
+          "200": {
+            "description": "OK\n\nA sorted list of possible new membership options is returned. The most relevant options (based on postal code) is on top of the list.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "price": {
+                        "type": "number"
+                      },
+                      "cardSystem": {
+                        "$ref": "#/components/schemas/CardSystem"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Example": {
+                    "value": [
+                      {
+                        "price": 5,
+                        "cardSystem": {
+                          "id": 1,
+                          "name": "UiTPAS Dender"
+                        }
+                      },
+                      {
+                        "price": 5,
+                        "cardSystem": {
+                          "id": 8,
+                          "name": "UiTPAS Gent"
+                        }
+                      },
+                      {
+                        "price": 5,
+                        "cardSystem": {
+                          "id": 12,
+                          "name": "UiTPAS Oostende"
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/invalid-insz-number\n\nThe detail property might include more information for the client developer.\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          }
+        },
+        "operationId": "get-passholders-membership-options",
+        "description": "<!-- theme: warning -->\n\n> WARNING\n>\n> Experimental API. Breaking changes might be introduced in future updates.\n  \nRetrieve the membership options for a given insz number and email address.\n\nThe caller of this request must have `PASSHOLDER_WRITE` permission.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "inszNumber",
+            "description": "INSZ number of the person who want to register a new UiTPAS membership"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "postalCode"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Authorization",
+            "description": "HTTP Basic auth using client id as user and secret as password"
+          }
+        ],
+        "tags": [
+          "Passholders"
+        ]
+      },
+      "parameters": []
+    },
     "/passholders/me/uitid": {
       "parameters": [],
       "put": {

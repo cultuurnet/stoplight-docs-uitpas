@@ -1628,25 +1628,7 @@
         },
         "operationId": "get-passholders-membership-prices",
         "description": "<!-- theme: warning -->\n\n> WARNING\n>\n> Experimental API. Breaking changes might be introduced in future updates.\n\nRetrieve the membership prices for an existing passholder. The result will contain only prices for cardsystems where the passholder is not already a member. The result will be sorted on most relevant price first.\n\nThe caller of this request must have `PASSHOLDER_READ` and `PRICE_READ` permission.",
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
-            "name": "postalCode",
-            "description": "postal code of the residence of the user so the result is sorted on most nearby options first."
-          },
-          {
-            "schema": {
-              "type": "string",
-              "format": "date"
-            },
-            "in": "query",
-            "name": "dateOfBirth",
-            "description": "date of birth of the user used to determine the correct price. The default price is used when omitted."
-          }
-        ],
+        "parameters": [],
         "tags": [
           "Passholders"
         ],

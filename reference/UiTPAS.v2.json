@@ -1540,7 +1540,7 @@
             "$ref": "#/components/responses/Forbidden"
           }
         },
-        "operationId": "get-passholders-membership-options",
+        "operationId": "get-passholders-passholderId-membership-prices",
         "description": "<!-- theme: warning -->\n\n> WARNING\n>\n> Experimental API. Breaking changes might be introduced in future updates.\n\nRetrieve the membership prices for a new passholder. All parameters are optional. If `postalCode` is specified, the most relevant price comes first.\n\nThe caller of this request must have `PRICE_READ` permission.",
         "parameters": [
           {
@@ -1626,7 +1626,7 @@
             "$ref": "#/components/responses/Forbidden"
           }
         },
-        "operationId": "get-passholders-membership-options",
+        "operationId": "get-passholders-membership-prices",
         "description": "<!-- theme: warning -->\n\n> WARNING\n>\n> Experimental API. Breaking changes might be introduced in future updates.\n\nRetrieve the membership prices for an existing passholder. The result will contain only prices for cardsystems where the passholder is not already a member. The result will be sorted on most relevant price first.\n\nThe caller of this request must have `PASSHOLDER_READ` and `PRICE_READ` permission.",
         "parameters": [
           {

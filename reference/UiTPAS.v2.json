@@ -1478,26 +1478,18 @@
         ]
       }
     },
-    "/passholders/membership-options": {
+    "/passholders/membership-prices": {
       "get": {
-        "summary": "Retrieve UiTPAS membership options",
+        "summary": "Retrieve new membership prices",
         "responses": {
           "200": {
-            "description": "OK\n\nA sorted list of possible new membership options is returned. The most relevant options (based on postal code) is on top of the list.",
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "type": "object",
-                    "properties": {
-                      "price": {
-                        "type": "number"
-                      },
-                      "cardSystem": {
-                        "$ref": "#/components/schemas/CardSystem"
-                      }
-                    }
+                    "$ref": "#/components/schemas/MembershipPrice"
                   }
                 },
                 "examples": {
@@ -1531,11 +1523,98 @@
             }
           },
           "400": {
-            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/invalid-insz-number\n\nThe detail property might include more information for the client developer.\n",
+            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/invalid-postal-code\n\nThe detail property might include more information for the client developer.\n",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "examples": {}
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          }
+        },
+        "operationId": "get-passholders-membership-options",
+        "description": "<!-- theme: warning -->\n\n> WARNING\n>\n> Experimental API. Breaking changes might be introduced in future updates.\n\nRetrieve the membership prices for a new passholder. All parameters are optional. If `postalCode` is specified, the most relevant price comes first.\n\nThe caller of this request must have `PRICE_READ` permission.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "postalCode",
+            "description": "postal code of the residence of the user so the result is sorted on most nearby options first. Must be a valid Belgian postal code or `0000` for foreign places."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "format": "date"
+            },
+            "in": "query",
+            "name": "dateOfBirth",
+            "description": "date of birth of the user used to determine the correct price. The default price is used when omitted."
+          }
+        ],
+        "tags": [
+          "Passholders"
+        ],
+        "security": [
+          {
+            "CLIENT_ACCESS_TOKEN": []
+          },
+          {
+            "USER_ACCESS_TOKEN": []
+          }
+        ]
+      },
+      "parameters": []
+    },
+    "/passholders/{passholderId}/membership-prices": {
+      "get": {
+        "summary": "Retrieve upgrade membership prices",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MembershipPrice"
+                  }
+                },
+                "examples": {
+                  "Example": {
+                    "value": [
+                      {
+                        "price": 5,
+                        "cardSystem": {
+                          "id": 1,
+                          "name": "UiTPAS Dender"
+                        }
+                      },
+                      {
+                        "price": 5,
+                        "cardSystem": {
+                          "id": 8,
+                          "name": "UiTPAS Gent"
+                        }
+                      },
+                      {
+                        "price": 5,
+                        "cardSystem": {
+                          "id": 12,
+                          "name": "UiTPAS Oostende"
+                        }
+                      }
+                    ]
+                  }
                 }
               }
             }
@@ -1548,37 +1627,49 @@
           }
         },
         "operationId": "get-passholders-membership-options",
-        "description": "<!-- theme: warning -->\n\n> WARNING\n>\n> Experimental API. Breaking changes might be introduced in future updates.\n  \nRetrieve the membership options for a given insz number and email address.\n\nThe caller of this request must have `PASSHOLDER_WRITE` permission.",
+        "description": "<!-- theme: warning -->\n\n> WARNING\n>\n> Experimental API. Breaking changes might be introduced in future updates.\n\nRetrieve the membership prices for an existing passholder. The result will contain only prices for cardsystems where the passholder is not already a member. The result will be sorted on most relevant price first.\n\nThe caller of this request must have `PASSHOLDER_READ` and `PRICE_READ` permission.",
         "parameters": [
           {
             "schema": {
               "type": "string"
             },
             "in": "query",
-            "name": "inszNumber",
-            "description": "INSZ number of the person who want to register a new UiTPAS membership"
+            "name": "postalCode",
+            "description": "postal code of the residence of the user so the result is sorted on most nearby options first."
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date"
             },
             "in": "query",
-            "name": "postalCode"
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "Authorization",
-            "description": "HTTP Basic auth using client id as user and secret as password"
+            "name": "dateOfBirth",
+            "description": "date of birth of the user used to determine the correct price. The default price is used when omitted."
           }
         ],
         "tags": [
           "Passholders"
+        ],
+        "security": [
+          {
+            "CLIENT_ACCESS_TOKEN": []
+          },
+          {
+            "USER_ACCESS_TOKEN": []
+          }
         ]
       },
-      "parameters": []
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "passholderId",
+          "in": "path",
+          "required": true,
+          "description": "The id of the passholder"
+        }
+      ]
     },
     "/passholders/me/uitid": {
       "parameters": [],
@@ -2393,6 +2484,37 @@
         },
         "required": [
           "id"
+        ]
+      },
+      "MembershipPrice": {
+        "type": "object",
+        "title": "MembershipPrice",
+        "description": "The MembershipPrice describes the price an UiTPAS membership in a specific cardsystem for a new or existing passholder.  ",
+        "x-internal": false,
+        "x-examples": {
+          "Example": {
+            "price": 5,
+            "cardSystem": {
+              "id": 1,
+              "name": "UiTPAS Oostende"
+            }
+          }
+        },
+        "x-tags": [
+          "Models"
+        ],
+        "properties": {
+          "price": {
+            "description": "",
+            "type": "number"
+          },
+          "cardSystem": {
+            "$ref": "#/components/schemas/CardSystem"
+          }
+        },
+        "required": [
+          "price",
+          "cardSystem"
         ]
       },
       "TicketSale": {

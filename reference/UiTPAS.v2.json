@@ -40,6 +40,9 @@
     },
     {
       "name": "Ticket sales"
+    },
+    {
+      "name": "UiTID"
     }
   ],
   "paths": {
@@ -1185,6 +1188,344 @@
       },
       "parameters": []
     },
+    "/passholders/me/uitid/registration-token": {
+      "parameters": [],
+      "get": {
+        "summary": "Retrieve UiTID registration token",
+        "operationId": "get-uitid-passholder-registration-token",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "token": {
+                      "type": "string",
+                      "description": "UiTPAS number of the validated passholder"
+                    }
+                  },
+                  "required": [
+                    "token"
+                  ],
+                  "readOnly": true
+                },
+                "examples": {
+                  "Example": {
+                    "value": {
+                      "token": "4f5ac68b-e85a-4c38-ad8c-a07a253ed692"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "OK\n\nThe passholder can proceed UiTID registration."
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "429": {
+            "description": "Too Many Requests\n\nPossbile error types:\n\n* https://api.publiq.be/probs/uitpas/rate-limited\n\nThe detail property might include more information for the client developer.\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Example": {
+                    "value": {
+                      "type": "https://api.publiq.be/probs/uitpas/rate-limited",
+                      "title": "Rate limited",
+                      "status": 429,
+                      "detail": "Rate limited"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "This is step 1 of the process to register an UiTPAS passholder in UiTID using their UiTPAS number and date of birth. It is used to retrieve an UiTID registration token for the passholder. If the passholder already has a token via an email they received to register in UiTID, this step can be skipped.\n\nThis endpoint uses HTTP Basic Authentication using:\n* Username: uitpasNumber \n* Password: dateOfBirth in the form yyyy-mm-dd\n\nIn summary, this header should look like: \n\n```\nAuthorization: Basic base64(uitpasNumber+dateOfBirth)\n```\n\nThe response will contain a `token` property that can be used in step 2 of the process, [retrieving the UiTID registration status](/reference/UiTPAS.v2.json/paths/~1passholders~1me~1uitid~1status/get).\n\nThis caller of this method is identified with [client identification](https://docs.publiq.be/docs/authentication/ZG9jOjExODE5NDY5-client-identification) and does not require any permissions, but please note this endpoint is rate-limited on IP address to prevent abuse.",
+        "tags": [
+          "UiTID"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "required": true,
+            "name": "Authorization",
+            "description": "HTTP Basic auth using uitpasNumber as the username and dateOfBirth as password"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "x-client-id",
+            "description": "API key identifying the calling client",
+            "required": true
+          }
+        ]
+      }
+    },
+    "/passholders/me/uitid/status": {
+      "parameters": [],
+      "get": {
+        "summary": "Retrieve UiTID registration status",
+        "operationId": "get-uitid-passholder-status",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "uitpasNumber": {
+                      "type": "string",
+                      "description": "UiTPAS number of the validated passholder"
+                    },
+                    "email": {
+                      "type": "string",
+                      "description": "Optionally email address of the validated passholder"
+                    },
+                    "state": {
+                      "type": "string",
+                      "enum": [
+                        "REGISTERED",
+                        "UNREGISTERED"
+                      ],
+                      "description": "State of the passholder"
+                    }
+                  },
+                  "required": [
+                    "uitpasNumber",
+                    "state"
+                  ],
+                  "readOnly": true
+                },
+                "examples": {
+                  "Unregistered passholder without email": {
+                    "value": {
+                      "state": "UNREGISTERED",
+                      "uitpasNumber": "0900000008301"
+                    }
+                  },
+                  "Unregistered passholder including email": {
+                    "value": {
+                      "state": "UNREGISTERED",
+                      "uitpasNumber": "0900000008301",
+                      "email": "john@example.org"
+                    }
+                  },
+                  "Registered passholder": {
+                    "value": {
+                      "state": "REGISTERED",
+                      "uitpasNumber": "0900000008301",
+                      "email": "john@example.org"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "OK\n\nThe passholder can proceed UiTID registration."
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "429": {
+            "description": "Too Many Requests\n\nPossbile error types:\n\n* https://api.publiq.be/probs/uitpas/rate-limited\n\nThe detail property might include more information for the client developer.\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Example": {
+                    "value": {
+                      "type": "https://api.publiq.be/probs/uitpas/rate-limited",
+                      "title": "Rate limited",
+                      "status": 429,
+                      "detail": "Rate limited"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "Retrieves the UiTID registration status of a passholder. This is step 2 in the process of registering an UiTPAS passholder in UiTID.\n\nThis endpoint requires a registation token in the `x-registration-token` header. A client can obtain such a token using [`GET /passholders/me/uitid/registration-token`](/reference/UiTPAS.v2.json/paths/~1passholders~1me~1uitid~1registration-token/get). Alternatively, a token may already be available to the client because the user may have received an email link including it.\n\nBased on the state value, the client can proceed in 2 ways:\n\n- If state is `UNREGISTERED`\n\nThe passholder can proceed to step 3, [retrieving the UiTID email address status](/reference/UiTPAS.v2.json/paths/~1uitid~1emails~1{email}/get).\n\nThe response can include the linked `email` address of the passholder if one is known. This can be used in the next step of the registration process ([`GET /uitid/emails/{email}`](/reference/UiTPAS.v2.json/paths/~1uitid~1emails~1{email}/get)). If no email address is included, the client should prompt the user to enter their email address first before proceeding to step 3.\n\n- If state is `REGISTERED` \n\nThe passholder is already `REGISTERED` so the user must continue by authenticating instead. The `email` address field contains the email address of the linked UiTID account that should be used to authenticate.\n\n\nThis caller of this method, identified with [client identification](https://docs.publiq.be/docs/authentication/ZG9jOjExODE5NDY5-client-identification) does not require any permissions.",
+        "tags": [
+          "UiTID"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "required": true,
+            "name": "x-registration-token",
+            "description": "the registration token of this passholder"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "x-client-id",
+            "description": "API key identifying the calling client",
+            "required": true
+          }
+        ]
+      }
+    },
+    "/uitid/emails/{email}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "email",
+          "in": "path",
+          "required": true,
+          "description": "Email address the passholder wants to use to register"
+        }
+      ],
+      "get": {
+        "summary": "Retrieve UiTID email address status",
+        "operationId": "get-uitid-email",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "state": {
+                      "type": "string",
+                      "enum": [
+                        "UITID_UNREGISTERED",
+                        "UITID_REGISTERED",
+                        "UITPAS_ALREADY_LINKED"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "state"
+                  ],
+                  "readOnly": true
+                },
+                "examples": {
+                  "Example": {
+                    "value": {
+                      "state": "UITID_UNREGISTERED"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "OK\n\nThe email address can be used to register the passholder."
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "429": {
+            "description": "Too Many Requests\n\nPossbile error types:\n\n* https://api.publiq.be/probs/uitpas/rate-limited\n\nThe detail property might include more information for the client developer.\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Example": {
+                    "value": {
+                      "type": "https://api.publiq.be/probs/uitpas/rate-limited",
+                      "title": "Rate limited",
+                      "status": 429,
+                      "detail": "Rate limited"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "Retrieves the email address status in UiTPAS and UiTID for a given email address. This is step 3 in the process of registering an UiTPAS passholder in UiTID.\n\nThe response contains a `state` property which can be one of the following values:\n\n* `UITPAS_ALREADY_LINKED` : the user cannot use this email address to register another UiTPAS\n* `UITID_UNREGISTERED` : the user can use this email address to register their UiTPAS and must register on UiTID first\n* `UITID_REGISTERED` : the user can use this email address to register their UiTPAS and must login on UiTID first\n\nAfter [UiTID authentication](https://docs.publiq.be/docs/authentication/ZG9jOjExODE5NTM5-user-access-token) the client should proceed to step 4 of the process, [registering UiTID for the passholder](/reference/UiTPAS.v2.json/paths/~1passholders~1me~1uitid/put).\n\nThis caller of this method, identified with [client identification](https://docs.publiq.be/docs/authentication/ZG9jOjExODE5NDY5-client-identification), does not require any permissions but please note this endpoint is rate-limited on IP address to prevent abuse.",
+        "tags": [
+          "UiTID"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "x-client-id",
+            "description": "API key identifying the calling client"
+          }
+        ]
+      }
+    },
+    "/passholders/me/uitid": {
+      "parameters": [],
+      "put": {
+        "summary": "Register UiTID for passholder",
+        "operationId": "register-uitid-passholder",
+        "responses": {
+          "201": {
+            "description": "Created. No Content."
+          },
+          "400": {
+            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/passholder-already-registered\n* https://api.publiq.be/probs/uitpas/uitid-already-registered\n\nThe detail property might include more information for the client developer.\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          }
+        },
+        "description": "Registers the UiTID for this passholder. This is step 4, and the final step, in the process of registering an UiTPAS passholder in UiTID.\n\nThis request requires an `Authorization` header with the [user access token](https://docs.publiq.be/docs/authentication/ZG9jOjExODE5NTM5-user-access-token) of an authenticated UiTID *and* it requires a `x-registration-token` header containing a valid registration token of the passholder.\n\nA user access token of a client with `PASSHOLDER_REGISTER_UITID` permission is mandatory.",
+        "security": [
+          {
+            "USER_ACCESS_TOKEN": []
+          }
+        ],
+        "tags": [
+          "UiTID"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "x-registration-token",
+            "description": "the registration token of this passholder",
+            "required": true
+          }
+        ]
+      }
+    },
     "/passholders/me": {
       "get": {
         "summary": "Retrieve passholder for the current user",
@@ -1230,16 +1571,6 @@
               }
             }
           },
-          "400": {
-            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/insz-in-token-required\n\nThe detail property might include more information for the client developer.\n",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
           "401": {
             "$ref": "#/components/responses/Unauthorized"
           },
@@ -1258,7 +1589,7 @@
           }
         },
         "operationId": "get-passholders-me",
-        "description": "<!-- theme: warning -->\n\n> WARNING\n>\n> Experimental API. Breaking changes might be introduced in future updates.\n\nAllows users to retrieve their passholder using a user access token.\n\nA user access token of a client with `PASSHOLDER_SELF_READ` permission is mandatory. The passholder is retrieved by `inszNumber` if the access token contains the custom claim `https://publiq.be/rrn` (i.e. user has logged in using connection ACM), or by linked UiTID user (`sub` claim of the user access token).",
+        "description": "Allows users to retrieve their passholder using a user access token.\n\nA user access token of a client with `PASSHOLDER_SELF_READ` permission is mandatory. The passholder is retrieved by `inszNumber` if the access token contains the custom claim `https://publiq.be/rrn` (i.e. user has logged in using connection ACM), or by linked UiTID user (`sub` or `https://publiq.be/uitidv1id` claim of the user access token).",
         "security": [
           {
             "USER_ACCESS_TOKEN": []
@@ -2419,7 +2750,10 @@
               "$ref": "#/components/schemas/TariffAvailibility"
             }
           }
-        }
+        },
+        "x-tags": [
+          "Models"
+        ]
       },
       "TariffAvailibility": {
         "x-examples": {
@@ -2450,6 +2784,9 @@
               "remaining"
             ]
           }
+        ],
+        "x-tags": [
+          "Models"
         ]
       },
       "PassholderSelfRegistration": {
@@ -2506,6 +2843,9 @@
           "city",
           "cardSystem",
           "registrationOrganizer"
+        ],
+        "x-tags": [
+          "Models"
         ]
       }
     },
@@ -2543,7 +2883,7 @@
             "schema": {
               "$ref": "#/components/schemas/Error"
             },
-            "examples": {
+            "x-examples": {
               "Unauthorized": {
                 "value": {
                   "type": "https://api.publiq.be/probs/auth/unauthorized",
@@ -2562,7 +2902,7 @@
             "schema": {
               "$ref": "#/components/schemas/Error"
             },
-            "examples": {
+            "x-examples": {
               "Forbidden": {
                 "value": {
                   "type": "https://api.publiq.be/probs/auth/forbidden",

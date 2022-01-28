@@ -14,3 +14,12 @@
     You will receive test credentials including permissions for a test organizer.
 
 4.  Ready for production? [Request your credentials](https://forms.gle/CDdJfmeuNocYPSRc9) for the UiTPAS production environment. These credentials should be requested by the UiTPAS organizer, so the correct permissions can be granted. Before receiving these, we ask you to send us a short overview of your integration and to give us a quick demo.
+
+## Postman
+
+<!-- focus: false -->
+
+[![Download postman collection](https://postman.publiq.be/postman-download.svg)](https://postman.publiq.be/?api=uitpas-api)
+
+Do you already have a **client id** and **client secret**?
+Download a personalized Postman collection to start making requests in seconds!

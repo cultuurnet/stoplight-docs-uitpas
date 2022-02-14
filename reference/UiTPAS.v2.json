@@ -36,9 +36,6 @@
       "name": "Permissions"
     },
     {
-      "name": "POC"
-    },
-    {
       "name": "Schools"
     },
     {
@@ -1201,7 +1198,58 @@
                 "schema": {
                   "$ref": "#/components/schemas/Passholder"
                 },
-                "examples": {}
+                "examples": {
+                  "Example": {
+                    "value": {
+                      "id": "string",
+                      "name": "string",
+                      "firstName": "string",
+                      "lastName": "string",
+                      "inszNumber": "string",
+                      "cardSystemMemberships": [
+                        {
+                          "cardSystem": {
+                            "id": 0,
+                            "name": "string"
+                          },
+                          "uitpasNumber": "string",
+                          "status": "ACTIVE",
+                          "socialTariff": {
+                            "endDate": "2019-08-24T14:15:22Z",
+                            "inGracePeriod": true,
+                            "expired": true
+                          }
+                        }
+                      ],
+                      "email": "string",
+                      "creationDate": "2019-08-24T14:15:22Z",
+                      "dateOfBirth": "2019-08-24",
+                      "postalCode": "string",
+                      "city": "string",
+                      "registrationOrganizer": {
+                        "id": "string",
+                        "name": "string"
+                      },
+                      "points": 3,
+                      "uitidStatus": "REGISTERED",
+                      "address": {
+                        "street": "string",
+                        "number": "string",
+                        "box": "string",
+                        "postalCode": "string",
+                        "city": "string"
+                      },
+                      "optInPreferences": {
+                        "serviceMails": true,
+                        "infoMails": true,
+                        "milestoneMails": true,
+                        "sms": true,
+                        "post": true
+                      },
+                      "nationality": "string"
+                    }
+                  }
+                }
               }
             }
           },
@@ -1229,273 +1277,51 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/PassholderRegistration"
+              },
+              "examples": {
+                "Example": {
+                  "value": {
+                    "name": "string",
+                    "firstName": "string",
+                    "lastName": "string",
+                    "dateOfBirth": "2019-08-24",
+                    "inszNumber": "string",
+                    "address": {
+                      "street": "string",
+                      "number": "string",
+                      "box": "string",
+                      "postalCode": "string",
+                      "city": "string"
+                    },
+                    "email": "string",
+                    "cardSystem": {
+                      "id": 0,
+                      "name": "string"
+                    },
+                    "registrationOrganizer": {
+                      "id": "1234",
+                      "name": "Example UiTPAS Organizer"
+                    },
+                    "gender": "male",
+                    "nationality": "string",
+                    "phoneNumber": "string",
+                    "optInPreferences": {
+                      "serviceMails": true,
+                      "milestoneMails": true,
+                      "infoMails": true,
+                      "sms": true,
+                      "post": true
+                    }
+                  }
+                }
               }
             }
           }
         },
         "tags": [
-          "POC"
+          "Passholders"
         ]
       }
-    },
-    "/passholders/state": {
-      "get": {
-        "summary": "Retrieve UiTPAS state by INSZ number",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "string",
-                      "enum": [
-                        "REGISTERED",
-                        "UNREGISTERED"
-                      ]
-                    },
-                    "passholder": {
-                      "$ref": "#/components/schemas/Passholder"
-                    },
-                    "endUserUrl": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "examples": {
-                  "Example": {
-                    "value": {
-                      "status": "UNREGISTERED",
-                      "passholder": {
-                        "id": "string",
-                        "name": "string",
-                        "firstName": "string",
-                        "lastName": "string",
-                        "inszNumber": "string",
-                        "cardSystemMemberships": [
-                          {
-                            "cardSystem": {
-                              "id": 0,
-                              "name": "string"
-                            },
-                            "uitpasNumber": "string",
-                            "status": "ACTIVE",
-                            "socialTariff": {
-                              "endDate": "2019-08-24T14:15:22Z",
-                              "inGracePeriod": true,
-                              "expired": true
-                            }
-                          }
-                        ],
-                        "email": "string",
-                        "creationDate": "2019-08-24T14:15:22Z",
-                        "dateOfBirth": "2019-08-24",
-                        "postalCode": "string",
-                        "city": "string",
-                        "registrationOrganizer": {
-                          "id": "string",
-                          "name": "string"
-                        },
-                        "points": 0,
-                        "uitidStatus": "REGISTERED",
-                        "address": {
-                          "street": "string",
-                          "number": "string",
-                          "box": "string",
-                          "postalCode": "string",
-                          "city": "string"
-                        },
-                        "optInPreferences": {
-                          "serviceMails": true,
-                          "infoMails": true,
-                          "milestoneMails": true,
-                          "sms": true,
-                          "post": true
-                        },
-                        "nationality": "string"
-                      },
-                      "endUserUrl": "https://www.uitpas.be"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/invalid-insz-number\n\nThe detail property might include more information for the client developer.\n",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/components/responses/Unauthorized"
-          },
-          "403": {
-            "$ref": "#/components/responses/Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        },
-        "operationId": "get-passholders-insz",
-        "description": "Retrieve UiTPAS state by INSZ number.\n\nThe caller of this request must have `PASSHOLDER_READ` permission.",
-        "security": [
-          {
-            "USER_ACCESS_TOKEN": []
-          },
-          {
-            "CLIENT_ACCESS_TOKEN": []
-          }
-        ],
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "x-insz-number",
-            "description": "INSZ number of the passholder",
-            "required": true
-          }
-        ],
-        "tags": [
-          "POC"
-        ]
-      },
-      "parameters": []
-    },
-    
-    "/passholders/membership-options": {
-      "get": {
-        "summary": "Retrieve UiTPAS membership options",
-        "responses": {
-          "200": {
-            "description": "OK\n\nA sorted list of possible new membership options is returned. The most relevant options (based on postal code) is on top of the list.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "price": {
-                        "type": "number"
-                      },
-                      "cardSystem": {
-                        "$ref": "#/components/schemas/CardSystem"
-                      }
-                    }
-                  }
-                },
-                "examples": {
-                  "Example": {
-                    "value": [
-                      {
-                        "price": 5,
-                        "cardSystem": {
-                          "id": 1,
-                          "name": "UiTPAS Dender"
-                        }
-                      },
-                      {
-                        "price": 5,
-                        "cardSystem": {
-                          "id": 8,
-                          "name": "UiTPAS Gent"
-                        }
-                      },
-                      {
-                        "price": 5,
-                        "cardSystem": {
-                          "id": 12,
-                          "name": "UiTPAS Oostende"
-                        }
-                      }
-                    ]
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/invalid-insz-number\n\nThe detail property might include more information for the client developer.\n",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/components/responses/Unauthorized"
-          },
-          "403": {
-            "$ref": "#/components/responses/Forbidden"
-          }
-        },
-        "operationId": "get-passholders-membership-options",
-        "description": "Retrieve the membership options for a given insz number and email address.\n\nThe caller of this request must have `PASSHOLDER_WRITE` permission.",
-        "security": [
-          {
-            "USER_ACCESS_TOKEN": []
-          },
-          {
-            "CLIENT_ACCESS_TOKEN": []
-          }
-        ],
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
-            "name": "inszNumber",
-            "required": true
-          },
-          {
-            "schema": {
-              "type": "string",
-              "format": "date"
-            },
-            "in": "query",
-            "name": "dateOfBirth"
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
-            "name": "postalCode"
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
-            "name": "voucherNumber",
-            "description": "TODO: ALS vouchers ondersteund zouden worden, dan zou dat hier moeten in zitten"
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "x-insz-number",
-            "description": "The INSZ number of the passholder"
-          }
-        ],
-        "tags": [
-          "POC"
-        ]
-      },
-      "parameters": []
     },
     "/passholders/me/uitid/registration-token": {
       "parameters": [],
@@ -3560,10 +3386,12 @@
           "clientCredentials": {
             "tokenUrl": "",
             "refreshUrl": "",
-            "scopes": {}
+            "scopes": {
+              "https://api.publiq.be/auth/uitpas": "Grants access to the UiTPAS API"
+            }
           }
         },
-        "description": "A client access token, obtained by exchanging your client id and client secret for a token via an HTTP request to publiq's authorization server. See the [authentication docs about client access tokens](https://publiq.stoplight.io/docs/authentication/docs/client-access-token.md) for more info."
+        "description": "See [Authentication docs](https://docs.publiq.be/docs/authentication/ZG9jOjExODE5NDY4-client-access-token)"
       }
     },
     "parameters": {},

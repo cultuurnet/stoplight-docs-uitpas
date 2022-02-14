@@ -3034,13 +3034,9 @@
                 "Ticket sale reward": {
                   "value": {
                     "title": "Free entrance for 10 points on 1 specific event",
-                    "maxAvailableUnits": 0,
                     "description1": "this is the mandatory description",
-                    "description2": "this is an optional extra description",
                     "publicationPeriodBegin": "2021-08-24T14:15:22Z",
                     "publicationPeriodEnd": "2022-08-24T14:15:22Z",
-                    "exchangePeriodBegin": "2021-08-24T14:15:22Z",
-                    "exchangePeriodEnd": "2022-08-24T14:15:22Z",
                     "moreInfoURL": "https://example.org/more-info-about-this-reward",
                     "cashInType": "TICKETSALE",
                     "points": 10,
@@ -3062,6 +3058,127 @@
             }
           }
         }
+      },
+      "get": {
+        "summary": "",
+        "operationId": "get-rewards",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RewardsPaginatedResponse"
+                },
+                "examples": {
+                  "Example": {
+                    "value": {
+                      "totalItems": 1,
+                      "member": [
+                        {
+                          "id": "1234",
+                          "title": "Free entrance for 10 points on 1 specific event",
+                          "owningCardSystem": {
+                            "id": 1,
+                            "name": "UiTPAS Dender"
+                          },
+                          "allCardSystems": true,
+                          "status": "ACTIVE",
+                          "maxAvailableUnits": 0,
+                          "unitsTaken": 0,
+                          "description1": "this is the mandatory description",
+                          "description2": "this is an optional extra description",
+                          "pictures": [
+                            "https://www.uitpas.be/default-picture-for-ticketsale-rewards.png"
+                          ],
+                          "publicationPeriodBegin": "2021-08-24T14:15:22Z",
+                          "publicationPeriodEnd": "2022-08-24T14:15:22Z",
+                          "exchangePeriodBegin": "2021-08-24T14:15:22Z",
+                          "exchangePeriodEnd": "2022-08-24T14:15:22Z",
+                          "moreInfoURL": "string",
+                          "inSpotlight": false,
+                          "points": 10,
+                          "types": [
+                            "string"
+                          ],
+                          "forKids": false,
+                          "sport": false,
+                          "labels": "",
+                          "cashInType": "TICKETSALE",
+                          "usesCodes": false,
+                          "ticketSaleDiscount": {
+                            "amount": 5,
+                            "type": "ABSOLUTE",
+                            "conditions": [
+                              {
+                                "type": "EVENT",
+                                "values": [
+                                  "5a0967f9-cc06-4c3c-9206-30481a767434"
+                                ]
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Rewards"
+        ],
+        "description": "Search rewards.\n\nThe caller of this request must have `REWARDS_READ` permission.",
+        "security": [
+          {
+            "USER_ACCESS_TOKEN": []
+          },
+          {
+            "CLIENT_ACCESS_TOKEN": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "start"
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "limit"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "organizerId",
+            "description": "Search ticketsale rewards valid for this organizer"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "eventId",
+            "description": "Search ticketsale rewards valid for this event"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "owningCardSystemId",
+            "description": "Search rewards of this card system"
+          }
+        ]
       }
     }
   },
@@ -3237,7 +3354,7 @@
         ]
       },
       "Error": {
-        "$ref": "https://raw.githubusercontent.com/cultuurnet/stoplight-docs-errors/fix-examples-syntax/models/Error.json"
+        "$ref": "https://raw.githubusercontent.com/cultuurnet/stoplight-docs-errors/main/models/Error.json"
       },
       "OrganizerPermissions": {
         "title": "OrganizerPermissions",
@@ -3287,6 +3404,25 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Passholder"
+            }
+          }
+        }
+      },
+      "RewardsPaginatedResponse": {
+        "title": "RewardsPaginatedResponse",
+        "type": "object",
+        "x-tags": [
+          "Models"
+        ],
+        "description": "Paginated response object for rewards",
+        "properties": {
+          "totalItems": {
+            "type": "integer"
+          },
+          "member": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Reward"
             }
           }
         }
@@ -3829,7 +3965,8 @@
                     "type": {
                       "type": "string",
                       "enum": [
-                        "EVENT"
+                        "EVENT",
+                        "ORGANIZER"
                       ]
                     },
                     "values": {
@@ -3852,8 +3989,6 @@
           "description1",
           "publicationPeriodBegin",
           "publicationPeriodEnd",
-          "exchangePeriodBegin",
-          "exchangePeriodEnd",
           "points",
           "moreInfoURL",
           "cashInType"
@@ -3905,7 +4040,7 @@
         "x-tags": [
           "Models"
         ]
-      }      
+      }
     },
     "securitySchemes": {
       "USER_ACCESS_TOKEN": {

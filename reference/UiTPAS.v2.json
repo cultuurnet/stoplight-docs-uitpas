@@ -3891,7 +3891,6 @@
           },
           "pictures": {
             "type": "array",
-            "description": "TODO: will we provide an image upload endpoint?",
             "items": {
               "type": "string"
             }

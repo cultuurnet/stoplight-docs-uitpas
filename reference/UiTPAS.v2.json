@@ -3386,12 +3386,10 @@
           "clientCredentials": {
             "tokenUrl": "",
             "refreshUrl": "",
-            "scopes": {
-              "https://api.publiq.be/auth/uitpas": "Grants access to the UiTPAS API"
-            }
+            "scopes": {}
           }
         },
-        "description": "See [Authentication docs](https://docs.publiq.be/docs/authentication/ZG9jOjExODE5NDY4-client-access-token)"
+        "description": "A client access token, obtained by exchanging your client id and client secret for a token via an HTTP request to publiq's authorization server. See the [authentication docs about client access tokens](https://publiq.stoplight.io/docs/authentication/docs/client-access-token.md) for more info."
       }
     },
     "parameters": {},

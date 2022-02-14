@@ -2863,10 +2863,12 @@
             "format": "date"
           },
           "postalCode": {
-            "type": "string"
+            "type": "string",
+            "deprecated": true
           },
           "city": {
             "type": "string",
+            "deprecated": true,
             "readOnly": true
           },
           "registrationOrganizer": {
@@ -2900,8 +2902,7 @@
                 "type": "string"
               },
               "city": {
-                "type": "string",
-                "description": "TODO: wat met reeds bestaande city en postalCode?!?"
+                "type": "string"
               }
             }
           },

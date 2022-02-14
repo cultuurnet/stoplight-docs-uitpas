@@ -1,13 +1,13 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "UiTPAS API Reference",
+    "title": "UiTPAS API",
     "version": "2.0",
     "contact": {
       "name": "publiq helpdesk",
       "email": "vragen@publiq.be"
     },
-    "description": "With UiTPAS API 2.0 you can retrieve ticket sale prices for specific UiTPAS numbers, and register ticket sales for specific UiTPAS numbers.\n\nFuture versions will also include support for more features like saving points and exchanging them for benefits."
+    "description": "With UiTPAS API 2.0 you can retrieve ticket sale prices for specific UiTPAS numbers, and register ticket sales for specific UiTPAS numbers.\n\nFuture versions will also include support for more features like saving points and exchanging them for benefits.\n\n## Postman\n\n<!-- focus: false -->\n\n[![Download postman collection](https://postman.publiq.be/postman-download.svg)](https://postman.publiq.be/?api=uitpas-api)\n\nDo you already have a **client id** and **client secret**?\nDownload a personalized Postman collection to start making requests in seconds!"
   },
   "servers": [
     {
@@ -1787,6 +1787,181 @@
         ]
       }
     },
+    "/passholders/membership-prices": {
+      "get": {
+        "summary": "Retrieve new membership prices",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MembershipPrice"
+                  }
+                },
+                "examples": {
+                  "Example": {
+                    "value": [
+                      {
+                        "price": 5,
+                        "cardSystem": {
+                          "id": 1,
+                          "name": "UiTPAS Dender"
+                        }
+                      },
+                      {
+                        "price": 5,
+                        "cardSystem": {
+                          "id": 8,
+                          "name": "UiTPAS Gent"
+                        }
+                      },
+                      {
+                        "price": 5,
+                        "cardSystem": {
+                          "id": 12,
+                          "name": "UiTPAS Oostende"
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/invalid-postal-code\n\nThe detail property might include more information for the client developer.\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {}
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          }
+        },
+        "operationId": "get-passholders-passholderId-membership-prices",
+        "description": "<!-- theme: warning -->\n\n> WARNING\n>\n> Experimental API. Breaking changes might be introduced in future updates.\n\nRetrieve the membership prices for a new passholder. All parameters are optional. If `postalCode` is specified, the most relevant price comes first.\n\nThe caller of this request must have `PRICE_READ` permission.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "postalCode",
+            "description": "postal code of the residence of the user so the result is sorted on most nearby options first. Must be a valid Belgian postal code or `0000` for foreign places."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "format": "date"
+            },
+            "in": "query",
+            "name": "dateOfBirth",
+            "description": "date of birth of the user used to determine the correct price. The default price is used when omitted."
+          }
+        ],
+        "tags": [
+          "Passholders"
+        ],
+        "security": [
+          {
+            "CLIENT_ACCESS_TOKEN": []
+          },
+          {
+            "USER_ACCESS_TOKEN": []
+          }
+        ]
+      },
+      "parameters": []
+    },
+    "/passholders/{passholderId}/membership-prices": {
+      "get": {
+        "summary": "Retrieve upgrade membership prices",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MembershipPrice"
+                  }
+                },
+                "examples": {
+                  "Example": {
+                    "value": [
+                      {
+                        "price": 5,
+                        "cardSystem": {
+                          "id": 1,
+                          "name": "UiTPAS Dender"
+                        }
+                      },
+                      {
+                        "price": 5,
+                        "cardSystem": {
+                          "id": 8,
+                          "name": "UiTPAS Gent"
+                        }
+                      },
+                      {
+                        "price": 5,
+                        "cardSystem": {
+                          "id": 12,
+                          "name": "UiTPAS Oostende"
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          }
+        },
+        "operationId": "get-passholders-membership-prices",
+        "description": "<!-- theme: warning -->\n\n> WARNING\n>\n> Experimental API. Breaking changes might be introduced in future updates.\n\nRetrieve the membership prices for an existing passholder. The result will contain only prices for cardsystems where the passholder is not already a member. The result will be sorted on most relevant price first.\n\nThe caller of this request must have `PASSHOLDER_READ` and `PRICE_READ` permission.",
+        "parameters": [],
+        "tags": [
+          "Passholders"
+        ],
+        "security": [
+          {
+            "CLIENT_ACCESS_TOKEN": []
+          },
+          {
+            "USER_ACCESS_TOKEN": []
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "passholderId",
+          "in": "path",
+          "required": true,
+          "description": "The id of the passholder"
+        }
+      ]
+    },
     "/passholders/me/uitid": {
       "parameters": [],
       "put": {
@@ -2602,6 +2777,37 @@
           "id"
         ]
       },
+      "MembershipPrice": {
+        "type": "object",
+        "title": "MembershipPrice",
+        "description": "The MembershipPrice describes the price an UiTPAS membership in a specific cardsystem for a new or existing passholder.  ",
+        "x-internal": false,
+        "x-examples": {
+          "Example": {
+            "price": 5,
+            "cardSystem": {
+              "id": 1,
+              "name": "UiTPAS Oostende"
+            }
+          }
+        },
+        "x-tags": [
+          "Models"
+        ],
+        "properties": {
+          "price": {
+            "description": "",
+            "type": "number"
+          },
+          "cardSystem": {
+            "$ref": "#/components/schemas/CardSystem"
+          }
+        },
+        "required": [
+          "price",
+          "cardSystem"
+        ]
+      },
       "TicketSale": {
         "description": "Model used both for registering new ticket sales and when searching for past ticket sales.\n\nThe `passholder` field is automatically included in responses if you have PASSHOLDER_SEARCH permission. It is not required for ticket sale registrations.",
         "type": "object",
@@ -3343,12 +3549,10 @@
             "authorizationUrl": "",
             "tokenUrl": "",
             "refreshUrl": "",
-            "scopes": {
-              "https://api.publiq.be/auth/uitpas": "Grants access to the UiTPAS API"
-            }
+            "scopes": {}
           }
         },
-        "description": "See [Authentication docs](https://docs.publiq.be/docs/authentication/ZG9jOjExODE5NTM5-user-access-token)"
+        "description": "A user access token, obtained by redirecting the end user to publiq's authorization server to login. See the [authentication docs about user access tokens](https://publiq.stoplight.io/docs/authentication/docs/user-access-token.md) for more info."
       },
       "CLIENT_ACCESS_TOKEN": {
         "type": "oauth2",
@@ -3356,18 +3560,10 @@
           "clientCredentials": {
             "tokenUrl": "",
             "refreshUrl": "",
-            "scopes": {
-              "https://api.publiq.be/auth/uitpas": "Grants access to the UiTPAS API"
-            }
+            "scopes": {}
           }
         },
-        "description": "See [Authentication docs](https://docs.publiq.be/docs/authentication/ZG9jOjExODE5NDY4-client-access-token)"
-      },
-      "CLIENT_IDENTIFICATION": {
-        "name": "x-client-id",
-        "type": "apiKey",
-        "in": "header",
-        "description": "See [Authentication docs](https://docs.publiq.be/docs/authentication/ZG9jOjExODE5NDY5-client-identification)"
+        "description": "A client access token, obtained by exchanging your client id and client secret for a token via an HTTP request to publiq's authorization server. See the [authentication docs about client access tokens](https://publiq.stoplight.io/docs/authentication/docs/client-access-token.md) for more info."
       }
     },
     "parameters": {},

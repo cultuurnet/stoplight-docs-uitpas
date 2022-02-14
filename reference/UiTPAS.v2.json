@@ -3060,7 +3060,7 @@
         }
       },
       "get": {
-        "summary": "",
+        "summary": "Search rewards",
         "operationId": "get-rewards",
         "responses": {
           "200": {

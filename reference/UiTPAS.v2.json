@@ -2420,6 +2420,59 @@
           }
         ]
       }
+    },
+    "/cards/{uitpasNumber}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "uitpasNumber",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Retrieve Card",
+        "tags": [
+          "Passholders"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Card"
+                },
+                "examples": {}
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/card-blocked\n* https://api.publiq.be/probs/uitpas/card-invalid-status\n\nThe detail property might include more information for the client developer."
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "description": "Not Found0 Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/card-not-found\n\nThe detail property might include more information for the client developer."
+          }
+        },
+        "operationId": "get-cards-uitpasNumber",
+        "security": [
+          {
+            "USER_ACCESS_TOKEN": []
+          },
+          {
+            "CLIENT_ACCESS_TOKEN": []
+          }
+        ],
+        "description": "Retrieve information related to a valid card.\n\nThe caller of this request must have `CARDS_READ` permission."
+      }
     }
   },
   "components": {
@@ -2747,6 +2800,53 @@
           "postalCode",
           "registrationOrganizer"
         ]
+      },
+      "Card": {
+        "type": "object",
+        "title": "Card",
+        "x-tags": [
+          "Models"
+        ],
+        "description": "The `Card` entity includes basic information about the card and the related `Passholder`.  ",
+        "properties": {
+          "passholderId": {
+            "type": "string",
+            "readOnly": true
+          },
+          "uitpasNumber": {
+            "type": "string",
+            "readOnly": true
+          },
+          "points": {
+            "type": "integer",
+            "readOnly": true
+          },
+          "postalCode": {
+            "type": "string",
+            "readOnly": true
+          },
+          "socialTariffExpired": {
+            "type": "boolean",
+            "description": "If the social tariff of the passholder is expired, this field will be `true`. ",
+            "readOnly": true
+          }
+        },
+        "required": [
+          "passholderId",
+          "uitpasNumber",
+          "points",
+          "postalCode"
+        ],
+        "readOnly": true,
+        "x-examples": {
+          "Example": {
+            "passholderId": "b34c19fc-bcf9-4d10-aeb2-6bc9efd38b68\n",
+            "uitpasNumber": "0560002524314",
+            "points": 12,
+            "postalCode": "1000",
+            "socialTariffExpired": false
+          }
+        }
       },
       "CardSystemMembership": {
         "title": "CardSystemMembership",

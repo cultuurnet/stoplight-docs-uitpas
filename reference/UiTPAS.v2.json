@@ -2445,7 +2445,17 @@
                 "schema": {
                   "$ref": "#/components/schemas/Card"
                 },
-                "examples": {}
+                "examples": {
+                  "Example": {
+                    "value": {
+                      "passholderId": "b34c19fc-bcf9-4d10-aeb2-6bc9efd38b68",
+                      "uitpasNumber": "0560002524314",
+                      "points": 12,
+                      "postalCode": "1000",
+                      "socialTariffExpired": false
+                    }
+                  }
+                }
               }
             }
           },
@@ -2840,7 +2850,7 @@
         "readOnly": true,
         "x-examples": {
           "Example": {
-            "passholderId": "b34c19fc-bcf9-4d10-aeb2-6bc9efd38b68\n",
+            "passholderId": "b34c19fc-bcf9-4d10-aeb2-6bc9efd38b68",
             "uitpasNumber": "0560002524314",
             "points": 12,
             "postalCode": "1000",

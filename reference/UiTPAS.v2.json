@@ -1186,7 +1186,142 @@
           }
         ]
       },
-      "parameters": []
+      "parameters": [],
+      "post": {
+        "summary": "Register a new passholder",
+        "operationId": "post-passholders",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Passholder"
+                },
+                "examples": {
+                  "Example": {
+                    "value": {
+                      "id": "string",
+                      "name": "string",
+                      "firstName": "string",
+                      "lastName": "string",
+                      "inszNumber": "string",
+                      "cardSystemMemberships": [
+                        {
+                          "cardSystem": {
+                            "id": 0,
+                            "name": "string"
+                          },
+                          "uitpasNumber": "string",
+                          "status": "ACTIVE",
+                          "socialTariff": {
+                            "endDate": "2019-08-24T14:15:22Z",
+                            "inGracePeriod": true,
+                            "expired": true
+                          }
+                        }
+                      ],
+                      "email": "string",
+                      "creationDate": "2019-08-24T14:15:22Z",
+                      "dateOfBirth": "2019-08-24",
+                      "postalCode": "string",
+                      "city": "string",
+                      "registrationOrganizer": {
+                        "id": "string",
+                        "name": "string"
+                      },
+                      "points": 3,
+                      "uitidStatus": "REGISTERED",
+                      "address": {
+                        "street": "string",
+                        "number": "string",
+                        "box": "string",
+                        "postalCode": "string",
+                        "city": "string"
+                      },
+                      "optInPreferences": {
+                        "serviceMails": true,
+                        "infoMails": true,
+                        "milestoneMails": true,
+                        "sms": true,
+                        "post": true
+                      },
+                      "nationality": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          }
+        },
+        "description": "Register a passholder\n\nThe caller of this request must have `PASSHOLDER_WRITE` permission.",
+        "security": [
+          {
+            "CLIENT_ACCESS_TOKEN": []
+          },
+          {
+            "USER_ACCESS_TOKEN": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PassholderRegistration"
+              },
+              "examples": {
+                "Example": {
+                  "value": {
+                    "name": "string",
+                    "firstName": "string",
+                    "lastName": "string",
+                    "dateOfBirth": "2019-08-24",
+                    "inszNumber": "string",
+                    "address": {
+                      "street": "string",
+                      "number": "string",
+                      "box": "string",
+                      "postalCode": "string",
+                      "city": "string"
+                    },
+                    "email": "string",
+                    "cardSystem": {
+                      "id": 0,
+                      "name": "string"
+                    },
+                    "registrationOrganizer": {
+                      "id": "1234",
+                      "name": "Example UiTPAS Organizer"
+                    },
+                    "gender": "male",
+                    "nationality": "string",
+                    "phoneNumber": "string",
+                    "optInPreferences": {
+                      "serviceMails": true,
+                      "milestoneMails": true,
+                      "infoMails": true,
+                      "sms": true,
+                      "post": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Passholders"
+        ]
+      }
     },
     "/passholders/me/uitid/registration-token": {
       "parameters": [],
@@ -2703,6 +2838,9 @@
           "firstName": {
             "type": "string"
           },
+          "lastName": {
+            "type": "string"
+          },
           "inszNumber": {
             "type": "string"
           },
@@ -2725,10 +2863,12 @@
             "format": "date"
           },
           "postalCode": {
-            "type": "string"
+            "type": "string",
+            "deprecated": true
           },
           "city": {
             "type": "string",
+            "deprecated": true,
             "readOnly": true
           },
           "registrationOrganizer": {
@@ -2737,6 +2877,57 @@
           "points": {
             "type": "integer",
             "readOnly": true
+          },
+          "uitidStatus": {
+            "type": "string",
+            "enum": [
+              "REGISTERED",
+              "UNREGISTERED"
+            ],
+            "readOnly": true
+          },
+          "address": {
+            "type": "object",
+            "properties": {
+              "street": {
+                "type": "string"
+              },
+              "number": {
+                "type": "string"
+              },
+              "box": {
+                "type": "string"
+              },
+              "postalCode": {
+                "type": "string"
+              },
+              "city": {
+                "type": "string"
+              }
+            }
+          },
+          "optInPreferences": {
+            "type": "object",
+            "properties": {
+              "serviceMails": {
+                "type": "boolean"
+              },
+              "infoMails": {
+                "type": "boolean"
+              },
+              "milestoneMails": {
+                "type": "boolean"
+              },
+              "sms": {
+                "type": "boolean"
+              },
+              "post": {
+                "type": "boolean"
+              }
+            }
+          },
+          "nationality": {
+            "type": "string"
           }
         },
         "required": [
@@ -3052,6 +3243,128 @@
         ],
         "x-tags": [
           "Models"
+        ]
+      },
+      "PassholderRegistration": {
+        "title": "PassholderRegistration",
+        "type": "object",
+        "x-examples": {
+          "Example": {
+            "name": "Lastname",
+            "firstName": "Firstname",
+            "cardSystem": {
+              "id": 27
+            },
+            "email": "firstname.lastname@example.com",
+            "dateOfBirth": "1980-01-01",
+            "postalCode": "9000",
+            "city": "Gent",
+            "registrationOrganizer": {
+              "id": "d2f898b1-455e-44ee-b08a-c4c05b1ab900"
+            }
+          }
+        },
+        "description": "",
+        "x-tags": [
+          "Models"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "dateOfBirth": {
+            "type": "string",
+            "format": "date"
+          },
+          "inszNumber": {
+            "type": "string"
+          },
+          "address": {
+            "type": "object",
+            "required": [
+              "street",
+              "number",
+              "box",
+              "postalCode",
+              "city"
+            ],
+            "properties": {
+              "street": {
+                "type": "string"
+              },
+              "number": {
+                "type": "string"
+              },
+              "box": {
+                "type": "string"
+              },
+              "postalCode": {
+                "type": "string"
+              },
+              "city": {
+                "type": "string"
+              }
+            }
+          },
+          "email": {
+            "type": "string"
+          },
+          "cardSystem": {
+            "$ref": "#/components/schemas/CardSystem"
+          },
+          "registrationOrganizer": {
+            "$ref": "#/components/schemas/Organizer"
+          },
+          "gender": {
+            "type": "string",
+            "enum": [
+              "male",
+              "female",
+              "x"
+            ]
+          },
+          "nationality": {
+            "type": "string"
+          },
+          "phoneNumber": {
+            "type": "string"
+          },
+          "optInPreferences": {
+            "type": "object",
+            "properties": {
+              "serviceMails": {
+                "type": "boolean"
+              },
+              "milestoneMails": {
+                "type": "boolean"
+              },
+              "infoMails": {
+                "type": "boolean"
+              },
+              "sms": {
+                "type": "boolean"
+              },
+              "post": {
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "required": [
+          "name",
+          "firstName",
+          "lastName",
+          "dateOfBirth",
+          "inszNumber",
+          "address",
+          "cardSystem",
+          "registrationOrganizer"
         ]
       }
     },

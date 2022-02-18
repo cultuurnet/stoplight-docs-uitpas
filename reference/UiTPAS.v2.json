@@ -2967,6 +2967,9 @@
               }
             }
           },
+          "phoneNumber": {
+            "type": "string"
+          },
           "optInPreferences": {
             "type": "object",
             "properties": {

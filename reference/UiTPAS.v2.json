@@ -2469,7 +2469,7 @@
             "$ref": "#/components/responses/Forbidden"
           },
           "404": {
-            "description": "Not Found0 Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/card-not-found\n\nThe detail property might include more information for the client developer."
+            "description": "Not Found. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/card-not-found\n\nThe detail property might include more information for the client developer."
           }
         },
         "operationId": "get-passes-uitpasNumber",

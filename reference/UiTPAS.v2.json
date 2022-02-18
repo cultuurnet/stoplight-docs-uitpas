@@ -1263,7 +1263,7 @@
             "$ref": "#/components/responses/Forbidden"
           }
         },
-        "description": "Register a passholder\n\nThe caller of this request must have `PASSHOLDER_WRITE` permission for the `registrationOrganizer` of the `PassholderRegistration` object.",
+        "description": "<!-- theme: warning -->\n\n> WARNING\n>\n> Experimental API. Breaking changes might be introduced in future updates.\n\nRegister a passholder\n\nThe caller of this request must have `PASSHOLDER_WRITE` permission for the `registrationOrganizer` of the `PassholderRegistration` object.",
         "security": [
           {
             "CLIENT_ACCESS_TOKEN": []

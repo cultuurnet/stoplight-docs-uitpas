@@ -1227,8 +1227,8 @@
                       "postalCode": "string",
                       "city": "string",
                       "registrationOrganizer": {
-                        "id": "string",
-                        "name": "string"
+                        "id": "abc12345",
+                        "name": "UiTPAS Test Organizer"
                       },
                       "points": 3,
                       "uitidStatus": "REGISTERED",
@@ -1287,8 +1287,7 @@
                     "email": "string",
                     "dateOfBirth": "2019-08-24",
                     "registrationOrganizer": {
-                      "id": "abc12345",
-                      "name": "UiTPAS Test Organizer"
+                      "id": "abc12345"
                     },
                     "address": {
                       "street": "string",

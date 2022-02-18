@@ -2460,7 +2460,7 @@
             }
           },
           "400": {
-            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/card-blocked\n* https://api.publiq.be/probs/uitpas/card-invalid-status\n\nThe detail property might include more information for the client developer."
+            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/passholder-blocked\n* https://api.publiq.be/probs/uitpas/card-blocked\n\nThe detail property might include more information for the client developer."
           },
           "401": {
             "$ref": "#/components/responses/Unauthorized"
@@ -2469,7 +2469,7 @@
             "$ref": "#/components/responses/Forbidden"
           },
           "404": {
-            "description": "Not Found. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/card-not-found\n\nThe detail property might include more information for the client developer."
+            "description": "Not Found. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/pass-not-found\n\nThe detail property might include more information for the client developer."
           }
         },
         "operationId": "get-passes-uitpasNumber",

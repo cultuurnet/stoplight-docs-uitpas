@@ -1798,6 +1798,10 @@
                       "inszNumber": "string",
                       "dateOfBirth": "2000-01-01",
                       "postalCode": "9300",
+                      "address": {
+                        "postalCode": "9300",
+                        "city": "Aalst"
+                      },
                       "registrationOrganizer": {
                         "id": "1234",
                         "name": "Example UiTPAS Organizer"
@@ -2824,6 +2828,7 @@
         "properties": {
           "id": {
             "type": "string",
+            "description": "This field is always available in responses.",
             "readOnly": true
           },
           "name": {
@@ -2837,6 +2842,7 @@
           },
           "cardSystemMemberships": {
             "type": "array",
+            "description": "This field is always available in responses.",
             "items": {
               "$ref": "#/components/schemas/CardSystemMembership"
             },
@@ -2848,6 +2854,7 @@
           "creationDate": {
             "type": "string",
             "format": "date-time",
+            "description": "This field is always available in responses.",
             "readOnly": true
           },
           "dateOfBirth": {
@@ -2857,6 +2864,7 @@
           "postalCode": {
             "type": "string",
             "deprecated": true,
+            "description": "This field is always available in responses.",
             "readOnly": true
           },
           "city": {
@@ -2877,6 +2885,7 @@
           },
           "points": {
             "type": "integer",
+            "description": "This field is always available in responses.",
             "readOnly": true
           },
           "uitidStatus": {
@@ -2885,6 +2894,7 @@
               "REGISTERED",
               "UNREGISTERED"
             ],
+            "description": "This field is always available in responses.",
             "readOnly": true
           },
           "address": {
@@ -2969,16 +2979,10 @@
           }
         },
         "required": [
-          "id",
           "name",
           "firstName",
-          "cardSystemMemberships",
-          "creationDate",
           "dateOfBirth",
-          "postalCode",
           "registrationOrganizer",
-          "points",
-          "uitidStatus",
           "address"
         ]
       },

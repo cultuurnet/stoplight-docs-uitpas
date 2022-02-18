@@ -1254,7 +1254,7 @@
             }
           },
           "400": {
-            "description": "Bad request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/organizer-not-found\n* https://api.publiq.be/probs/uitpas/cardsystem-not-found\n* https://api.publiq.be/probs/uitpas/invalid-city\n\nThe detail property might include more information for the client developer."
+            "description": "Bad request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/organizer-not-found\n* https://api.publiq.be/probs/uitpas/cardsystem-not-found\n* https://api.publiq.be/probs/uitpas/invalid-city\n* https://api.publiq.be/probs/uitpas/invalid-insz-number\n\nThe detail property might include more information for the client developer."
           },
           "401": {
             "$ref": "#/components/responses/Unauthorized"

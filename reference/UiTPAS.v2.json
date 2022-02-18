@@ -2421,7 +2421,7 @@
         ]
       }
     },
-    "/cards/{uitpasNumber}": {
+    "/passes/{uitpasNumber}": {
       "parameters": [
         {
           "schema": {
@@ -2433,7 +2433,7 @@
         }
       ],
       "get": {
-        "summary": "Retrieve Card",
+        "summary": "Retrieve pass",
         "tags": [
           "Passholders"
         ],
@@ -2481,7 +2481,7 @@
             "CLIENT_ACCESS_TOKEN": []
           }
         ],
-        "description": "Retrieve information related to a valid card.\n\nThe caller of this request must have `CARDS_READ` permission."
+        "description": "Retrieve information related to a pass.\n\nThe caller of this request must have `PASS_READ` permission."
       }
     }
   },

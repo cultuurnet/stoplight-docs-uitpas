@@ -403,11 +403,17 @@
                             "inszNumber": "string",
                             "dateOfBirth": "2000-01-01",
                             "postalCode": "9300",
+                            "address": {
+                              "postalCode": "9300",
+                              "city": "Aalst"
+                            },
                             "creationDate": "2022-08-24T14:15:22Z",
                             "registrationOrganizer": {
                               "id": "1234",
                               "name": "Example UiTPAS Organizer"
                             },
+                            "points": 10,
+                            "uitidStatus": "UNREGISTERED",
                             "cardSystemMemberships": [
                               {
                                 "cardSystem": {
@@ -444,10 +450,17 @@
                             "inszNumber": "string",
                             "dateOfBirth": "2000-01-01",
                             "postalCode": "9300",
+                            "address": {
+                              "postalCode": "9300",
+                              "city": "Aalst"
+                            },
+                            "creationDate": "2022-08-24T14:15:22Z",
                             "registrationOrganizer": {
                               "id": "1234",
                               "name": "Example UiTPAS Organizer"
                             },
+                            "points": 12,
+                            "uitidStatus": "UNREGISTERED",
                             "cardSystemMemberships": [
                               {
                                 "cardSystem": {
@@ -957,6 +970,12 @@
                           "inszNumber": "string",
                           "dateOfBirth": "2000-01-01",
                           "postalCode": "9300",
+                          "address": {
+                            "postalCode": "9300",
+                            "city": "Aalst"
+                          },
+                          "points": 12,
+                          "uitidStatus": "UNREGISTERED",
                           "registrationOrganizer": {
                             "id": "1234",
                             "name": "Example UiTPAS Organizer"

@@ -2472,7 +2472,7 @@
             "description": "Not Found0 Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/card-not-found\n\nThe detail property might include more information for the client developer."
           }
         },
-        "operationId": "get-cards-uitpasNumber",
+        "operationId": "get-passes-uitpasNumber",
         "security": [
           {
             "USER_ACCESS_TOKEN": []

@@ -224,34 +224,7 @@
                         "uitpasNumber": "0560002524314",
                         "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
                         "regularPrice": 10,
-                        "regularPriceLabel": "Optional descriptive label of the regular price. Used in financial reporting.",
-                        "passholder": {
-                          "id": "string",
-                          "name": "string",
-                          "firstName": "string",
-                          "inszNumber": "string",
-                          "dateOfBirth": "2000-01-01",
-                          "postalCode": "9300",
-                          "registrationOrganizer": {
-                            "id": "1234",
-                            "name": "Example UiTPAS Organizer"
-                          },
-                          "cardSystemMemberships": [
-                            {
-                              "cardSystem": {
-                                "id": 1,
-                                "name": "UiTPAS Dender"
-                              },
-                              "uitpasNumber": "0560002524314",
-                              "status": "ACTIVE",
-                              "socialTariff": {
-                                "endDate": "2022-08-24T14:15:22Z",
-                                "inGracePeriod": false,
-                                "expired": false
-                              }
-                            }
-                          ]
-                        }
+                        "regularPriceLabel": "Optional descriptive label of the regular price. Used in financial reporting."
                       }
                     ]
                   },
@@ -268,34 +241,7 @@
                         "uitpasNumber": "0560002524314",
                         "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
                         "regularPrice": 10,
-                        "regularPriceLabel": "Optional descriptive label of the regular price. Used in financial reporting.",
-                        "passholder": {
-                          "id": "string",
-                          "name": "string",
-                          "firstName": "string",
-                          "inszNumber": "string",
-                          "dateOfBirth": "2000-01-01",
-                          "postalCode": "9300",
-                          "registrationOrganizer": {
-                            "id": "1234",
-                            "name": "Example UiTPAS Organizer"
-                          },
-                          "cardSystemMemberships": [
-                            {
-                              "cardSystem": {
-                                "id": 1,
-                                "name": "UiTPAS Dender"
-                              },
-                              "uitpasNumber": "0560002524314",
-                              "status": "ACTIVE",
-                              "socialTariff": {
-                                "endDate": "2022-08-24T14:15:22Z",
-                                "inGracePeriod": false,
-                                "expired": false
-                              }
-                            }
-                          ]
-                        }
+                        "regularPriceLabel": "Optional descriptive label of the regular price. Used in financial reporting."
                       },
                       {
                         "id": "21346",
@@ -308,34 +254,7 @@
                         "uitpasNumber": "0940002524123",
                         "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
                         "regularPrice": 10,
-                        "regularPriceLabel": "Optional descriptive label of the regular price. Used in financial reporting.",
-                        "passholder": {
-                          "id": "string",
-                          "name": "string",
-                          "firstName": "string",
-                          "inszNumber": "string",
-                          "dateOfBirth": "2000-01-01",
-                          "postalCode": "9300",
-                          "registrationOrganizer": {
-                            "id": "1234",
-                            "name": "Example UiTPAS Organizer"
-                          },
-                          "cardSystemMemberships": [
-                            {
-                              "cardSystem": {
-                                "id": 1,
-                                "name": "UiTPAS Dender"
-                              },
-                              "uitpasNumber": "0940002524123",
-                              "status": "ACTIVE",
-                              "socialTariff": {
-                                "endDate": "2022-08-24T14:15:22Z",
-                                "inGracePeriod": false,
-                                "expired": false
-                              }
-                            }
-                          ]
-                        }
+                        "regularPriceLabel": "Optional descriptive label of the regular price. Used in financial reporting."
                       }
                     ]
                   }
@@ -484,6 +403,7 @@
                             "inszNumber": "string",
                             "dateOfBirth": "2000-01-01",
                             "postalCode": "9300",
+                            "creationDate": "2022-08-24T14:15:22Z",
                             "registrationOrganizer": {
                               "id": "1234",
                               "name": "Example UiTPAS Organizer"
@@ -1261,6 +1181,9 @@
           },
           "403": {
             "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
           }
         },
         "description": "<!-- theme: warning -->\n\n> WARNING\n>\n> Experimental API. Breaking changes might be introduced in future updates.\n\nRegister a passholder\n\nThe caller of this request must have `PASSHOLDER_WRITE` permission for the `registrationOrganizer`.",
@@ -1934,6 +1857,11 @@
                       ],
                       "postalCode": "9000",
                       "city": "Gent",
+                      "uitidStatus": "UNREGISTERED",
+                      "address": {
+                        "postalCode": "9000",
+                        "city": "Gent"
+                      },
                       "email": "firstname.lastname@example.com",
                       "creationDate": "2021-10-15T09:50:51+00:00",
                       "dateOfBirth": "2000-08-24",
@@ -3029,7 +2957,6 @@
           "creationDate",
           "dateOfBirth",
           "postalCode",
-          "city",
           "registrationOrganizer",
           "points",
           "uitidStatus",

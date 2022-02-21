@@ -224,34 +224,7 @@
                         "uitpasNumber": "0560002524314",
                         "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
                         "regularPrice": 10,
-                        "regularPriceLabel": "Optional descriptive label of the regular price. Used in financial reporting.",
-                        "passholder": {
-                          "id": "string",
-                          "name": "string",
-                          "firstName": "string",
-                          "inszNumber": "string",
-                          "dateOfBirth": "2000-01-01",
-                          "postalCode": "9300",
-                          "registrationOrganizer": {
-                            "id": "1234",
-                            "name": "Example UiTPAS Organizer"
-                          },
-                          "cardSystemMemberships": [
-                            {
-                              "cardSystem": {
-                                "id": 1,
-                                "name": "UiTPAS Dender"
-                              },
-                              "uitpasNumber": "0560002524314",
-                              "status": "ACTIVE",
-                              "socialTariff": {
-                                "endDate": "2022-08-24T14:15:22Z",
-                                "inGracePeriod": false,
-                                "expired": false
-                              }
-                            }
-                          ]
-                        }
+                        "regularPriceLabel": "Optional descriptive label of the regular price. Used in financial reporting."
                       }
                     ]
                   },
@@ -268,34 +241,7 @@
                         "uitpasNumber": "0560002524314",
                         "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
                         "regularPrice": 10,
-                        "regularPriceLabel": "Optional descriptive label of the regular price. Used in financial reporting.",
-                        "passholder": {
-                          "id": "string",
-                          "name": "string",
-                          "firstName": "string",
-                          "inszNumber": "string",
-                          "dateOfBirth": "2000-01-01",
-                          "postalCode": "9300",
-                          "registrationOrganizer": {
-                            "id": "1234",
-                            "name": "Example UiTPAS Organizer"
-                          },
-                          "cardSystemMemberships": [
-                            {
-                              "cardSystem": {
-                                "id": 1,
-                                "name": "UiTPAS Dender"
-                              },
-                              "uitpasNumber": "0560002524314",
-                              "status": "ACTIVE",
-                              "socialTariff": {
-                                "endDate": "2022-08-24T14:15:22Z",
-                                "inGracePeriod": false,
-                                "expired": false
-                              }
-                            }
-                          ]
-                        }
+                        "regularPriceLabel": "Optional descriptive label of the regular price. Used in financial reporting."
                       },
                       {
                         "id": "21346",
@@ -308,34 +254,7 @@
                         "uitpasNumber": "0940002524123",
                         "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
                         "regularPrice": 10,
-                        "regularPriceLabel": "Optional descriptive label of the regular price. Used in financial reporting.",
-                        "passholder": {
-                          "id": "string",
-                          "name": "string",
-                          "firstName": "string",
-                          "inszNumber": "string",
-                          "dateOfBirth": "2000-01-01",
-                          "postalCode": "9300",
-                          "registrationOrganizer": {
-                            "id": "1234",
-                            "name": "Example UiTPAS Organizer"
-                          },
-                          "cardSystemMemberships": [
-                            {
-                              "cardSystem": {
-                                "id": 1,
-                                "name": "UiTPAS Dender"
-                              },
-                              "uitpasNumber": "0940002524123",
-                              "status": "ACTIVE",
-                              "socialTariff": {
-                                "endDate": "2022-08-24T14:15:22Z",
-                                "inGracePeriod": false,
-                                "expired": false
-                              }
-                            }
-                          ]
-                        }
+                        "regularPriceLabel": "Optional descriptive label of the regular price. Used in financial reporting."
                       }
                     ]
                   }
@@ -484,10 +403,17 @@
                             "inszNumber": "string",
                             "dateOfBirth": "2000-01-01",
                             "postalCode": "9300",
+                            "address": {
+                              "postalCode": "9300",
+                              "city": "Aalst"
+                            },
+                            "creationDate": "2022-08-24T14:15:22Z",
                             "registrationOrganizer": {
                               "id": "1234",
                               "name": "Example UiTPAS Organizer"
                             },
+                            "points": 10,
+                            "uitidStatus": "UNREGISTERED",
                             "cardSystemMemberships": [
                               {
                                 "cardSystem": {
@@ -524,10 +450,17 @@
                             "inszNumber": "string",
                             "dateOfBirth": "2000-01-01",
                             "postalCode": "9300",
+                            "address": {
+                              "postalCode": "9300",
+                              "city": "Aalst"
+                            },
+                            "creationDate": "2022-08-24T14:15:22Z",
                             "registrationOrganizer": {
                               "id": "1234",
                               "name": "Example UiTPAS Organizer"
                             },
+                            "points": 12,
+                            "uitidStatus": "UNREGISTERED",
                             "cardSystemMemberships": [
                               {
                                 "cardSystem": {
@@ -1037,6 +970,12 @@
                           "inszNumber": "string",
                           "dateOfBirth": "2000-01-01",
                           "postalCode": "9300",
+                          "address": {
+                            "postalCode": "9300",
+                            "city": "Aalst"
+                          },
+                          "points": 12,
+                          "uitidStatus": "UNREGISTERED",
                           "registrationOrganizer": {
                             "id": "1234",
                             "name": "Example UiTPAS Organizer"
@@ -1209,8 +1148,8 @@
                       "cardSystemMemberships": [
                         {
                           "cardSystem": {
-                            "id": 0,
-                            "name": "string"
+                            "id": 1,
+                            "name": "UiTPAS Regio Dender"
                           },
                           "uitpasNumber": "string",
                           "status": "ACTIVE",
@@ -1227,8 +1166,8 @@
                       "postalCode": "string",
                       "city": "string",
                       "registrationOrganizer": {
-                        "id": "string",
-                        "name": "string"
+                        "id": "abc12345",
+                        "name": "UiTPAS Test Organizer"
                       },
                       "points": 3,
                       "uitidStatus": "REGISTERED",
@@ -1254,16 +1193,19 @@
             }
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Bad request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/organizer-not-found\n* https://api.publiq.be/probs/uitpas/cardsystem-not-found\n* https://api.publiq.be/probs/uitpas/invalid-city\n* https://api.publiq.be/probs/uitpas/invalid-insz-number\n\nThe detail property might include more information for the client developer."
           },
           "401": {
             "$ref": "#/components/responses/Unauthorized"
           },
           "403": {
             "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
           }
         },
-        "description": "Register a passholder\n\nThe caller of this request must have `PASSHOLDER_WRITE` permission.",
+        "description": "<!-- theme: warning -->\n\n> WARNING\n>\n> Experimental API. Breaking changes might be introduced in future updates.\n\nRegister a passholder\n\nThe caller of this request must have `PASSHOLDER_WRITE` permission for the `registrationOrganizer`.",
         "security": [
           {
             "CLIENT_ACCESS_TOKEN": []
@@ -1276,42 +1218,39 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/PassholderRegistration"
+                "$ref": "#/components/schemas/Passholder"
               },
               "examples": {
                 "Example": {
                   "value": {
                     "name": "string",
                     "firstName": "string",
-                    "lastName": "string",
-                    "dateOfBirth": "2019-08-24",
                     "inszNumber": "string",
+                    "email": "string",
+                    "dateOfBirth": "2019-08-24",
+                    "registrationOrganizer": {
+                      "id": "abc12345"
+                    },
                     "address": {
                       "street": "string",
                       "number": "string",
                       "box": "string",
-                      "postalCode": "string",
-                      "city": "string"
+                      "postalCode": "1000",
+                      "city": "Brussel",
+                      "country": "string"
                     },
-                    "email": "string",
-                    "cardSystem": {
-                      "id": 0,
-                      "name": "string"
-                    },
-                    "registrationOrganizer": {
-                      "id": "1234",
-                      "name": "Example UiTPAS Organizer"
-                    },
-                    "gender": "male",
-                    "nationality": "string",
-                    "phoneNumber": "string",
                     "optInPreferences": {
                       "serviceMails": true,
-                      "milestoneMails": true,
                       "infoMails": true,
-                      "sms": true,
+                      "milestoneMails": true,
+                      "sms": false,
                       "post": true
-                    }
+                    },
+                    "nationality": "string",
+                    "legalConsentPaper": false,
+                    "legalConsentDigital": true,
+                    "parentalConsent": false,
+                    "registrationCardSystemId": 1
                   }
                 }
               }
@@ -1320,6 +1259,55 @@
         },
         "tags": [
           "Passholders"
+        ]
+      }
+    },
+    "/passholders/{passholderId}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "passholderId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "delete": {
+        "summary": "Remove passholder",
+        "operationId": "delete-passholders-passholderId",
+        "tags": [
+          "Passholders"
+        ],
+        "description": "Remove this passholder.\n\nThe caller of this request must have `PASSHOLDER_DELETE` permission.",
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "USER_ACCESS_TOKEN": []
+          },
+          {
+            "CLIENT_ACCESS_TOKEN": []
+          }
         ]
       }
     },
@@ -1859,6 +1847,10 @@
                       "inszNumber": "string",
                       "dateOfBirth": "2000-01-01",
                       "postalCode": "9300",
+                      "address": {
+                        "postalCode": "9300",
+                        "city": "Aalst"
+                      },
                       "registrationOrganizer": {
                         "id": "1234",
                         "name": "Example UiTPAS Organizer"
@@ -1937,6 +1929,11 @@
                       ],
                       "postalCode": "9000",
                       "city": "Gent",
+                      "uitidStatus": "UNREGISTERED",
+                      "address": {
+                        "postalCode": "9000",
+                        "city": "Gent"
+                      },
                       "email": "firstname.lastname@example.com",
                       "creationDate": "2021-10-15T09:50:51+00:00",
                       "dateOfBirth": "2000-08-24",
@@ -2827,9 +2824,60 @@
           "Models"
         ],
         "description": "Person who holds an UiTPAS, the end-user of an UiTPAS. \n\nA `Passholder` can be identified by its `id`. However, there are cases where the passholder identifies using one of its UiTPAS numbers. That number is CardSystem specific, so it can be found under `cardSystemMemberships`. Every passholder should have at least one cardsystem membership.",
+        "x-examples": {
+          "Example": {
+            "id": "string",
+            "name": "string",
+            "firstName": "string",
+            "inszNumber": "string",
+            "cardSystemMemberships": [
+              {
+                "cardSystem": {
+                  "id": 0,
+                  "name": "string"
+                },
+                "uitpasNumber": "string",
+                "status": "ACTIVE",
+                "socialTariff": {
+                  "endDate": "2019-08-24T14:15:22Z",
+                  "inGracePeriod": true,
+                  "expired": true
+                }
+              }
+            ],
+            "email": "string",
+            "creationDate": "2019-08-24T14:15:22Z",
+            "dateOfBirth": "2019-08-24",
+            "postalCode": "string",
+            "city": "string",
+            "registrationOrganizer": {
+              "id": "string",
+              "name": "string"
+            },
+            "points": 0,
+            "uitidStatus": "REGISTERED",
+            "address": {
+              "street": "string",
+              "number": "string",
+              "box": "string",
+              "postalCode": "string",
+              "city": "string",
+              "country": "string"
+            },
+            "optInPreferences": {
+              "serviceMails": true,
+              "infoMails": true,
+              "milestoneMails": true,
+              "sms": true,
+              "post": true
+            },
+            "nationality": "string"
+          }
+        },
         "properties": {
           "id": {
             "type": "string",
+            "description": "This field is always available in responses.",
             "readOnly": true
           },
           "name": {
@@ -2838,17 +2886,16 @@
           "firstName": {
             "type": "string"
           },
-          "lastName": {
-            "type": "string"
-          },
           "inszNumber": {
             "type": "string"
           },
           "cardSystemMemberships": {
             "type": "array",
+            "description": "This field is always available in responses.",
             "items": {
               "$ref": "#/components/schemas/CardSystemMembership"
-            }
+            },
+            "readOnly": true
           },
           "email": {
             "type": "string"
@@ -2856,6 +2903,7 @@
           "creationDate": {
             "type": "string",
             "format": "date-time",
+            "description": "This field is always available in responses.",
             "readOnly": true
           },
           "dateOfBirth": {
@@ -2864,18 +2912,29 @@
           },
           "postalCode": {
             "type": "string",
-            "deprecated": true
+            "deprecated": true,
+            "description": "This field is always available in responses.",
+            "readOnly": true
           },
           "city": {
             "type": "string",
             "deprecated": true,
             "readOnly": true
           },
+          "gender": {
+            "type": "string",
+            "enum": [
+              "MALE",
+              "FEMALE",
+              "X"
+            ]
+          },
           "registrationOrganizer": {
             "$ref": "#/components/schemas/Organizer"
           },
           "points": {
             "type": "integer",
+            "description": "This field is always available in responses.",
             "readOnly": true
           },
           "uitidStatus": {
@@ -2884,10 +2943,15 @@
               "REGISTERED",
               "UNREGISTERED"
             ],
+            "description": "This field is always available in responses.",
             "readOnly": true
           },
           "address": {
             "type": "object",
+            "required": [
+              "postalCode",
+              "city"
+            ],
             "properties": {
               "street": {
                 "type": "string"
@@ -2903,8 +2967,14 @@
               },
               "city": {
                 "type": "string"
+              },
+              "country": {
+                "type": "string"
               }
             }
+          },
+          "phoneNumber": {
+            "type": "string"
           },
           "optInPreferences": {
             "type": "object",
@@ -2915,28 +2985,113 @@
               "infoMails": {
                 "type": "boolean"
               },
-              "milestoneMails": {
-                "type": "boolean"
-              },
               "sms": {
                 "type": "boolean"
               },
               "post": {
                 "type": "boolean"
+              },
+              "milestoneMails": {
+                "type": "boolean"
               }
-            }
+            },
+            "required": [
+              "serviceMails",
+              "infoMails",
+              "sms",
+              "post",
+              "milestoneMails"
+            ]
           },
           "nationality": {
             "type": "string"
+          },
+          "parentalConsent": {
+            "type": "boolean",
+            "description": "Only used in passholder registration. Set to true for under-aged passholder that have parental consent.",
+            "writeOnly": true
+          },
+          "legalTermsPaper": {
+            "type": "boolean",
+            "description": "Only used in passholder registration. Set to true for passholders that received legal terms on paper.",
+            "writeOnly": true
+          },
+          "legalTermsDigital": {
+            "type": "boolean",
+            "description": "Only used in passholder registration. Set to true for passholders that received legal terms digitally.",
+            "writeOnly": true
+          },
+          "registrationCardSystemId": {
+            "type": "integer",
+            "description": "Only used in passholder registration. Set to the id of the CardSystem of which the passholder has to become a member.",
+            "writeOnly": true
           }
         },
         "required": [
           "name",
           "firstName",
-          "cardSystemMemberships",
+          "dateOfBirth",
+          "registrationOrganizer",
+          "address"
+        ]
+      },
+      "PassholderSelfRegistration": {
+        "title": "PassholderSelfRegistration",
+        "type": "object",
+        "x-examples": {
+          "Example": {
+            "name": "Lastname",
+            "firstName": "Firstname",
+            "cardSystem": {
+              "id": 27
+            },
+            "email": "firstname.lastname@example.com",
+            "dateOfBirth": "1980-01-01",
+            "postalCode": "9000",
+            "city": "Gent",
+            "registrationOrganizer": {
+              "id": "d2f898b1-455e-44ee-b08a-c4c05b1ab900"
+            }
+          }
+        },
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "dateOfBirth": {
+            "type": "string",
+            "format": "date"
+          },
+          "email": {
+            "type": "string"
+          },
+          "postalCode": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "cardSystem": {
+            "$ref": "#/components/schemas/CardSystem"
+          },
+          "registrationOrganizer": {
+            "$ref": "#/components/schemas/Organizer"
+          }
+        },
+        "required": [
+          "name",
+          "firstName",
           "dateOfBirth",
           "postalCode",
+          "city",
+          "cardSystem",
           "registrationOrganizer"
+        ],
+        "x-tags": [
+          "Models"
         ]
       },
       "CardSystemMembership": {
@@ -3184,187 +3339,6 @@
         ],
         "x-tags": [
           "Models"
-        ]
-      },
-      "PassholderSelfRegistration": {
-        "title": "PassholderSelfRegistration",
-        "type": "object",
-        "x-examples": {
-          "Example": {
-            "name": "Lastname",
-            "firstName": "Firstname",
-            "cardSystem": {
-              "id": 27
-            },
-            "email": "firstname.lastname@example.com",
-            "dateOfBirth": "1980-01-01",
-            "postalCode": "9000",
-            "city": "Gent",
-            "registrationOrganizer": {
-              "id": "d2f898b1-455e-44ee-b08a-c4c05b1ab900"
-            }
-          }
-        },
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "firstName": {
-            "type": "string"
-          },
-          "dateOfBirth": {
-            "type": "string",
-            "format": "date"
-          },
-          "email": {
-            "type": "string"
-          },
-          "postalCode": {
-            "type": "string"
-          },
-          "city": {
-            "type": "string"
-          },
-          "cardSystem": {
-            "$ref": "#/components/schemas/CardSystem"
-          },
-          "registrationOrganizer": {
-            "$ref": "#/components/schemas/Organizer"
-          }
-        },
-        "required": [
-          "name",
-          "firstName",
-          "dateOfBirth",
-          "postalCode",
-          "city",
-          "cardSystem",
-          "registrationOrganizer"
-        ],
-        "x-tags": [
-          "Models"
-        ]
-      },
-      "PassholderRegistration": {
-        "title": "PassholderRegistration",
-        "type": "object",
-        "x-examples": {
-          "Example": {
-            "name": "Lastname",
-            "firstName": "Firstname",
-            "cardSystem": {
-              "id": 27
-            },
-            "email": "firstname.lastname@example.com",
-            "dateOfBirth": "1980-01-01",
-            "postalCode": "9000",
-            "city": "Gent",
-            "registrationOrganizer": {
-              "id": "d2f898b1-455e-44ee-b08a-c4c05b1ab900"
-            }
-          }
-        },
-        "description": "",
-        "x-tags": [
-          "Models"
-        ],
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "firstName": {
-            "type": "string"
-          },
-          "lastName": {
-            "type": "string"
-          },
-          "dateOfBirth": {
-            "type": "string",
-            "format": "date"
-          },
-          "inszNumber": {
-            "type": "string"
-          },
-          "address": {
-            "type": "object",
-            "required": [
-              "street",
-              "number",
-              "box",
-              "postalCode",
-              "city"
-            ],
-            "properties": {
-              "street": {
-                "type": "string"
-              },
-              "number": {
-                "type": "string"
-              },
-              "box": {
-                "type": "string"
-              },
-              "postalCode": {
-                "type": "string"
-              },
-              "city": {
-                "type": "string"
-              }
-            }
-          },
-          "email": {
-            "type": "string"
-          },
-          "cardSystem": {
-            "$ref": "#/components/schemas/CardSystem"
-          },
-          "registrationOrganizer": {
-            "$ref": "#/components/schemas/Organizer"
-          },
-          "gender": {
-            "type": "string",
-            "enum": [
-              "male",
-              "female",
-              "x"
-            ]
-          },
-          "nationality": {
-            "type": "string"
-          },
-          "phoneNumber": {
-            "type": "string"
-          },
-          "optInPreferences": {
-            "type": "object",
-            "properties": {
-              "serviceMails": {
-                "type": "boolean"
-              },
-              "milestoneMails": {
-                "type": "boolean"
-              },
-              "infoMails": {
-                "type": "boolean"
-              },
-              "sms": {
-                "type": "boolean"
-              },
-              "post": {
-                "type": "boolean"
-              }
-            }
-          }
-        },
-        "required": [
-          "name",
-          "firstName",
-          "lastName",
-          "dateOfBirth",
-          "inszNumber",
-          "address",
-          "cardSystem",
-          "registrationOrganizer"
         ]
       }
     },

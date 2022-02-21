@@ -1262,6 +1262,48 @@
         ]
       }
     },
+    "/passholders/{passholderId}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "passholderId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "delete": {
+        "summary": "Remove passholder",
+        "operationId": "delete-passholders-passholderId",
+        "tags": [
+          "Passholders"
+        ],
+        "description": "Remove this passholder.\n\nThe caller of this request must have `PASSHOLDER_DELETE` permission.",
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "USER_ACCESS_TOKEN": []
+          },
+          {
+            "CLIENT_ACCESS_TOKEN": []
+          }
+        ]
+      }
+    },
     "/passholders/me/uitid/registration-token": {
       "parameters": [],
       "get": {

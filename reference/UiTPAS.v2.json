@@ -2552,6 +2552,69 @@
           }
         ]
       }
+    },
+    "/passes/{uitpasNumber}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "uitpasNumber",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Retrieve pass",
+        "tags": [
+          "Passholders"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Card"
+                },
+                "examples": {
+                  "Example": {
+                    "value": {
+                      "passholderId": "b34c19fc-bcf9-4d10-aeb2-6bc9efd38b68",
+                      "uitpasNumber": "0560002524314",
+                      "points": 12,
+                      "postalCode": "1000",
+                      "socialTariffExpired": false
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/passholder-blocked\n* https://api.publiq.be/probs/uitpas/card-blocked\n\nThe detail property might include more information for the client developer."
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "description": "Not Found. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/pass-not-found\n\nThe detail property might include more information for the client developer."
+          }
+        },
+        "operationId": "get-passes-uitpasNumber",
+        "security": [
+          {
+            "USER_ACCESS_TOKEN": []
+          },
+          {
+            "CLIENT_ACCESS_TOKEN": []
+          }
+        ],
+        "description": "Retrieve information related to a pass.\n\nThe caller of this request must have `PASS_READ` permission."
+      }
     }
   },
   "components": {
@@ -3093,6 +3156,53 @@
         "x-tags": [
           "Models"
         ]
+      },
+      "Card": {
+        "type": "object",
+        "title": "Card",
+        "x-tags": [
+          "Models"
+        ],
+        "description": "The `Card` entity includes basic information about the card and the related `Passholder`.  ",
+        "properties": {
+          "passholderId": {
+            "type": "string",
+            "readOnly": true
+          },
+          "uitpasNumber": {
+            "type": "string",
+            "readOnly": true
+          },
+          "points": {
+            "type": "integer",
+            "readOnly": true
+          },
+          "postalCode": {
+            "type": "string",
+            "readOnly": true
+          },
+          "socialTariffExpired": {
+            "type": "boolean",
+            "description": "If the social tariff of the passholder is expired, this field will be `true`. ",
+            "readOnly": true
+          }
+        },
+        "required": [
+          "passholderId",
+          "uitpasNumber",
+          "points",
+          "postalCode"
+        ],
+        "readOnly": true,
+        "x-examples": {
+          "Example": {
+            "passholderId": "b34c19fc-bcf9-4d10-aeb2-6bc9efd38b68",
+            "uitpasNumber": "0560002524314",
+            "points": 12,
+            "postalCode": "1000",
+            "socialTariffExpired": false
+          }
+        }
       },
       "CardSystemMembership": {
         "title": "CardSystemMembership",

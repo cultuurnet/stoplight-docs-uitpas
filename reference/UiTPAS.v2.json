@@ -3159,11 +3159,11 @@
       },
       "Card": {
         "type": "object",
-        "title": "Card",
+        "title": "Pass",
         "x-tags": [
           "Models"
         ],
-        "description": "The `Card` entity includes basic information about the card and the related `Passholder`.  ",
+        "description": "The `Pass` entity includes basic information about the UiTPAS and its related `Passholder`.  ",
         "properties": {
           "passholderId": {
             "type": "string",

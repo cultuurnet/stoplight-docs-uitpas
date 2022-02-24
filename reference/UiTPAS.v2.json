@@ -2575,7 +2575,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Card"
+                  "$ref": "#/components/schemas/Pass"
                 },
                 "examples": {
                   "Example": {
@@ -3157,7 +3157,7 @@
           "Models"
         ]
       },
-      "Card": {
+      "Pass": {
         "type": "object",
         "title": "Pass",
         "x-tags": [

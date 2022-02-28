@@ -131,7 +131,7 @@
                       "available": [
                         {
                           "id": "REWARD5464",
-                          "name": "50% korting op een specifiek event",
+                          "name": "50% korting voor 10 UiTPAS punten",
                           "price": 5,
                           "remaining": 1,
                           "type": "REWARD"
@@ -247,34 +247,7 @@
                         "uitpasNumber": "0560002524314",
                         "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
                         "regularPrice": 10,
-                        "regularPriceLabel": "Optional descriptive label of the regular price. Used in financial reporting.",
-                        "passholder": {
-                          "id": "string",
-                          "name": "string",
-                          "firstName": "string",
-                          "inszNumber": "string",
-                          "dateOfBirth": "2000-01-01",
-                          "postalCode": "9300",
-                          "registrationOrganizer": {
-                            "id": "1234",
-                            "name": "Example UiTPAS Organizer"
-                          },
-                          "cardSystemMemberships": [
-                            {
-                              "cardSystem": {
-                                "id": 1,
-                                "name": "UiTPAS Dender"
-                              },
-                              "uitpasNumber": "0560002524314",
-                              "status": "ACTIVE",
-                              "socialTariff": {
-                                "endDate": "2022-08-24T14:15:22Z",
-                                "inGracePeriod": false,
-                                "expired": false
-                              }
-                            }
-                          ]
-                        }
+                        "regularPriceLabel": "Optional descriptive label of the regular price. Used in financial reporting."
                       }
                     ]
                   },
@@ -291,34 +264,7 @@
                         "uitpasNumber": "0560002524314",
                         "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
                         "regularPrice": 10,
-                        "regularPriceLabel": "Optional descriptive label of the regular price. Used in financial reporting.",
-                        "passholder": {
-                          "id": "string",
-                          "name": "string",
-                          "firstName": "string",
-                          "inszNumber": "string",
-                          "dateOfBirth": "2000-01-01",
-                          "postalCode": "9300",
-                          "registrationOrganizer": {
-                            "id": "1234",
-                            "name": "Example UiTPAS Organizer"
-                          },
-                          "cardSystemMemberships": [
-                            {
-                              "cardSystem": {
-                                "id": 1,
-                                "name": "UiTPAS Dender"
-                              },
-                              "uitpasNumber": "0560002524314",
-                              "status": "ACTIVE",
-                              "socialTariff": {
-                                "endDate": "2022-08-24T14:15:22Z",
-                                "inGracePeriod": false,
-                                "expired": false
-                              }
-                            }
-                          ]
-                        }
+                        "regularPriceLabel": "Optional descriptive label of the regular price. Used in financial reporting."
                       },
                       {
                         "id": "21346",
@@ -331,34 +277,7 @@
                         "uitpasNumber": "0940002524123",
                         "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
                         "regularPrice": 10,
-                        "regularPriceLabel": "Optional descriptive label of the regular price. Used in financial reporting.",
-                        "passholder": {
-                          "id": "string",
-                          "name": "string",
-                          "firstName": "string",
-                          "inszNumber": "string",
-                          "dateOfBirth": "2000-01-01",
-                          "postalCode": "9300",
-                          "registrationOrganizer": {
-                            "id": "1234",
-                            "name": "Example UiTPAS Organizer"
-                          },
-                          "cardSystemMemberships": [
-                            {
-                              "cardSystem": {
-                                "id": 1,
-                                "name": "UiTPAS Dender"
-                              },
-                              "uitpasNumber": "0940002524123",
-                              "status": "ACTIVE",
-                              "socialTariff": {
-                                "endDate": "2022-08-24T14:15:22Z",
-                                "inGracePeriod": false,
-                                "expired": false
-                              }
-                            }
-                          ]
-                        }
+                        "regularPriceLabel": "Optional descriptive label of the regular price. Used in financial reporting."
                       }
                     ]
                   },
@@ -368,41 +287,13 @@
                         "id": "489144",
                         "tariff": {
                           "id": "REWARD1234",
-                          "name": "50% korting op een specifiek event",
+                          "name": "50% korting voor 10 punten",
                           "price": 5,
                           "type": "REWARD"
                         },
                         "uitpasNumber": "0560002524314",
                         "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
-                        "regularPrice": 10,
-                        "passholder": {
-                          "id": "string",
-                          "name": "string",
-                          "firstName": "string",
-                          "inszNumber": "string",
-                          "dateOfBirth": "2000-01-01",
-                          "postalCode": "9300",
-                          "points": 3,
-                          "registrationOrganizer": {
-                            "id": "1234",
-                            "name": "Example UiTPAS Organizer"
-                          },
-                          "cardSystemMemberships": [
-                            {
-                              "cardSystem": {
-                                "id": 1,
-                                "name": "UiTPAS Dender"
-                              },
-                              "uitpasNumber": "0560002524314",
-                              "status": "ACTIVE",
-                              "socialTariff": {
-                                "endDate": "2022-08-24T14:15:22Z",
-                                "inGracePeriod": false,
-                                "expired": false
-                              }
-                            }
-                          ]
-                        }
+                        "regularPrice": 10
                       }
                     ]
                   }
@@ -2558,7 +2449,7 @@
                   "$ref": "#/components/schemas/Reward"
                 },
                 "examples": {
-                  "example-1": {
+                  "Example": {
                     "value": {
                       "id": "1234",
                       "title": "Free entrance for 10 points on 1 specific event UPDATE",
@@ -2570,15 +2461,19 @@
                       "status": "ACTIVE",
                       "maxAvailableUnits": 0,
                       "unitsTaken": 0,
-                      "description1": "this is the mandatory description",
-                      "description2": "this is an optional extra description",
+                      "promotionalDescription": "this is the mandatory description",
+                      "practicalInfo": "this is an optional extra description",
                       "pictures": [
                         "https://www.uitpas.be/default-picture-for-ticketsale-rewards.png"
                       ],
-                      "publicationPeriodBegin": "2021-08-24T14:15:22Z",
-                      "publicationPeriodEnd": "2022-08-24T14:15:22Z",
-                      "exchangePeriodBegin": "2021-08-24T14:15:22Z",
-                      "exchangePeriodEnd": "2022-08-24T14:15:22Z",
+                      "publicationPeriod": {
+                        "begin": "2021-08-24T14:15:22Z",
+                        "end": "2022-08-24T14:15:22Z"
+                      },
+                      "exchangePeriod": {
+                        "begin": "2021-08-24T14:15:22Z",
+                        "end": "2022-08-24T14:15:22Z"
+                      },
                       "moreInfoURL": "string",
                       "inSpotlight": false,
                       "points": 10,
@@ -2670,15 +2565,19 @@
                       "status": "ACTIVE",
                       "maxAvailableUnits": 1000,
                       "unitsTaken": 0,
-                      "description1": "this is the mandatory description",
-                      "description2": "this is an optional extra description",
+                      "promotionalDescription": "this is the mandatory description",
+                      "practicalInfo": "this is an optional extra description",
                       "pictures": [
                         "https://www.uitpas.be/default-picture-for-ticketsale-rewards.png"
                       ],
-                      "publicationPeriodBegin": "2021-08-24T14:15:22Z",
-                      "publicationPeriodEnd": "2022-08-24T14:15:22Z",
-                      "exchangePeriodBegin": "2021-08-24T14:15:22Z",
-                      "exchangePeriodEnd": "2022-08-24T14:15:22Z",
+                      "publicationPeriod": {
+                        "begin": "2021-08-24T14:15:22Z",
+                        "end": "2022-08-24T14:15:22Z"
+                      },
+                      "exchangePeriod": {
+                        "begin": "2021-08-24T14:15:22Z",
+                        "end": "2022-08-24T14:15:22Z"
+                      },
                       "moreInfoURL": "string",
                       "inSpotlight": false,
                       "points": 10,
@@ -2802,20 +2701,28 @@
         "summary": "Exchange reward",
         "operationId": "put-rewards-id-exchange",
         "responses": {
-          "200": {
-            "description": "OK",
+          "201": {
+            "description": "Created",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ExchangedReward"
                 },
                 "examples": {
-                  "example-1": {
+                  "Example": {
                     "value": {
                       "id": "string",
                       "reward": {
                         "id": "string",
                         "title": "string",
+                        "promotionalDescription": "string",
+                        "publicationPeriod": {
+                          "begin": "2019-08-24T14:15:22Z",
+                          "end": "2019-08-24T14:15:22Z"
+                        },
+                        "points": 0,
+                        "moreInfoURL": "string",
+                        "cashInType": "PHYSICAL",
                         "owningCardSystem": {
                           "id": 0,
                           "name": "string"
@@ -2826,34 +2733,30 @@
                             "name": "string"
                           }
                         ],
+                        "allCardSystems": true,
                         "organizers": [
                           {
                             "id": "string",
                             "name": "string"
                           }
                         ],
-                        "allCardSystems": true,
                         "status": "ACTIVE",
                         "maxAvailableUnits": 0,
                         "unitsTaken": 0,
-                        "description1": "string",
-                        "description2": "string",
+                        "practicalInfo": "string",
                         "pictures": [
                           "string"
                         ],
-                        "publicationPeriodBegin": "2019-08-24T14:15:22Z",
-                        "publicationPeriodEnd": "2019-08-24T14:15:22Z",
-                        "exchangePeriodBegin": "2019-08-24T14:15:22Z",
-                        "exchangePeriodEnd": "2019-08-24T14:15:22Z",
-                        "points": 0,
+                        "exchangePeriod": {
+                          "begin": "2019-08-24T14:15:22Z",
+                          "end": "2019-08-24T14:15:22Z"
+                        },
                         "types": [
                           "string"
                         ],
                         "forKids": true,
                         "sport": true,
                         "labels": "string",
-                        "moreInfoURL": "string",
-                        "cashInType": "PHYSICAL",
                         "usesCodes": true,
                         "ticketSaleDiscount": {
                           "amount": 0,
@@ -2881,6 +2784,18 @@
                 }
               }
             }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "description": "Not Found. Possible error types:\n\n* https://api.publiq.be/probs/uitpas/reward-not-found"
           }
         },
         "description": "Exchange passholder points for a reward.\n\nThe caller of this request must have `REWARDS_EXCHANGE` permission for the given organizer.",
@@ -2894,7 +2809,8 @@
                 "type": "object",
                 "properties": {
                   "uitpasNumber": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "UiTPAS number of the passholder exchanging this reward."
                   }
                 },
                 "required": [
@@ -2902,7 +2818,7 @@
                 ]
               },
               "examples": {
-                "example-1": {
+                "Example": {
                   "value": {
                     "uitpasNumber": "string"
                   }
@@ -2924,8 +2840,20 @@
         "summary": "Check reward exchange status for a passholder",
         "operationId": "get-rewards-id-exchange",
         "responses": {
-          "200": {
-            "description": "OK"
+          "202": {
+            "description": "Accepted.\n\nThere is no further content in this response. If the status is Accepted, the given passholder can exchange this reward."
+          },
+          "400": {
+            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/social-tariff-expired\n* https://api.publiq.be/probs/uitpas/invalid-uitpas-number\n* https://api.publiq.be/probs/uitpas/reward-period-constraint\n* https://api.publiq.be/probs/uitpas/reward-volume-constraint\n* https://api.publiq.be/probs/uitpas/reward-passholder-constraint\n"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "description": "Not Found. Possible error types:\n\n* https://api.publiq.be/probs/uitpas/reward-not-found"
           }
         },
         "description": "Check the reward exchange status for a passholder\n\n\nThe caller of this request must have `REWARDS_EXCHANGE` permission for the given organizer.",
@@ -2939,6 +2867,17 @@
         ],
         "tags": [
           "Rewards"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "required": true,
+            "name": "uitpasNumber",
+            "description": "UiTPAS number identifying the passholder who wants to exchange this reward."
+          }
         ]
       }
     },
@@ -2967,15 +2906,18 @@
                       "status": "ACTIVE",
                       "maxAvailableUnits": 0,
                       "unitsTaken": 0,
-                      "description1": "this is the mandatory description",
-                      "description2": "this is an optional extra description",
+                      "promotionalDescription": "this is the mandatory description",
                       "pictures": [
                         "https://www.uitpas.be/default-picture-for-ticketsale-rewards.png"
                       ],
-                      "publicationPeriodBegin": "2021-08-24T14:15:22Z",
-                      "publicationPeriodEnd": "2022-08-24T14:15:22Z",
-                      "exchangePeriodBegin": "2021-08-24T14:15:22Z",
-                      "exchangePeriodEnd": "2022-08-24T14:15:22Z",
+                      "publicationPeriod": {
+                        "begin": "2021-08-24T14:15:22Z",
+                        "end": "2022-08-24T14:15:22Z"
+                      },
+                      "exchangePeriod": {
+                        "begin": "2021-08-24T14:15:22Z",
+                        "end": "2022-08-24T14:15:22Z"
+                      },
                       "moreInfoURL": "string",
                       "inSpotlight": false,
                       "points": 10,
@@ -3034,9 +2976,11 @@
                 "Ticket sale reward": {
                   "value": {
                     "title": "Free entrance for 10 points on 1 specific event",
-                    "description1": "this is the mandatory description",
-                    "publicationPeriodBegin": "2021-08-24T14:15:22Z",
-                    "publicationPeriodEnd": "2022-08-24T14:15:22Z",
+                    "promotionalDescription": "this is the mandatory description",
+                    "publicationPeriod": {
+                      "begin": "2021-08-24T14:15:22Z",
+                      "end": "2022-08-24T14:15:22Z"
+                    },
                     "moreInfoURL": "https://example.org/more-info-about-this-reward",
                     "cashInType": "TICKETSALE",
                     "points": 10,
@@ -3086,15 +3030,19 @@
                           "status": "ACTIVE",
                           "maxAvailableUnits": 0,
                           "unitsTaken": 0,
-                          "description1": "this is the mandatory description",
-                          "description2": "this is an optional extra description",
+                          "promotionalDescription": "this is the mandatory description",
+                          "practicalInfo": "this is an optional extra description",
                           "pictures": [
                             "https://www.uitpas.be/default-picture-for-ticketsale-rewards.png"
                           ],
-                          "publicationPeriodBegin": "2021-08-24T14:15:22Z",
-                          "publicationPeriodEnd": "2022-08-24T14:15:22Z",
-                          "exchangePeriodBegin": "2021-08-24T14:15:22Z",
-                          "exchangePeriodEnd": "2022-08-24T14:15:22Z",
+                          "publicationPeriod": {
+                            "begin": "2021-08-24T14:15:22Z",
+                            "end": "2022-08-24T14:15:22Z"
+                          },
+                          "exchangePeriod": {
+                            "begin": "2021-08-24T14:15:22Z",
+                            "end": "2022-08-24T14:15:22Z"
+                          },
                           "moreInfoURL": "string",
                           "inSpotlight": false,
                           "points": 10,
@@ -3125,6 +3073,15 @@
                 }
               }
             }
+          },
+          "400": {
+            "description": "Bad Request. Possible error types:\n\n* https://api.publiq.be/probs/uitpas/organizer-not-found\n* https://api.publiq.be/probs/uitpas/event-not-found\n* https://api.publiq.be/probs/uitpas/cardsystem-not-found"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
         "tags": [
@@ -3834,10 +3791,48 @@
           "Models"
         ]
       },
+      "Period": {
+        "title": "Period",
+        "type": "object",
+        "x-examples": {
+          "Example": {
+            "name": "Lastname",
+            "firstName": "Firstname",
+            "cardSystem": {
+              "id": 27
+            },
+            "email": "firstname.lastname@example.com",
+            "dateOfBirth": "1980-01-01",
+            "postalCode": "9000",
+            "city": "Gent",
+            "registrationOrganizer": {
+              "id": "d2f898b1-455e-44ee-b08a-c4c05b1ab900"
+            }
+          }
+        },
+        "x-tags": [
+          "Models"
+        ],
+        "description": "Period entity with a begin and end date.",
+        "properties": {
+          "begin": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "end": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "begin",
+          "end"
+        ]
+      },
       "Reward": {
         "type": "object",
         "title": "Reward",
-        "description": "",
+        "description": "Reward model",
         "x-tags": [
           "Models"
         ],
@@ -3847,87 +3842,19 @@
             "readOnly": true
           },
           "title": {
-            "type": "string"
-          },
-          "owningCardSystem": {
-            "$ref": "#/components/schemas/CardSystem"
-          },
-          "applicableCardSystems": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/CardSystem"
-            }
-          },
-          "organizers": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Organizer"
-            }
-          },
-          "allCardSystems": {
-            "type": "boolean"
-          },
-          "status": {
             "type": "string",
-            "enum": [
-              "ACTIVE",
-              "INACTIVE",
-              "DELETED"
-            ],
-            "readOnly": true
+            "description": "Title of the Reward"
           },
-          "maxAvailableUnits": {
-            "type": "integer"
-          },
-          "unitsTaken": {
-            "type": "integer",
-            "readOnly": true
-          },
-          "description1": {
-            "type": "string"
-          },
-          "description2": {
-            "type": "string"
-          },
-          "pictures": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "publicationPeriodBegin": {
+          "promotionalDescription": {
             "type": "string",
-            "format": "date-time"
+            "description": "Promotion description"
           },
-          "publicationPeriodEnd": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "exchangePeriodBegin": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "exchangePeriodEnd": {
-            "type": "string",
-            "format": "date-time"
+          "publicationPeriod": {
+            "$ref": "#/components/schemas/Period"
           },
           "points": {
-            "type": "number"
-          },
-          "types": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "forKids": {
-            "type": "boolean"
-          },
-          "sport": {
-            "type": "boolean"
-          },
-          "labels": {
-            "type": "string"
+            "type": "number",
+            "description": "Number of points needed to exchange the Reward"
           },
           "moreInfoURL": {
             "type": "string"
@@ -3940,24 +3867,102 @@
               "TICKETSALE"
             ]
           },
+          "owningCardSystem": {
+            "$ref": "#/components/schemas/CardSystem"
+          },
+          "applicableCardSystems": {
+            "type": "array",
+            "description": "List of CardSystems whose members can exchange this Reward. ",
+            "items": {
+              "$ref": "#/components/schemas/CardSystem"
+            }
+          },
+          "allCardSystems": {
+            "type": "boolean",
+            "description": "If set to true, `applicableCardSystems` will always contain all UiTPAS CardSystems."
+          },
+          "organizers": {
+            "type": "array",
+            "description": "List of Organizers where this Reward can be exchanged.",
+            "items": {
+              "$ref": "#/components/schemas/Organizer"
+            }
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "INACTIVE",
+              "DELETED"
+            ],
+            "description": "Status of this Reward.",
+            "readOnly": true
+          },
+          "maxAvailableUnits": {
+            "type": "integer",
+            "description": "Maximum (total) available units of this Reward."
+          },
+          "unitsTaken": {
+            "type": "integer",
+            "description": "Number of Rewards already exchanged.",
+            "readOnly": true
+          },
+          "practicalInfo": {
+            "type": "string",
+            "description": "Practical info for passholders who want to exchange this Reward."
+          },
+          "pictures": {
+            "type": "array",
+            "description": "List of URLs to zero or more images of this Reward.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "exchangePeriod": {
+            "$ref": "#/components/schemas/Period"
+          },
+          "types": {
+            "type": "array",
+            "description": "List of types of this Reward. This is free text, but common types are: \"Gadget of item\", \"Doen\", \"Eten en drinken\" and \"Goede doel\".",
+            "items": {
+              "type": "string"
+            }
+          },
+          "forKids": {
+            "type": "boolean",
+            "description": "true if this Reward is specifically targetted to children."
+          },
+          "sport": {
+            "type": "boolean",
+            "description": "true if this is a sport Reward"
+          },
+          "labels": {
+            "type": "string",
+            "description": "Comma separated list of labels."
+          },
           "usesCodes": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Only for Reward of cashinType ONLINE. If set to true this Reward will produce an `exchangeCode` when exchanged."
           },
           "ticketSaleDiscount": {
             "type": "object",
+            "description": "Only for Reward of cashInType TICKETSALE. Describes the discount a passholder can receive in exhange of this Reward.",
             "properties": {
               "amount": {
-                "type": "number"
+                "type": "number",
+                "description": "Discount amount a passholder can receive on a ticket sale, in euro or percentage."
               },
               "type": {
                 "type": "string",
                 "enum": [
                   "ABSOLUTE",
                   "PERCENTAGE"
-                ]
+                ],
+                "description": "Whether the discount `amount` is absolute (in euro) or relative (percentage of the regular price)"
               },
               "conditions": {
                 "type": "array",
+                "description": "List of conditions to which this TicketSale Reward applies.",
                 "items": {
                   "type": "object",
                   "properties": {
@@ -3966,10 +3971,12 @@
                       "enum": [
                         "EVENT",
                         "ORGANIZER"
-                      ]
+                      ],
+                      "description": "Type of the condition."
                     },
                     "values": {
                       "type": "array",
+                      "description": "List of values of the condition",
                       "items": {
                         "type": "string"
                       }
@@ -3980,14 +3987,17 @@
                   ]
                 }
               }
-            }
+            },
+            "required": [
+              "amount",
+              "type"
+            ]
           }
         },
         "required": [
           "title",
-          "description1",
-          "publicationPeriodBegin",
-          "publicationPeriodEnd",
+          "promotionalDescription",
+          "publicationPeriod",
           "points",
           "moreInfoURL",
           "cashInType"

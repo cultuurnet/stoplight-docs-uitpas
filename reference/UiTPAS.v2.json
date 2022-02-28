@@ -2653,12 +2653,16 @@
                   "value": {
                     "title": "Free entrance for 10 points on 1 specific event UPDATE",
                     "maxAvailableUnits": 1000,
-                    "description1": "this is the mandatory description",
-                    "description2": "this is an optional extra description",
-                    "publicationPeriodBegin": "2021-08-24T14:15:22Z",
-                    "publicationPeriodEnd": "2022-08-24T14:15:22Z",
-                    "exchangePeriodBegin": "2021-08-24T14:15:22Z",
-                    "exchangePeriodEnd": "2022-08-24T14:15:22Z",
+                    "promotionalDescription": "this is the mandatory description",
+                    "practicalInfo": "this is an optional extra description",
+                    "publicationPeriod": {
+                      "begin": "2021-08-24T14:15:22Z",
+                      "end": "2022-08-24T14:15:22Z"
+                    },
+                    "exchangePeriod": {
+                      "begin": "2021-08-24T14:15:22Z",
+                      "end": "2022-08-24T14:15:22Z"
+                    },
                     "moreInfoURL": "https://example.org/more-info-about-this-reward",
                     "cashInType": "TICKETSALE",
                     "points": 10,

@@ -2709,7 +2709,7 @@
         ],
         "description": "Retrieve information related to a pass.\n\nThe caller of this request must have `PASS_READ` permission."
       }
-    },  
+    },
     "/rewards/{id}": {
       "get": {
         "summary": "Retrieve reward",

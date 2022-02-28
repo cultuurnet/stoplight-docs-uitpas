@@ -4313,7 +4313,7 @@
       },
       "Reward": {
         "type": "object",
-        "title": "Reward",
+        "title": "Reward", 
         "description": "Reward model",
         "x-tags": [
           "Models"

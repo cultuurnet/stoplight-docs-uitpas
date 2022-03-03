@@ -2,12 +2,12 @@
   "openapi": "3.0.0",
   "info": {
     "title": "UiTPAS API",
-    "version": "2.0",
+    "version": "4.0",
     "contact": {
       "name": "publiq helpdesk",
       "email": "vragen@publiq.be"
     },
-    "description": "With UiTPAS API 2.0 you can retrieve ticket sale prices for specific UiTPAS numbers, and register ticket sales for specific UiTPAS numbers.\n\nFuture versions will also include support for more features like saving points and exchanging them for benefits.\n\n## Postman\n\n<!-- focus: false -->\n\n[![Download postman collection](https://postman.publiq.be/postman-download.svg)](https://postman.publiq.be/?api=uitpas-api)\n\nDo you already have a **client id** and **client secret**?\nDownload a personalized Postman collection to start making requests in seconds!"
+    "description": "With UiTPAS API 4.0 you can retrieve ticket sale prices for specific UiTPAS numbers, and register ticket sales for specific UiTPAS numbers.\n\nFuture versions will also include support for more features like saving points and exchanging them for benefits.\n\n## Postman\n\n<!-- focus: false -->\n\n[![Download postman collection](https://postman.publiq.be/postman-download.svg)](https://postman.publiq.be/?api=uitpas-api)\n\nDo you already have a **client id** and **client secret**?\nDownload a personalized Postman collection to start making requests in seconds!"
   },
   "servers": [
     {
@@ -1409,7 +1409,7 @@
             }
           }
         },
-        "description": "Retrieve the passholder's school.\n\nThe caller of this request must have `PASSHOLDER_SEARCH` permission.\n\n<!-- theme: warning -->\n\n> Passholder schools are used to manage passholders in a very specific case. If you are not explicitly working with UiTPAS schools, you will probably **NOT** need this API. \n\nUsing [GET](/reference/UiTPAS.v2.json/paths/~1passholders~1{passholderId}~1school/get), [PUT](/reference/UiTPAS.v2.json/paths/~1passholders~1{passholderId}~1school/put) and [DELETE](/reference/UiTPAS.v2.json/paths/~1passholders~1{passholderId}~1school/delete) on this endpoint, the school of a passholder can be retrieved, updated and deleted. All schools are organizers.",
+        "description": "Retrieve the passholder's school.\n\nThe caller of this request must have `PASSHOLDER_SEARCH` permission.\n\n<!-- theme: warning -->\n\n> Passholder schools are used to manage passholders in a very specific case. If you are not explicitly working with UiTPAS schools, you will probably **NOT** need this API. \n\nUsing [GET](/reference/uitpas.json/paths/~1passholders~1{passholderId}~1school/get), [PUT](/reference/uitpas.json/paths/~1passholders~1{passholderId}~1school/put) and [DELETE](/reference/uitpas.json/paths/~1passholders~1{passholderId}~1school/delete) on this endpoint, the school of a passholder can be retrieved, updated and deleted. All schools are organizers.",
         "security": [
           {
             "USER_ACCESS_TOKEN": [
@@ -1460,7 +1460,7 @@
             }
           }
         },
-        "description": "Update the passholder's school relation.\n\nThe caller of this request must have `PASSHOLDER_UPDATE` permission.\n\n<!-- theme: warning -->\n\n> Passholder schools are used to manage passholders in a very specific case. If you are not explicitly working with UiTPAS schools, you will probably **NOT** need this API. \n\nUsing [GET](/reference/UiTPAS.v2.json/paths/~1passholders~1{passholderId}~1school/get), [PUT](/reference/UiTPAS.v2.json/paths/~1passholders~1{passholderId}~1school/put) and [DELETE](/reference/UiTPAS.v2.json/paths/~1passholders~1{passholderId}~1school/delete) on this endpoint, the school of a passholder can be retrieved, updated and deleted. All schools are organizers.",
+        "description": "Update the passholder's school relation.\n\nThe caller of this request must have `PASSHOLDER_UPDATE` permission.\n\n<!-- theme: warning -->\n\n> Passholder schools are used to manage passholders in a very specific case. If you are not explicitly working with UiTPAS schools, you will probably **NOT** need this API. \n\nUsing [GET](/reference/uitpas.json/paths/~1passholders~1{passholderId}~1school/get), [PUT](/reference/uitpas.json/paths/~1passholders~1{passholderId}~1school/put) and [DELETE](/reference/uitpas.json/paths/~1passholders~1{passholderId}~1school/delete) on this endpoint, the school of a passholder can be retrieved, updated and deleted. All schools are organizers.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -1511,7 +1511,7 @@
             }
           }
         },
-        "description": "Delete the passholder's school relation.\n\nThe user or client performing this request must have `PASSHOLDER_UPDATE` permission.\n\n<!-- theme: warning -->\n\n> Passholder schools are used to manage passholders in a very specific case. If you are not explicitly working with UiTPAS schools, you will probably **NOT** need this API. \n\nUsing [GET](/reference/UiTPAS.v2.json/paths/~1passholders~1{passholderId}~1school/get), [PUT](/reference/UiTPAS.v2.json/paths/~1passholders~1{passholderId}~1school/put) and [DELETE](/reference/UiTPAS.v2.json/paths/~1passholders~1{passholderId}~1school/delete) on this endpoint, the school of a passholder can be retrieved, updated and deleted. All schools are organizers.",
+        "description": "Delete the passholder's school relation.\n\nThe user or client performing this request must have `PASSHOLDER_UPDATE` permission.\n\n<!-- theme: warning -->\n\n> Passholder schools are used to manage passholders in a very specific case. If you are not explicitly working with UiTPAS schools, you will probably **NOT** need this API. \n\nUsing [GET](/reference/uitpas.json/paths/~1passholders~1{passholderId}~1school/get), [PUT](/reference/uitpas.json/paths/~1passholders~1{passholderId}~1school/put) and [DELETE](/reference/uitpas.json/paths/~1passholders~1{passholderId}~1school/delete) on this endpoint, the school of a passholder can be retrieved, updated and deleted. All schools are organizers.",
         "security": [
           {
             "USER_ACCESS_TOKEN": [

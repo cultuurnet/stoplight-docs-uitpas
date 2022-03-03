@@ -6,7 +6,7 @@
 |----------|:-------------:|
 | \[TEST] UiTPAS Organisatie (Regio Gent + Paspartoe) |  `0ce87cbc-9299-4528-8d35-92225dc9489f` |
 
-Your test client should have permission to this organizer. You can double-check which organizer you have permission to by using [GET /permissions](/reference/UiTPAS.v2.json/paths/~1permissions/get)
+Your test client should have permission to this organizer. You can double-check which organizer you have permission to by using [GET /permissions](/reference/uitpas.json/paths/~1permissions/get)
 
 ```http
 GET /permissions HTTP/1.1

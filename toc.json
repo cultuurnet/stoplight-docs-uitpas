@@ -56,7 +56,7 @@
     {
       "type": "item",
       "title": "UiTPAS API",
-      "uri": "reference/UiTPAS.v2.json"
+      "uri": "reference/uitpas.json"
     }
   ]
 }

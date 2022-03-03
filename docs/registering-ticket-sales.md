@@ -47,12 +47,12 @@ Your application then starts its typical flow of guiding the passholder through 
 
 At some point during the checkout process on your website or application (but **before a payment has happened**), you provide the passholder a way to enter their UiTPAS number if they have one.
 
-Optionally the UiTPAS number can already be verified at this stage by [retrieving pass](/reference/UiTPAS.v2.json/paths/~1passes/%7BuitpasNumber%7D/get) information. This endpoint also provides basic information like the passholder's points, postalCode and if the social tariff is expired. 
+Optionally the UiTPAS number can already be verified at this stage by [retrieving pass](/reference/uitpas.json/paths/~1passes/%7BuitpasNumber%7D/get) information. This endpoint also provides basic information like the passholder's points, postalCode and if the social tariff is expired. 
 
 
 ### 4. Determine available UiTPAS tariffs
 
-Using the event id, the UiTPAS number and the regular price of your event, you can [request available UiTPAS tariffs](/reference/UiTPAS.v2.json/paths/~1tariffs/get).
+Using the event id, the UiTPAS number and the regular price of your event, you can [request available UiTPAS tariffs](/reference/uitpas.json/paths/~1tariffs/get).
 
 Example request:
 
@@ -109,7 +109,7 @@ For example if all the discounted tariffs are based on one-time-use coupons, but
 
 ### 6. Register the ticket sale
 
-After the passholder has selected an UiTPAS tariff, the [ticket sale(s) must be registered](/reference/UiTPAS.v2.json/paths/~1ticket-sales/post). Only after this registration step, your application can be sure that the UiTPAS discounted price can be granted. If you don't register the ticket sale correctly, the organizer can not get reimbursed for the discount within the UiTPAS financial flow.
+After the passholder has selected an UiTPAS tariff, the [ticket sale(s) must be registered](/reference/uitpas.json/paths/~1ticket-sales/post). Only after this registration step, your application can be sure that the UiTPAS discounted price can be granted. If you don't register the ticket sale correctly, the organizer can not get reimbursed for the discount within the UiTPAS financial flow.
 
 > If the passholder had no UiTPAS tariffs, or did not select one, you do not need to register your ticket sale with UiTPAS.
 
@@ -140,7 +140,7 @@ As you can see, you can also include multiple ticket sale registrations at once.
 
 This can be helpful when you want to provide your passholders a way to buy multiple tickets at once.
 
-For more information about each property, see the documentation for the [POST /ticket-sales](/reference/UiTPAS.v2.json/paths/~1ticket-sales/post) endpoint.
+For more information about each property, see the documentation for the [POST /ticket-sales](/reference/uitpas.json/paths/~1ticket-sales/post) endpoint.
 
 Example response:
 
@@ -176,7 +176,7 @@ After registering the ticket sale, your website or application should continue w
 
 ### 7. Cancelling the ticket sale
 
-If for some reason you need to [cancel the ticket sale registration](/reference/UiTPAS.v2.json/paths/~1ticket-sales~1%7BticketSaleId%7D/delete) you can do so using the `id` of the ticket sale in the response of the registration.
+If for some reason you need to [cancel the ticket sale registration](/reference/uitpas.json/paths/~1ticket-sales~1%7BticketSaleId%7D/delete) you can do so using the `id` of the ticket sale in the response of the registration.
 
 ### Frequently asked questions
 

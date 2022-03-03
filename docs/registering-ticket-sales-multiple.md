@@ -12,7 +12,7 @@ The register ticket sale request accepts an array of ticket sales. This array ca
 
 It is important to pass TicketSale objects with tariffs that are applicable to that passholder, for the given event. Do note that the register ticket sale request will fail for the complete set of ticket sales if one of those ticket sales would trigger an error.
 
-To determine the available tariffs, your application needs to use [GET /tariffs](/reference/UiTPAS.v2.json/paths/~1tariffs/get) for every passholder/event combination for which you need to register a ticket sale.
+To determine the available tariffs, your application needs to use [GET /tariffs](/reference/uitpas.json/paths/~1tariffs/get) for every passholder/event combination for which you need to register a ticket sale.
 
 Example request for passholder `0900000672312` and event `5a0967f9-cc06-4c3c-9206-30481a767434`:
 
@@ -81,7 +81,7 @@ Content-Type: application/json
 
 After the end-user has selected an UiTPAS tariff for every UiTPAS number and event combination, your website or application continues with its regular flow for completing the sale like payment (for the discounted price) etc.
 
-When your regular flow successfully finishes, you need to [register the ticket sales](/reference/UiTPAS.v2.json/paths/~1ticket-sales/post). If you don't register the ticket sale correctly, the organizer can not get reimbursed for the discount within the UiTPAS financial flow.
+When your regular flow successfully finishes, you need to [register the ticket sales](/reference/uitpas.json/paths/~1ticket-sales/post). If you don't register the ticket sale correctly, the organizer can not get reimbursed for the discount within the UiTPAS financial flow.
 
 For example, registering ticket sales for UiTPAS number `0900000672312` using the social tariff and `0900010888817` using a coupon tariff for event `5a0967f9-cc06-4c3c-9206-30481a767434`:
 
@@ -151,7 +151,7 @@ Content-Type: application/json
 
 ### 7. Cancelling the ticket sales
 
-If for some reason you need to [cancel the ticket sale registration](/reference/UiTPAS.v2.json/paths/~1ticket-sales~1%7BticketSaleId%7D/delete) you can do so using the `id` of the ticket sale in the response of the registration.
+If for some reason you need to [cancel the ticket sale registration](/reference/uitpas.json/paths/~1ticket-sales~1%7BticketSaleId%7D/delete) you can do so using the `id` of the ticket sale in the response of the registration.
 
 ### Frequently asked questions
 

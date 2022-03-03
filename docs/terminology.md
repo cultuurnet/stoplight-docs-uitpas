@@ -24,7 +24,7 @@ Just like events, organizers are saved in [UiTdatabank](https://docs.publiq.be/d
 
 ## UiTPAS Tariffs
 
-UiTPAS [tariffs](/reference/UiTPAS.v2.json/paths/~1tariffs/get) are the discounted prices a specific passholder may receive for a specific UiTPAS event. For example, a passholder may receive a social tariff or may have a redeemable coupon.
+UiTPAS [tariffs](/reference/uitpas.json/paths/~1tariffs/get) are the discounted prices a specific passholder may receive for a specific UiTPAS event. For example, a passholder may receive a social tariff or may have a redeemable coupon.
 
 ## Social tariff ('kansentarief')
 
@@ -40,11 +40,11 @@ Based on certain parameters such as the residence of the passholder or a specifi
 
 For example: the City of Hasselt awards a 5 euro coupon to all passholders of Hasselt.
 This coupon will automatically be made available to all inhabitants of Hasselt.
-When the UiTPAS [tariffs](/reference/UiTPAS.v2.json/paths/~1tariffs/get) for an inhabitant of Hasselt are checked, this coupon will show up as an option and can then be redeemed.
+When the UiTPAS [tariffs](/reference/uitpas.json/paths/~1tariffs/get) for an inhabitant of Hasselt are checked, this coupon will show up as an option and can then be redeemed.
 
 ## Ticket sale
 
-When you register an UiTPAS discounted tariff for a specific passholder on a specific UiTPAS event, we call this a [ticket sale](/reference/UiTPAS.v2.json/paths/~1ticket-sales/post).
+When you register an UiTPAS discounted tariff for a specific passholder on a specific UiTPAS event, we call this a [ticket sale](/reference/uitpas.json/paths/~1ticket-sales/post).
 
 ## Check-in
 

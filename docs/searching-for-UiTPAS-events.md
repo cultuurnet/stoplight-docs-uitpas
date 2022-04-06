@@ -1,6 +1,15 @@
 # Searching for UiTPAS events
 
 This mini-guide will explain how to search for UiTPAS events using the [Search API](https://documentatie.uitdatabank.be/content/search_api_3/latest/searching.html).
+ 
+> ##### Getting the organizerIds 
+>
+> The Search API allows you to search in all UiTPAS events.
+>Mostly it only makes sense to search for events of the UiTPAS organizer the current user or client has access to.
+>
+>That's why you should first check which organizers you currently have UiTPAS permissions for using the [GET /permissions](https://documentatie.uitdatabank.be/content/search_api_3/latest/searching.html) endpoint.
+>
+> If you don't perform this check, you risk trying to perform UiTPAS actions for organizers you don't have permissions for, which will fail.
 
 ### Authentication
 
@@ -26,7 +35,7 @@ You can search for all the UiTPAS events of one UiTPAS organizer by using the or
 
 ### Searching for UiTPAS events of multiple UiTPAS organizers
 
-You can search for the UiTPAS events of multiple UiTPAS organizers by using the q parameter.
+You can search for the UiTPAS events of multiple UiTPAS organizers by using the q paramter.
 
 ```json http
 {

@@ -2671,7 +2671,7 @@
         }
       ],
       "get": {
-        "summary": "Retrieve INSZ number",
+        "summary": "Retrieve chip number",
         "tags": [
           "Passholders"
         ],

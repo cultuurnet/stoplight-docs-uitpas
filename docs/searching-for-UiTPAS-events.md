@@ -26,7 +26,7 @@ You can search for all the UiTPAS events of one UiTPAS organizer by using the or
 
 ### Searching for UiTPAS events of multiple UiTPAS organizers
 
-You can search for the UiTPAS events of multiple UiTPAS organizers by using the q paramter.
+You can search for the UiTPAS events of multiple UiTPAS organizers by using the q parameter.
 
 ```json http
 {

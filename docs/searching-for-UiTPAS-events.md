@@ -15,7 +15,7 @@ This mini-guide will explain how to search for UiTPAS events using the [Search A
 
 You can make use of the Search API with [client identification](https://docs.publiq.be/docs/authentication/ZG9jOjExODE5NDY5-client-identification).
 
-**These APIs only require you to specify the client id of your existing UiTPAS integration** for customization and technical support purposes.
+**These APIs only require you to specify the client id of your existing UiTPAS integration.**
 
 ### Searching for UiTPAS events of one specific organizer
 
@@ -35,7 +35,7 @@ You can search for all the UiTPAS events of one UiTPAS organizer by using the or
 
 ### Searching for UiTPAS events of multiple UiTPAS organizers
 
-You can search for the UiTPAS events of multiple UiTPAS organizers by using the q paramter.
+You can search for the UiTPAS events of multiple UiTPAS organizers by using the q parameter.
 
 ```json http
 {

@@ -30,24 +30,41 @@
       "title": "Guides"
     },
     {
-      "type": "item",
-      "title": "Registering ticket sales",
-      "uri": "docs/registering-ticket-sales.md"
+      "type": "group",
+      "title": "Ticket sales",
+      "items": [
+        {
+          "type": "item",
+          "title": "Registering ticket sales",
+          "uri": "docs/registering-ticket-sales.md"
+        },
+        {
+          "type": "item",
+          "title": "Registering ticket sales for group passes",
+          "uri": "docs/registering-ticket-sales-group.md"
+        },
+        {
+          "type": "item",
+          "title": "Registering multple ticket sales at once",
+          "uri": "docs/registering-ticket-sales-multiple.md"
+        }
+      ]
     },
-    {
-      "type": "item",
-      "title": "Registering events",
-      "uri": "docs/registering-events.md"
-    },
-    {
-      "type": "item",
-      "title": "Registering ticket sales for group passes",
-      "uri": "docs/registering-ticket-sales-group.md"
-    },
-    {
-      "type": "item",
-      "title": "Registering multple ticket sales at once",
-      "uri": "docs/registering-ticket-sales-multiple.md"
+      {
+      "type": "group",
+      "title": "Events",
+      "items": [
+        {
+          "type": "item",
+          "title": "Registering events",
+          "uri": "docs/registering-events.md"
+        },
+        {
+          "type": "item",
+          "title": "Searching for UiTPAS events",
+          "uri": "docs/searching-for-UiTPAS-events.md"
+        }
+      ]
     },
     {
       "type": "divider",

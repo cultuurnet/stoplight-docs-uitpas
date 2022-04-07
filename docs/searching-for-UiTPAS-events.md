@@ -1,13 +1,13 @@
 # Searching for UiTPAS events
 
 This mini-guide will explain how to search for UiTPAS events using the [Search API](https://documentatie.uitdatabank.be/content/search_api_3/latest/searching.html).
- 
-> ##### Getting the organizerIds 
+
+> ##### Getting the organizerIds
 >
 > The Search API allows you to search in all UiTPAS events.
->Mostly it only makes sense to search for events of the UiTPAS organizer the current user or client has access to.
+> Mostly it only makes sense to search for events of the UiTPAS organizer the current user or client has access to.
 >
->That's why you should first check which organizers you currently have UiTPAS permissions for using the [GET /permissions](https://docs.publiq.be/docs/uitpas/b3A6NDM0MjM5NzY-get-permissions) endpoint.
+> That's why you should first check which organizers you currently have UiTPAS permissions for using the [GET /permissions](https://docs.publiq.be/docs/uitpas/b3A6NDM0MjM5NzY-get-permissions) endpoint.
 >
 > If you don't perform this check, you risk trying to perform UiTPAS actions for organizers you don't have permissions for, which will fail.
 
@@ -27,8 +27,9 @@ You can search for all the UiTPAS events of one UiTPAS organizer by using the or
   method: "GET",
   query: {
     "clientId": "YOUR_TEST_ENV_CLIENT_ID",
+        "organizerId":"0ce87cbc-9299-4528-8d35-92225dc9489f",
     "uitpas":true,
-    "organizerId":"0ce87cbc-9299-4528-8d35-92225dc9489f"
+    "embed":true
   }
 }
 ```
@@ -43,8 +44,9 @@ You can search for the UiTPAS events of multiple UiTPAS organizers by using the 
   method: "GET",
   query: {
     "clientId": "YOUR_TEST_ENV_CLIENT_ID",
-    "uitpas":true,
-    "q":"organizer.id:<UUID> OR organizer.id:<UUID>"
+     "q":"organizer.id:<UUID> OR organizer.id:<UUID>"
+     "uitpas":true,
+     "embed":true
   }
 }
 ```

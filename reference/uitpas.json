@@ -2576,8 +2576,7 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Pass"
-                },
-                "examples": {}
+                }                
               }
             }
           },
@@ -2629,8 +2628,7 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Pass"
-                },
-                "examples": {}
+                }
               }
             }
           },
@@ -2682,8 +2680,7 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Pass"
-                },
-                "examples": {}
+                }
               }
             }
           },

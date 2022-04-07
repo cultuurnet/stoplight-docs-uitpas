@@ -50,6 +50,11 @@
       "uri": "docs/registering-ticket-sales-multiple.md"
     },
     {
+      "type": "item",
+      "title": "Searching for UiTPAS events",
+      "uri": "docs/searching-for-UiTPAS-events.md"
+    },
+    {
       "type": "divider",
       "title": "API references"
     },

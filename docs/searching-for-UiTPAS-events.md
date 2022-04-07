@@ -7,7 +7,7 @@ This mini-guide will explain how to search for UiTPAS events using the [Search A
 > The Search API allows you to search in all UiTPAS events.
 >Mostly it only makes sense to search for events of the UiTPAS organizer the current user or client has access to.
 >
->That's why you should first check which organizers you currently have UiTPAS permissions for using the [GET /permissions](https://documentatie.uitdatabank.be/content/search_api_3/latest/searching.html) endpoint.
+>That's why you should first check which organizers you currently have UiTPAS permissions for using the [GET /permissions](https://docs.publiq.be/docs/uitpas/b3A6NDM0MjM5NzY-get-permissions) endpoint.
 >
 > If you don't perform this check, you risk trying to perform UiTPAS actions for organizers you don't have permissions for, which will fail.
 

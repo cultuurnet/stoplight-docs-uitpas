@@ -99,7 +99,14 @@
                           "price": 8,
                           "remaining": 1,
                           "type": "COUPON"
-                        }
+                        },
+                        {
+                          "id": "REWARD5464",
+                          "name": "50% korting op een specifiek event",
+                          "price": 5,
+                          "remaining": 1,
+                          "type": "REWARD"
+                        }                        
                       ]
                     }
                   },
@@ -115,7 +122,20 @@
                         }
                       ]
                     }
-                  }
+                  },
+                  "Example with reward tariff": {
+                    "value": {
+                      "available": [
+                        {
+                          "id": "REWARD5464",
+                          "name": "50% korting voor 10 UiTPAS punten",
+                          "price": 5,
+                          "remaining": 1,
+                          "type": "REWARD"
+                        }
+                      ]
+                    }
+                  }                  
                 }
               }
             }
@@ -343,6 +363,14 @@
                       "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
                       "regularPrice": 10,
                       "regularPriceLabel": "Base tariff"
+                    },
+                    {
+                      "tariff": {
+                        "id": "REWARD21343"
+                      },
+                      "uitpasNumber": "0985002524385",
+                      "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
+                      "regularPrice": 10
                     }
                   ]
                 },
@@ -355,8 +383,55 @@
                       },
                       "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
                       "regularPrice": 10,
-                      "regularPriceLabel": "Optional descriptive label of the regular price. Used in financial reporting.",
-                      "numberOfTickets": 5
+                      "regularPriceLabel": "Optional descriptive label of the regular price. Used in financial reporting."
+                    },
+                    {
+                      "uitpasNumber": "0560002524314",
+                      "tariff": {
+                        "id": "SOCIALTARIFF"
+                      },
+                      "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
+                      "regularPrice": 10,
+                      "regularPriceLabel": "Optional descriptive label of the regular price. Used in financial reporting."
+                    },
+                    {
+                      "uitpasNumber": "0560002524314",
+                      "tariff": {
+                        "id": "SOCIALTARIFF"
+                      },
+                      "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
+                      "regularPrice": 10,
+                      "regularPriceLabel": "Optional descriptive label of the regular price. Used in financial reporting."
+                    },
+                    {
+                      "uitpasNumber": "0560002524314",
+                      "tariff": {
+                        "id": "SOCIALTARIFF"
+                      },
+                      "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
+                      "regularPrice": 10,
+                      "regularPriceLabel": "Optional descriptive label of the regular price. Used in financial reporting."
+                    },
+                    {
+                      "uitpasNumber": "0560002524314",
+                      "tariff": {
+                        "id": "SOCIALTARIFF"
+                      },
+                      "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
+                      "regularPrice": 10,
+                      "regularPriceLabel": "Optional descriptive label of the regular price. Used in financial reporting."
+                    }
+                  ]
+                },
+                "Example using a reward tariff": {
+                  "value": [
+                    {
+                      "tariff": {
+                        "id": "REWARD1234"
+                      },
+                      "uitpasNumber": "0560002524314",
+                      "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
+                      "regularPrice": 10
                     }
                   ]
                 }
@@ -2819,7 +2894,8 @@
             "type": "string",
             "enum": [
               "SOCIALTARIFF",
-              "COUPON"
+              "COUPON",
+              "REWARD"
             ],
             "readOnly": true
           }

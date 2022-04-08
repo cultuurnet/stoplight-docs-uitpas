@@ -2576,6 +2576,30 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Pass"
+                },
+                "examples": {
+                  "Example with warning message": {
+                    "value": {
+                      "passholderId": "b34c19fc-bcf9-4d10-aeb2-6bc9efd38b68",
+                      "uitpasNumber": "0560002524314",
+                      "points": 12,
+                      "postalCode": "1000",
+                      "messages": [
+                        {
+                          "level": "WARN",
+                          "text": "Je sociaal tarief is verlopen. Contacteer je UiTPAS balie."
+                        }
+                      ]
+                    }
+                  },
+                  "Example without messages": {
+                    "value": {
+                      "passholderId": "b34c19fc-bcf9-4d10-aeb2-6bc9efd38b68",
+                      "uitpasNumber": "0560002524314",
+                      "points": 12,
+                      "postalCode": "1000"
+                    }
+                  }
                 }                
               }
             }
@@ -2628,7 +2652,31 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Pass"
-                }
+                },
+                "examples": {
+                  "Example with warning message": {
+                    "value": {
+                      "passholderId": "b34c19fc-bcf9-4d10-aeb2-6bc9efd38b68",
+                      "uitpasNumber": "0560002524314",
+                      "points": 12,
+                      "postalCode": "1000",
+                      "messages": [
+                        {
+                          "level": "WARN",
+                          "text": "Je sociaal tarief is verlopen. Contacteer je UiTPAS balie."
+                        }
+                      ]
+                    }
+                  },
+                  "Example without messages": {
+                    "value": {
+                      "passholderId": "b34c19fc-bcf9-4d10-aeb2-6bc9efd38b68",
+                      "uitpasNumber": "0560002524314",
+                      "points": 12,
+                      "postalCode": "1000"
+                    }
+                  }
+                }                
               }
             }
           },
@@ -2680,6 +2728,30 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Pass"
+                },
+                "examples": {
+                  "Example with warning message": {
+                    "value": {
+                      "passholderId": "b34c19fc-bcf9-4d10-aeb2-6bc9efd38b68",
+                      "uitpasNumber": "0560002524314",
+                      "points": 12,
+                      "postalCode": "1000",
+                      "messages": [
+                        {
+                          "level": "WARN",
+                          "text": "Je sociaal tarief is verlopen. Contacteer je UiTPAS balie."
+                        }
+                      ]
+                    }
+                  },
+                  "Example without messages": {
+                    "value": {
+                      "passholderId": "b34c19fc-bcf9-4d10-aeb2-6bc9efd38b68",
+                      "uitpasNumber": "0560002524314",
+                      "points": 12,
+                      "postalCode": "1000"
+                    }
+                  }
                 }
               }
             }

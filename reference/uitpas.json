@@ -106,7 +106,7 @@
                           "price": 5,
                           "remaining": 1,
                           "type": "REWARD"
-                        }                        
+                        }
                       ]
                     }
                   },
@@ -135,7 +135,7 @@
                         }
                       ]
                     }
-                  }                  
+                  }
                 }
               }
             }
@@ -1121,6 +1121,14 @@
             },
             "in": "query",
             "name": "uitpasNumber"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "chipNumber",
+            "description": "Hexadecimal notation of the chipNumber of the UiTPAS"
           },
           {
             "schema": {

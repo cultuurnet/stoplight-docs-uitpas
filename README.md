@@ -42,4 +42,3 @@ Run `yarn docs:lint` to check for errors or warnings. If any errors or warnings 
 ### Checking the OpenAPI files for errors
 
 Run `yarn api:lint` to check for errors or warnings. If any errors or warnings are detected, you need to fix them manually for now.
-

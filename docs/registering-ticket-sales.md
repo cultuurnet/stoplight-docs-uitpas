@@ -47,6 +47,9 @@ Your application then starts its typical flow of guiding the passholder through 
 
 At some point during the checkout process on your website or application (but **before a payment has happened**), you provide the passholder a way to enter their UiTPAS number if they have one.
 
+Optionally the UiTPAS number can already be verified at this stage by [retrieving pass](/reference/uitpas.json/paths/~1passes/%7BuitpasNumber%7D/get) information. This endpoint also provides basic information like the passholder's points, postalCode and if the social tariff is expired. 
+
+
 ### 4. Determine available UiTPAS tariffs
 
 Using the event id, the UiTPAS number and the regular price of your event, you can [request available UiTPAS tariffs](/reference/uitpas.json/paths/~1tariffs/get).

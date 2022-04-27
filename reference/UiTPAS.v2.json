@@ -2746,7 +2746,7 @@
                         "begin": "2021-08-24T14:15:22Z",
                         "end": "2022-08-24T14:15:22Z"
                       },
-                      "exchangePeriod": {
+                      "redeemPeriod": {
                         "begin": "2021-08-24T14:15:22Z",
                         "end": "2022-08-24T14:15:22Z"
                       },
@@ -2850,7 +2850,7 @@
                         "begin": "2021-08-24T14:15:22Z",
                         "end": "2022-08-24T14:15:22Z"
                       },
-                      "exchangePeriod": {
+                      "redeemPeriod": {
                         "begin": "2021-08-24T14:15:22Z",
                         "end": "2022-08-24T14:15:22Z"
                       },
@@ -2935,7 +2935,7 @@
                       "begin": "2021-08-24T14:15:22Z",
                       "end": "2022-08-24T14:15:22Z"
                     },
-                    "exchangePeriod": {
+                    "redeemPeriod": {
                       "begin": "2021-08-24T14:15:22Z",
                       "end": "2022-08-24T14:15:22Z"
                     },
@@ -2966,7 +2966,7 @@
         "description": "Update reward.\n\nThe caller of this request must have `REWARDS_WRITE` permission for the given organizer."
       }
     },
-    "/rewards/{id}/exchange": {
+    "/rewards/{id}/redeem-status": {
       "parameters": [
         {
           "schema": {
@@ -2977,16 +2977,94 @@
           "required": true
         }
       ],
+      "get": {
+        "summary": "Check redeem status of a reward for a passholder",
+        "operationId": "get-rewards-id-redeem-status",
+        "responses": {
+          "200": {
+            "description": "OK. \n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "redeemable": {
+                      "type": "boolean",
+                      "description": "Whether this reward can be redeemed by the given passholder.",
+                      "readOnly": true
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "If redeemable if false, this field contains the reason why.",
+                      "enum": [
+                        "DATE",
+                        "VOLUME",
+                        "PASSHOLDER"
+                      ]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "User readable message of the reason (only if redeemable if false)",
+                      "readOnly": true
+                    }
+                  },
+                  "required": [
+                    "redeemable"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/social-tariff-expired\n* https://api.publiq.be/probs/uitpas/invalid-uitpas-number\n* https://api.publiq.be/probs/uitpas/reward-period-constraint\n* https://api.publiq.be/probs/uitpas/reward-volume-constraint\n* https://api.publiq.be/probs/uitpas/reward-passholder-constraint\n"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "description": "Not Found. Possible error types:\n\n* https://api.publiq.be/probs/uitpas/reward-not-found"
+          }
+        },
+        "description": "Check the reward redeem status for a passholder.\n\n\nThe caller of this request must have `REDEEM_REWARDS` permission for the given organizer.",
+        "security": [
+          {
+            "CLIENT_ACCESS_TOKEN": []
+          },
+          {
+            "USER_ACCESS_TOKEN": []
+          }
+        ],
+        "tags": [
+          "Rewards"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "required": true,
+            "name": "uitpasNumber",
+            "description": "UiTPAS number identifying the passholder who wants to redeem this reward."
+          }
+        ]
+      }
+    },
+    "/rewards/redeemed": {
+      "parameters": [],
       "post": {
-        "summary": "Exchange reward",
-        "operationId": "put-rewards-id-exchange",
+        "summary": "Redeem reward",
+        "operationId": "post-rewards-redeemed",
         "responses": {
           "201": {
             "description": "Created",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ExchangedReward"
+                  "$ref": "#/components/schemas/RedeemedReward"
                 },
                 "examples": {
                   "Example": {
@@ -3027,7 +3105,7 @@
                         "pictures": [
                           "string"
                         ],
-                        "exchangePeriod": {
+                        "redeemPeriod": {
                           "begin": "2019-08-24T14:15:22Z",
                           "end": "2019-08-24T14:15:22Z"
                         },
@@ -3051,14 +3129,13 @@
                           ]
                         }
                       },
-                      "exchangeDate": "2019-08-24T14:15:22Z",
-                      "exchangeLink": "string",
-                      "exchangeInfo": {
-                        "exchangeText": "string",
-                        "exchangeLink": "string",
-                        "exchangeLinkLabel": "string"
+                      "redeemDate": "2019-08-24T14:15:22Z",
+                      "redeemInfo": {
+                        "redeemText": "string",
+                        "redeemLink": "string",
+                        "redeemLinkLabel": "string"
                       },
-                      "exchangeCode": "string"
+                      "redeemCode": "string"
                     }
                   }
                 }
@@ -3066,7 +3143,7 @@
             }
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/social-tariff-expired\n* https://api.publiq.be/probs/uitpas/invalid-uitpas-number\n* https://api.publiq.be/probs/uitpas/passholder-not-found\n* https://api.publiq.be/probs/uitpas/reward-not-found\n* https://api.publiq.be/probs/uitpas/reward-period-constraint\n* https://api.publiq.be/probs/uitpas/reward-volume-constraint\n* https://api.publiq.be/probs/uitpas/reward-passholder-constraint\n"
           },
           "401": {
             "$ref": "#/components/responses/Unauthorized"
@@ -3078,7 +3155,7 @@
             "description": "Not Found. Possible error types:\n\n* https://api.publiq.be/probs/uitpas/reward-not-found"
           }
         },
-        "description": "Exchange passholder points for a reward.\n\nThe caller of this request must have `REWARDS_EXCHANGE` permission for the given organizer.",
+        "description": "Redeem reward.\n\nThe caller of this request must have `REDEEM_REWARDS` permission for the given organizer.",
         "tags": [
           "Rewards"
         ],
@@ -3088,12 +3165,17 @@
               "schema": {
                 "type": "object",
                 "properties": {
+                  "rewardId": {
+                    "type": "string",
+                    "description": "ID of Reward to redeem"
+                  },
                   "uitpasNumber": {
                     "type": "string",
                     "description": "UiTPAS number of the passholder exchanging this reward."
                   }
                 },
                 "required": [
+                  "rewardId",
                   "uitpasNumber"
                 ]
               },
@@ -3117,26 +3199,31 @@
         ]
       },
       "get": {
-        "summary": "Check reward exchange status for a passholder",
-        "operationId": "get-rewards-id-exchange",
+        "summary": "Retrieve redeemed rewards",
+        "operationId": "get-rewards-redeemed",
         "responses": {
-          "202": {
-            "description": "Accepted.\n\nThere is no further content in this response. If the status is Accepted, the given passholder can exchange this reward."
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RedeemedRewardsPaginatedResponse"
+                },
+                "examples": {}
+              }
+            }
           },
           "400": {
-            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/social-tariff-expired\n* https://api.publiq.be/probs/uitpas/invalid-uitpas-number\n* https://api.publiq.be/probs/uitpas/reward-period-constraint\n* https://api.publiq.be/probs/uitpas/reward-volume-constraint\n* https://api.publiq.be/probs/uitpas/reward-passholder-constraint\n"
+            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/social-tariff-expired\n* https://api.publiq.be/probs/uitpas/invalid-uitpas-number\n\n"
           },
           "401": {
             "$ref": "#/components/responses/Unauthorized"
           },
           "403": {
             "$ref": "#/components/responses/Forbidden"
-          },
-          "404": {
-            "description": "Not Found. Possible error types:\n\n* https://api.publiq.be/probs/uitpas/reward-not-found"
           }
         },
-        "description": "Check the reward exchange status for a passholder\n\n\nThe caller of this request must have `REWARDS_EXCHANGE` permission for the given organizer.",
+        "description": "Retrieve redeemed rewards for a passholder.\n\nThe caller of this request must have `REWARDS_READ` permission.",
         "security": [
           {
             "CLIENT_ACCESS_TOKEN": []
@@ -3156,7 +3243,34 @@
             "in": "query",
             "required": true,
             "name": "uitpasNumber",
-            "description": "UiTPAS number identifying the passholder who wants to exchange this reward."
+            "description": "UiTPAS number identifying the passholder."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "POINTS",
+                "WELCOME"
+              ]
+            },
+            "in": "query",
+            "name": "rewardType",
+            "description": "Type of the redeemed reward."
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "start"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "20"
+            },
+            "in": "query",
+            "name": "limit"
           }
         ]
       }
@@ -3194,7 +3308,7 @@
                         "begin": "2021-08-24T14:15:22Z",
                         "end": "2022-08-24T14:15:22Z"
                       },
-                      "exchangePeriod": {
+                      "redeemPeriod": {
                         "begin": "2021-08-24T14:15:22Z",
                         "end": "2022-08-24T14:15:22Z"
                       },
@@ -3319,7 +3433,7 @@
                             "begin": "2021-08-24T14:15:22Z",
                             "end": "2022-08-24T14:15:22Z"
                           },
-                          "exchangePeriod": {
+                          "redeemPeriod": {
                             "begin": "2021-08-24T14:15:22Z",
                             "end": "2022-08-24T14:15:22Z"
                           },
@@ -3414,6 +3528,165 @@
             "in": "query",
             "name": "owningCardSystemId",
             "description": "Search rewards of this card system"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "POINTS",
+                "WELCOME"
+              ]
+            },
+            "in": "query",
+            "name": "rewardType",
+            "description": "Search rewards of this rewardType"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "text"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "type",
+                "cardsystem",
+                "sport",
+                "forKids",
+                "lastChance"
+              ]
+            },
+            "in": "query",
+            "name": "facets[]"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "asc",
+                "desc"
+              ]
+            },
+            "in": "query",
+            "name": "sort[name]"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "asc",
+                "desc"
+              ]
+            },
+            "in": "query",
+            "name": "sort[creationDate]"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "asc",
+                "desc"
+              ]
+            },
+            "in": "query",
+            "name": "sort[redeemCount]"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "asc",
+                "desc"
+              ]
+            },
+            "in": "query",
+            "name": "sort[points]"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "types[]"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "pointsFrom"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "pointsTo"
+          },
+          {
+            "schema": {
+              "type": "boolean"
+            },
+            "in": "query",
+            "name": "forKids"
+          },
+          {
+            "schema": {
+              "type": "boolean"
+            },
+            "in": "query",
+            "name": "lastChance"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "ACTIVE",
+                "INACTIVE",
+                "DELETED"
+              ]
+            },
+            "in": "query",
+            "name": "status"
+          },
+          {
+            "schema": {
+              "type": "boolean"
+            },
+            "in": "query",
+            "name": "inPublicationPeriod"
+          },
+          {
+            "schema": {
+              "type": "boolean"
+            },
+            "in": "query",
+            "name": "inGrantingPeriod"
+          },
+          {
+            "schema": {
+              "type": "boolean"
+            },
+            "in": "query",
+            "name": "owningCardSystemIsPermanent"
+          },
+          {
+            "schema": {
+              "type": "boolean"
+            },
+            "in": "query",
+            "name": "inRedeemPeriod"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "suggestText"
           }
         ]
       }
@@ -3660,6 +3933,43 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Reward"
+            }
+          },
+          "facets": {
+            "type": "object",
+            "description": "TODO"
+          },
+          "suggestions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "text": {
+                  "type": "string"
+                },
+                "score": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        }
+      },
+      "RedeemedRewardsPaginatedResponse": {
+        "title": "RewardsPaginatedResponse",
+        "type": "object",
+        "x-tags": [
+          "Models"
+        ],
+        "description": "Paginated response object for rewards",
+        "properties": {
+          "totalItems": {
+            "type": "integer"
+          },
+          "member": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RedeemedReward"
             }
           }
         }
@@ -4272,7 +4582,7 @@
         "x-tags": [
           "Models"
         ]
-      },      
+      },
       "Period": {
         "title": "Period",
         "type": "object",
@@ -4313,7 +4623,7 @@
       },
       "Reward": {
         "type": "object",
-        "title": "Reward", 
+        "title": "Reward",
         "description": "Reward model",
         "x-tags": [
           "Models"
@@ -4327,6 +4637,14 @@
             "type": "string",
             "description": "Title of the Reward"
           },
+          "rewardType": {
+            "type": "string",
+            "description": "Type of the Reward",
+            "enum": [
+              "POINTS",
+              "WELCOME"
+            ]
+          },
           "promotionalDescription": {
             "type": "string",
             "description": "Promotion description"
@@ -4334,14 +4652,17 @@
           "publicationPeriod": {
             "$ref": "#/components/schemas/Period"
           },
+          "grantingPeriod": {
+            "$ref": "#/components/schemas/Period"
+          },
           "points": {
             "type": "number",
-            "description": "Number of points needed to exchange the Reward"
+            "description": "Number of points needed to redeem the Reward"
           },
           "moreInfoURL": {
             "type": "string"
           },
-          "cashInType": {
+          "redeemType": {
             "type": "string",
             "enum": [
               "PHYSICAL",
@@ -4354,7 +4675,7 @@
           },
           "applicableCardSystems": {
             "type": "array",
-            "description": "List of CardSystems whose members can exchange this Reward. ",
+            "description": "List of CardSystems whose members can redeem this Reward. ",
             "items": {
               "$ref": "#/components/schemas/CardSystem"
             }
@@ -4365,7 +4686,7 @@
           },
           "organizers": {
             "type": "array",
-            "description": "List of Organizers where this Reward can be exchanged.",
+            "description": "List of Organizers where this Reward can be redeemed.",
             "items": {
               "$ref": "#/components/schemas/Organizer"
             }
@@ -4386,12 +4707,12 @@
           },
           "unitsTaken": {
             "type": "integer",
-            "description": "Number of Rewards already exchanged.",
+            "description": "Number of Rewards already redeemed.",
             "readOnly": true
           },
           "practicalInfo": {
             "type": "string",
-            "description": "Practical info for passholders who want to exchange this Reward."
+            "description": "Practical info for passholders who want to redeem this Reward."
           },
           "pictures": {
             "type": "array",
@@ -4400,7 +4721,7 @@
               "type": "string"
             }
           },
-          "exchangePeriod": {
+          "redeemPeriod": {
             "$ref": "#/components/schemas/Period"
           },
           "types": {
@@ -4424,7 +4745,7 @@
           },
           "usesCodes": {
             "type": "boolean",
-            "description": "Only for Reward of cashinType ONLINE. If set to true this Reward will produce an `exchangeCode` when exchanged."
+            "description": "Only for Reward of cashinType ONLINE. If set to true this Reward will produce an `redeemCode` when redeemed."
           },
           "ticketSaleDiscount": {
             "type": "object",
@@ -4478,16 +4799,21 @@
         },
         "required": [
           "title",
+          "rewardType",
           "promotionalDescription",
           "publicationPeriod",
+          "grantingPeriod",
           "points",
           "moreInfoURL",
-          "cashInType"
+          "redeemType"
         ]
       },
-      "ExchangedReward": {
+      "RedeemedReward": {
         "type": "object",
-        "title": "ExchangedReward",
+        "title": "RedeemedReward",
+        "x-tags": [
+          "Models"
+        ],
         "properties": {
           "id": {
             "type": "string",
@@ -4496,41 +4822,35 @@
           "reward": {
             "$ref": "#/components/schemas/Reward"
           },
-          "exchangeDate": {
+          "redeemDate": {
             "type": "string",
             "format": "date-time",
             "readOnly": true
           },
-          "exchangeLink": {
-            "type": "string"
-          },
-          "exchangeInfo": {
+          "redeemInfo": {
             "type": "object",
             "properties": {
-              "exchangeText": {
+              "text": {
                 "type": "string"
               },
-              "exchangeLink": {
+              "link": {
                 "type": "string"
               },
-              "exchangeLinkLabel": {
+              "label": {
                 "type": "string"
               }
             }
           },
-          "exchangeCode": {
+          "redeemCode": {
             "type": "string"
           }
         },
         "required": [
           "id",
           "reward",
-          "exchangeDate"
+          "redeemDate"
         ],
-        "readOnly": true,
-        "x-tags": [
-          "Models"
-        ]
+        "readOnly": true
       }
     },
     "securitySchemes": {

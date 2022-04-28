@@ -3538,8 +3538,8 @@
               ]
             },
             "in": "query",
-            "name": "rewardType",
-            "description": "Search rewards of this rewardType"
+            "name": "type",
+            "description": "Search rewards of this type"
           },
           {
             "schema": {
@@ -3553,14 +3553,14 @@
               "type": "string",
               "enum": [
                 "type",
-                "cardsystem",
-                "sport",
-                "forKids",
-                "lastChance"
+                "owningCardSystemId",
+                "extras",
+                "categories"
               ]
             },
             "in": "query",
-            "name": "facets[]"
+            "name": "facets",
+            "description": "Can be included more than once to allow multiple values."
           },
           {
             "schema": {
@@ -3611,7 +3611,7 @@
               "type": "string"
             },
             "in": "query",
-            "name": "types[]"
+            "name": "categories"
           },
           {
             "schema": {
@@ -3629,26 +3629,13 @@
           },
           {
             "schema": {
-              "type": "boolean"
-            },
-            "in": "query",
-            "name": "forKids"
-          },
-          {
-            "schema": {
-              "type": "boolean"
-            },
-            "in": "query",
-            "name": "lastChance"
-          },
-          {
-            "schema": {
               "type": "string",
               "enum": [
                 "ACTIVE",
                 "INACTIVE",
                 "DELETED"
-              ]
+              ],
+              "default": "ACTIVE"
             },
             "in": "query",
             "name": "status"
@@ -3681,13 +3668,6 @@
               "type": "string"
             },
             "in": "query",
-            "name": "suggestText"
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
             "name": "grantingPeriodFrom",
             "description": "Include only rewards with this date (including) or more recent is within the granting period. Format yyyy-mm-dd e.g. 2003-01-01"
           },
@@ -3714,6 +3694,20 @@
             "in": "query",
             "name": "redeemPeriodTo",
             "description": "Include only rewards with this date (including) or older is within the redeem period. Format yyyy-mm-dd e.g. 2003-01-01"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "forKids",
+                "sport",
+                "online",
+                "lastChance"
+              ]
+            },
+            "in": "query",
+            "name": "extras",
+            "description": "Can be included more than once to allow multiple values."
           }
         ]
       }
@@ -4664,7 +4658,7 @@
             "type": "string",
             "description": "Title of the Reward"
           },
-          "rewardType": {
+          "type": {
             "type": "string",
             "description": "Type of the Reward",
             "enum": [
@@ -4751,11 +4745,17 @@
           "redeemPeriod": {
             "$ref": "#/components/schemas/Period"
           },
-          "types": {
+          "categories": {
             "type": "array",
             "description": "List of types of this Reward. This is free text, but common types are: \"Gadget of item\", \"Doen\", \"Eten en drinken\" and \"Goede doel\".",
             "items": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "Eten en drinken",
+                "Doen",
+                "Gadget of item",
+                "Goede doel"
+              ]
             }
           },
           "forKids": {
@@ -4826,7 +4826,7 @@
         },
         "required": [
           "title",
-          "rewardType",
+          "type",
           "promotionalDescription",
           "publicationPeriod",
           "grantingPeriod",

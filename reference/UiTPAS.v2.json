@@ -3655,17 +3655,19 @@
           },
           {
             "schema": {
-              "type": "boolean"
+              "type": "string"
             },
             "in": "query",
-            "name": "inPublicationPeriod"
+            "name": "publicationPeriodFrom",
+            "description": "Include only rewards with this date (including) or more recent is within the publication period. Format yyyy-mm-dd e.g. 2003-01-01"
           },
           {
             "schema": {
-              "type": "boolean"
+              "type": "string"
             },
             "in": "query",
-            "name": "inGrantingPeriod"
+            "name": "publicationPeriodTo",
+            "description": "Include only rewards with this date (including) or older is within the publication period. Format yyyy-mm-dd e.g. 2003-01-01"
           },
           {
             "schema": {
@@ -3676,17 +3678,42 @@
           },
           {
             "schema": {
-              "type": "boolean"
+              "type": "string"
             },
             "in": "query",
-            "name": "inRedeemPeriod"
+            "name": "suggestText"
           },
           {
             "schema": {
               "type": "string"
             },
             "in": "query",
-            "name": "suggestText"
+            "name": "grantingPeriodFrom",
+            "description": "Include only rewards with this date (including) or more recent is within the granting period. Format yyyy-mm-dd e.g. 2003-01-01"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "grantingPeriodTo",
+            "description": "Include only rewards with this date (including) or older is within the granting period. Format yyyy-mm-dd e.g. 2003-01-01"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "redeemPeriodFrom",
+            "description": "Include only rewards with this date (including) or more recent is within the redeem period. Format yyyy-mm-dd e.g. 2003-01-01"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "redeemPeriodTo",
+            "description": "Include only rewards with this date (including) or older is within the redeem period. Format yyyy-mm-dd e.g. 2003-01-01"
           }
         ]
       }

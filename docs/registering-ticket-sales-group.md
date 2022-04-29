@@ -10,7 +10,7 @@ This mini-guide hooks into the regular flow when an end-user entered the UiTPAS 
 
 ### 1. Determine possible UiTPAS tariffs
 
-Using the event id, the UiTPAS number and the regular price of your event, you can [request possible UiTPAS tariffs](/reference/UiTPAS.v2.json/paths/~1tariffs/get).
+Using the event id, the UiTPAS number and the regular price of your event, you can [request possible UiTPAS tariffs](/reference/uitpas.json/paths/~1tariffs/get).
 
 Your application doesn't (have to) know if the given UiTPAS number is a regular passholder or a group pass.
 
@@ -53,7 +53,7 @@ If the API response contained one or more UiTPAS tariffs, your website or applic
 
 After the end-user has selected an UiTPAS tariff, your website or application continues with its regular flow for completing the sale like payment (for the discounted price) etc.
 
-When your regular flow successfully finishes, you need to [register the ticket sale](/reference/UiTPAS.v2.json/paths/~1ticket-sales/post). If you don't register the ticket sale correctly, the organizer can not get reimbursed for the discount within the UiTPAS financial flow.
+When your regular flow successfully finishes, you need to [register the ticket sale](/reference/uitpas.json/paths/~1ticket-sales/post). If you don't register the ticket sale correctly, the organizer can not get reimbursed for the discount within the UiTPAS financial flow.
 
 For every ticket sale, you need to include a `TicketSale` object in the ticket sale request.
 
@@ -95,7 +95,7 @@ Authorization: Bearer YOUR_ACCESS_TOKEN'
 
 Have a look at the [test dataset](/docs/test-dataset) for more sample passholders or events.
 
-For more information about each property, see the documentation for the [POST /ticket-sales](/reference/UiTPAS.v2.json/paths/~1ticket-sales/post) endpoint.
+For more information about each property, see the documentation for the [POST /ticket-sales](/reference/uitpas.json/paths/~1ticket-sales/post) endpoint.
 
 Example response:
 
@@ -148,7 +148,7 @@ Content-Type: application/json
 
 ### 4. Cancelling the ticket sale
 
-If for some reason you need to [cancel the ticket sale registration](/reference/UiTPAS.v2.json/paths/~1ticket-sales~1%7BticketSaleId%7D/delete) you can do so using the `id` of the ticket sale in the response of the registration.
+If for some reason you need to [cancel the ticket sale registration](/reference/uitpas.json/paths/~1ticket-sales~1%7BticketSaleId%7D/delete) you can do so using the `id` of the ticket sale in the response of the registration.
 
 ### Frequently asked questions
 

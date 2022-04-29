@@ -2,12 +2,12 @@
   "openapi": "3.0.0",
   "info": {
     "title": "UiTPAS API",
-    "version": "2.0",
+    "version": "4.0",
     "contact": {
       "name": "publiq helpdesk",
       "email": "vragen@publiq.be"
     },
-    "description": "With UiTPAS API 2.0 you can retrieve ticket sale prices for specific UiTPAS numbers, and register ticket sales for specific UiTPAS numbers.\n\nFuture versions will also include support for more features like saving points and exchanging them for benefits.\n\n## Postman\n\n<!-- focus: false -->\n\n[![Download postman collection](https://postman.publiq.be/postman-download.svg)](https://postman.publiq.be/?api=uitpas-api)\n\nDo you already have a **client id** and **client secret**?\nDownload a personalized Postman collection to start making requests in seconds!"
+    "description": "With UiTPAS API 4.0 you can retrieve ticket sale prices for specific UiTPAS numbers, and register ticket sales for specific UiTPAS numbers.\n\nFuture versions will also include support for more features like saving points and exchanging them for benefits.\n\n## Postman\n\n<!-- focus: false -->\n\n[![Download postman collection](https://postman.publiq.be/postman-download.svg)](https://postman.publiq.be/?api=uitpas-api)\n\nDo you already have a **client id** and **client secret**?\nDownload a personalized Postman collection to start making requests in seconds!"
   },
   "servers": [
     {
@@ -1146,6 +1146,14 @@
               "type": "string"
             },
             "in": "query",
+            "name": "chipNumber",
+            "description": "Hexadecimal notation of the chipNumber of the UiTPAS"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
             "name": "name"
           },
           {
@@ -1465,7 +1473,7 @@
             }
           }
         },
-        "description": "This is step 1 of the process to register an UiTPAS passholder in UiTID using their UiTPAS number and date of birth. It is used to retrieve an UiTID registration token for the passholder. If the passholder already has a token via an email they received to register in UiTID, this step can be skipped.\n\nThis endpoint uses HTTP Basic Authentication using:\n* Username: uitpasNumber \n* Password: dateOfBirth in the form yyyy-mm-dd\n\nIn summary, this header should look like: \n\n```\nAuthorization: Basic base64(uitpasNumber+dateOfBirth)\n```\n\nThe response will contain a `token` property that can be used in step 2 of the process, [retrieving the UiTID registration status](/reference/UiTPAS.v2.json/paths/~1passholders~1me~1uitid~1status/get).\n\nThis caller of this method is identified with [client identification](https://docs.publiq.be/docs/authentication/ZG9jOjExODE5NDY5-client-identification) and does not require any permissions, but please note this endpoint is rate-limited on IP address to prevent abuse.",
+        "description": "This is step 1 of the process to register an UiTPAS passholder in UiTID using their UiTPAS number and date of birth. It is used to retrieve an UiTID registration token for the passholder. If the passholder already has a token via an email they received to register in UiTID, this step can be skipped.\n\nThis endpoint uses HTTP Basic Authentication using:\n* Username: uitpasNumber \n* Password: dateOfBirth in the form yyyy-mm-dd\n\nIn summary, this header should look like: \n\n```\nAuthorization: Basic base64(uitpasNumber+dateOfBirth)\n```\n\nThe response will contain a `token` property that can be used in step 2 of the process, [retrieving the UiTID registration status](/reference/uitpas.json/paths/~1passholders~1me~1uitid~1status/get).\n\nThis caller of this method is identified with [client identification](https://docs.publiq.be/docs/authentication/ZG9jOjExODE5NDY5-client-identification) and does not require any permissions, but please note this endpoint is rate-limited on IP address to prevent abuse.",
         "tags": [
           "UiTID"
         ],
@@ -1579,7 +1587,7 @@
             }
           }
         },
-        "description": "Retrieves the UiTID registration status of a passholder. This is step 2 in the process of registering an UiTPAS passholder in UiTID.\n\nThis endpoint requires a registation token in the `x-registration-token` header. A client can obtain such a token using [`GET /passholders/me/uitid/registration-token`](/reference/UiTPAS.v2.json/paths/~1passholders~1me~1uitid~1registration-token/get). Alternatively, a token may already be available to the client because the user may have received an email link including it.\n\nBased on the state value, the client can proceed in 2 ways:\n\n- If state is `UNREGISTERED`\n\nThe passholder can proceed to step 3, [retrieving the UiTID email address status](/reference/UiTPAS.v2.json/paths/~1uitid~1emails~1{email}/get).\n\nThe response can include the linked `email` address of the passholder if one is known. This can be used in the next step of the registration process ([`GET /uitid/emails/{email}`](/reference/UiTPAS.v2.json/paths/~1uitid~1emails~1{email}/get)). If no email address is included, the client should prompt the user to enter their email address first before proceeding to step 3.\n\n- If state is `REGISTERED` \n\nThe passholder is already `REGISTERED` so the user must continue by authenticating instead. The `email` address field contains the email address of the linked UiTID account that should be used to authenticate.\n\n\nThis caller of this method, identified with [client identification](https://docs.publiq.be/docs/authentication/ZG9jOjExODE5NDY5-client-identification) does not require any permissions.",
+        "description": "Retrieves the UiTID registration status of a passholder. This is step 2 in the process of registering an UiTPAS passholder in UiTID.\n\nThis endpoint requires a registation token in the `x-registration-token` header. A client can obtain such a token using [`GET /passholders/me/uitid/registration-token`](/reference/uitpas.json/paths/~1passholders~1me~1uitid~1registration-token/get). Alternatively, a token may already be available to the client because the user may have received an email link including it.\n\nBased on the state value, the client can proceed in 2 ways:\n\n- If state is `UNREGISTERED`\n\nThe passholder can proceed to step 3, [retrieving the UiTID email address status](/reference/uitpas.json/paths/~1uitid~1emails~1{email}/get).\n\nThe response can include the linked `email` address of the passholder if one is known. This can be used in the next step of the registration process ([`GET /uitid/emails/{email}`](/reference/uitpas.json/paths/~1uitid~1emails~1{email}/get)). If no email address is included, the client should prompt the user to enter their email address first before proceeding to step 3.\n\n- If state is `REGISTERED` \n\nThe passholder is already `REGISTERED` so the user must continue by authenticating instead. The `email` address field contains the email address of the linked UiTID account that should be used to authenticate.\n\n\nThis caller of this method, identified with [client identification](https://docs.publiq.be/docs/authentication/ZG9jOjExODE5NDY5-client-identification) does not require any permissions.",
         "tags": [
           "UiTID"
         ],
@@ -1679,7 +1687,7 @@
             }
           }
         },
-        "description": "Retrieves the email address status in UiTPAS and UiTID for a given email address. This is step 3 in the process of registering an UiTPAS passholder in UiTID.\n\nThe response contains a `state` property which can be one of the following values:\n\n* `UITPAS_ALREADY_LINKED` : the user cannot use this email address to register another UiTPAS\n* `UITID_UNREGISTERED` : the user can use this email address to register their UiTPAS and must register on UiTID first\n* `UITID_REGISTERED` : the user can use this email address to register their UiTPAS and must login on UiTID first\n\nAfter [UiTID authentication](https://docs.publiq.be/docs/authentication/ZG9jOjExODE5NTM5-user-access-token) the client should proceed to step 4 of the process, [registering UiTID for the passholder](/reference/UiTPAS.v2.json/paths/~1passholders~1me~1uitid/put).\n\nThis caller of this method, identified with [client identification](https://docs.publiq.be/docs/authentication/ZG9jOjExODE5NDY5-client-identification), does not require any permissions but please note this endpoint is rate-limited on IP address to prevent abuse.",
+        "description": "Retrieves the email address status in UiTPAS and UiTID for a given email address. This is step 3 in the process of registering an UiTPAS passholder in UiTID.\n\nThe response contains a `state` property which can be one of the following values:\n\n* `UITPAS_ALREADY_LINKED` : the user cannot use this email address to register another UiTPAS\n* `UITID_UNREGISTERED` : the user can use this email address to register their UiTPAS and must register on UiTID first\n* `UITID_REGISTERED` : the user can use this email address to register their UiTPAS and must login on UiTID first\n\nAfter [UiTID authentication](https://docs.publiq.be/docs/authentication/ZG9jOjExODE5NTM5-user-access-token) the client should proceed to step 4 of the process, [registering UiTID for the passholder](/reference/uitpas.json/paths/~1passholders~1me~1uitid/put).\n\nThis caller of this method, identified with [client identification](https://docs.publiq.be/docs/authentication/ZG9jOjExODE5NDY5-client-identification), does not require any permissions but please note this endpoint is rate-limited on IP address to prevent abuse.",
         "tags": [
           "UiTID"
         ],
@@ -2141,7 +2149,7 @@
             }
           }
         },
-        "description": "Retrieve the passholder's school.\n\nThe caller of this request must have `PASSHOLDER_SEARCH` permission.\n\n<!-- theme: warning -->\n\n> Passholder schools are used to manage passholders in a very specific case. If you are not explicitly working with UiTPAS schools, you will probably **NOT** need this API. \n\nUsing [GET](/reference/UiTPAS.v2.json/paths/~1passholders~1{passholderId}~1school/get), [PUT](/reference/UiTPAS.v2.json/paths/~1passholders~1{passholderId}~1school/put) and [DELETE](/reference/UiTPAS.v2.json/paths/~1passholders~1{passholderId}~1school/delete) on this endpoint, the school of a passholder can be retrieved, updated and deleted. All schools are organizers.",
+        "description": "Retrieve the passholder's school.\n\nThe caller of this request must have `PASSHOLDER_SEARCH` permission.\n\n<!-- theme: warning -->\n\n> Passholder schools are used to manage passholders in a very specific case. If you are not explicitly working with UiTPAS schools, you will probably **NOT** need this API. \n\nUsing [GET](/reference/uitpas.json/paths/~1passholders~1{passholderId}~1school/get), [PUT](/reference/uitpas.json/paths/~1passholders~1{passholderId}~1school/put) and [DELETE](/reference/uitpas.json/paths/~1passholders~1{passholderId}~1school/delete) on this endpoint, the school of a passholder can be retrieved, updated and deleted. All schools are organizers.",
         "security": [
           {
             "USER_ACCESS_TOKEN": [
@@ -2192,7 +2200,7 @@
             }
           }
         },
-        "description": "Update the passholder's school relation.\n\nThe caller of this request must have `PASSHOLDER_UPDATE` permission.\n\n<!-- theme: warning -->\n\n> Passholder schools are used to manage passholders in a very specific case. If you are not explicitly working with UiTPAS schools, you will probably **NOT** need this API. \n\nUsing [GET](/reference/UiTPAS.v2.json/paths/~1passholders~1{passholderId}~1school/get), [PUT](/reference/UiTPAS.v2.json/paths/~1passholders~1{passholderId}~1school/put) and [DELETE](/reference/UiTPAS.v2.json/paths/~1passholders~1{passholderId}~1school/delete) on this endpoint, the school of a passholder can be retrieved, updated and deleted. All schools are organizers.",
+        "description": "Update the passholder's school relation.\n\nThe caller of this request must have `PASSHOLDER_UPDATE` permission.\n\n<!-- theme: warning -->\n\n> Passholder schools are used to manage passholders in a very specific case. If you are not explicitly working with UiTPAS schools, you will probably **NOT** need this API. \n\nUsing [GET](/reference/uitpas.json/paths/~1passholders~1{passholderId}~1school/get), [PUT](/reference/uitpas.json/paths/~1passholders~1{passholderId}~1school/put) and [DELETE](/reference/uitpas.json/paths/~1passholders~1{passholderId}~1school/delete) on this endpoint, the school of a passholder can be retrieved, updated and deleted. All schools are organizers.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -2243,7 +2251,7 @@
             }
           }
         },
-        "description": "Delete the passholder's school relation.\n\nThe user or client performing this request must have `PASSHOLDER_UPDATE` permission.\n\n<!-- theme: warning -->\n\n> Passholder schools are used to manage passholders in a very specific case. If you are not explicitly working with UiTPAS schools, you will probably **NOT** need this API. \n\nUsing [GET](/reference/UiTPAS.v2.json/paths/~1passholders~1{passholderId}~1school/get), [PUT](/reference/UiTPAS.v2.json/paths/~1passholders~1{passholderId}~1school/put) and [DELETE](/reference/UiTPAS.v2.json/paths/~1passholders~1{passholderId}~1school/delete) on this endpoint, the school of a passholder can be retrieved, updated and deleted. All schools are organizers.",
+        "description": "Delete the passholder's school relation.\n\nThe user or client performing this request must have `PASSHOLDER_UPDATE` permission.\n\n<!-- theme: warning -->\n\n> Passholder schools are used to manage passholders in a very specific case. If you are not explicitly working with UiTPAS schools, you will probably **NOT** need this API. \n\nUsing [GET](/reference/uitpas.json/paths/~1passholders~1{passholderId}~1school/get), [PUT](/reference/uitpas.json/paths/~1passholders~1{passholderId}~1school/put) and [DELETE](/reference/uitpas.json/paths/~1passholders~1{passholderId}~1school/delete) on this endpoint, the school of a passholder can be retrieved, updated and deleted. All schools are organizers.",
         "security": [
           {
             "USER_ACCESS_TOKEN": [
@@ -2672,13 +2680,26 @@
                   "$ref": "#/components/schemas/Pass"
                 },
                 "examples": {
-                  "Example": {
+                  "Example with warning message": {
                     "value": {
                       "passholderId": "b34c19fc-bcf9-4d10-aeb2-6bc9efd38b68",
                       "uitpasNumber": "0560002524314",
                       "points": 12,
                       "postalCode": "1000",
-                      "socialTariffExpired": false
+                      "messages": [
+                        {
+                          "level": "WARN",
+                          "text": "Je sociaal tarief is verlopen. Contacteer je UiTPAS balie."
+                        }
+                      ]
+                    }
+                  },
+                  "Example without messages": {
+                    "value": {
+                      "passholderId": "b34c19fc-bcf9-4d10-aeb2-6bc9efd38b68",
+                      "uitpasNumber": "0560002524314",
+                      "points": 12,
+                      "postalCode": "1000"
                     }
                   }
                 }
@@ -2707,7 +2728,159 @@
             "CLIENT_ACCESS_TOKEN": []
           }
         ],
-        "description": "Retrieve information related to a pass.\n\nThe caller of this request must have `PASS_READ` permission."
+        "description": "Retrieve information related to a pass.\n\nIf the response contains `messages`, they MUST be displayed to the end-user.\n\nThe caller of this request must have `PASSES_READ` permission."
+      }
+    },
+    "/insz-numbers/{inszNumber}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "inszNumber",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Retrieve INSZ number",
+        "tags": [
+          "Passholders"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Pass"
+                },
+                "examples": {
+                  "Example with warning message": {
+                    "value": {
+                      "passholderId": "b34c19fc-bcf9-4d10-aeb2-6bc9efd38b68",
+                      "uitpasNumber": "0560002524314",
+                      "points": 12,
+                      "postalCode": "1000",
+                      "messages": [
+                        {
+                          "level": "WARN",
+                          "text": "Je sociaal tarief is verlopen. Contacteer je UiTPAS balie."
+                        }
+                      ]
+                    }
+                  },
+                  "Example without messages": {
+                    "value": {
+                      "passholderId": "b34c19fc-bcf9-4d10-aeb2-6bc9efd38b68",
+                      "uitpasNumber": "0560002524314",
+                      "points": 12,
+                      "postalCode": "1000"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/passholder-blocked\n* https://api.publiq.be/probs/uitpas/card-blocked\n\nThe detail property might include more information for the client developer."
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "description": "Not Found. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/pass-not-found\n\nThe detail property might include more information for the client developer."
+          }
+        },
+        "operationId": "get-insz-numbers-inszNumber",
+        "security": [
+          {
+            "USER_ACCESS_TOKEN": []
+          },
+          {
+            "CLIENT_ACCESS_TOKEN": []
+          }
+        ],
+        "description": "Retrieve information related to an INSZ number.\n\nIf the response contains `messages`, they MUST be displayed to the end-user.\n\nThe caller of this request must have `INSZ_NUMBERS_READ` permission."
+      }
+    },
+    "/chip-numbers/{chipNumber}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "chipNumber",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Retrieve chip number",
+        "tags": [
+          "Passholders"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Pass"
+                },
+                "examples": {
+                  "Example with warning message": {
+                    "value": {
+                      "passholderId": "b34c19fc-bcf9-4d10-aeb2-6bc9efd38b68",
+                      "uitpasNumber": "0560002524314",
+                      "points": 12,
+                      "postalCode": "1000",
+                      "messages": [
+                        {
+                          "level": "WARN",
+                          "text": "Je sociaal tarief is verlopen. Contacteer je UiTPAS balie."
+                        }
+                      ]
+                    }
+                  },
+                  "Example without messages": {
+                    "value": {
+                      "passholderId": "b34c19fc-bcf9-4d10-aeb2-6bc9efd38b68",
+                      "uitpasNumber": "0560002524314",
+                      "points": 12,
+                      "postalCode": "1000"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/passholder-blocked\n* https://api.publiq.be/probs/uitpas/card-blocked\n\nThe detail property might include more information for the client developer."
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "description": "Not Found. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/pass-not-found\n\nThe detail property might include more information for the client developer."
+          }
+        },
+        "operationId": "get-chip-numbers-chipNumber",
+        "security": [
+          {
+            "USER_ACCESS_TOKEN": []
+          },
+          {
+            "CLIENT_ACCESS_TOKEN": []
+          }
+        ],
+        "description": "Retrieve information related to a chip number.\n\nIf the response contains `messages`, they MUST be displayed to the end-user.\n\nThe caller of this request must have `CHIP_NUMBERS_READ` permission."
       }
     },
     "/rewards/{id}": {
@@ -4547,26 +4720,73 @@
           "Models"
         ],
         "description": "The `Pass` entity includes basic information about the UiTPAS and its related `Passholder`.  ",
+        "x-examples": {
+          "Example with warning message": {
+            "passholderId": "b34c19fc-bcf9-4d10-aeb2-6bc9efd38b68",
+            "uitpasNumber": "0560002524314",
+            "points": 12,
+            "postalCode": "1000",
+            "messages": [
+              {
+                "level": "WARN",
+                "text": "Je sociaal tarief is verlopen. Contacteer je UiTPAS balie."
+              }
+            ]
+          },
+          "Example without messages": {
+            "passholderId": "b34c19fc-bcf9-4d10-aeb2-6bc9efd38b68",
+            "uitpasNumber": "0560002524314",
+            "points": 12,
+            "postalCode": "1000"
+          }
+        },
         "properties": {
           "passholderId": {
             "type": "string",
+            "description": "ID of the passholder associated with this pass",
             "readOnly": true
           },
           "uitpasNumber": {
             "type": "string",
+            "description": "UiTPAS number of this pass",
             "readOnly": true
           },
           "points": {
             "type": "integer",
+            "description": "Number of points of the passholder of this pass",
             "readOnly": true
           },
           "postalCode": {
             "type": "string",
+            "description": "Postal code of the passholder of this pass",
             "readOnly": true
           },
-          "socialTariffExpired": {
-            "type": "boolean",
-            "description": "If the social tariff of the passholder is expired, this field will be `true`. ",
+          "messages": {
+            "type": "array",
+            "description": "Message that, if present, must be displayed to the user",
+            "items": {
+              "type": "object",
+              "properties": {
+                "level": {
+                  "type": "string",
+                  "enum": [
+                    "INFO",
+                    "WARN",
+                    "ERROR"
+                  ],
+                  "description": "Severity level of the message",
+                  "readOnly": true
+                },
+                "text": {
+                  "type": "string",
+                  "description": "Actual text of the message to be displayed to the user"
+                }
+              },
+              "required": [
+                "level",
+                "text"
+              ]
+            },
             "readOnly": true
           }
         },
@@ -4576,16 +4796,7 @@
           "points",
           "postalCode"
         ],
-        "readOnly": true,
-        "x-examples": {
-          "Example": {
-            "passholderId": "b34c19fc-bcf9-4d10-aeb2-6bc9efd38b68",
-            "uitpasNumber": "0560002524314",
-            "points": 12,
-            "postalCode": "1000",
-            "socialTariffExpired": false
-          }
-        }
+        "readOnly": true
       },
       "CardSystemMembership": {
         "title": "CardSystemMembership",

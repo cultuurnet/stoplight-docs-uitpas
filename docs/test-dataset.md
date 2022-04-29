@@ -6,7 +6,7 @@
 |----------|:-------------:|
 | \[TEST] UiTPAS Organisatie (Regio Gent + Paspartoe) |  `0ce87cbc-9299-4528-8d35-92225dc9489f` |
 
-Your test client should have permission to this organizer. You can double-check which organizer you have permission to by using [GET /permissions](/reference/UiTPAS.v2.json/paths/~1permissions/get)
+Your test client should have permission to this organizer. You can double-check which organizer you have permission to by using [GET /permissions](/reference/uitpas.json/paths/~1permissions/get)
 
 ```http
 GET /permissions HTTP/1.1
@@ -43,19 +43,19 @@ When testing ticket sale requests, you'll need an UitpasNumber of a passholder. 
 
 | UitpasNumber      | Social tariff | Postal code | Coupons | Card status |
 |----------|:-------------:|:-------------:|:-------------:|:-------------:|
-| `0900000008301` | no | 9000 | no | active |
-| `0900000672312` | yes (Gent) | 9090 | no | active |
-| `0900010888817` | expired |  9000 | 1 coupon (Gent) | active |
-| `0900010261411` | yes (Gent) |  9090 | no | active |
-| `0900005183117` | yes (Gent) |  9000 | no | blocked |
-| `0900000999715` | expired |  1000 | no | active |
-| `1000000301704` | no |  9000 | no | active |
-| `0900000007402` | yes (Paspartoe) |  9000 | 2 coupons (Paspartoe) | active |
-| `0900011091916` | yes |  n/a | n/a | unregistered |
-| `0900000008905` | no |  n/a | n/a | unregistered |
+| `0900000095902` | no | 9000 | no | active |
+| `0900000067513` | yes (Gent) | 9090 | no | active |
+| `0900000031618` | expired |  9000 | 1 coupon (Gent) | active |
+| `0900000036112` | yes (Gent) |  9090 | no | active |
+| `0900000002312` | yes (Gent) |  9000 | no | blocked |
+| `0900000058918` | expired |  1000 | no | active |
+| `1000000520006` | no |  9000 | no | active |
+| `0900000093204` | yes (Paspartoe) |  9000 | 2 coupons (Paspartoe) | active |
+| `0900000074519` | yes |  n/a | n/a | unregistered |
+| `0900000075706` | no |  n/a | n/a | unregistered |
 
 ## Group passes
 
 | UitpasNumber      | Social tariff | Coupons | Card status |
 |----------|:-------------:|:-------------:|:-------------:|
-| `0900010630813` | yes | no | active |
+| `0900000045410` | yes | no | active |

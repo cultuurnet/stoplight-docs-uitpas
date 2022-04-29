@@ -2728,6 +2728,7 @@
                   "Example": {
                     "value": {
                       "id": "1234",
+                      "type": "POINTS",
                       "title": "Free entrance for 10 points on 1 specific event UPDATE",
                       "owningCardSystem": {
                         "id": 1,
@@ -2750,16 +2751,20 @@
                         "begin": "2021-08-24T14:15:22Z",
                         "end": "2022-08-24T14:15:22Z"
                       },
+                      "grantingPeriod": {
+                        "begin": "2021-08-24T14:15:22Z",
+                        "end": "2022-08-24T14:15:22Z"
+                      },
                       "moreInfoURL": "string",
                       "inSpotlight": false,
                       "points": 10,
-                      "types": [
-                        "string"
+                      "categories": [
+                        "Eten en drinken"
                       ],
                       "forKids": false,
                       "sport": false,
                       "labels": "",
-                      "cashInType": "TICKETSALE",
+                      "redeemType": "TICKETSALE",
                       "usesCodes": false,
                       "ticketSaleDiscount": {
                         "amount": 5,
@@ -2832,6 +2837,7 @@
                   "Ticketsale reward": {
                     "value": {
                       "id": "1234",
+                      "type": "POINTS",
                       "title": "Free entrance for 10 points on 1 specific event UPDATE",
                       "owningCardSystem": {
                         "id": 1,
@@ -2854,16 +2860,20 @@
                         "begin": "2021-08-24T14:15:22Z",
                         "end": "2022-08-24T14:15:22Z"
                       },
+                      "grantingPeriod": {
+                        "begin": "2021-08-24T14:15:22Z",
+                        "end": "2022-08-24T14:15:22Z"
+                      },
                       "moreInfoURL": "string",
                       "inSpotlight": false,
                       "points": 10,
-                      "types": [
-                        "string"
+                      "categories": [
+                        "Doen"
                       ],
                       "forKids": false,
                       "sport": false,
                       "labels": "",
-                      "cashInType": "TICKETSALE",
+                      "redeemType": "TICKETSALE",
                       "usesCodes": false,
                       "ticketSaleDiscount": {
                         "amount": 5,
@@ -2928,6 +2938,7 @@
                 "Ticketsale reward": {
                   "value": {
                     "title": "Free entrance for 10 points on 1 specific event UPDATE",
+                    "type": "POINTS",
                     "maxAvailableUnits": 1000,
                     "promotionalDescription": "this is the mandatory description",
                     "practicalInfo": "this is an optional extra description",
@@ -2939,8 +2950,12 @@
                       "begin": "2021-08-24T14:15:22Z",
                       "end": "2022-08-24T14:15:22Z"
                     },
+                    "grantingPeriod": {
+                      "begin": "2021-08-24T14:15:22Z",
+                      "end": "2022-08-24T14:15:22Z"
+                    },
                     "moreInfoURL": "https://example.org/more-info-about-this-reward",
-                    "cashInType": "TICKETSALE",
+                    "redeemType": "TICKETSALE",
                     "points": 10,
                     "ticketSaleDiscount": {
                       "amount": 5,
@@ -3011,6 +3026,20 @@
                   "required": [
                     "redeemable"
                   ]
+                },
+                "examples": {
+                  "Example redeemable": {
+                    "value": {
+                      "redeemable": true
+                    }
+                  },
+                  "Example not redeemable": {
+                    "value": {
+                      "redeemable": false,
+                      "reason": "PASSHOLDER",
+                      "message": "Je hebt niet genoeg punten om dit voordeel in te wisselen."
+                    }
+                  }
                 }
               }
             }
@@ -3073,14 +3102,19 @@
                       "reward": {
                         "id": "string",
                         "title": "string",
+                        "type": "POINTS",
                         "promotionalDescription": "string",
                         "publicationPeriod": {
                           "begin": "2019-08-24T14:15:22Z",
                           "end": "2019-08-24T14:15:22Z"
                         },
+                        "grantingPeriod": {
+                          "begin": "2019-08-24T14:15:22Z",
+                          "end": "2019-08-24T14:15:22Z"
+                        },
                         "points": 0,
                         "moreInfoURL": "string",
-                        "cashInType": "PHYSICAL",
+                        "redeemType": "PHYSICAL",
                         "owningCardSystem": {
                           "id": 0,
                           "name": "string"
@@ -3109,8 +3143,8 @@
                           "begin": "2019-08-24T14:15:22Z",
                           "end": "2019-08-24T14:15:22Z"
                         },
-                        "types": [
-                          "string"
+                        "categories": [
+                          "Eten en drinken"
                         ],
                         "forKids": true,
                         "sport": true,
@@ -3131,9 +3165,9 @@
                       },
                       "redeemDate": "2019-08-24T14:15:22Z",
                       "redeemInfo": {
-                        "redeemText": "string",
-                        "redeemLink": "string",
-                        "redeemLinkLabel": "string"
+                        "text": "string",
+                        "link": "string",
+                        "label": "string"
                       },
                       "redeemCode": "string"
                     }
@@ -3182,7 +3216,8 @@
               "examples": {
                 "Example": {
                   "value": {
-                    "uitpasNumber": "string"
+                    "uitpasNumber": "string",
+                    "rewardId": "string"
                   }
                 }
               }
@@ -3209,7 +3244,89 @@
                 "schema": {
                   "$ref": "#/components/schemas/RedeemedRewardsPaginatedResponse"
                 },
-                "examples": {}
+                "examples": {
+                  "Example": {
+                    "value": {
+                      "totalItems": 10,
+                      "member": [
+                        {
+                          "id": "string",
+                          "reward": {
+                            "id": "string",
+                            "title": "string",
+                            "type": "POINTS",
+                            "promotionalDescription": "string",
+                            "publicationPeriod": {
+                              "begin": "2019-08-24T14:15:22Z",
+                              "end": "2019-08-24T14:15:22Z"
+                            },
+                            "grantingPeriod": {
+                              "begin": "2019-08-24T14:15:22Z",
+                              "end": "2019-08-24T14:15:22Z"
+                            },
+                            "points": 0,
+                            "moreInfoURL": "string",
+                            "redeemType": "PHYSICAL",
+                            "owningCardSystem": {
+                              "id": 0,
+                              "name": "string"
+                            },
+                            "applicableCardSystems": [
+                              {
+                                "id": 0,
+                                "name": "string"
+                              }
+                            ],
+                            "allCardSystems": true,
+                            "organizers": [
+                              {
+                                "id": "string",
+                                "name": "string"
+                              }
+                            ],
+                            "status": "ACTIVE",
+                            "maxAvailableUnits": 0,
+                            "unitsTaken": 0,
+                            "practicalInfo": "string",
+                            "pictures": [
+                              "string"
+                            ],
+                            "redeemPeriod": {
+                              "begin": "2019-08-24T14:15:22Z",
+                              "end": "2019-08-24T14:15:22Z"
+                            },
+                            "categories": [
+                              "Eten en drinken"
+                            ],
+                            "forKids": true,
+                            "sport": true,
+                            "labels": "string",
+                            "usesCodes": true,
+                            "ticketSaleDiscount": {
+                              "amount": 0,
+                              "type": "ABSOLUTE",
+                              "conditions": [
+                                {
+                                  "type": "EVENT",
+                                  "values": [
+                                    "string"
+                                  ]
+                                }
+                              ]
+                            }
+                          },
+                          "redeemDate": "2019-08-24T14:15:22Z",
+                          "redeemInfo": {
+                            "text": "string",
+                            "link": "string",
+                            "label": "string"
+                          },
+                          "redeemCode": "string"
+                        }
+                      ]
+                    }
+                  }
+                }
               }
             }
           },
@@ -3292,6 +3409,7 @@
                     "value": {
                       "id": "1234",
                       "title": "Free entrance for 10 points on 1 specific event",
+                      "type": "POINTS",
                       "owningCardSystem": {
                         "id": 1,
                         "name": "UiTPAS Dender"
@@ -3312,16 +3430,20 @@
                         "begin": "2021-08-24T14:15:22Z",
                         "end": "2022-08-24T14:15:22Z"
                       },
+                      "grantingPeriod": {
+                        "begin": "2021-08-24T14:15:22Z",
+                        "end": "2022-08-24T14:15:22Z"
+                      },
                       "moreInfoURL": "string",
                       "inSpotlight": false,
                       "points": 10,
-                      "types": [
-                        "string"
+                      "categories": [
+                        "Doen"
                       ],
                       "forKids": false,
                       "sport": false,
                       "labels": "",
-                      "cashInType": "TICKETSALE",
+                      "redeemType": "TICKETSALE",
                       "usesCodes": false,
                       "ticketSaleDiscount": {
                         "amount": 5,
@@ -3335,6 +3457,90 @@
                           }
                         ]
                       }
+                    }
+                  },
+                  "Points reward": {
+                    "value": {
+                      "id": "1234",
+                      "type": "POINTS",
+                      "title": "Gratis koffie",
+                      "owningCardSystem": {
+                        "id": 1,
+                        "name": "UiTPAS Dender"
+                      },
+                      "allCardSystems": true,
+                      "status": "ACTIVE",
+                      "maxAvailableUnits": 100,
+                      "unitsTaken": 0,
+                      "promotionalDescription": "this is the mandatory description",
+                      "pictures": [
+                        "https://www.uitpas.be/default-picture-for-points-rewards.png"
+                      ],
+                      "publicationPeriod": {
+                        "begin": "2021-08-24T14:15:22Z",
+                        "end": "2022-08-24T14:15:22Z"
+                      },
+                      "redeemPeriod": {
+                        "begin": "2021-08-24T14:15:22Z",
+                        "end": "2022-08-24T14:15:22Z"
+                      },
+                      "grantingPeriod": {
+                        "begin": "2021-08-24T14:15:22Z",
+                        "end": "2022-08-24T14:15:22Z"
+                      },
+                      "moreInfoURL": "string",
+                      "inSpotlight": false,
+                      "points": 3,
+                      "categories": [
+                        "Eten en drinken"
+                      ],
+                      "forKids": false,
+                      "sport": false,
+                      "labels": "",
+                      "redeemType": "PHYSICAL",
+                      "usesCodes": false
+                    }
+                  },
+                  "Welcome Reward": {
+                    "value": {
+                      "id": "1234",
+                      "type": "WELCOME",
+                      "title": "Gratis zwemmen",
+                      "owningCardSystem": {
+                        "id": 1,
+                        "name": "UiTPAS Dender"
+                      },
+                      "allCardSystems": true,
+                      "status": "ACTIVE",
+                      "maxAvailableUnits": 100,
+                      "unitsTaken": 0,
+                      "promotionalDescription": "this is the mandatory description",
+                      "pictures": [
+                        "https://www.uitpas.be/default-picture-for-welcome-rewards.png"
+                      ],
+                      "publicationPeriod": {
+                        "begin": "2021-08-24T14:15:22Z",
+                        "end": "2022-08-24T14:15:22Z"
+                      },
+                      "redeemPeriod": {
+                        "begin": "2021-08-24T14:15:22Z",
+                        "end": "2022-08-24T14:15:22Z"
+                      },
+                      "grantingPeriod": {
+                        "begin": "2021-08-24T14:15:22Z",
+                        "end": "2022-08-24T14:15:22Z"
+                      },
+                      "moreInfoURL": "string",
+                      "inSpotlight": false,
+                      "points": 0,
+                      "categories": [
+                        "Doen"
+                      ],
+                      "forKids": false,
+                      "sport": false,
+                      "labels": "",
+                      "redeemType": "PHYSICAL",
+                      "usesCodes": false
                     }
                   }
                 }
@@ -3370,13 +3576,18 @@
                 "Ticket sale reward": {
                   "value": {
                     "title": "Free entrance for 10 points on 1 specific event",
+                    "type": "POINTS",
                     "promotionalDescription": "this is the mandatory description",
                     "publicationPeriod": {
                       "begin": "2021-08-24T14:15:22Z",
                       "end": "2022-08-24T14:15:22Z"
                     },
+                    "grantingPeriod": {
+                      "begin": "2021-08-24T14:15:22Z",
+                      "end": "2022-08-24T14:15:22Z"
+                    },
                     "moreInfoURL": "https://example.org/more-info-about-this-reward",
-                    "cashInType": "TICKETSALE",
+                    "redeemType": "TICKETSALE",
                     "points": 10,
                     "ticketSaleDiscount": {
                       "amount": 5,
@@ -3416,6 +3627,7 @@
                         {
                           "id": "1234",
                           "title": "Free entrance for 10 points on 1 specific event",
+                          "type": "POINTS",
                           "owningCardSystem": {
                             "id": 1,
                             "name": "UiTPAS Dender"
@@ -3437,6 +3649,10 @@
                             "begin": "2021-08-24T14:15:22Z",
                             "end": "2022-08-24T14:15:22Z"
                           },
+                          "grantingPeriod": {
+                            "begin": "2021-08-24T14:15:22Z",
+                            "end": "2022-08-24T14:15:22Z"
+                          },
                           "moreInfoURL": "string",
                           "inSpotlight": false,
                           "points": 10,
@@ -3446,7 +3662,7 @@
                           "forKids": false,
                           "sport": false,
                           "labels": "",
-                          "cashInType": "TICKETSALE",
+                          "redeemType": "TICKETSALE",
                           "usesCodes": false,
                           "ticketSaleDiscount": {
                             "amount": 5,
@@ -3496,14 +3712,17 @@
               "type": "integer"
             },
             "in": "query",
-            "name": "start"
+            "name": "start",
+            "description": "Start index of the results. Default 0."
           },
           {
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "default": 20
             },
             "in": "query",
-            "name": "limit"
+            "name": "limit",
+            "description": "Maximum number of results."
           },
           {
             "schema": {
@@ -3546,7 +3765,8 @@
               "type": "string"
             },
             "in": "query",
-            "name": "text"
+            "name": "text",
+            "description": "Free text search in reward name, organizer or city."
           },
           {
             "schema": {
@@ -3560,7 +3780,7 @@
             },
             "in": "query",
             "name": "facets",
-            "description": "Can be included more than once to allow multiple values."
+            "description": "Request facets of the given field in the response. Can be included more than once to allow multiple values."
           },
           {
             "schema": {
@@ -3571,7 +3791,8 @@
               ]
             },
             "in": "query",
-            "name": "sort[name]"
+            "name": "sort[name]",
+            "description": "Sort on reward name"
           },
           {
             "schema": {
@@ -3582,7 +3803,8 @@
               ]
             },
             "in": "query",
-            "name": "sort[creationDate]"
+            "name": "sort[creationDate]",
+            "description": "Sort on reward creation date"
           },
           {
             "schema": {
@@ -3593,7 +3815,8 @@
               ]
             },
             "in": "query",
-            "name": "sort[redeemCount]"
+            "name": "sort[redeemCount]",
+            "description": "Sort on redeem count"
           },
           {
             "schema": {
@@ -3604,28 +3827,32 @@
               ]
             },
             "in": "query",
-            "name": "sort[points]"
+            "name": "sort[points]",
+            "description": "Sort on reward points"
           },
           {
             "schema": {
               "type": "string"
             },
             "in": "query",
-            "name": "categories"
+            "name": "categories",
+            "description": "Search rewards of this category. Can be included more than once to allow multiple values."
           },
           {
             "schema": {
-              "type": "string"
+              "type": "integer"
             },
             "in": "query",
-            "name": "pointsFrom"
+            "name": "pointsFrom",
+            "description": "Include only rewards with this value (including) or more points."
           },
           {
             "schema": {
-              "type": "string"
+              "type": "integer"
             },
             "in": "query",
-            "name": "pointsTo"
+            "name": "pointsTo",
+            "description": "Include only rewards with this value (including) or less points."
           },
           {
             "schema": {
@@ -3638,7 +3865,8 @@
               "default": "ACTIVE"
             },
             "in": "query",
-            "name": "status"
+            "name": "status",
+            "description": "Search rewards of this status."
           },
           {
             "schema": {
@@ -3658,10 +3886,12 @@
           },
           {
             "schema": {
-              "type": "boolean"
+              "type": "boolean",
+              "default": true
             },
             "in": "query",
-            "name": "owningCardSystemIsPermanent"
+            "name": "permanentCardSystemOnly",
+            "description": "Include only rewards of permanent card systems."
           },
           {
             "schema": {

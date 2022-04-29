@@ -21,6 +21,9 @@
   ],
   "tags": [
     {
+      "name": "Card Systems"
+    },
+    {
       "name": "Events"
     },
     {
@@ -1917,10 +1920,7 @@
     },
     "/card-systems": {
       "get": {
-        "summary": "Retrieve card systems",
-        "tags": [
-          "CardSystems"
-        ],
+        "summary": "Search card systems",
         "responses": {
           "200": {
             "description": "OK",
@@ -1972,29 +1972,61 @@
           }
         },
         "operationId": "get-card-systems",
-        "description": "Retrieve card systems based on query parameters.  \n\n\nTODO: security client identification",
+        "description": "Search card systems.\n\nThis caller of this method, identified with client identification, does not require any permissions.",
         "parameters": [
           {
             "schema": {
-              "type": "string"
+              "type": "boolean",
+              "default": true
             },
             "in": "query",
-            "name": "postalCode"
+            "name": "permanentOnly",
+            "description": "Search only permanent card systems."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "x-client-id",
+            "description": "API key identifying the calling client"
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "start",
+            "description": "Start index of the results. Default 0"
+          },
+          {
+            "schema": {
+              "type": "integer",
+              "default": 20
+            },
+            "in": "query",
+            "name": "limit",
+            "description": "Maximum number of results"
           },
           {
             "schema": {
               "type": "string"
             },
             "in": "query",
-            "name": "city"
+            "name": "city",
+            "description": "Search card systems by city name. Can be included more than once to allow multiple values."
           },
           {
             "schema": {
-              "type": "boolean"
+              "type": "string"
             },
             "in": "query",
-            "name": "permanent"
+            "name": "postalCode",
+            "description": "Search card systems by postal code. Can be included more than once to allow multiple values."
           }
+        ],
+        "tags": [
+          "Card Systems"
         ]
       }
     }
@@ -2391,10 +2423,6 @@
             "properties": {
               "website": {
                 "type": "string"
-              },
-              "terms": {
-                "type": "string",
-                "description": "TODO: deze lijkt nergens ingevuld"
               }
             }
           },

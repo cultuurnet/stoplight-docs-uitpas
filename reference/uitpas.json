@@ -3870,7 +3870,7 @@
         "tags": [
           "Rewards"
         ],
-        "description": "Search rewards.\n\nThe caller of this request must have `REWARDS_READ` permission.",
+        "description": "Search rewards.\n\nThe caller of this request must have `REWARDS_READ` permission and possibly also `REWARDS_PASSHOLDER_READ` to use the `isRedeemableBy` query parameter.",
         "security": [
           {
             "USER_ACCESS_TOKEN": []
@@ -4111,6 +4111,14 @@
             "in": "query",
             "name": "extras",
             "description": "Can be included more than once to allow multiple values."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "isRedeemableBy",
+            "description": "Include only rewards that are currently redeemable by the given UiTPAS number. The use of this fields requires `REWARDS_PASSHOLDER_READ` permission or a user access token of the given passholder."
           }
         ]
       }

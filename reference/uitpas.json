@@ -3171,7 +3171,37 @@
                             ]
                           }
                         }
-                      ]
+                      ],
+                      "facet": {
+                        "categories": {
+                          "Doen": {
+                            "name": {
+                              "nl": "Doen"
+                            },
+                            "count": 12
+                          },
+                          "Gadget": {
+                            "name": {
+                              "nl": "Gadget"
+                            },
+                            "count": 2
+                          }
+                        },
+                        "owningCardSystemId": {
+                          "1": {
+                            "name": {
+                              "nl": "UiTPAS Dender"
+                            },
+                            "count": 8
+                          },
+                          "8": {
+                            "name": {
+                              "nl": "UiTPAS Gent"
+                            },
+                            "count": 4
+                          }
+                        }
+                      }
                     }
                   }
                 }
@@ -4385,9 +4415,32 @@
               "$ref": "#/components/schemas/Reward"
             }
           },
-          "facets": {
+          "facet": {
+            "description": "Facet information (if requested)",
             "type": "object",
-            "description": "TODO"
+            "additionalProperties": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "object",
+                    "properties": {
+                      "nl": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "count": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "name",
+                  "count"
+                ]
+              }
+            }
           }
         }
       },

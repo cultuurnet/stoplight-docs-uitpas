@@ -2883,6 +2883,568 @@
         "description": "Retrieve information related to a chip number.\n\nIf the response contains `messages`, they MUST be displayed to the end-user.\n\nThe caller of this request must have `CHIP_NUMBERS_READ` permission."
       }
     },
+    "/rewards": {
+      "post": {
+        "summary": "Create new reward",
+        "operationId": "post-rewards",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Reward"
+                },
+                "examples": {
+                  "Ticketsale reward": {
+                    "value": {
+                      "id": "1234",
+                      "title": "Free entrance for 10 points on 1 specific event",
+                      "type": "POINTS",
+                      "owningCardSystem": {
+                        "id": 1,
+                        "name": "UiTPAS Dender"
+                      },
+                      "allCardSystems": true,
+                      "status": "ACTIVE",
+                      "maxAvailableUnits": 0,
+                      "unitsTaken": 0,
+                      "promotionalDescription": "this is the mandatory description",
+                      "pictures": [
+                        "https://www.uitpas.be/default-picture-for-ticketsale-rewards.png"
+                      ],
+                      "publicationPeriod": {
+                        "begin": "2021-08-24T14:15:22Z",
+                        "end": "2022-08-24T14:15:22Z"
+                      },
+                      "redeemPeriod": {
+                        "begin": "2021-08-24T14:15:22Z",
+                        "end": "2022-08-24T14:15:22Z"
+                      },
+                      "grantingPeriod": {
+                        "begin": "2021-08-24T14:15:22Z",
+                        "end": "2022-08-24T14:15:22Z"
+                      },
+                      "moreInfoURL": "https://www.uitpas.be/reward/example-more-info",
+                      "inSpotlight": false,
+                      "points": 10,
+                      "categories": [
+                        "Doen"
+                      ],
+                      "forKids": false,
+                      "sport": false,
+                      "labels": "",
+                      "redeemType": "TICKETSALE",
+                      "usesCodes": false,
+                      "ticketSaleDiscount": {
+                        "amount": 5,
+                        "type": "ABSOLUTE",
+                        "conditions": [
+                          {
+                            "type": "EVENT",
+                            "values": [
+                              "5a0967f9-cc06-4c3c-9206-30481a767434"
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "Points reward": {
+                    "value": {
+                      "id": "1234",
+                      "type": "POINTS",
+                      "title": "Gratis koffie",
+                      "owningCardSystem": {
+                        "id": 1,
+                        "name": "UiTPAS Dender"
+                      },
+                      "allCardSystems": true,
+                      "status": "ACTIVE",
+                      "maxAvailableUnits": 100,
+                      "unitsTaken": 0,
+                      "promotionalDescription": "this is the mandatory description",
+                      "pictures": [
+                        "https://www.uitpas.be/default-picture-for-points-rewards.png"
+                      ],
+                      "publicationPeriod": {
+                        "begin": "2021-08-24T14:15:22Z",
+                        "end": "2022-08-24T14:15:22Z"
+                      },
+                      "redeemPeriod": {
+                        "begin": "2021-08-24T14:15:22Z",
+                        "end": "2022-08-24T14:15:22Z"
+                      },
+                      "grantingPeriod": {
+                        "begin": "2021-08-24T14:15:22Z",
+                        "end": "2022-08-24T14:15:22Z"
+                      },
+                      "moreInfoURL": "string",
+                      "inSpotlight": false,
+                      "points": 3,
+                      "categories": [
+                        "Eten en drinken"
+                      ],
+                      "forKids": false,
+                      "sport": false,
+                      "labels": "",
+                      "redeemType": "PHYSICAL",
+                      "usesCodes": false
+                    }
+                  },
+                  "Welcome Reward": {
+                    "value": {
+                      "id": "1234",
+                      "type": "WELCOME",
+                      "title": "Gratis zwemmen",
+                      "owningCardSystem": {
+                        "id": 1,
+                        "name": "UiTPAS Dender"
+                      },
+                      "allCardSystems": true,
+                      "status": "ACTIVE",
+                      "maxAvailableUnits": 100,
+                      "unitsTaken": 0,
+                      "promotionalDescription": "this is the mandatory description",
+                      "pictures": [
+                        "https://www.uitpas.be/default-picture-for-welcome-rewards.png"
+                      ],
+                      "publicationPeriod": {
+                        "begin": "2021-08-24T14:15:22Z",
+                        "end": "2022-08-24T14:15:22Z"
+                      },
+                      "redeemPeriod": {
+                        "begin": "2021-08-24T14:15:22Z",
+                        "end": "2022-08-24T14:15:22Z"
+                      },
+                      "grantingPeriod": {
+                        "begin": "2021-08-24T14:15:22Z",
+                        "end": "2022-08-24T14:15:22Z"
+                      },
+                      "moreInfoURL": "string",
+                      "inSpotlight": false,
+                      "points": 0,
+                      "categories": [
+                        "Doen"
+                      ],
+                      "forKids": false,
+                      "sport": false,
+                      "labels": "",
+                      "redeemType": "PHYSICAL",
+                      "usesCodes": false
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. Possible error types:\n\n* https://api.publiq.be/probs/uitpas/invalid-card-system\n\nThe detail property might include more information for the client developer."
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          }
+        },
+        "security": [
+          {
+            "USER_ACCESS_TOKEN": []
+          },
+          {
+            "CLIENT_ACCESS_TOKEN": []
+          }
+        ],
+        "description": "Create a new reward.\n\nThe caller of this request must have `REWARDS_WRITE` permission for the given organizer.",
+        "tags": [
+          "Rewards"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Reward"
+              },
+              "examples": {
+                "Ticket sale reward": {
+                  "value": {
+                    "title": "Free entrance for 10 points on 1 specific event",
+                    "type": "POINTS",
+                    "promotionalDescription": "this is the mandatory description",
+                    "publicationPeriod": {
+                      "begin": "2021-08-24T14:15:22Z",
+                      "end": "2022-08-24T14:15:22Z"
+                    },
+                    "grantingPeriod": {
+                      "begin": "2021-08-24T14:15:22Z",
+                      "end": "2022-08-24T14:15:22Z"
+                    },
+                    "moreInfoURL": "https://example.org/more-info-about-this-reward",
+                    "redeemType": "TICKETSALE",
+                    "points": 10,
+                    "ticketSaleDiscount": {
+                      "amount": 5,
+                      "type": "ABSOLUTE",
+                      "conditions": [
+                        {
+                          "type": "EVENT",
+                          "values": [
+                            "5a0967f9-cc06-4c3c-9206-30481a767434"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Search rewards",
+        "operationId": "get-rewards",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RewardsPaginatedResponse"
+                },
+                "examples": {
+                  "Example": {
+                    "value": {
+                      "totalItems": 1,
+                      "member": [
+                        {
+                          "id": "1234",
+                          "title": "Free entrance for 10 points on 1 specific event",
+                          "type": "POINTS",
+                          "owningCardSystem": {
+                            "id": 1,
+                            "name": "UiTPAS Dender"
+                          },
+                          "allCardSystems": true,
+                          "status": "ACTIVE",
+                          "maxAvailableUnits": 0,
+                          "unitsTaken": 0,
+                          "promotionalDescription": "this is the mandatory description",
+                          "practicalInfo": "this is an optional extra description",
+                          "pictures": [
+                            "https://www.uitpas.be/default-picture-for-ticketsale-rewards.png"
+                          ],
+                          "publicationPeriod": {
+                            "begin": "2021-08-24T14:15:22Z",
+                            "end": "2022-08-24T14:15:22Z"
+                          },
+                          "redeemPeriod": {
+                            "begin": "2021-08-24T14:15:22Z",
+                            "end": "2022-08-24T14:15:22Z"
+                          },
+                          "grantingPeriod": {
+                            "begin": "2021-08-24T14:15:22Z",
+                            "end": "2022-08-24T14:15:22Z"
+                          },
+                          "moreInfoURL": "https://www.uitpas.be/reward/example-more-info",
+                          "inSpotlight": false,
+                          "points": 10,
+                          "types": [
+                            "string"
+                          ],
+                          "forKids": false,
+                          "sport": false,
+                          "labels": "",
+                          "redeemType": "TICKETSALE",
+                          "usesCodes": false,
+                          "ticketSaleDiscount": {
+                            "amount": 5,
+                            "type": "ABSOLUTE",
+                            "conditions": [
+                              {
+                                "type": "EVENT",
+                                "values": [
+                                  "5a0967f9-cc06-4c3c-9206-30481a767434"
+                                ]
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. Possible error types:\n\n* https://api.publiq.be/probs/uitpas/organizer-not-found\n* https://api.publiq.be/probs/uitpas/event-not-found\n* https://api.publiq.be/probs/uitpas/cardsystem-not-found"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          }
+        },
+        "tags": [
+          "Rewards"
+        ],
+        "description": "Search rewards.\n\nThe caller of this request does not need special permissions permission except `REWARDS_PASSHOLDER_READ` to use the `isRedeemableBy` query parameter.\n\nThis endpoint allows both [client identification](/docs/authentication/ZG9jOjExODE5NDY5-client-identification) and token authentication ([user](/docs/authentication/ZG9jOjExODE5NTM5-user-access-token) and [client](/docs/authentication/ZG9jOjExODE5NDY4-client-access-token)).",
+        "security": [
+          {
+            "USER_ACCESS_TOKEN": []
+          },
+          {
+            "CLIENT_ACCESS_TOKEN": []
+          },
+          {
+            "CLIENT_IDENTIFICATION": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "start",
+            "description": "Start index of the results. Default 0."
+          },
+          {
+            "schema": {
+              "type": "integer",
+              "default": 20
+            },
+            "in": "query",
+            "name": "limit",
+            "description": "Maximum number of results."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "organizerId",
+            "description": "Search rewards applicable for this organizer"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "owningCardSystemId",
+            "description": "Search rewards of this card system"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "POINTS",
+                "WELCOME"
+              ]
+            },
+            "in": "query",
+            "name": "type",
+            "description": "Search rewards of this type"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "text",
+            "description": "Free text search in reward name, organizer or city."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "type",
+                "owningCardSystemId",
+                "extras",
+                "categories"
+              ]
+            },
+            "in": "query",
+            "name": "facets",
+            "description": "Request facets of the given field in the response. Can be included more than once to allow multiple values."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "asc",
+                "desc"
+              ]
+            },
+            "in": "query",
+            "name": "sort[name]",
+            "description": "Sort on reward name"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "asc",
+                "desc"
+              ]
+            },
+            "in": "query",
+            "name": "sort[creationDate]",
+            "description": "Sort on reward creation date"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "asc",
+                "desc"
+              ]
+            },
+            "in": "query",
+            "name": "sort[redeemCount]",
+            "description": "Sort on redeem count"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "asc",
+                "desc"
+              ]
+            },
+            "in": "query",
+            "name": "sort[points]",
+            "description": "Sort on reward points"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Goede doel",
+                "Eten en drinken",
+                "Doen",
+                "Gadget of item"
+              ]
+            },
+            "in": "query",
+            "name": "categories",
+            "description": "Search rewards of this category. Can be included more than once to allow multiple values."
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "pointsFrom",
+            "description": "Include only rewards with this value (including) or more points."
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "pointsTo",
+            "description": "Include only rewards with this value (including) or less points."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "ACTIVE",
+                "INACTIVE",
+                "DELETED"
+              ],
+              "default": "ACTIVE"
+            },
+            "in": "query",
+            "name": "status",
+            "description": "Search rewards of this status."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "publicationPeriodFrom",
+            "description": "Include only rewards with this date (including) or more recent is within the publication period. Format yyyy-mm-dd e.g. 2003-01-01"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "publicationPeriodTo",
+            "description": "Include only rewards with this date (including) or older is within the publication period. Format yyyy-mm-dd e.g. 2003-01-01"
+          },
+          {
+            "schema": {
+              "type": "boolean",
+              "default": true
+            },
+            "in": "query",
+            "name": "permanentCardSystemOnly",
+            "description": "Include only rewards of permanent card systems."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "grantingPeriodFrom",
+            "description": "Include only rewards with this date (including) or more recent is within the granting period. Format yyyy-mm-dd e.g. 2003-01-01"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "grantingPeriodTo",
+            "description": "Include only rewards with this date (including) or older is within the granting period. Format yyyy-mm-dd e.g. 2003-01-01"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "redeemPeriodFrom",
+            "description": "Include only rewards with this date (including) or more recent is within the redeem period. Format yyyy-mm-dd e.g. 2003-01-01"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "redeemPeriodTo",
+            "description": "Include only rewards with this date (including) or older is within the redeem period. Format yyyy-mm-dd e.g. 2003-01-01"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "forKids",
+                "sport",
+                "online",
+                "lastChance"
+              ]
+            },
+            "in": "query",
+            "name": "extras",
+            "description": "Can be included more than once to allow multiple values."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "isRedeemableBy",
+            "description": "Include only rewards that are currently redeemable by the given UiTPAS number. The use of this fields requires `REWARDS_PASSHOLDER_READ` permission or a user access token of the given passholder."
+          }
+        ]
+      }
+    },
     "/rewards/{id}": {
       "get": {
         "summary": "Retrieve reward",
@@ -3037,7 +3599,7 @@
                         "begin": "2021-08-24T14:15:22Z",
                         "end": "2022-08-24T14:15:22Z"
                       },
-                      "moreInfoURL": "string",
+                      "moreInfoURL": "https://www.uitpas.be/reward/example-more-info",
                       "inSpotlight": false,
                       "points": 10,
                       "categories": [
@@ -3067,7 +3629,7 @@
             }
           },
           "400": {
-            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/\n\nThe detail property might include more information for the client developer.",
+            "description": "Bad Request. Possible error types:\n\n* https://api.publiq.be/probs/uitpas/invalid-card-system\n\nThe detail property might include more information for the client developer.",
             "content": {
               "application/json": {
                 "schema": {
@@ -3218,7 +3780,14 @@
             }
           },
           "400": {
-            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/social-tariff-expired\n* https://api.publiq.be/probs/uitpas/invalid-uitpas-number\n* https://api.publiq.be/probs/uitpas/reward-period-constraint\n* https://api.publiq.be/probs/uitpas/reward-volume-constraint\n* https://api.publiq.be/probs/uitpas/reward-passholder-constraint\n"
+            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/social-tariff-expired\n* https://api.publiq.be/probs/uitpas/invalid-uitpas-number\n\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
           },
           "401": {
             "$ref": "#/components/responses/Unauthorized"
@@ -3286,7 +3855,7 @@
                           "end": "2019-08-24T14:15:22Z"
                         },
                         "points": 0,
-                        "moreInfoURL": "string",
+                        "moreInfoURL": "https://www.uitpas.be/reward/example-more-info",
                         "redeemType": "PHYSICAL",
                         "owningCardSystem": {
                           "id": 0,
@@ -3504,7 +4073,14 @@
             }
           },
           "400": {
-            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/social-tariff-expired\n* https://api.publiq.be/probs/uitpas/invalid-uitpas-number\n\n"
+            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/social-tariff-expired\n* https://api.publiq.be/probs/uitpas/invalid-uitpas-number\n\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
           },
           "401": {
             "$ref": "#/components/responses/Unauthorized"
@@ -3561,564 +4137,6 @@
             },
             "in": "query",
             "name": "limit"
-          }
-        ]
-      }
-    },
-    "/rewards": {
-      "post": {
-        "summary": "Create new reward",
-        "operationId": "post-rewards",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Reward"
-                },
-                "examples": {
-                  "Ticketsale reward": {
-                    "value": {
-                      "id": "1234",
-                      "title": "Free entrance for 10 points on 1 specific event",
-                      "type": "POINTS",
-                      "owningCardSystem": {
-                        "id": 1,
-                        "name": "UiTPAS Dender"
-                      },
-                      "allCardSystems": true,
-                      "status": "ACTIVE",
-                      "maxAvailableUnits": 0,
-                      "unitsTaken": 0,
-                      "promotionalDescription": "this is the mandatory description",
-                      "pictures": [
-                        "https://www.uitpas.be/default-picture-for-ticketsale-rewards.png"
-                      ],
-                      "publicationPeriod": {
-                        "begin": "2021-08-24T14:15:22Z",
-                        "end": "2022-08-24T14:15:22Z"
-                      },
-                      "redeemPeriod": {
-                        "begin": "2021-08-24T14:15:22Z",
-                        "end": "2022-08-24T14:15:22Z"
-                      },
-                      "grantingPeriod": {
-                        "begin": "2021-08-24T14:15:22Z",
-                        "end": "2022-08-24T14:15:22Z"
-                      },
-                      "moreInfoURL": "string",
-                      "inSpotlight": false,
-                      "points": 10,
-                      "categories": [
-                        "Doen"
-                      ],
-                      "forKids": false,
-                      "sport": false,
-                      "labels": "",
-                      "redeemType": "TICKETSALE",
-                      "usesCodes": false,
-                      "ticketSaleDiscount": {
-                        "amount": 5,
-                        "type": "ABSOLUTE",
-                        "conditions": [
-                          {
-                            "type": "EVENT",
-                            "values": [
-                              "5a0967f9-cc06-4c3c-9206-30481a767434"
-                            ]
-                          }
-                        ]
-                      }
-                    }
-                  },
-                  "Points reward": {
-                    "value": {
-                      "id": "1234",
-                      "type": "POINTS",
-                      "title": "Gratis koffie",
-                      "owningCardSystem": {
-                        "id": 1,
-                        "name": "UiTPAS Dender"
-                      },
-                      "allCardSystems": true,
-                      "status": "ACTIVE",
-                      "maxAvailableUnits": 100,
-                      "unitsTaken": 0,
-                      "promotionalDescription": "this is the mandatory description",
-                      "pictures": [
-                        "https://www.uitpas.be/default-picture-for-points-rewards.png"
-                      ],
-                      "publicationPeriod": {
-                        "begin": "2021-08-24T14:15:22Z",
-                        "end": "2022-08-24T14:15:22Z"
-                      },
-                      "redeemPeriod": {
-                        "begin": "2021-08-24T14:15:22Z",
-                        "end": "2022-08-24T14:15:22Z"
-                      },
-                      "grantingPeriod": {
-                        "begin": "2021-08-24T14:15:22Z",
-                        "end": "2022-08-24T14:15:22Z"
-                      },
-                      "moreInfoURL": "string",
-                      "inSpotlight": false,
-                      "points": 3,
-                      "categories": [
-                        "Eten en drinken"
-                      ],
-                      "forKids": false,
-                      "sport": false,
-                      "labels": "",
-                      "redeemType": "PHYSICAL",
-                      "usesCodes": false
-                    }
-                  },
-                  "Welcome Reward": {
-                    "value": {
-                      "id": "1234",
-                      "type": "WELCOME",
-                      "title": "Gratis zwemmen",
-                      "owningCardSystem": {
-                        "id": 1,
-                        "name": "UiTPAS Dender"
-                      },
-                      "allCardSystems": true,
-                      "status": "ACTIVE",
-                      "maxAvailableUnits": 100,
-                      "unitsTaken": 0,
-                      "promotionalDescription": "this is the mandatory description",
-                      "pictures": [
-                        "https://www.uitpas.be/default-picture-for-welcome-rewards.png"
-                      ],
-                      "publicationPeriod": {
-                        "begin": "2021-08-24T14:15:22Z",
-                        "end": "2022-08-24T14:15:22Z"
-                      },
-                      "redeemPeriod": {
-                        "begin": "2021-08-24T14:15:22Z",
-                        "end": "2022-08-24T14:15:22Z"
-                      },
-                      "grantingPeriod": {
-                        "begin": "2021-08-24T14:15:22Z",
-                        "end": "2022-08-24T14:15:22Z"
-                      },
-                      "moreInfoURL": "string",
-                      "inSpotlight": false,
-                      "points": 0,
-                      "categories": [
-                        "Doen"
-                      ],
-                      "forKids": false,
-                      "sport": false,
-                      "labels": "",
-                      "redeemType": "PHYSICAL",
-                      "usesCodes": false
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/components/responses/Unauthorized"
-          },
-          "403": {
-            "$ref": "#/components/responses/Forbidden"
-          }
-        },
-        "security": [
-          {
-            "USER_ACCESS_TOKEN": []
-          },
-          {
-            "CLIENT_ACCESS_TOKEN": []
-          }
-        ],
-        "description": "Create a new reward.\n\nThe caller of this request must have `REWARDS_WRITE` permission for the given organizer.",
-        "tags": [
-          "Rewards"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Reward"
-              },
-              "examples": {
-                "Ticket sale reward": {
-                  "value": {
-                    "title": "Free entrance for 10 points on 1 specific event",
-                    "type": "POINTS",
-                    "promotionalDescription": "this is the mandatory description",
-                    "publicationPeriod": {
-                      "begin": "2021-08-24T14:15:22Z",
-                      "end": "2022-08-24T14:15:22Z"
-                    },
-                    "grantingPeriod": {
-                      "begin": "2021-08-24T14:15:22Z",
-                      "end": "2022-08-24T14:15:22Z"
-                    },
-                    "moreInfoURL": "https://example.org/more-info-about-this-reward",
-                    "redeemType": "TICKETSALE",
-                    "points": 10,
-                    "ticketSaleDiscount": {
-                      "amount": 5,
-                      "type": "ABSOLUTE",
-                      "conditions": [
-                        {
-                          "type": "EVENT",
-                          "values": [
-                            "5a0967f9-cc06-4c3c-9206-30481a767434"
-                          ]
-                        }
-                      ]
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "get": {
-        "summary": "Search rewards",
-        "operationId": "get-rewards",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/RewardsPaginatedResponse"
-                },
-                "examples": {
-                  "Example": {
-                    "value": {
-                      "totalItems": 1,
-                      "member": [
-                        {
-                          "id": "1234",
-                          "title": "Free entrance for 10 points on 1 specific event",
-                          "type": "POINTS",
-                          "owningCardSystem": {
-                            "id": 1,
-                            "name": "UiTPAS Dender"
-                          },
-                          "allCardSystems": true,
-                          "status": "ACTIVE",
-                          "maxAvailableUnits": 0,
-                          "unitsTaken": 0,
-                          "promotionalDescription": "this is the mandatory description",
-                          "practicalInfo": "this is an optional extra description",
-                          "pictures": [
-                            "https://www.uitpas.be/default-picture-for-ticketsale-rewards.png"
-                          ],
-                          "publicationPeriod": {
-                            "begin": "2021-08-24T14:15:22Z",
-                            "end": "2022-08-24T14:15:22Z"
-                          },
-                          "redeemPeriod": {
-                            "begin": "2021-08-24T14:15:22Z",
-                            "end": "2022-08-24T14:15:22Z"
-                          },
-                          "grantingPeriod": {
-                            "begin": "2021-08-24T14:15:22Z",
-                            "end": "2022-08-24T14:15:22Z"
-                          },
-                          "moreInfoURL": "string",
-                          "inSpotlight": false,
-                          "points": 10,
-                          "types": [
-                            "string"
-                          ],
-                          "forKids": false,
-                          "sport": false,
-                          "labels": "",
-                          "redeemType": "TICKETSALE",
-                          "usesCodes": false,
-                          "ticketSaleDiscount": {
-                            "amount": 5,
-                            "type": "ABSOLUTE",
-                            "conditions": [
-                              {
-                                "type": "EVENT",
-                                "values": [
-                                  "5a0967f9-cc06-4c3c-9206-30481a767434"
-                                ]
-                              }
-                            ]
-                          }
-                        }
-                      ]
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request. Possible error types:\n\n* https://api.publiq.be/probs/uitpas/organizer-not-found\n* https://api.publiq.be/probs/uitpas/event-not-found\n* https://api.publiq.be/probs/uitpas/cardsystem-not-found"
-          },
-          "401": {
-            "$ref": "#/components/responses/Unauthorized"
-          },
-          "403": {
-            "$ref": "#/components/responses/Forbidden"
-          }
-        },
-        "tags": [
-          "Rewards"
-        ],
-        "description": "Search rewards.\n\nThe caller of this request must have `REWARDS_READ` permission and possibly also `REWARDS_PASSHOLDER_READ` to use the `isRedeemableBy` query parameter.",
-        "security": [
-          {
-            "USER_ACCESS_TOKEN": []
-          },
-          {
-            "CLIENT_ACCESS_TOKEN": []
-          }
-        ],
-        "parameters": [
-          {
-            "schema": {
-              "type": "integer"
-            },
-            "in": "query",
-            "name": "start",
-            "description": "Start index of the results. Default 0."
-          },
-          {
-            "schema": {
-              "type": "integer",
-              "default": 20
-            },
-            "in": "query",
-            "name": "limit",
-            "description": "Maximum number of results."
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
-            "name": "organizerId",
-            "description": "Search ticketsale rewards valid for this organizer"
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
-            "name": "eventId",
-            "description": "Search ticketsale rewards valid for this event"
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
-            "name": "owningCardSystemId",
-            "description": "Search rewards of this card system"
-          },
-          {
-            "schema": {
-              "type": "string",
-              "enum": [
-                "POINTS",
-                "WELCOME"
-              ]
-            },
-            "in": "query",
-            "name": "type",
-            "description": "Search rewards of this type"
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
-            "name": "text",
-            "description": "Free text search in reward name, organizer or city."
-          },
-          {
-            "schema": {
-              "type": "string",
-              "enum": [
-                "type",
-                "owningCardSystemId",
-                "extras",
-                "categories"
-              ]
-            },
-            "in": "query",
-            "name": "facets",
-            "description": "Request facets of the given field in the response. Can be included more than once to allow multiple values."
-          },
-          {
-            "schema": {
-              "type": "string",
-              "enum": [
-                "asc",
-                "desc"
-              ]
-            },
-            "in": "query",
-            "name": "sort[name]",
-            "description": "Sort on reward name"
-          },
-          {
-            "schema": {
-              "type": "string",
-              "enum": [
-                "asc",
-                "desc"
-              ]
-            },
-            "in": "query",
-            "name": "sort[creationDate]",
-            "description": "Sort on reward creation date"
-          },
-          {
-            "schema": {
-              "type": "string",
-              "enum": [
-                "asc",
-                "desc"
-              ]
-            },
-            "in": "query",
-            "name": "sort[redeemCount]",
-            "description": "Sort on redeem count"
-          },
-          {
-            "schema": {
-              "type": "string",
-              "enum": [
-                "asc",
-                "desc"
-              ]
-            },
-            "in": "query",
-            "name": "sort[points]",
-            "description": "Sort on reward points"
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
-            "name": "categories",
-            "description": "Search rewards of this category. Can be included more than once to allow multiple values."
-          },
-          {
-            "schema": {
-              "type": "integer"
-            },
-            "in": "query",
-            "name": "pointsFrom",
-            "description": "Include only rewards with this value (including) or more points."
-          },
-          {
-            "schema": {
-              "type": "integer"
-            },
-            "in": "query",
-            "name": "pointsTo",
-            "description": "Include only rewards with this value (including) or less points."
-          },
-          {
-            "schema": {
-              "type": "string",
-              "enum": [
-                "ACTIVE",
-                "INACTIVE",
-                "DELETED"
-              ],
-              "default": "ACTIVE"
-            },
-            "in": "query",
-            "name": "status",
-            "description": "Search rewards of this status."
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
-            "name": "publicationPeriodFrom",
-            "description": "Include only rewards with this date (including) or more recent is within the publication period. Format yyyy-mm-dd e.g. 2003-01-01"
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
-            "name": "publicationPeriodTo",
-            "description": "Include only rewards with this date (including) or older is within the publication period. Format yyyy-mm-dd e.g. 2003-01-01"
-          },
-          {
-            "schema": {
-              "type": "boolean",
-              "default": true
-            },
-            "in": "query",
-            "name": "permanentCardSystemOnly",
-            "description": "Include only rewards of permanent card systems."
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
-            "name": "grantingPeriodFrom",
-            "description": "Include only rewards with this date (including) or more recent is within the granting period. Format yyyy-mm-dd e.g. 2003-01-01"
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
-            "name": "grantingPeriodTo",
-            "description": "Include only rewards with this date (including) or older is within the granting period. Format yyyy-mm-dd e.g. 2003-01-01"
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
-            "name": "redeemPeriodFrom",
-            "description": "Include only rewards with this date (including) or more recent is within the redeem period. Format yyyy-mm-dd e.g. 2003-01-01"
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
-            "name": "redeemPeriodTo",
-            "description": "Include only rewards with this date (including) or older is within the redeem period. Format yyyy-mm-dd e.g. 2003-01-01"
-          },
-          {
-            "schema": {
-              "type": "string",
-              "enum": [
-                "forKids",
-                "sport",
-                "online",
-                "lastChance"
-              ]
-            },
-            "in": "query",
-            "name": "extras",
-            "description": "Can be included more than once to allow multiple values."
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
-            "name": "isRedeemableBy",
-            "description": "Include only rewards that are currently redeemable by the given UiTPAS number. The use of this fields requires `REWARDS_PASSHOLDER_READ` permission or a user access token of the given passholder."
           }
         ]
       }
@@ -4370,20 +4388,6 @@
           "facets": {
             "type": "object",
             "description": "TODO"
-          },
-          "suggestions": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "text": {
-                  "type": "string"
-                },
-                "score": {
-                  "type": "number"
-                }
-              }
-            }
           }
         }
       },
@@ -5130,7 +5134,8 @@
             "description": "Number of points needed to redeem the Reward"
           },
           "moreInfoURL": {
-            "type": "string"
+            "type": "string",
+            "description": "URL where a user can find more info about this reward."
           },
           "redeemType": {
             "type": "string",
@@ -5196,7 +5201,7 @@
           },
           "categories": {
             "type": "array",
-            "description": "List of types of this Reward. This is free text, but common types are: \"Gadget of item\", \"Doen\", \"Eten en drinken\" and \"Goede doel\".",
+            "description": "List of categories of this Reward.",
             "items": {
               "type": "string",
               "enum": [
@@ -5352,6 +5357,11 @@
           }
         },
         "description": "A client access token, obtained by exchanging your client id and client secret for a token via an HTTP request to publiq's authorization server. See the [authentication docs about client access tokens](https://publiq.stoplight.io/docs/authentication/docs/client-access-token.md) for more info."
+      },
+      "CLIENT_IDENTIFICATION": {
+        "name": "x-client-id",
+        "type": "apiKey",
+        "in": "header"
       }
     },
     "parameters": {},

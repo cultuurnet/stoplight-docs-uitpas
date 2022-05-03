@@ -2921,7 +2921,7 @@
           }
         },
         "operationId": "get-card-systems",
-        "description": "Search card systems.\n\nThis caller of this method, identified with client identification, does not require any permissions.",
+        "description": "Search card systems.\n\nThis caller of this method, identified by client identification, client access token or user access token, does not require any permissions.",
         "parameters": [
           {
             "schema": {
@@ -2929,16 +2929,8 @@
               "default": true
             },
             "in": "query",
-            "name": "permanentOnly",
-            "description": "Search only permanent card systems."
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "x-client-id",
-            "description": "API key identifying the calling client"
+            "name": "permanent",
+            "description": "Include only permanent (`true`) card systems or temporary (`false`) card systems."
           },
           {
             "schema": {
@@ -2976,6 +2968,17 @@
         ],
         "tags": [
           "Card Systems"
+        ],
+        "security": [
+          {
+            "CLIENT_IDENTIFICATION": []
+          },
+          {
+            "CLIENT_ACCESS_TOKEN": []
+          },
+          {
+            "USER_ACCESS_TOKEN": []
+          }
         ]
       }
     }
@@ -3896,6 +3899,11 @@
           }
         },
         "description": "A client access token, obtained by exchanging your client id and client secret for a token via an HTTP request to publiq's authorization server. See the [authentication docs about client access tokens](https://publiq.stoplight.io/docs/authentication/docs/client-access-token.md) for more info."
+      },
+      "CLIENT_IDENTIFICATION": {
+        "name": "x-client-id",
+        "type": "apiKey",
+        "in": "query"
       }
     },
     "parameters": {},

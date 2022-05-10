@@ -3240,7 +3240,8 @@
             },
             "in": "query",
             "name": "start",
-            "description": "Start index of the results. Default 0."
+            "description": "Start index of the results. Default 0.",
+            "style": "form"
           },
           {
             "schema": {
@@ -3249,7 +3250,8 @@
             },
             "in": "query",
             "name": "limit",
-            "description": "Maximum number of results."
+            "description": "Maximum number of results.",
+            "style": "form"
           },
           {
             "schema": {
@@ -3257,7 +3259,8 @@
             },
             "in": "query",
             "name": "organizerId",
-            "description": "Search rewards applicable for this organizer"
+            "description": "Search rewards applicable for this organizer",
+            "style": "form"
           },
           {
             "schema": {
@@ -3265,7 +3268,8 @@
             },
             "in": "query",
             "name": "owningCardSystemId",
-            "description": "Search rewards of this card system"
+            "description": "Search rewards of this card system",
+            "style": "form"
           },
           {
             "schema": {
@@ -3277,7 +3281,8 @@
             },
             "in": "query",
             "name": "type",
-            "description": "Search rewards of this type"
+            "description": "Search rewards of this type",
+            "style": "form"
           },
           {
             "schema": {
@@ -3285,7 +3290,8 @@
             },
             "in": "query",
             "name": "text",
-            "description": "Free text search in reward name, organizer or city."
+            "description": "Free text search in reward name, organizer or city.",
+            "style": "form"
           },
           {
             "schema": {
@@ -3299,7 +3305,8 @@
             },
             "in": "query",
             "name": "facets",
-            "description": "Request facets of the given field in the response. Can be included more than once to allow multiple values."
+            "description": "Request facets of the given field in the response. Can be included more than once to allow multiple values.",
+            "style": "form"
           },
           {
             "schema": {
@@ -3311,7 +3318,8 @@
             },
             "in": "query",
             "name": "sort[name]",
-            "description": "Sort on reward name"
+            "description": "Sort on reward name",
+            "style": "form"
           },
           {
             "schema": {
@@ -3323,7 +3331,8 @@
             },
             "in": "query",
             "name": "sort[creationDate]",
-            "description": "Sort on reward creation date"
+            "description": "Sort on reward creation date",
+            "style": "form"
           },
           {
             "schema": {
@@ -3335,7 +3344,8 @@
             },
             "in": "query",
             "name": "sort[redeemCount]",
-            "description": "Sort on redeem count"
+            "description": "Sort on redeem count",
+            "style": "form"
           },
           {
             "schema": {
@@ -3347,7 +3357,8 @@
             },
             "in": "query",
             "name": "sort[points]",
-            "description": "Sort on reward points"
+            "description": "Sort on reward points",
+            "style": "form"
           },
           {
             "schema": {
@@ -3361,7 +3372,8 @@
             },
             "in": "query",
             "name": "categories",
-            "description": "Search rewards of this category. Can be included more than once to allow multiple values."
+            "description": "Search rewards of this category. Can be included more than once to allow multiple values.",
+            "style": "form"
           },
           {
             "schema": {
@@ -3369,7 +3381,8 @@
             },
             "in": "query",
             "name": "pointsFrom",
-            "description": "Include only rewards with this value (including) or more points."
+            "description": "Include only rewards with this value (including) or more points.",
+            "style": "form"
           },
           {
             "schema": {
@@ -3377,78 +3390,22 @@
             },
             "in": "query",
             "name": "pointsTo",
-            "description": "Include only rewards with this value (including) or less points."
+            "description": "Include only rewards with this value (including) or less points.",
+            "style": "form"
           },
           {
             "schema": {
               "type": "string",
+              "default": "ENDUSERS",
               "enum": [
-                "ACTIVE",
-                "INACTIVE",
-                "DELETED"
-              ],
-              "default": "ACTIVE"
+                "ALL",
+                "ENDUSERS"
+              ]
             },
             "in": "query",
-            "name": "status",
-            "description": "Search rewards of this status."
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
-            "name": "publicationPeriodFrom",
-            "description": "Include only rewards with this date (including) or more recent is within the publication period. Format yyyy-mm-dd e.g. 2003-01-01"
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
-            "name": "publicationPeriodTo",
-            "description": "Include only rewards with this date (including) or older is within the publication period. Format yyyy-mm-dd e.g. 2003-01-01"
-          },
-          {
-            "schema": {
-              "type": "boolean",
-              "default": true
-            },
-            "in": "query",
-            "name": "permanentCardSystemOnly",
-            "description": "Include only rewards of permanent card systems."
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
-            "name": "grantingPeriodFrom",
-            "description": "Include only rewards with this date (including) or more recent is within the granting period. Format yyyy-mm-dd e.g. 2003-01-01"
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
-            "name": "grantingPeriodTo",
-            "description": "Include only rewards with this date (including) or older is within the granting period. Format yyyy-mm-dd e.g. 2003-01-01"
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
-            "name": "redeemPeriodFrom",
-            "description": "Include only rewards with this date (including) or more recent is within the redeem period. Format yyyy-mm-dd e.g. 2003-01-01"
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
-            "name": "redeemPeriodTo",
-            "description": "Include only rewards with this date (including) or older is within the redeem period. Format yyyy-mm-dd e.g. 2003-01-01"
+            "name": "subset",
+            "description": "Include only rewards of a specific subset. Defaults to `ENDUSERS`, which means all active rewards, that are currently published and in its redeem period and are part of a permanent cardsystem. Set this field to `ALL` to include all rewards.",
+            "style": "form"
           },
           {
             "schema": {
@@ -3462,7 +3419,8 @@
             },
             "in": "query",
             "name": "extras",
-            "description": "Can be included more than once to allow multiple values."
+            "description": "Filter on a number of predefined fields, which are also available as a facet. Can be included more than once to allow multiple values.",
+            "style": "form"
           },
           {
             "schema": {
@@ -3470,7 +3428,8 @@
             },
             "in": "query",
             "name": "isRedeemableBy",
-            "description": "Include only rewards that are currently redeemable by the given UiTPAS number. The use of this fields requires `REWARDS_PASSHOLDER_READ` permission or a user access token of the given passholder."
+            "description": "Include only rewards that are currently redeemable by the given UiTPAS number. The use of this fields requires `REWARDS_PASSHOLDER_READ` permission or a user access token of the given passholder, identified by its UiTPAS number.",
+            "style": "form"
           }
         ]
       }
@@ -4416,29 +4375,19 @@
             }
           },
           "facet": {
-            "description": "Facet information (if requested)",
             "type": "object",
-            "additionalProperties": {
-              "type": "object",
-              "additionalProperties": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "type": "object",
-                    "properties": {
-                      "nl": {
-                        "type": "string"
-                      }
-                    }
-                  },
-                  "count": {
-                    "type": "integer"
-                  }
-                },
-                "required": [
-                  "name",
-                  "count"
-                ]
+            "properties": {
+              "categories": {
+                "$ref": "#/components/schemas/Facet"
+              },
+              "extras": {
+                "$ref": "#/components/schemas/Facet"
+              },
+              "owningCardSystemId": {
+                "$ref": "#/components/schemas/Facet"
+              },
+              "type": {
+                "$ref": "#/components/schemas/Facet"
               }
             }
           }
@@ -5385,6 +5334,49 @@
           "redeemDate"
         ],
         "readOnly": true
+      },
+      "Facet": {
+        "title": "Facet",
+        "type": "object",
+        "additionalProperties": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "object",
+              "properties": {
+                "nl": {
+                  "type": "string"
+                }
+              }
+            },
+            "count": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "name",
+            "count"
+          ]
+        },
+        "x-tags": [
+          "Models"
+        ],
+        "x-examples": {
+          "Example": {
+            "field1": {
+              "name": {
+                "nl": "name1"
+              },
+              "count": 3
+            },
+            "field2": {
+              "name": {
+                "nl": "name2"
+              },
+              "count": 4
+            }
+          }
+        }
       }
     },
     "securitySchemes": {

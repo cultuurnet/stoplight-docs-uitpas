@@ -3410,7 +3410,7 @@
                       "forKids": false,
                       "sport": false,
                       "labels": "",
-                      "redeemType": "TICKETSALE",
+                      "redeemType": "ONLINE",
                       "usesCodes": false
                     }
                   }
@@ -5025,8 +5025,7 @@
             "type": "string",
             "enum": [
               "PHYSICAL",
-              "ONLINE",
-              "TICKETSALE"
+              "ONLINE"
             ]
           },
           "owningCardSystem": {

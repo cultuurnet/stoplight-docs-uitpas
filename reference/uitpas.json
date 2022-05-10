@@ -2884,7 +2884,7 @@
       }
     },
     "/rewards": {
-"get": {
+      "get": {
         "summary": "Search rewards",
         "operationId": "get-rewards",
         "responses": {
@@ -3214,7 +3214,7 @@
             "style": "form"
           }
         ]
-      },      
+      },
       "post": {
         "summary": "Create new reward",
         "operationId": "post-rewards",
@@ -3432,7 +3432,7 @@
             }
           }
         }
-      }      
+      }
     },
     "/rewards/{id}": {
       "get": {
@@ -4117,7 +4117,8 @@
               "type": "integer"
             },
             "in": "query",
-            "name": "start"
+            "name": "start",
+            "description": "Start index of the redeemed Rewards."
           },
           {
             "schema": {
@@ -4125,7 +4126,8 @@
               "default": "20"
             },
             "in": "query",
-            "name": "limit"
+            "name": "limit",
+            "description": "Limit the number of redeemed Rewards in the response."
           }
         ]
       }
@@ -4366,16 +4368,19 @@
         "description": "Paginated response object for rewards",
         "properties": {
           "totalItems": {
-            "type": "integer"
+            "type": "integer",
+            "description": "Total number of Rewards for the request."
           },
           "member": {
             "type": "array",
+            "description": "List of Rewards starting at index `start` and limited to `limit` items.",
             "items": {
               "$ref": "#/components/schemas/Reward"
             }
           },
           "facet": {
             "type": "object",
+            "description": "Facet information for the requested facets.",
             "properties": {
               "categories": {
                 "$ref": "#/components/schemas/Facet"
@@ -4402,10 +4407,12 @@
         "description": "Paginated response object for rewards",
         "properties": {
           "totalItems": {
-            "type": "integer"
+            "type": "integer",
+            "description": "Total number of redeemed Rewards for the request."
           },
           "member": {
             "type": "array",
+            "description": "List of redeemed Rewards starting at index `start` and limited to `limit` items.",
             "items": {
               "$ref": "#/components/schemas/RedeemedReward"
             }
@@ -5107,6 +5114,7 @@
         "properties": {
           "id": {
             "type": "string",
+            "description": "ID of the Reward",
             "readOnly": true
           },
           "title": {
@@ -5228,7 +5236,7 @@
           },
           "usesCodes": {
             "type": "boolean",
-            "description": "Only for Reward of cashinType ONLINE. If set to true this Reward will produce an `redeemCode` when redeemed."
+            "description": "Only for Reward of cashinType ONLINE. If set to true this Reward will produce a `redeemCode` when redeemed."
           },
           "ticketSaleDiscount": {
             "type": "object",
@@ -5300,6 +5308,7 @@
         "properties": {
           "id": {
             "type": "string",
+            "description": "ID of the redeemed reward.",
             "readOnly": true
           },
           "reward": {
@@ -5308,24 +5317,30 @@
           "redeemDate": {
             "type": "string",
             "format": "date-time",
+            "description": "Date of the redeem action.",
             "readOnly": true
           },
           "redeemInfo": {
             "type": "object",
+            "description": "Information about the redeem action.",
             "properties": {
               "text": {
-                "type": "string"
+                "type": "string",
+                "description": "Text to show to the user who redeemed this Reward."
               },
               "link": {
-                "type": "string"
+                "type": "string",
+                "description": "Link for a call-to-action for the redeemded Reward."
               },
               "label": {
-                "type": "string"
+                "type": "string",
+                "description": "Label for the call-to-action of the redeemed Reward."
               }
             }
           },
           "redeemCode": {
-            "type": "string"
+            "type": "string",
+            "description": "Redeem code to show to the user who redeemed this Reward. (only applicable for Rewards that have `usesCodes=true`)"
           }
         },
         "required": [

@@ -2938,20 +2938,8 @@
                           "forKids": false,
                           "sport": false,
                           "labels": "",
-                          "redeemType": "TICKETSALE",
-                          "usesCodes": false,
-                          "ticketSaleDiscount": {
-                            "amount": 5,
-                            "type": "ABSOLUTE",
-                            "conditions": [
-                              {
-                                "type": "EVENT",
-                                "values": [
-                                  "5a0967f9-cc06-4c3c-9206-30481a767434"
-                                ]
-                              }
-                            ]
-                          }
+                          "redeemType": "ONLINE",
+                          "usesCodes": false
                         }
                       ],
                       "facet": {
@@ -3227,60 +3215,6 @@
                   "$ref": "#/components/schemas/Reward"
                 },
                 "examples": {
-                  "Ticketsale reward": {
-                    "value": {
-                      "id": "1234",
-                      "title": "Free entrance for 10 points on 1 specific event",
-                      "type": "POINTS",
-                      "owningCardSystem": {
-                        "id": 1,
-                        "name": "UiTPAS Dender"
-                      },
-                      "allCardSystems": true,
-                      "status": "ACTIVE",
-                      "maxAvailableUnits": 0,
-                      "unitsTaken": 0,
-                      "promotionalDescription": "this is the mandatory description",
-                      "pictures": [
-                        "https://www.uitpas.be/default-picture-for-ticketsale-rewards.png"
-                      ],
-                      "publicationPeriod": {
-                        "begin": "2021-08-24T14:15:22Z",
-                        "end": "2022-08-24T14:15:22Z"
-                      },
-                      "redeemPeriod": {
-                        "begin": "2021-08-24T14:15:22Z",
-                        "end": "2022-08-24T14:15:22Z"
-                      },
-                      "grantingPeriod": {
-                        "begin": "2021-08-24T14:15:22Z",
-                        "end": "2022-08-24T14:15:22Z"
-                      },
-                      "moreInfoURL": "https://www.uitpas.be/reward/example-more-info",
-                      "inSpotlight": false,
-                      "points": 10,
-                      "categories": [
-                        "Doen"
-                      ],
-                      "forKids": false,
-                      "sport": false,
-                      "labels": "",
-                      "redeemType": "TICKETSALE",
-                      "usesCodes": false,
-                      "ticketSaleDiscount": {
-                        "amount": 5,
-                        "type": "ABSOLUTE",
-                        "conditions": [
-                          {
-                            "type": "EVENT",
-                            "values": [
-                              "5a0967f9-cc06-4c3c-9206-30481a767434"
-                            ]
-                          }
-                        ]
-                      }
-                    }
-                  },
                   "Points reward": {
                     "value": {
                       "id": "1234",
@@ -3398,7 +3332,7 @@
                 "$ref": "#/components/schemas/Reward"
               },
               "examples": {
-                "Ticket sale reward": {
+                "Example": {
                   "value": {
                     "title": "Free entrance for 10 points on 1 specific event",
                     "type": "POINTS",
@@ -3412,20 +3346,8 @@
                       "end": "2022-08-24T14:15:22Z"
                     },
                     "moreInfoURL": "https://example.org/more-info-about-this-reward",
-                    "redeemType": "TICKETSALE",
-                    "points": 10,
-                    "ticketSaleDiscount": {
-                      "amount": 5,
-                      "type": "ABSOLUTE",
-                      "conditions": [
-                        {
-                          "type": "EVENT",
-                          "values": [
-                            "5a0967f9-cc06-4c3c-9206-30481a767434"
-                          ]
-                        }
-                      ]
-                    }
+                    "redeemType": "ONLINE",
+                    "points": 10
                   }
                 }
               }
@@ -3489,19 +3411,7 @@
                       "sport": false,
                       "labels": "",
                       "redeemType": "TICKETSALE",
-                      "usesCodes": false,
-                      "ticketSaleDiscount": {
-                        "amount": 5,
-                        "type": "ABSOLUTE",
-                        "conditions": [
-                          {
-                            "type": "EVENT",
-                            "values": [
-                              "5a0967f9-cc06-4c3c-9206-30481a767434"
-                            ]
-                          }
-                        ]
-                      }
+                      "usesCodes": false
                     }
                   }
                 }
@@ -3558,11 +3468,11 @@
                   "$ref": "#/components/schemas/Reward"
                 },
                 "examples": {
-                  "Ticketsale reward": {
+                  "Example": {
                     "value": {
                       "id": "1234",
                       "type": "POINTS",
-                      "title": "Free entrance for 10 points on 1 specific event UPDATE",
+                      "title": "Gratis toegangsticket voor het Design Museum Brussel",
                       "owningCardSystem": {
                         "id": 1,
                         "name": "UiTPAS Dender"
@@ -3597,20 +3507,8 @@
                       "forKids": false,
                       "sport": false,
                       "labels": "",
-                      "redeemType": "TICKETSALE",
-                      "usesCodes": false,
-                      "ticketSaleDiscount": {
-                        "amount": 5,
-                        "type": "ABSOLUTE",
-                        "conditions": [
-                          {
-                            "type": "EVENT",
-                            "values": [
-                              "5a0967f9-cc06-4c3c-9206-30481a767434"
-                            ]
-                          }
-                        ]
-                      }
+                      "redeemType": "ONLINE",
+                      "usesCodes": false
                     }
                   }
                 }
@@ -3659,9 +3557,9 @@
                 "$ref": "#/components/schemas/Reward"
               },
               "examples": {
-                "Ticketsale reward": {
+                "Example": {
                   "value": {
-                    "title": "Free entrance for 10 points on 1 specific event UPDATE",
+                    "title": "Gratis toegangsticket voor het Design Museum Brussel",
                     "type": "POINTS",
                     "maxAvailableUnits": 1000,
                     "promotionalDescription": "this is the mandatory description",
@@ -3679,20 +3577,8 @@
                       "end": "2022-08-24T14:15:22Z"
                     },
                     "moreInfoURL": "https://example.org/more-info-about-this-reward",
-                    "redeemType": "TICKETSALE",
-                    "points": 10,
-                    "ticketSaleDiscount": {
-                      "amount": 5,
-                      "type": "ABSOLUTE",
-                      "conditions": [
-                        {
-                          "type": "EVENT",
-                          "values": [
-                            "5a0967f9-cc06-4c3c-9206-30481a767434"
-                          ]
-                        }
-                      ]
-                    }
+                    "redeemType": "ONLINE",
+                    "points": 10
                   }
                 }
               }
@@ -3820,7 +3706,7 @@
         "operationId": "post-rewards-redeemed",
         "responses": {
           "201": {
-            "description": "Created",
+            "description": "Created.",
             "content": {
               "application/json": {
                 "schema": {
@@ -4032,19 +3918,7 @@
                             "forKids": true,
                             "sport": true,
                             "labels": "string",
-                            "usesCodes": true,
-                            "ticketSaleDiscount": {
-                              "amount": 0,
-                              "type": "ABSOLUTE",
-                              "conditions": [
-                                {
-                                  "type": "EVENT",
-                                  "values": [
-                                    "string"
-                                  ]
-                                }
-                              ]
-                            }
+                            "usesCodes": true
                           },
                           "redeemDate": "2019-08-24T14:15:22Z",
                           "redeemInfo": {
@@ -5237,55 +5111,6 @@
           "usesCodes": {
             "type": "boolean",
             "description": "Only for Reward of cashinType ONLINE. If set to true this Reward will produce a `redeemCode` when redeemed."
-          },
-          "ticketSaleDiscount": {
-            "type": "object",
-            "description": "Only for Reward of cashInType TICKETSALE. Describes the discount a passholder can receive in exhange of this Reward.",
-            "properties": {
-              "amount": {
-                "type": "number",
-                "description": "Discount amount a passholder can receive on a ticket sale, in euro or percentage."
-              },
-              "type": {
-                "type": "string",
-                "enum": [
-                  "ABSOLUTE",
-                  "PERCENTAGE"
-                ],
-                "description": "Whether the discount `amount` is absolute (in euro) or relative (percentage of the regular price)"
-              },
-              "conditions": {
-                "type": "array",
-                "description": "List of conditions to which this TicketSale Reward applies.",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "EVENT",
-                        "ORGANIZER"
-                      ],
-                      "description": "Type of the condition."
-                    },
-                    "values": {
-                      "type": "array",
-                      "description": "List of values of the condition",
-                      "items": {
-                        "type": "string"
-                      }
-                    }
-                  },
-                  "required": [
-                    "type"
-                  ]
-                }
-              }
-            },
-            "required": [
-              "amount",
-              "type"
-            ]
           }
         },
         "required": [

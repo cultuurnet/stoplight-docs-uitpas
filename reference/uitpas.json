@@ -2884,225 +2884,7 @@
       }
     },
     "/rewards": {
-      "post": {
-        "summary": "Create new reward",
-        "operationId": "post-rewards",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Reward"
-                },
-                "examples": {
-                  "Ticketsale reward": {
-                    "value": {
-                      "id": "1234",
-                      "title": "Free entrance for 10 points on 1 specific event",
-                      "type": "POINTS",
-                      "owningCardSystem": {
-                        "id": 1,
-                        "name": "UiTPAS Dender"
-                      },
-                      "allCardSystems": true,
-                      "status": "ACTIVE",
-                      "maxAvailableUnits": 0,
-                      "unitsTaken": 0,
-                      "promotionalDescription": "this is the mandatory description",
-                      "pictures": [
-                        "https://www.uitpas.be/default-picture-for-ticketsale-rewards.png"
-                      ],
-                      "publicationPeriod": {
-                        "begin": "2021-08-24T14:15:22Z",
-                        "end": "2022-08-24T14:15:22Z"
-                      },
-                      "redeemPeriod": {
-                        "begin": "2021-08-24T14:15:22Z",
-                        "end": "2022-08-24T14:15:22Z"
-                      },
-                      "grantingPeriod": {
-                        "begin": "2021-08-24T14:15:22Z",
-                        "end": "2022-08-24T14:15:22Z"
-                      },
-                      "moreInfoURL": "https://www.uitpas.be/reward/example-more-info",
-                      "inSpotlight": false,
-                      "points": 10,
-                      "categories": [
-                        "Doen"
-                      ],
-                      "forKids": false,
-                      "sport": false,
-                      "labels": "",
-                      "redeemType": "TICKETSALE",
-                      "usesCodes": false,
-                      "ticketSaleDiscount": {
-                        "amount": 5,
-                        "type": "ABSOLUTE",
-                        "conditions": [
-                          {
-                            "type": "EVENT",
-                            "values": [
-                              "5a0967f9-cc06-4c3c-9206-30481a767434"
-                            ]
-                          }
-                        ]
-                      }
-                    }
-                  },
-                  "Points reward": {
-                    "value": {
-                      "id": "1234",
-                      "type": "POINTS",
-                      "title": "Gratis koffie",
-                      "owningCardSystem": {
-                        "id": 1,
-                        "name": "UiTPAS Dender"
-                      },
-                      "allCardSystems": true,
-                      "status": "ACTIVE",
-                      "maxAvailableUnits": 100,
-                      "unitsTaken": 0,
-                      "promotionalDescription": "this is the mandatory description",
-                      "pictures": [
-                        "https://www.uitpas.be/default-picture-for-points-rewards.png"
-                      ],
-                      "publicationPeriod": {
-                        "begin": "2021-08-24T14:15:22Z",
-                        "end": "2022-08-24T14:15:22Z"
-                      },
-                      "redeemPeriod": {
-                        "begin": "2021-08-24T14:15:22Z",
-                        "end": "2022-08-24T14:15:22Z"
-                      },
-                      "grantingPeriod": {
-                        "begin": "2021-08-24T14:15:22Z",
-                        "end": "2022-08-24T14:15:22Z"
-                      },
-                      "moreInfoURL": "string",
-                      "inSpotlight": false,
-                      "points": 3,
-                      "categories": [
-                        "Eten en drinken"
-                      ],
-                      "forKids": false,
-                      "sport": false,
-                      "labels": "",
-                      "redeemType": "PHYSICAL",
-                      "usesCodes": false
-                    }
-                  },
-                  "Welcome Reward": {
-                    "value": {
-                      "id": "1234",
-                      "type": "WELCOME",
-                      "title": "Gratis zwemmen",
-                      "owningCardSystem": {
-                        "id": 1,
-                        "name": "UiTPAS Dender"
-                      },
-                      "allCardSystems": true,
-                      "status": "ACTIVE",
-                      "maxAvailableUnits": 100,
-                      "unitsTaken": 0,
-                      "promotionalDescription": "this is the mandatory description",
-                      "pictures": [
-                        "https://www.uitpas.be/default-picture-for-welcome-rewards.png"
-                      ],
-                      "publicationPeriod": {
-                        "begin": "2021-08-24T14:15:22Z",
-                        "end": "2022-08-24T14:15:22Z"
-                      },
-                      "redeemPeriod": {
-                        "begin": "2021-08-24T14:15:22Z",
-                        "end": "2022-08-24T14:15:22Z"
-                      },
-                      "grantingPeriod": {
-                        "begin": "2021-08-24T14:15:22Z",
-                        "end": "2022-08-24T14:15:22Z"
-                      },
-                      "moreInfoURL": "string",
-                      "inSpotlight": false,
-                      "points": 0,
-                      "categories": [
-                        "Doen"
-                      ],
-                      "forKids": false,
-                      "sport": false,
-                      "labels": "",
-                      "redeemType": "PHYSICAL",
-                      "usesCodes": false
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request. Possible error types:\n\n* https://api.publiq.be/probs/uitpas/invalid-card-system\n\nThe detail property might include more information for the client developer."
-          },
-          "401": {
-            "$ref": "#/components/responses/Unauthorized"
-          },
-          "403": {
-            "$ref": "#/components/responses/Forbidden"
-          }
-        },
-        "security": [
-          {
-            "USER_ACCESS_TOKEN": []
-          },
-          {
-            "CLIENT_ACCESS_TOKEN": []
-          }
-        ],
-        "description": "Create a new reward.\n\nThe caller of this request must have `REWARDS_WRITE` permission for the given organizer.",
-        "tags": [
-          "Rewards"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Reward"
-              },
-              "examples": {
-                "Ticket sale reward": {
-                  "value": {
-                    "title": "Free entrance for 10 points on 1 specific event",
-                    "type": "POINTS",
-                    "promotionalDescription": "this is the mandatory description",
-                    "publicationPeriod": {
-                      "begin": "2021-08-24T14:15:22Z",
-                      "end": "2022-08-24T14:15:22Z"
-                    },
-                    "grantingPeriod": {
-                      "begin": "2021-08-24T14:15:22Z",
-                      "end": "2022-08-24T14:15:22Z"
-                    },
-                    "moreInfoURL": "https://example.org/more-info-about-this-reward",
-                    "redeemType": "TICKETSALE",
-                    "points": 10,
-                    "ticketSaleDiscount": {
-                      "amount": 5,
-                      "type": "ABSOLUTE",
-                      "conditions": [
-                        {
-                          "type": "EVENT",
-                          "values": [
-                            "5a0967f9-cc06-4c3c-9206-30481a767434"
-                          ]
-                        }
-                      ]
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "get": {
+"get": {
         "summary": "Search rewards",
         "operationId": "get-rewards",
         "responses": {
@@ -3432,7 +3214,225 @@
             "style": "form"
           }
         ]
-      }
+      },      
+      "post": {
+        "summary": "Create new reward",
+        "operationId": "post-rewards",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Reward"
+                },
+                "examples": {
+                  "Ticketsale reward": {
+                    "value": {
+                      "id": "1234",
+                      "title": "Free entrance for 10 points on 1 specific event",
+                      "type": "POINTS",
+                      "owningCardSystem": {
+                        "id": 1,
+                        "name": "UiTPAS Dender"
+                      },
+                      "allCardSystems": true,
+                      "status": "ACTIVE",
+                      "maxAvailableUnits": 0,
+                      "unitsTaken": 0,
+                      "promotionalDescription": "this is the mandatory description",
+                      "pictures": [
+                        "https://www.uitpas.be/default-picture-for-ticketsale-rewards.png"
+                      ],
+                      "publicationPeriod": {
+                        "begin": "2021-08-24T14:15:22Z",
+                        "end": "2022-08-24T14:15:22Z"
+                      },
+                      "redeemPeriod": {
+                        "begin": "2021-08-24T14:15:22Z",
+                        "end": "2022-08-24T14:15:22Z"
+                      },
+                      "grantingPeriod": {
+                        "begin": "2021-08-24T14:15:22Z",
+                        "end": "2022-08-24T14:15:22Z"
+                      },
+                      "moreInfoURL": "https://www.uitpas.be/reward/example-more-info",
+                      "inSpotlight": false,
+                      "points": 10,
+                      "categories": [
+                        "Doen"
+                      ],
+                      "forKids": false,
+                      "sport": false,
+                      "labels": "",
+                      "redeemType": "TICKETSALE",
+                      "usesCodes": false,
+                      "ticketSaleDiscount": {
+                        "amount": 5,
+                        "type": "ABSOLUTE",
+                        "conditions": [
+                          {
+                            "type": "EVENT",
+                            "values": [
+                              "5a0967f9-cc06-4c3c-9206-30481a767434"
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "Points reward": {
+                    "value": {
+                      "id": "1234",
+                      "type": "POINTS",
+                      "title": "Gratis koffie",
+                      "owningCardSystem": {
+                        "id": 1,
+                        "name": "UiTPAS Dender"
+                      },
+                      "allCardSystems": true,
+                      "status": "ACTIVE",
+                      "maxAvailableUnits": 100,
+                      "unitsTaken": 0,
+                      "promotionalDescription": "this is the mandatory description",
+                      "pictures": [
+                        "https://www.uitpas.be/default-picture-for-points-rewards.png"
+                      ],
+                      "publicationPeriod": {
+                        "begin": "2021-08-24T14:15:22Z",
+                        "end": "2022-08-24T14:15:22Z"
+                      },
+                      "redeemPeriod": {
+                        "begin": "2021-08-24T14:15:22Z",
+                        "end": "2022-08-24T14:15:22Z"
+                      },
+                      "grantingPeriod": {
+                        "begin": "2021-08-24T14:15:22Z",
+                        "end": "2022-08-24T14:15:22Z"
+                      },
+                      "moreInfoURL": "string",
+                      "inSpotlight": false,
+                      "points": 3,
+                      "categories": [
+                        "Eten en drinken"
+                      ],
+                      "forKids": false,
+                      "sport": false,
+                      "labels": "",
+                      "redeemType": "PHYSICAL",
+                      "usesCodes": false
+                    }
+                  },
+                  "Welcome Reward": {
+                    "value": {
+                      "id": "1234",
+                      "type": "WELCOME",
+                      "title": "Gratis zwemmen",
+                      "owningCardSystem": {
+                        "id": 1,
+                        "name": "UiTPAS Dender"
+                      },
+                      "allCardSystems": true,
+                      "status": "ACTIVE",
+                      "maxAvailableUnits": 100,
+                      "unitsTaken": 0,
+                      "promotionalDescription": "this is the mandatory description",
+                      "pictures": [
+                        "https://www.uitpas.be/default-picture-for-welcome-rewards.png"
+                      ],
+                      "publicationPeriod": {
+                        "begin": "2021-08-24T14:15:22Z",
+                        "end": "2022-08-24T14:15:22Z"
+                      },
+                      "redeemPeriod": {
+                        "begin": "2021-08-24T14:15:22Z",
+                        "end": "2022-08-24T14:15:22Z"
+                      },
+                      "grantingPeriod": {
+                        "begin": "2021-08-24T14:15:22Z",
+                        "end": "2022-08-24T14:15:22Z"
+                      },
+                      "moreInfoURL": "string",
+                      "inSpotlight": false,
+                      "points": 0,
+                      "categories": [
+                        "Doen"
+                      ],
+                      "forKids": false,
+                      "sport": false,
+                      "labels": "",
+                      "redeemType": "PHYSICAL",
+                      "usesCodes": false
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. Possible error types:\n\n* https://api.publiq.be/probs/uitpas/invalid-card-system\n\nThe detail property might include more information for the client developer."
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          }
+        },
+        "security": [
+          {
+            "USER_ACCESS_TOKEN": []
+          },
+          {
+            "CLIENT_ACCESS_TOKEN": []
+          }
+        ],
+        "description": "Create a new reward.\n\nThe caller of this request must have `REWARDS_WRITE` permission for the given organizer.",
+        "tags": [
+          "Rewards"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Reward"
+              },
+              "examples": {
+                "Ticket sale reward": {
+                  "value": {
+                    "title": "Free entrance for 10 points on 1 specific event",
+                    "type": "POINTS",
+                    "promotionalDescription": "this is the mandatory description",
+                    "publicationPeriod": {
+                      "begin": "2021-08-24T14:15:22Z",
+                      "end": "2022-08-24T14:15:22Z"
+                    },
+                    "grantingPeriod": {
+                      "begin": "2021-08-24T14:15:22Z",
+                      "end": "2022-08-24T14:15:22Z"
+                    },
+                    "moreInfoURL": "https://example.org/more-info-about-this-reward",
+                    "redeemType": "TICKETSALE",
+                    "points": 10,
+                    "ticketSaleDiscount": {
+                      "amount": 5,
+                      "type": "ABSOLUTE",
+                      "conditions": [
+                        {
+                          "type": "EVENT",
+                          "values": [
+                            "5a0967f9-cc06-4c3c-9206-30481a767434"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }      
     },
     "/rewards/{id}": {
       "get": {

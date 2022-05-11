@@ -3029,7 +3029,7 @@
             },
             "in": "query",
             "name": "organizerId",
-            "description": "Search rewards applicable for this organizer",
+            "description": "Include only rewards applicable for this organizer",
             "style": "form"
           },
           {
@@ -3038,7 +3038,7 @@
             },
             "in": "query",
             "name": "owningCardSystemId",
-            "description": "Search rewards of this card system",
+            "description": "Include only rewards of this card system",
             "style": "form"
           },
           {
@@ -3051,7 +3051,7 @@
             },
             "in": "query",
             "name": "type",
-            "description": "Search rewards of this type",
+            "description": "Include only rewards of this type",
             "style": "form"
           },
           {
@@ -3142,7 +3142,7 @@
             },
             "in": "query",
             "name": "categories",
-            "description": "Search rewards of this category. Can be included more than once to allow multiple values.",
+            "description": "Include only rewards of this category. Can be included more than once to allow multiple values.",
             "style": "form"
           },
           {

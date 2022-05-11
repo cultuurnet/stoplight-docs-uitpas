@@ -3286,7 +3286,7 @@
                         "begin": "2021-08-24T14:15:22Z",
                         "end": "2022-08-24T14:15:22Z"
                       },
-                      "moreInfoURL": "string",
+                      "moreInfoURL": "https://example.org/more-info-about-this-reward",
                       "inSpotlight": false,
                       "points": 0,
                       "categories": [

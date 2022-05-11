@@ -3257,7 +3257,7 @@
                       "usesCodes": false
                     }
                   },
-                  "Welcome Reward": {
+                  "Welcome reward": {
                     "value": {
                       "id": "1234",
                       "type": "WELCOME",
@@ -3818,7 +3818,7 @@
                 "properties": {
                   "rewardId": {
                     "type": "string",
-                    "description": "ID of Reward to redeem"
+                    "description": "ID of reward to redeem"
                   },
                   "uitpasNumber": {
                     "type": "string",
@@ -3992,7 +3992,7 @@
             },
             "in": "query",
             "name": "start",
-            "description": "Start index of the redeemed Rewards."
+            "description": "Start index of the redeemed rewards."
           },
           {
             "schema": {
@@ -4001,7 +4001,7 @@
             },
             "in": "query",
             "name": "limit",
-            "description": "Limit the number of redeemed Rewards in the response."
+            "description": "Limit the number of redeemed rewards in the response."
           }
         ]
       }
@@ -4243,11 +4243,11 @@
         "properties": {
           "totalItems": {
             "type": "integer",
-            "description": "Total number of Rewards for the request."
+            "description": "Total number of rewards for the request."
           },
           "member": {
             "type": "array",
-            "description": "List of Rewards starting at index `start` and limited to `limit` items.",
+            "description": "List of rewards starting at index `start` and limited to `limit` items.",
             "items": {
               "$ref": "#/components/schemas/Reward"
             }
@@ -4282,11 +4282,11 @@
         "properties": {
           "totalItems": {
             "type": "integer",
-            "description": "Total number of redeemed Rewards for the request."
+            "description": "Total number of redeemed rewards for the request."
           },
           "member": {
             "type": "array",
-            "description": "List of redeemed Rewards starting at index `start` and limited to `limit` items.",
+            "description": "List of redeemed rewards starting at index `start` and limited to `limit` items.",
             "items": {
               "$ref": "#/components/schemas/RedeemedReward"
             }
@@ -4988,16 +4988,16 @@
         "properties": {
           "id": {
             "type": "string",
-            "description": "ID of the Reward",
+            "description": "ID of the reward",
             "readOnly": true
           },
           "title": {
             "type": "string",
-            "description": "Title of the Reward"
+            "description": "Title of the reward"
           },
           "type": {
             "type": "string",
-            "description": "Type of the Reward",
+            "description": "Type of the reward",
             "enum": [
               "POINTS",
               "WELCOME"
@@ -5015,7 +5015,7 @@
           },
           "points": {
             "type": "number",
-            "description": "Number of points needed to redeem the Reward"
+            "description": "Number of points needed to redeem the reward"
           },
           "moreInfoURL": {
             "type": "string",
@@ -5033,7 +5033,7 @@
           },
           "applicableCardSystems": {
             "type": "array",
-            "description": "List of CardSystems whose members can redeem this Reward. ",
+            "description": "List of CardSystems whose members can redeem this reward. ",
             "items": {
               "$ref": "#/components/schemas/CardSystem"
             }
@@ -5044,7 +5044,7 @@
           },
           "organizers": {
             "type": "array",
-            "description": "List of Organizers where this Reward can be redeemed.",
+            "description": "List of Organizers where this reward can be redeemed.",
             "items": {
               "$ref": "#/components/schemas/Organizer"
             }
@@ -5056,25 +5056,25 @@
               "INACTIVE",
               "DELETED"
             ],
-            "description": "Status of this Reward.",
+            "description": "Status of this reward.",
             "readOnly": true
           },
           "maxAvailableUnits": {
             "type": "integer",
-            "description": "Maximum (total) available units of this Reward."
+            "description": "Maximum (total) available units of this reward."
           },
           "unitsTaken": {
             "type": "integer",
-            "description": "Number of Rewards already redeemed.",
+            "description": "Number of rewards already redeemed.",
             "readOnly": true
           },
           "practicalInfo": {
             "type": "string",
-            "description": "Practical info for passholders who want to redeem this Reward."
+            "description": "Practical info for passholders who want to redeem this reward."
           },
           "pictures": {
             "type": "array",
-            "description": "List of URLs to zero or more images of this Reward.",
+            "description": "List of URLs to zero or more images of this reward.",
             "items": {
               "type": "string"
             }
@@ -5084,7 +5084,7 @@
           },
           "categories": {
             "type": "array",
-            "description": "List of categories of this Reward.",
+            "description": "List of categories of this reward.",
             "items": {
               "type": "string",
               "enum": [
@@ -5097,11 +5097,11 @@
           },
           "forKids": {
             "type": "boolean",
-            "description": "true if this Reward is specifically targetted to children."
+            "description": "true if this reward is specifically targetted to children."
           },
           "sport": {
             "type": "boolean",
-            "description": "true if this is a sport Reward"
+            "description": "true if this is a sport reward"
           },
           "labels": {
             "type": "string",
@@ -5109,7 +5109,7 @@
           },
           "usesCodes": {
             "type": "boolean",
-            "description": "Only for Reward of cashinType ONLINE. If set to true this Reward will produce a `redeemCode` when redeemed."
+            "description": "Only for reward of cashinType ONLINE. If set to true this reward will produce a `redeemCode` when redeemed."
           }
         },
         "required": [
@@ -5150,21 +5150,21 @@
             "properties": {
               "text": {
                 "type": "string",
-                "description": "Text to show to the user who redeemed this Reward."
+                "description": "Text to show to the user who redeemed this reward."
               },
               "link": {
                 "type": "string",
-                "description": "Link for a call-to-action for the redeemded Reward."
+                "description": "Link for a call-to-action for the redeemded reward."
               },
               "label": {
                 "type": "string",
-                "description": "Label for the call-to-action of the redeemed Reward."
+                "description": "Label for the call-to-action of the redeemed reward."
               }
             }
           },
           "redeemCode": {
             "type": "string",
-            "description": "Redeem code to show to the user who redeemed this Reward. (only applicable for Rewards that have `usesCodes=true`)"
+            "description": "Redeem code to show to the user who redeemed this reward. (Only applicable for rewards that have `usesCodes=true`)"
           }
         },
         "required": [

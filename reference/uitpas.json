@@ -3997,8 +3997,8 @@
           },
           {
             "schema": {
-              "type": "string",
-              "default": "20"
+              "type": "integer",
+              "default": 20
             },
             "in": "query",
             "name": "limit",

@@ -5019,7 +5019,8 @@
           },
           "moreInfoURL": {
             "type": "string",
-            "description": "URL where a user can find more info about this reward."
+            "description": "URL where a user can find more info about this reward.",
+            "format": "uri"
           },
           "redeemType": {
             "type": "string",

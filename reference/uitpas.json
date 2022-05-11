@@ -2889,7 +2889,7 @@
         "operationId": "get-rewards",
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Paginated collection of rewards.",
             "content": {
               "application/json": {
                 "schema": {
@@ -3208,7 +3208,7 @@
         "operationId": "post-rewards",
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Reward created.",
             "content": {
               "application/json": {
                 "schema": {
@@ -3364,7 +3364,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Details of the requested reward.",
             "content": {
               "application/json": {
                 "schema": {
@@ -3461,7 +3461,7 @@
         "operationId": "put-rewards-id",
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Updated info for the reward with the given ID.",
             "content": {
               "application/json": {
                 "schema": {
@@ -3607,7 +3607,7 @@
         "operationId": "get-rewards-id-redeem-status",
         "responses": {
           "200": {
-            "description": "OK. \n",
+            "description": "Info that indicates if the reward with the given ID is redeemable or not by the passholder with the given UiTPAS number.",
             "content": {
               "application/json": {
                 "schema": {
@@ -3706,7 +3706,7 @@
         "operationId": "post-rewards-redeemed",
         "responses": {
           "201": {
-            "description": "Created.",
+            "description": "Info about the redeemed reward.",
             "content": {
               "application/json": {
                 "schema": {
@@ -3855,7 +3855,7 @@
         "operationId": "get-rewards-redeemed",
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Paginated collection of redeemed rewards.",
             "content": {
               "application/json": {
                 "schema": {

@@ -2991,7 +2991,7 @@
         "tags": [
           "Rewards"
         ],
-        "description": "Search rewards.\n\nThe caller of this request does not need special permissions permission except `REWARDS_PASSHOLDER_READ` to use the `isRedeemableBy` query parameter.\n\nThis endpoint allows both [client identification](/docs/authentication/ZG9jOjExODE5NDY5-client-identification) and token authentication ([user](/docs/authentication/ZG9jOjExODE5NTM5-user-access-token) and [client](/docs/authentication/ZG9jOjExODE5NDY4-client-access-token)).",
+        "description": "Search rewards.\n\nThe caller of this request does not need special permissions permission except `REWARDS_PASSHOLDER_READ` to use the `isRedeemableBy` query parameter.\n\nThis endpoint allows authentication with [client identification](/docs/authentication/ZG9jOjExODE5NDY5-client-identification), [client access tokens](/docs/authentication/ZG9jOjExODE5NDY4-client-access-token), and [user access tokens](/docs/authentication/ZG9jOjExODE5NTM5-user-access-token).",
         "security": [
           {
             "USER_ACCESS_TOKEN": []

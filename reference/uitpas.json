@@ -5155,7 +5155,7 @@
               "link": {
                 "type": "string",
                 "format": "uri",
-                "description": "Link for a call-to-action for the redeemded reward."
+                "description": "Link for a call-to-action for the redeemed reward."
               },
               "label": {
                 "type": "string",

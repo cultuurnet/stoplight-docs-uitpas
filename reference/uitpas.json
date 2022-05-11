@@ -5077,7 +5077,8 @@
             "type": "array",
             "description": "List of URLs to zero or more images of this reward.",
             "items": {
-              "type": "string"
+              "type": "string",
+              "format": "uri"
             }
           },
           "redeemPeriod": {

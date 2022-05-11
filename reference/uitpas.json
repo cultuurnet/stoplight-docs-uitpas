@@ -5202,15 +5202,15 @@
         ],
         "x-examples": {
           "Example": {
-            "field1": {
+            "option1": {
               "name": {
-                "nl": "name1"
+                "nl": "Option 1"
               },
               "count": 3
             },
-            "field2": {
+            "option2": {
               "name": {
-                "nl": "name2"
+                "nl": "Option 2"
               },
               "count": 4
             }

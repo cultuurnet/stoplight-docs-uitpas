@@ -3244,7 +3244,7 @@
                         "begin": "2021-08-24T14:15:22Z",
                         "end": "2022-08-24T14:15:22Z"
                       },
-                      "moreInfoURL": "string",
+                      "moreInfoURL": "https://example.org/more-info-about-this-reward",
                       "inSpotlight": false,
                       "points": 3,
                       "categories": [
@@ -3401,7 +3401,7 @@
                         "begin": "2021-08-24T14:15:22Z",
                         "end": "2022-08-24T14:15:22Z"
                       },
-                      "moreInfoURL": "string",
+                      "moreInfoURL": "https://example.org/more-info-about-this-reward",
                       "inSpotlight": false,
                       "points": 10,
                       "categories": [
@@ -3884,7 +3884,7 @@
                               "end": "2019-08-24T14:15:22Z"
                             },
                             "points": 0,
-                            "moreInfoURL": "string",
+                            "moreInfoURL": "https://example.org/more-info-about-this-reward",
                             "redeemType": "PHYSICAL",
                             "owningCardSystem": {
                               "id": 0,

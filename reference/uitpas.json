@@ -3988,7 +3988,8 @@
           },
           {
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "default": 0
             },
             "in": "query",
             "name": "start",

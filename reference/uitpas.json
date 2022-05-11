@@ -3356,7 +3356,7 @@
         }
       }
     },
-    "/rewards/{id}": {
+    "/rewards/{rewardId}": {
       "get": {
         "summary": "Retrieve reward",
         "tags": [
@@ -3451,9 +3451,10 @@
           "schema": {
             "type": "string"
           },
-          "name": "id",
+          "name": "rewardId",
           "in": "path",
-          "required": true
+          "required": true,
+          "description": "Unique ID of a single reward."
         }
       ],
       "put": {
@@ -3591,15 +3592,16 @@
         "description": "Update reward.\n\nThe caller of this request must have `REWARDS_WRITE` permission for the given organizer."
       }
     },
-    "/rewards/{id}/redeem-status": {
+    "/rewards/{rewardId}/redeem-status": {
       "parameters": [
         {
           "schema": {
             "type": "string"
           },
-          "name": "id",
+          "name": "rewardId",
           "in": "path",
-          "required": true
+          "required": true,
+          "description": "Unique ID of a single reward."
         }
       ],
       "get": {

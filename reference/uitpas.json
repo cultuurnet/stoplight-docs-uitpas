@@ -5134,8 +5134,7 @@
         "properties": {
           "id": {
             "type": "string",
-            "description": "ID of the redeemed reward.",
-            "readOnly": true
+            "description": "ID of the redeemed reward."
           },
           "reward": {
             "$ref": "#/components/schemas/Reward"
@@ -5143,8 +5142,7 @@
           "redeemDate": {
             "type": "string",
             "format": "date-time",
-            "description": "Date of the redeem action.",
-            "readOnly": true
+            "description": "Date of the redeem action."
           },
           "redeemInfo": {
             "type": "object",
@@ -5174,8 +5172,7 @@
           "id",
           "reward",
           "redeemDate"
-        ],
-        "readOnly": true
+        ]
       },
       "Facet": {
         "title": "Facet",

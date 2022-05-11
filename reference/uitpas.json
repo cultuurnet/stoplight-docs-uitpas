@@ -3756,7 +3756,7 @@
                         "unitsTaken": 0,
                         "practicalInfo": "string",
                         "pictures": [
-                          "string"
+                          "https://www.uitpas.be/default-picture-for-ticketsale-rewards.png"
                         ],
                         "redeemPeriod": {
                           "begin": "2019-08-24T14:15:22Z",
@@ -3908,7 +3908,7 @@
                             "unitsTaken": 0,
                             "practicalInfo": "string",
                             "pictures": [
-                              "string"
+                              "https://www.uitpas.be/default-picture-for-ticketsale-rewards.png"
                             ],
                             "redeemPeriod": {
                               "begin": "2019-08-24T14:15:22Z",

@@ -3785,7 +3785,7 @@
                       "redeemDate": "2019-08-24T14:15:22Z",
                       "redeemInfo": {
                         "text": "string",
-                        "link": "string",
+                        "link": "https://example.com/redeem-your-reward-here",
                         "label": "string"
                       },
                       "redeemCode": "string"
@@ -3925,7 +3925,7 @@
                           "redeemDate": "2019-08-24T14:15:22Z",
                           "redeemInfo": {
                             "text": "string",
-                            "link": "string",
+                            "link": "https://example.com/redeem-your-reward-here",
                             "label": "string"
                           },
                           "redeemCode": "string"

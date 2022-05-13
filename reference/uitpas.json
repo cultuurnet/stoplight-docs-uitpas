@@ -4964,6 +4964,19 @@
             "type": "number",
             "description": "Number of points needed to redeem the reward"
           },
+          "categories": {
+            "type": "array",
+            "description": "List of categories of this reward.",
+            "items": {
+              "type": "string",
+              "enum": [
+                "Eten en drinken",
+                "Doen",
+                "Gadget of item",
+                "Goede doel"
+              ]
+            }
+          },
           "moreInfoURL": {
             "type": "string",
             "description": "URL where a user can find more info about this reward.",
@@ -5031,19 +5044,6 @@
           "redeemPeriod": {
             "$ref": "#/components/schemas/Period"
           },
-          "categories": {
-            "type": "array",
-            "description": "List of categories of this reward.",
-            "items": {
-              "type": "string",
-              "enum": [
-                "Eten en drinken",
-                "Doen",
-                "Gadget of item",
-                "Goede doel"
-              ]
-            }
-          },
           "forKids": {
             "type": "boolean",
             "description": "true if this reward is specifically targetted to children."
@@ -5068,6 +5068,7 @@
           "publicationPeriod",
           "grantingPeriod",
           "points",
+          "categories",
           "moreInfoURL",
           "redeemType"
         ]

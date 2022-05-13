@@ -39,6 +39,9 @@
       "name": "Permissions"
     },
     {
+      "name": "Rewards"
+    },
+    {
       "name": "Schools"
     },
     {
@@ -70,7 +73,7 @@
                     "value": {
                       "available": [
                         {
-                          "id": "SOCIALTARIFF",
+                          "id": "SOCIALTARIFF-1",
                           "name": "Kansentarief",
                           "price": 1.5,
                           "type": "SOCIALTARIFF",
@@ -83,7 +86,7 @@
                     "value": {
                       "available": [
                         {
-                          "id": "SOCIALTARIFF",
+                          "id": "SOCIALTARIFF-1",
                           "name": "Kansentarief",
                           "price": 1.5,
                           "remaining": 1,
@@ -278,6 +281,22 @@
                         "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
                         "regularPrice": 10,
                         "regularPriceLabel": "Optional descriptive label of the regular price. Used in financial reporting."
+                      }
+                    ]
+                  },
+                  "Example using a reward tariff": {
+                    "value": [
+                      {
+                        "id": "489144",
+                        "tariff": {
+                          "id": "REWARD1234",
+                          "name": "50% korting voor 10 punten",
+                          "price": 5,
+                          "type": "REWARD"
+                        },
+                        "uitpasNumber": "0560002524314",
+                        "eventId": "31e926e2-a35f-11eb-bcbc-0242ac130002",
+                        "regularPrice": 10
                       }
                     ]
                   }
@@ -475,17 +494,17 @@
                           "regularPrice": 10,
                           "regularPriceLabel": "Optional descriptive label of the regular price. Used in financial reporting.",
                           "passholder": {
-                            "id": "string",
-                            "name": "string",
-                            "firstName": "string",
-                            "inszNumber": "string",
+                            "id": "1be0fb53-0695-405b-ac09-deafead650af",
+                            "name": "Peeters",
+                            "firstName": "Marc",
+                            "inszNumber": "00000009007",
                             "dateOfBirth": "2000-01-01",
                             "postalCode": "9300",
                             "address": {
                               "postalCode": "9300",
                               "city": "Aalst"
                             },
-                            "creationDate": "2022-08-24T14:15:22Z",
+                            "creationDate": "2012-08-24T14:15:22Z",
                             "registrationOrganizer": {
                               "id": "1234",
                               "name": "Example UiTPAS Organizer"
@@ -495,29 +514,25 @@
                             "cardSystemMemberships": [
                               {
                                 "cardSystem": {
-                                  "id": 1,
-                                  "name": "UiTPAS Dender",
-                                  "branding": {
-                                    "logo": "https://www.uitpas.be/_nuxt/img/1351557.svg",
-                                    "primaryColor": "rgba(0,0,0,1.0)",
-                                    "secondaryColor": "rgba(97,166,14,1.0)"
-                                  },
-                                  "links": {
-                                    "website": "https://www.uitpas.be"
-                                  },
-                                  "cities": [
-                                    {
-                                      "postalCode": "9300",
-                                      "name": "Aalst"
-                                    },
-                                    {
-                                      "postalCode": "9400",
-                                      "name": "Ninove"
-                                    }
-                                  ],
-                                  "permanent": true
+                    "id": 12,
+                    "name": "UiTPAS Oostende",
+                    "branding": {
+                      "logo": "https://www.uitpas.be/_nuxt/img/1351557.svg",
+                      "primaryColor": "rgba(0,0,0,1.0)",
+                      "secondaryColor": "rgba(97,166,14,1.0)"
+                    },
+                    "links": {
+                      "website": "https://www.uitpas.be"
+                    },
+                    "cities": [
+                      {
+                        "postalCode": "8400",
+                        "name": "Oostende"
+                      }
+                    ],
+                    "permanent": true
                                 },
-                                "uitpasNumber": "string",
+                                "uitpasNumber": "0930012345615",
                                 "status": "ACTIVE",
                                 "socialTariff": {
                                   "endDate": "2022-08-24T14:15:22Z",
@@ -541,49 +556,45 @@
                           "regularPrice": 10,
                           "regularPriceLabel": "Optional descriptive label of the regular price. Used in financial reporting.",
                           "passholder": {
-                            "id": "string",
-                            "name": "string",
-                            "firstName": "string",
-                            "inszNumber": "string",
+                            "id": "1be0fb53-0695-405b-ac09-deafead650af",
+                            "name": "Peeters",
+                            "firstName": "Marc",
+                            "inszNumber": "00000009007",
                             "dateOfBirth": "2000-01-01",
                             "postalCode": "9300",
                             "address": {
                               "postalCode": "9300",
                               "city": "Aalst"
                             },
-                            "creationDate": "2022-08-24T14:15:22Z",
+                            "creationDate": "2012-08-24T14:15:22Z",
                             "registrationOrganizer": {
                               "id": "1234",
                               "name": "Example UiTPAS Organizer"
                             },
-                            "points": 12,
+                            "points": 10,
                             "uitidStatus": "UNREGISTERED",
                             "cardSystemMemberships": [
                               {
                                 "cardSystem": {
-                                  "id": 1,
-                                  "name": "UiTPAS Dender",
-                                  "branding": {
-                                    "logo": "https://www.uitpas.be/_nuxt/img/1351557.svg",
-                                    "primaryColor": "rgba(0,0,0,1.0)",
-                                    "secondaryColor": "rgba(97,166,14,1.0)"
-                                  },
-                                  "links": {
-                                    "website": "https://www.uitpas.be"
-                                  },
-                                  "cities": [
-                                    {
-                                      "postalCode": "9300",
-                                      "name": "Aalst"
-                                    },
-                                    {
-                                      "postalCode": "9400",
-                                      "name": "Ninove"
-                                    }
-                                  ],
-                                  "permanent": true
+                    "id": 12,
+                    "name": "UiTPAS Oostende",
+                    "branding": {
+                      "logo": "https://www.uitpas.be/_nuxt/img/1351557.svg",
+                      "primaryColor": "rgba(0,0,0,1.0)",
+                      "secondaryColor": "rgba(97,166,14,1.0)"
+                    },
+                    "links": {
+                      "website": "https://www.uitpas.be"
+                    },
+                    "cities": [
+                      {
+                        "postalCode": "8400",
+                        "name": "Oostende"
+                      }
+                    ],
+                    "permanent": true
                                 },
-                                "uitpasNumber": "string",
+                                "uitpasNumber": "0930012345615",
                                 "status": "ACTIVE",
                                 "socialTariff": {
                                   "endDate": "2022-08-24T14:15:22Z",
@@ -1080,58 +1091,53 @@
                       "totalItems": 1,
                       "member": [
                         {
-                          "id": "string",
-                          "name": "string",
-                          "firstName": "string",
-                          "inszNumber": "string",
+                          "id": "1be0fb53-0695-405b-ac09-deafead650af",
+                          "name": "Peeters",
+                          "firstName": "Marc",
+                          "inszNumber": "00000009007",
                           "dateOfBirth": "2000-01-01",
                           "postalCode": "9300",
                           "address": {
                             "postalCode": "9300",
                             "city": "Aalst"
                           },
-                          "points": 12,
-                          "uitidStatus": "UNREGISTERED",
+                          "creationDate": "2012-08-24T14:15:22Z",
                           "registrationOrganizer": {
                             "id": "1234",
                             "name": "Example UiTPAS Organizer"
                           },
+                          "points": 10,
+                          "uitidStatus": "UNREGISTERED",
                           "cardSystemMemberships": [
                             {
                               "cardSystem": {
-                                "id": 1,
-                                "name": "UiTPAS Dender",
-                                "branding": {
-                                  "logo": "https://www.uitpas.be/_nuxt/img/1351557.svg",
-                                  "primaryColor": "rgba(0,0,0,1.0)",
-                                  "secondaryColor": "rgba(97,166,14,1.0)"
-                                },
-                                "links": {
-                                  "website": "https://www.uitpas.be"
-                                },
-                                "cities": [
-                                  {
-                                    "postalCode": "9300",
-                                    "name": "Aalst"
-                                  },
-                                  {
-                                    "postalCode": "9400",
-                                    "name": "Ninove"
-                                  }
-                                ],
-                                "permanent": true
+                    "id": 12,
+                    "name": "UiTPAS Oostende",
+                    "branding": {
+                      "logo": "https://www.uitpas.be/_nuxt/img/1351557.svg",
+                      "primaryColor": "rgba(0,0,0,1.0)",
+                      "secondaryColor": "rgba(97,166,14,1.0)"
+                    },
+                    "links": {
+                      "website": "https://www.uitpas.be"
+                    },
+                    "cities": [
+                      {
+                        "postalCode": "8400",
+                        "name": "Oostende"
+                      }
+                    ],
+                    "permanent": true
                               },
-                              "uitpasNumber": "string",
+                              "uitpasNumber": "0930012345615",
                               "status": "ACTIVE",
                               "socialTariff": {
-                                "endDate": "2019-08-24T14:15:22Z",
-                                "inGracePeriod": true,
-                                "expired": true
+                                "endDate": "2022-08-24T14:15:22Z",
+                                "inGracePeriod": false,
+                                "expired": false
                               }
                             }
-                          ],
-                          "email": "string",
-                          "creationDate": "2019-08-24T14:15:22Z"
+                          ]
                         }
                       ]
                     }
@@ -1283,71 +1289,53 @@
                 "examples": {
                   "Example": {
                     "value": {
-                      "id": "string",
-                      "name": "string",
-                      "firstName": "string",
-                      "lastName": "string",
-                      "inszNumber": "string",
+                      "id": "1be0fb53-0695-405b-ac09-deafead650af",
+                      "name": "Peeters",
+                      "firstName": "Marc",
+                      "inszNumber": "00000009007",
+                      "dateOfBirth": "2000-01-01",
+                      "postalCode": "9300",
+                      "address": {
+                        "postalCode": "9300",
+                        "city": "Aalst"
+                      },
+                      "creationDate": "2012-08-24T14:15:22Z",
+                      "registrationOrganizer": {
+                        "id": "1234",
+                        "name": "Example UiTPAS Organizer"
+                      },
+                      "points": 10,
+                      "uitidStatus": "UNREGISTERED",
                       "cardSystemMemberships": [
                         {
                           "cardSystem": {
-                            "id": 1,
-                            "name": "UiTPAS Dender",
-                            "branding": {
-                              "logo": "https://www.uitpas.be/_nuxt/img/1351557.svg",
-                              "primaryColor": "rgba(0,0,0,1.0)",
-                              "secondaryColor": "rgba(97,166,14,1.0)"
-                            },
-                            "links": {
-                              "website": "https://www.uitpas.be"
-                            },
-                            "cities": [
-                              {
-                                "postalCode": "9300",
-                                "name": "Aalst"
-                              },
-                              {
-                                "postalCode": "9400",
-                                "name": "Ninove"
-                              }
-                            ],
-                            "permanent": true
+                    "id": 12,
+                    "name": "UiTPAS Oostende",
+                    "branding": {
+                      "logo": "https://www.uitpas.be/_nuxt/img/1351557.svg",
+                      "primaryColor": "rgba(0,0,0,1.0)",
+                      "secondaryColor": "rgba(97,166,14,1.0)"
+                    },
+                    "links": {
+                      "website": "https://www.uitpas.be"
+                    },
+                    "cities": [
+                      {
+                        "postalCode": "8400",
+                        "name": "Oostende"
+                      }
+                    ],
+                    "permanent": true
                           },
-                          "uitpasNumber": "string",
+                          "uitpasNumber": "0930012345615",
                           "status": "ACTIVE",
                           "socialTariff": {
-                            "endDate": "2019-08-24T14:15:22Z",
-                            "inGracePeriod": true,
-                            "expired": true
+                            "endDate": "2022-08-24T14:15:22Z",
+                            "inGracePeriod": false,
+                            "expired": false
                           }
                         }
-                      ],
-                      "email": "string",
-                      "creationDate": "2019-08-24T14:15:22Z",
-                      "dateOfBirth": "2019-08-24",
-                      "postalCode": "string",
-                      "city": "string",
-                      "registrationOrganizer": {
-                        "id": "abc12345",
-                        "name": "UiTPAS Test Organizer"
-                      },
-                      "points": 3,
-                      "uitidStatus": "REGISTERED",
-                      "address": {
-                        "street": "string",
-                        "number": "string",
-                        "box": "string",
-                        "postalCode": "string",
-                        "city": "string"
-                      },
-                      "optInPreferences": {
-                        "serviceMails": true,
-                        "infoMails": true,
-                        "milestoneMails": true,
-                        "sms": true,
-                        "post": true
-                      },
-                      "nationality": "string"
+                      ]
                     }
                   }
                 }
@@ -1385,21 +1373,21 @@
               "examples": {
                 "Example": {
                   "value": {
-                    "name": "string",
-                    "firstName": "string",
-                    "inszNumber": "string",
-                    "email": "string",
-                    "dateOfBirth": "2019-08-24",
+                    "name": "Peeters",
+                    "firstName": "Marc",
+                    "inszNumber": "00000009007",
+                    "email": "marc.peeters@example.com",
+                    "dateOfBirth": "2000-01-01",
                     "registrationOrganizer": {
                       "id": "abc12345"
                     },
                     "address": {
-                      "street": "string",
-                      "number": "string",
-                      "box": "string",
-                      "postalCode": "1000",
-                      "city": "Brussel",
-                      "country": "string"
+                      "street": "Grote markt",
+                      "number": "12",
+                      "box": "",
+                      "postalCode": "9300",
+                      "city": "Aalst",
+                      "country": "be"
                     },
                     "optInPreferences": {
                       "serviceMails": true,
@@ -1408,7 +1396,7 @@
                       "sms": false,
                       "post": true
                     },
-                    "nationality": "string",
+                    "nationality": "Belg",
                     "legalConsentPaper": false,
                     "legalConsentDigital": true,
                     "parentalConsent": false,
@@ -1783,27 +1771,23 @@
                       {
                         "price": 5,
                         "cardSystem": {
-                          "id": 1,
-                          "name": "UiTPAS Dender",
-                          "branding": {
-                            "logo": "https://www.uitpas.be/_nuxt/img/1351557.svg",
-                            "primaryColor": "rgba(0,0,0,1.0)",
-                            "secondaryColor": "rgba(97,166,14,1.0)"
-                          },
-                          "links": {
-                            "website": "https://www.uitpas.be"
-                          },
-                          "cities": [
-                            {
-                              "postalCode": "9300",
-                              "name": "Aalst"
-                            },
-                            {
-                              "postalCode": "9400",
-                              "name": "Ninove"
-                            }
-                          ],
-                          "permanent": true
+                    "id": 12,
+                    "name": "UiTPAS Oostende",
+                    "branding": {
+                      "logo": "https://www.uitpas.be/_nuxt/img/1351557.svg",
+                      "primaryColor": "rgba(0,0,0,1.0)",
+                      "secondaryColor": "rgba(97,166,14,1.0)"
+                    },
+                    "links": {
+                      "website": "https://www.uitpas.be"
+                    },
+                    "cities": [
+                      {
+                        "postalCode": "8400",
+                        "name": "Oostende"
+                      }
+                    ],
+                    "permanent": true
                         }
                       },
                       {
@@ -1835,8 +1819,8 @@
                       {
                         "price": 5,
                         "cardSystem": {
-                          "id": 12,
-                          "name": "UiTPAS Oostende",
+                          "id": 1,
+                          "name": "UiTPAS Dender",
                           "branding": {
                             "logo": "https://www.uitpas.be/_nuxt/img/1351557.svg",
                             "primaryColor": "rgba(0,0,0,1.0)",
@@ -1847,8 +1831,12 @@
                           },
                           "cities": [
                             {
-                              "postalCode": "8400",
-                              "name": "Oostende"
+                              "postalCode": "9300",
+                              "name": "Aalst"
+                            },
+                            {
+                              "postalCode": "9400",
+                              "name": "Ninove"
                             }
                           ],
                           "permanent": true
@@ -1933,27 +1921,23 @@
                       {
                         "price": 5,
                         "cardSystem": {
-                          "id": 1,
-                          "name": "UiTPAS Dender",
-                          "branding": {
-                            "logo": "https://www.uitpas.be/_nuxt/img/1351557.svg",
-                            "primaryColor": "rgba(0,0,0,1.0)",
-                            "secondaryColor": "rgba(97,166,14,1.0)"
-                          },
-                          "links": {
-                            "website": "https://www.uitpas.be"
-                          },
-                          "cities": [
-                            {
-                              "postalCode": "9300",
-                              "name": "Aalst"
-                            },
-                            {
-                              "postalCode": "9400",
-                              "name": "Ninove"
-                            }
-                          ],
-                          "permanent": true
+                    "id": 12,
+                    "name": "UiTPAS Oostende",
+                    "branding": {
+                      "logo": "https://www.uitpas.be/_nuxt/img/1351557.svg",
+                      "primaryColor": "rgba(0,0,0,1.0)",
+                      "secondaryColor": "rgba(97,166,14,1.0)"
+                    },
+                    "links": {
+                      "website": "https://www.uitpas.be"
+                    },
+                    "cities": [
+                      {
+                        "postalCode": "8400",
+                        "name": "Oostende"
+                      }
+                    ],
+                    "permanent": true
                         }
                       },
                       {
@@ -1985,8 +1969,8 @@
                       {
                         "price": 5,
                         "cardSystem": {
-                          "id": 12,
-                          "name": "UiTPAS Oostende",
+                          "id": 1,
+                          "name": "UiTPAS Dender",
                           "branding": {
                             "logo": "https://www.uitpas.be/_nuxt/img/1351557.svg",
                             "primaryColor": "rgba(0,0,0,1.0)",
@@ -1997,8 +1981,12 @@
                           },
                           "cities": [
                             {
-                              "postalCode": "8400",
-                              "name": "Oostende"
+                              "postalCode": "9300",
+                              "name": "Aalst"
+                            },
+                            {
+                              "postalCode": "9400",
+                              "name": "Ninove"
                             }
                           ],
                           "permanent": true
@@ -2109,47 +2097,57 @@
                 "examples": {
                   "Example": {
                     "value": {
-                      "id": "string",
-                      "name": "string",
-                      "firstName": "string",
-                      "inszNumber": "string",
+                      "id": "1be0fb53-0695-405b-ac09-deafead650af",
+                      "name": "Peeters",
+                      "firstName": "Marc",
+                      "inszNumber": "00000009007",
                       "dateOfBirth": "2000-01-01",
                       "postalCode": "9300",
                       "address": {
                         "postalCode": "9300",
                         "city": "Aalst"
                       },
+                      "creationDate": "2012-08-24T14:15:22Z",
                       "registrationOrganizer": {
                         "id": "1234",
                         "name": "Example UiTPAS Organizer"
                       },
+                      "points": 10,
+                      "uitidStatus": "UNREGISTERED",
                       "cardSystemMemberships": [
                         {
                           "cardSystem": {
-                            "id": 12,
-                            "name": "UiTPAS Oostende",
-                            "branding": {
-                              "logo": "https://www.uitpas.be/_nuxt/img/1351557.svg",
-                              "primaryColor": "rgba(0,0,0,1.0)",
-                              "secondaryColor": "rgba(97,166,14,1.0)"
-                            },
-                            "links": {
-                              "website": "https://www.uitpas.be"
-                            },
-                            "cities": [
-                              {
-                                "postalCode": "8400",
-                                "name": "Oostende"
-                              }
-                            ],
-                            "permanent": true
+                          "id": 1,
+                          "name": "UiTPAS Dender",
+                          "branding": {
+                            "logo": "https://www.uitpas.be/_nuxt/img/1351557.svg",
+                            "primaryColor": "rgba(0,0,0,1.0)",
+                            "secondaryColor": "rgba(97,166,14,1.0)"
                           },
-                          "uitpasNumber": "string",
-                          "status": "ACTIVE"
+                          "links": {
+                            "website": "https://www.uitpas.be"
+                          },
+                          "cities": [
+                            {
+                              "postalCode": "9300",
+                              "name": "Aalst"
+                            },
+                            {
+                              "postalCode": "9400",
+                              "name": "Ninove"
+                            }
+                          ],
+                          "permanent": true
+                          },
+                          "uitpasNumber": "0930012345615",
+                          "status": "ACTIVE",
+                          "socialTariff": {
+                            "endDate": "2022-08-24T14:15:22Z",
+                            "inGracePeriod": false,
+                            "expired": false
+                          }
                         }
-                      ],
-                      "email": "string",
-                      "creationDate": "2019-08-24T14:15:22Z"
+                      ]
                     }
                   }
                 }
@@ -2203,23 +2201,27 @@
                       "cardSystemMemberships": [
                         {
                           "cardSystem": {
-                            "id": 12,
-                            "name": "UiTPAS Oostende",
-                            "branding": {
-                              "logo": "https://www.uitpas.be/_nuxt/img/1351557.svg",
-                              "primaryColor": "rgba(0,0,0,1.0)",
-                              "secondaryColor": "rgba(97,166,14,1.0)"
+                            "id": 27,
+                          "name": "UiTPAS Dender",
+                          "branding": {
+                            "logo": "https://www.uitpas.be/_nuxt/img/1351557.svg",
+                            "primaryColor": "rgba(0,0,0,1.0)",
+                            "secondaryColor": "rgba(97,166,14,1.0)"
+                          },
+                          "links": {
+                            "website": "https://www.uitpas.be"
+                          },
+                          "cities": [
+                            {
+                              "postalCode": "9300",
+                              "name": "Aalst"
                             },
-                            "links": {
-                              "website": "https://www.uitpas.be"
-                            },
-                            "cities": [
-                              {
-                                "postalCode": "8400",
-                                "name": "Oostende"
-                              }
-                            ],
-                            "permanent": true
+                            {
+                              "postalCode": "9400",
+                              "name": "Ninove"
+                            }
+                          ],
+                          "permanent": true
                           },
                           "uitpasNumber": "0999100000002",
                           "status": "ACTIVE"
@@ -3079,6 +3081,1117 @@
         "description": "Retrieve information related to a chip number.\n\nIf the response contains `messages`, they MUST be displayed to the end-user.\n\nThe caller of this request must have `CHIP_NUMBERS_READ` permission."
       }
     },
+    "/rewards": {
+      "get": {
+        "summary": "Search rewards",
+        "operationId": "get-rewards",
+        "responses": {
+          "200": {
+            "description": "Paginated collection of rewards.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RewardsPaginatedResponse"
+                },
+                "examples": {
+                  "Example": {
+                    "value": {
+                      "totalItems": 1,
+                      "member": [
+                        {
+                          "id": "1234",
+                          "title": "Free entrance for 10 points on 1 specific event",
+                          "type": "POINTS",
+                          "owningCardSystem": {
+                            "id": 1,
+                            "name": "UiTPAS Dender"
+                          },
+                          "categories": [
+                            "Doen"
+                          ],
+                          "allCardSystems": true,
+                          "status": "ACTIVE",
+                          "maxAvailableUnits": 0,
+                          "unitsTaken": 0,
+                          "promotionalDescription": "this is the mandatory description",
+                          "practicalInfo": "this is an optional extra description",
+                          "pictures": [
+                            "https://www.uitpas.be/default-picture-for-ticketsale-rewards.png"
+                          ],
+                          "publicationPeriod": {
+                            "begin": "2021-08-24T14:15:22Z",
+                            "end": "2022-08-24T14:15:22Z"
+                          },
+                          "redeemPeriod": {
+                            "begin": "2021-08-24T14:15:22Z",
+                            "end": "2022-08-24T14:15:22Z"
+                          },
+                          "grantingPeriod": {
+                            "begin": "2021-08-24T14:15:22Z",
+                            "end": "2022-08-24T14:15:22Z"
+                          },
+                          "moreInfoURL": "https://www.uitpas.be/reward/example-more-info",
+                          "inSpotlight": false,
+                          "points": 10,
+                          "types": [
+                            "string"
+                          ],
+                          "forKids": false,
+                          "sport": false,
+                          "labels": "",
+                          "redeemType": "ONLINE",
+                          "usesCodes": false
+                        }
+                      ],
+                      "facet": {
+                        "categories": {
+                          "Doen": {
+                            "name": {
+                              "nl": "Doen"
+                            },
+                            "count": 12
+                          },
+                          "Gadget": {
+                            "name": {
+                              "nl": "Gadget"
+                            },
+                            "count": 2
+                          }
+                        },
+                        "owningCardSystemId": {
+                          "1": {
+                            "name": {
+                              "nl": "UiTPAS Dender"
+                            },
+                            "count": 8
+                          },
+                          "8": {
+                            "name": {
+                              "nl": "UiTPAS Gent"
+                            },
+                            "count": 4
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. Possible error types:\n\n* https://api.publiq.be/probs/uitpas/organizer-not-found\n* https://api.publiq.be/probs/uitpas/event-not-found\n* https://api.publiq.be/probs/uitpas/cardsystem-not-found"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          }
+        },
+        "tags": [
+          "Rewards"
+        ],
+        "description": "Search rewards.\n\nThe caller of this request does not need special permissions permission except `REWARDS_PASSHOLDER_READ` to use the `isRedeemableBy` query parameter.\n\nThis endpoint allows authentication with [client identification](/docs/authentication/ZG9jOjExODE5NDY5-client-identification), [client access tokens](/docs/authentication/ZG9jOjExODE5NDY4-client-access-token), and [user access tokens](/docs/authentication/ZG9jOjExODE5NTM5-user-access-token).",
+        "security": [
+          {
+            "USER_ACCESS_TOKEN": []
+          },
+          {
+            "CLIENT_ACCESS_TOKEN": []
+          },
+          {
+            "CLIENT_IDENTIFICATION": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "start",
+            "description": "Start index of the results. Default 0.",
+            "style": "form"
+          },
+          {
+            "schema": {
+              "type": "integer",
+              "default": 20
+            },
+            "in": "query",
+            "name": "limit",
+            "description": "Maximum number of results.",
+            "style": "form"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "organizerId",
+            "description": "Include only rewards applicable for this organizer",
+            "style": "form"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "owningCardSystemId",
+            "description": "Include only rewards of this card system",
+            "style": "form"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "POINTS",
+                "WELCOME"
+              ]
+            },
+            "in": "query",
+            "name": "type",
+            "description": "Include only rewards of this type",
+            "style": "form"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "text",
+            "description": "Free text search in reward name, organizer or city.",
+            "style": "form"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "type",
+                "owningCardSystemId",
+                "extras",
+                "categories"
+              ]
+            },
+            "in": "query",
+            "name": "facets",
+            "description": "Request facets of the given field in the response. Can be included more than once to allow multiple values.",
+            "style": "form"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "asc",
+                "desc"
+              ]
+            },
+            "in": "query",
+            "name": "sort[name]",
+            "description": "Sort on reward name",
+            "style": "form"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "asc",
+                "desc"
+              ]
+            },
+            "in": "query",
+            "name": "sort[creationDate]",
+            "description": "Sort on reward creation date",
+            "style": "form"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "asc",
+                "desc"
+              ]
+            },
+            "in": "query",
+            "name": "sort[redeemCount]",
+            "description": "Sort on redeem count",
+            "style": "form"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "asc",
+                "desc"
+              ]
+            },
+            "in": "query",
+            "name": "sort[points]",
+            "description": "Sort on reward points",
+            "style": "form"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Goede doel",
+                "Eten en drinken",
+                "Doen",
+                "Gadget of item"
+              ]
+            },
+            "in": "query",
+            "name": "categories",
+            "description": "Include only rewards of this category. Can be included more than once to allow multiple values.",
+            "style": "form"
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "pointsFrom",
+            "description": "Include only rewards with this value (including) or more points.",
+            "style": "form"
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "pointsTo",
+            "description": "Include only rewards with this value (including) or less points.",
+            "style": "form"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "ENDUSERS",
+              "enum": [
+                "ALL",
+                "ENDUSERS"
+              ]
+            },
+            "in": "query",
+            "name": "subset",
+            "description": "Include only rewards of a specific subset. Defaults to `ENDUSERS`, which means all active rewards, that are currently published and in its redeem period and are part of a permanent cardsystem. Set this field to `ALL` to include all rewards.",
+            "style": "form"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "forKids",
+                "sport",
+                "online",
+                "lastChance"
+              ]
+            },
+            "in": "query",
+            "name": "extras",
+            "description": "Filter on a number of predefined fields, which are also available as a facet. Can be included more than once to allow multiple values.",
+            "style": "form"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "isRedeemableBy",
+            "description": "Include only rewards that are currently redeemable by the given UiTPAS number. The use of this fields requires `REWARDS_PASSHOLDER_READ` permission or a user access token of the given passholder, identified by its UiTPAS number.",
+            "style": "form"
+          }
+        ]
+      },
+      "post": {
+        "summary": "Create new reward",
+        "operationId": "post-rewards",
+        "responses": {
+          "200": {
+            "description": "Reward created.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Reward"
+                },
+                "examples": {
+                  "Points reward": {
+                    "value": {
+                      "id": "1234",
+                      "type": "POINTS",
+                      "title": "Gratis koffie",
+                      "owningCardSystem": {
+                        "id": 1,
+                        "name": "UiTPAS Dender"
+                      },
+                      "allCardSystems": true,
+                      "status": "ACTIVE",
+                      "maxAvailableUnits": 100,
+                      "unitsTaken": 0,
+                      "promotionalDescription": "this is the mandatory description",
+                      "pictures": [
+                        "https://www.uitpas.be/default-picture-for-points-rewards.png"
+                      ],
+                      "publicationPeriod": {
+                        "begin": "2021-08-24T14:15:22Z",
+                        "end": "2022-08-24T14:15:22Z"
+                      },
+                      "redeemPeriod": {
+                        "begin": "2021-08-24T14:15:22Z",
+                        "end": "2022-08-24T14:15:22Z"
+                      },
+                      "grantingPeriod": {
+                        "begin": "2021-08-24T14:15:22Z",
+                        "end": "2022-08-24T14:15:22Z"
+                      },
+                      "moreInfoURL": "https://example.org/more-info-about-this-reward",
+                      "inSpotlight": false,
+                      "points": 3,
+                      "categories": [
+                        "Eten en drinken"
+                      ],
+                      "forKids": false,
+                      "sport": false,
+                      "labels": "",
+                      "redeemType": "PHYSICAL",
+                      "usesCodes": false
+                    }
+                  },
+                  "Welcome reward": {
+                    "value": {
+                      "id": "1234",
+                      "type": "WELCOME",
+                      "title": "Gratis zwemmen",
+                      "owningCardSystem": {
+                        "id": 1,
+                        "name": "UiTPAS Dender"
+                      },
+                      "allCardSystems": true,
+                      "status": "ACTIVE",
+                      "maxAvailableUnits": 100,
+                      "unitsTaken": 0,
+                      "promotionalDescription": "this is the mandatory description",
+                      "pictures": [
+                        "https://www.uitpas.be/default-picture-for-welcome-rewards.png"
+                      ],
+                      "publicationPeriod": {
+                        "begin": "2021-08-24T14:15:22Z",
+                        "end": "2022-08-24T14:15:22Z"
+                      },
+                      "redeemPeriod": {
+                        "begin": "2021-08-24T14:15:22Z",
+                        "end": "2022-08-24T14:15:22Z"
+                      },
+                      "grantingPeriod": {
+                        "begin": "2021-08-24T14:15:22Z",
+                        "end": "2022-08-24T14:15:22Z"
+                      },
+                      "moreInfoURL": "https://example.org/more-info-about-this-reward",
+                      "inSpotlight": false,
+                      "points": 0,
+                      "categories": [
+                        "Doen"
+                      ],
+                      "forKids": false,
+                      "sport": false,
+                      "labels": "",
+                      "redeemType": "PHYSICAL",
+                      "usesCodes": false
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. Possible error types:\n\n* https://api.publiq.be/probs/body/missing\n* https://api.publiq.be/probs/body/invalid-syntax\n* https://api.publiq.be/probs/body/invalid-data\n* https://api.publiq.be/probs/uitpas/invalid-card-system\n\nThe detail property might include more information for the client developer."
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          }
+        },
+        "security": [
+          {
+            "USER_ACCESS_TOKEN": []
+          },
+          {
+            "CLIENT_ACCESS_TOKEN": []
+          }
+        ],
+        "description": "Create a new reward.\n\nThe caller of this request must have `REWARDS_WRITE` permission for the given organizer.",
+        "tags": [
+          "Rewards"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Reward"
+              },
+              "examples": {
+                "Example": {
+                  "value": {
+                    "title": "Free entrance for 10 points on 1 specific event",
+                    "type": "POINTS",
+                    "categories": [
+                      "Doen"
+                    ],
+                    "promotionalDescription": "this is the mandatory description",
+                    "publicationPeriod": {
+                      "begin": "2021-08-24T14:15:22Z",
+                      "end": "2022-08-24T14:15:22Z"
+                    },
+                    "grantingPeriod": {
+                      "begin": "2021-08-24T14:15:22Z",
+                      "end": "2022-08-24T14:15:22Z"
+                    },
+                    "moreInfoURL": "https://example.org/more-info-about-this-reward",
+                    "redeemType": "ONLINE",
+                    "points": 10
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rewards/{rewardId}": {
+      "get": {
+        "summary": "Retrieve reward",
+        "tags": [
+          "Rewards"
+        ],
+        "responses": {
+          "200": {
+            "description": "Details of the requested reward.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Reward"
+                },
+                "examples": {
+                  "Example": {
+                    "value": {
+                      "id": "1234",
+                      "type": "POINTS",
+                      "title": "Free entrance for 10 points on 1 specific event UPDATE",
+                      "owningCardSystem": {
+                        "id": 1,
+                        "name": "UiTPAS Dender"
+                      },
+                      "allCardSystems": true,
+                      "status": "ACTIVE",
+                      "maxAvailableUnits": 0,
+                      "unitsTaken": 0,
+                      "promotionalDescription": "this is the mandatory description",
+                      "practicalInfo": "this is an optional extra description",
+                      "pictures": [
+                        "https://www.uitpas.be/default-picture-for-ticketsale-rewards.png"
+                      ],
+                      "publicationPeriod": {
+                        "begin": "2021-08-24T14:15:22Z",
+                        "end": "2022-08-24T14:15:22Z"
+                      },
+                      "redeemPeriod": {
+                        "begin": "2021-08-24T14:15:22Z",
+                        "end": "2022-08-24T14:15:22Z"
+                      },
+                      "grantingPeriod": {
+                        "begin": "2021-08-24T14:15:22Z",
+                        "end": "2022-08-24T14:15:22Z"
+                      },
+                      "moreInfoURL": "https://example.org/more-info-about-this-reward",
+                      "inSpotlight": false,
+                      "points": 10,
+                      "categories": [
+                        "Eten en drinken"
+                      ],
+                      "forKids": false,
+                      "sport": false,
+                      "labels": "",
+                      "redeemType": "ONLINE",
+                      "usesCodes": false
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "description": "Not Found. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/reward-not-found\n\nThe detail property might include more information for the client developer.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-rewards-id",
+        "security": [
+          {
+            "USER_ACCESS_TOKEN": []
+          },
+          {
+            "CLIENT_ACCESS_TOKEN": []
+          }
+        ],
+        "description": "Retrieve reward by ID.\n\nThe caller of this request must have `REWARDS_READ` permission for the given organizer."
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "rewardId",
+          "in": "path",
+          "required": true,
+          "description": "Unique ID of a single reward."
+        }
+      ],
+      "put": {
+        "summary": "Update reward",
+        "operationId": "put-rewards-id",
+        "responses": {
+          "200": {
+            "description": "Updated info for the reward with the given ID.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Reward"
+                },
+                "examples": {
+                  "Example": {
+                    "value": {
+                      "id": "1234",
+                      "type": "POINTS",
+                      "title": "Gratis toegangsticket voor het Design Museum Brussel",
+                      "owningCardSystem": {
+                        "id": 1,
+                        "name": "UiTPAS Dender"
+                      },
+                      "allCardSystems": true,
+                      "status": "ACTIVE",
+                      "maxAvailableUnits": 1000,
+                      "unitsTaken": 0,
+                      "promotionalDescription": "this is the mandatory description",
+                      "practicalInfo": "this is an optional extra description",
+                      "pictures": [
+                        "https://www.uitpas.be/default-picture-for-ticketsale-rewards.png"
+                      ],
+                      "publicationPeriod": {
+                        "begin": "2021-08-24T14:15:22Z",
+                        "end": "2022-08-24T14:15:22Z"
+                      },
+                      "redeemPeriod": {
+                        "begin": "2021-08-24T14:15:22Z",
+                        "end": "2022-08-24T14:15:22Z"
+                      },
+                      "grantingPeriod": {
+                        "begin": "2021-08-24T14:15:22Z",
+                        "end": "2022-08-24T14:15:22Z"
+                      },
+                      "moreInfoURL": "https://www.uitpas.be/reward/example-more-info",
+                      "inSpotlight": false,
+                      "points": 10,
+                      "categories": [
+                        "Doen"
+                      ],
+                      "forKids": false,
+                      "sport": false,
+                      "labels": "",
+                      "redeemType": "ONLINE",
+                      "usesCodes": false
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. Possible error types:\n\n* https://api.publiq.be/probs/body/missing\n* https://api.publiq.be/probs/body/invalid-syntax\n* https://api.publiq.be/probs/body/invalid-data\n* https://api.publiq.be/probs/uitpas/invalid-card-system\n\nThe detail property might include more information for the client developer.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "description": "Not Found. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/reward-not-found\n\nThe detail property might include more information for the client developer.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "USER_ACCESS_TOKEN": []
+          },
+          {
+            "CLIENT_ACCESS_TOKEN": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Reward"
+              },
+              "examples": {
+                "Example": {
+                  "value": {
+                    "title": "Gratis toegangsticket voor het Design Museum Brussel",
+                    "type": "POINTS",
+                    "maxAvailableUnits": 1000,
+                    "categories": [
+                      "Doen"
+                    ],
+                    "promotionalDescription": "this is the mandatory description",
+                    "practicalInfo": "this is an optional extra description",
+                    "publicationPeriod": {
+                      "begin": "2021-08-24T14:15:22Z",
+                      "end": "2022-08-24T14:15:22Z"
+                    },
+                    "redeemPeriod": {
+                      "begin": "2021-08-24T14:15:22Z",
+                      "end": "2022-08-24T14:15:22Z"
+                    },
+                    "grantingPeriod": {
+                      "begin": "2021-08-24T14:15:22Z",
+                      "end": "2022-08-24T14:15:22Z"
+                    },
+                    "moreInfoURL": "https://example.org/more-info-about-this-reward",
+                    "redeemType": "ONLINE",
+                    "points": 10
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Rewards"
+        ],
+        "description": "Update reward.\n\nThe caller of this request must have `REWARDS_WRITE` permission for the given organizer."
+      }
+    },
+    "/rewards/{rewardId}/redeem-status": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "rewardId",
+          "in": "path",
+          "required": true,
+          "description": "Unique ID of a single reward."
+        }
+      ],
+      "get": {
+        "summary": "Check redeem status of a reward for a passholder",
+        "operationId": "get-rewards-id-redeem-status",
+        "responses": {
+          "200": {
+            "description": "Info that indicates if the reward with the given ID is redeemable or not by the passholder with the given UiTPAS number.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "redeemable": {
+                      "type": "boolean",
+                      "description": "Whether this reward can be redeemed by the given passholder.",
+                      "readOnly": true
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "If redeemable if false, this field contains the reason why.",
+                      "enum": [
+                        "DATE",
+                        "VOLUME",
+                        "PASSHOLDER"
+                      ]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "User readable message of the reason (only if redeemable if false)",
+                      "readOnly": true
+                    }
+                  },
+                  "required": [
+                    "redeemable"
+                  ]
+                },
+                "examples": {
+                  "Example redeemable": {
+                    "value": {
+                      "redeemable": true
+                    }
+                  },
+                  "Example not redeemable": {
+                    "value": {
+                      "redeemable": false,
+                      "reason": "PASSHOLDER",
+                      "message": "Je hebt niet genoeg punten om dit voordeel in te wisselen."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/social-tariff-expired\n* https://api.publiq.be/probs/uitpas/invalid-uitpas-number\n\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "description": "Not Found. Possible error types:\n\n* https://api.publiq.be/probs/uitpas/reward-not-found"
+          }
+        },
+        "description": "Check the reward redeem status for a passholder.\n\n\nThe caller of this request must have `REDEEM_REWARDS` permission for the given organizer.",
+        "security": [
+          {
+            "CLIENT_ACCESS_TOKEN": []
+          },
+          {
+            "USER_ACCESS_TOKEN": []
+          }
+        ],
+        "tags": [
+          "Rewards"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "required": true,
+            "name": "uitpasNumber",
+            "description": "UiTPAS number identifying the passholder who wants to redeem this reward."
+          }
+        ]
+      }
+    },
+    "/rewards/redeemed": {
+      "parameters": [],
+      "post": {
+        "summary": "Redeem reward",
+        "operationId": "post-rewards-redeemed",
+        "responses": {
+          "201": {
+            "description": "Info about the redeemed reward.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RedeemedReward"
+                },
+                "examples": {
+                  "Example": {
+                    "value": {
+                      "id": "7982c147-7cf6-4268-acdf-ffbd3d77a2ca",
+                      "reward": {
+                        "id": "374a166b-9170-4f9e-a797-48fb5bd6840d",
+                        "title": "A great reward",
+                        "type": "POINTS",
+                        "promotionalDescription": "This is a description",
+                        "publicationPeriod": {
+                          "begin": "2019-08-24T14:15:22Z",
+                          "end": "2019-08-24T14:15:22Z"
+                        },
+                        "grantingPeriod": {
+                          "begin": "2019-08-24T14:15:22Z",
+                          "end": "2019-08-24T14:15:22Z"
+                        },
+                        "points": 0,
+                        "moreInfoURL": "https://www.uitpas.be/reward/example-more-info",
+                        "redeemType": "PHYSICAL",
+                        "owningCardSystem": {
+                          "id": 1,
+                          "name": "UiTPAS Dender"
+                        },
+                        "allCardSystems": true,
+                        "organizers": [
+                          {
+                            "id": "abc12345",
+                            "name": "UiTPAS Test Organizer"
+                          }
+                        ],
+                        "status": "ACTIVE",
+                        "maxAvailableUnits": 100,
+                        "unitsTaken": 0,
+                        "practicalInfo": "This is information on how to redeem the reward.",
+                        "pictures": [
+                          "https://www.uitpas.be/default-picture-for-ticketsale-rewards.png"
+                        ],
+                        "redeemPeriod": {
+                          "begin": "2019-08-24T14:15:22Z",
+                          "end": "2019-08-24T14:15:22Z"
+                        },
+                        "categories": [
+                          "Eten en drinken"
+                        ],
+                        "forKids": true,
+                        "sport": true,
+                        "labels": "freetext1,freetext2",
+                        "usesCodes": true
+                      },
+                      "redeemDate": "2019-08-24T14:15:22Z",
+                      "redeemInfo": {
+                        "text": "Info on how to use the redeem code",
+                        "link": "https://example.com/redeem-your-reward-here",
+                        "label": "Claim your discount"
+                      },
+                      "redeemCode": "abc123456789"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/body/missing\n* https://api.publiq.be/probs/body/invalid-syntax\n* https://api.publiq.be/probs/body/invalid-data\n* https://api.publiq.be/probs/uitpas/social-tariff-expired\n* https://api.publiq.be/probs/uitpas/invalid-uitpas-number\n* https://api.publiq.be/probs/uitpas/passholder-not-found\n* https://api.publiq.be/probs/uitpas/reward-not-found\n* https://api.publiq.be/probs/uitpas/reward-period-constraint\n* https://api.publiq.be/probs/uitpas/reward-volume-constraint\n* https://api.publiq.be/probs/uitpas/reward-passholder-constraint\n"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "description": "Not Found. Possible error types:\n\n* https://api.publiq.be/probs/uitpas/reward-not-found"
+          }
+        },
+        "description": "Redeem reward.\n\nThe caller of this request must have `REDEEM_REWARDS` permission for the given organizer.",
+        "tags": [
+          "Rewards"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "rewardId": {
+                    "type": "string",
+                    "description": "ID of reward to redeem"
+                  },
+                  "uitpasNumber": {
+                    "type": "string",
+                    "description": "UiTPAS number of the passholder exchanging this reward."
+                  }
+                },
+                "required": [
+                  "rewardId",
+                  "uitpasNumber"
+                ]
+              },
+              "examples": {
+                "Example": {
+                  "value": {
+                    "uitpasNumber": "0930012345615",
+                    "rewardId": "fce4bd2f-4dca-4a44-9912-6168f0ac7e5e"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CLIENT_ACCESS_TOKEN": []
+          },
+          {
+            "USER_ACCESS_TOKEN": []
+          }
+        ]
+      },
+      "get": {
+        "summary": "Retrieve redeemed rewards",
+        "operationId": "get-rewards-redeemed",
+        "responses": {
+          "200": {
+            "description": "Paginated collection of redeemed rewards.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RedeemedRewardsPaginatedResponse"
+                },
+                "examples": {
+                  "Example": {
+                    "value": {
+                      "totalItems": 10,
+                      "member": [
+                        {
+                          "id": "7982c147-7cf6-4268-acdf-ffbd3d77a2ca",
+                          "reward": {
+                            "id": "374a166b-9170-4f9e-a797-48fb5bd6840d",
+                            "title": "A great reward",
+                            "type": "POINTS",
+                            "promotionalDescription": "This is a description",
+                            "publicationPeriod": {
+                              "begin": "2019-08-24T14:15:22Z",
+                              "end": "2019-08-24T14:15:22Z"
+                            },
+                            "grantingPeriod": {
+                              "begin": "2019-08-24T14:15:22Z",
+                              "end": "2019-08-24T14:15:22Z"
+                            },
+                            "points": 0,
+                            "moreInfoURL": "https://www.uitpas.be/reward/example-more-info",
+                            "redeemType": "PHYSICAL",
+                            "owningCardSystem": {
+                              "id": 1,
+                              "name": "UiTPAS Dender"
+                            },
+                            "allCardSystems": true,
+                            "organizers": [
+                              {
+                                "id": "abc12345",
+                                "name": "UiTPAS Test Organizer"
+                              }
+                            ],
+                            "status": "ACTIVE",
+                            "maxAvailableUnits": 100,
+                            "unitsTaken": 0,
+                            "practicalInfo": "This is information on how to redeem the reward.",
+                            "pictures": [
+                              "https://www.uitpas.be/default-picture-for-ticketsale-rewards.png"
+                            ],
+                            "redeemPeriod": {
+                              "begin": "2019-08-24T14:15:22Z",
+                              "end": "2019-08-24T14:15:22Z"
+                            },
+                            "categories": [
+                              "Eten en drinken"
+                            ],
+                            "forKids": true,
+                            "sport": true,
+                            "labels": "freetext1,freetext2",
+                            "usesCodes": true
+                          },
+                          "redeemDate": "2019-08-24T14:15:22Z",
+                          "redeemInfo": {
+                            "text": "Info on how to use the redeem code",
+                            "link": "https://example.com/redeem-your-reward-here",
+                            "label": "Claim your discount"
+                          },
+                          "redeemCode": "abc123456789"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/social-tariff-expired\n* https://api.publiq.be/probs/uitpas/invalid-uitpas-number\n\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          }
+        },
+        "description": "Retrieve redeemed rewards for a passholder.\n\nThe caller of this request must have `REWARDS_READ` permission.",
+        "security": [
+          {
+            "CLIENT_ACCESS_TOKEN": []
+          },
+          {
+            "USER_ACCESS_TOKEN": []
+          }
+        ],
+        "tags": [
+          "Rewards"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "required": true,
+            "name": "uitpasNumber",
+            "description": "UiTPAS number identifying the passholder."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "POINTS",
+                "WELCOME"
+              ]
+            },
+            "in": "query",
+            "name": "rewardType",
+            "description": "Type of the redeemed reward."
+          },
+          {
+            "schema": {
+              "type": "integer",
+              "default": 0
+            },
+            "in": "query",
+            "name": "start",
+            "description": "Start index of the redeemed rewards."
+          },
+          {
+            "schema": {
+              "type": "integer",
+              "default": 20
+            },
+            "in": "query",
+            "name": "limit",
+            "description": "Limit the number of redeemed rewards in the response."
+          }
+        ]
+      }
+    },
     "/card-systems": {
       "get": {
         "summary": "Search card systems",
@@ -3206,11 +4319,11 @@
         "description": "The Tariff describes the discounted price a passholder has to pay for a given ticket. ",
         "x-internal": false,
         "x-examples": {
-          "example-1": {
+          "Example": {
             "value": {
-              "id": "string",
-              "name": "string",
-              "price": 0,
+              "id": "SOCIALLTARIFF-1",
+              "name": "UiTPAS Kansentarief",
+              "price": 1.5,
               "type": "SOCIALTARIFF"
             }
           }
@@ -3221,7 +4334,8 @@
         "properties": {
           "id": {
             "type": "string",
-            "description": ""
+            "description": "ID of the tariff",
+            "readOnly": true
           },
           "name": {
             "type": "string",
@@ -3254,23 +4368,27 @@
           "Example": {
             "price": 5,
             "cardSystem": {
-              "id": 12,
-              "name": "UiTPAS Oostende",
-              "branding": {
-                "logo": "https://www.uitpas.be/_nuxt/img/1351557.svg",
-                "primaryColor": "rgba(0,0,0,1.0)",
-                "secondaryColor": "rgba(97,166,14,1.0)"
-              },
-              "links": {
-                "website": "https://www.uitpas.be"
-              },
-              "cities": [
-                {
-                  "postalCode": "8400",
-                  "name": "Oostende"
-                }
-              ],
-              "permanent": true
+                          "id": 1,
+                          "name": "UiTPAS Dender",
+                          "branding": {
+                            "logo": "https://www.uitpas.be/_nuxt/img/1351557.svg",
+                            "primaryColor": "rgba(0,0,0,1.0)",
+                            "secondaryColor": "rgba(97,166,14,1.0)"
+                          },
+                          "links": {
+                            "website": "https://www.uitpas.be"
+                          },
+                          "cities": [
+                            {
+                              "postalCode": "9300",
+                              "name": "Aalst"
+                            },
+                            {
+                              "postalCode": "9400",
+                              "name": "Ninove"
+                            }
+                          ],
+                          "permanent": true
             }
           }
         },
@@ -3316,30 +4434,34 @@
             "eventId": "CBA2D826-9E85-47BD-8E0B-2BC7882E68FB",
             "uitpasNumber": "1234567890",
             "passholder": {
-              "id": "string",
-              "name": "string",
-              "firstName": "string",
-              "inszNumber": "string",
+              "id": "772ecd3f-dfa3-42ee-8feb-f09dfab71902",
+              "name": "Peeters",
+              "firstName": "Marc",
+              "inszNumber": "00000009007",
               "cardSystemMemberships": [
                 {
                   "cardSystem": {
-                    "id": 12,
-                    "name": "UiTPAS Oostende",
-                    "branding": {
-                      "logo": "https://www.uitpas.be/_nuxt/img/1351557.svg",
-                      "primaryColor": "rgba(0,0,0,1.0)",
-                      "secondaryColor": "rgba(97,166,14,1.0)"
-                    },
-                    "links": {
-                      "website": "https://www.uitpas.be"
-                    },
-                    "cities": [
-                      {
-                        "postalCode": "8400",
-                        "name": "Oostende"
-                      }
-                    ],
-                    "permanent": true
+                          "id": 1,
+                          "name": "UiTPAS Dender",
+                          "branding": {
+                            "logo": "https://www.uitpas.be/_nuxt/img/1351557.svg",
+                            "primaryColor": "rgba(0,0,0,1.0)",
+                            "secondaryColor": "rgba(97,166,14,1.0)"
+                          },
+                          "links": {
+                            "website": "https://www.uitpas.be"
+                          },
+                          "cities": [
+                            {
+                              "postalCode": "9300",
+                              "name": "Aalst"
+                            },
+                            {
+                              "postalCode": "9400",
+                              "name": "Ninove"
+                            }
+                          ],
+                          "permanent": true
                   },
                   "uitpasNumber": "0560002524314",
                   "status": "ACTIVE",
@@ -3454,6 +4576,66 @@
           }
         }
       },
+      "RewardsPaginatedResponse": {
+        "title": "RewardsPaginatedResponse",
+        "type": "object",
+        "x-tags": [
+          "Models"
+        ],
+        "description": "Paginated response object for rewards",
+        "properties": {
+          "totalItems": {
+            "type": "integer",
+            "description": "Total number of rewards for the request."
+          },
+          "member": {
+            "type": "array",
+            "description": "List of rewards starting at index `start` and limited to `limit` items.",
+            "items": {
+              "$ref": "#/components/schemas/Reward"
+            }
+          },
+          "facet": {
+            "type": "object",
+            "description": "Facet information for the requested facets.",
+            "properties": {
+              "categories": {
+                "$ref": "#/components/schemas/Facet"
+              },
+              "extras": {
+                "$ref": "#/components/schemas/Facet"
+              },
+              "owningCardSystemId": {
+                "$ref": "#/components/schemas/Facet"
+              },
+              "type": {
+                "$ref": "#/components/schemas/Facet"
+              }
+            }
+          }
+        }
+      },
+      "RedeemedRewardsPaginatedResponse": {
+        "title": "RewardsPaginatedResponse",
+        "type": "object",
+        "x-tags": [
+          "Models"
+        ],
+        "description": "Paginated response object for rewards",
+        "properties": {
+          "totalItems": {
+            "type": "integer",
+            "description": "Total number of redeemed rewards for the request."
+          },
+          "member": {
+            "type": "array",
+            "description": "List of redeemed rewards starting at index `start` and limited to `limit` items.",
+            "items": {
+              "$ref": "#/components/schemas/RedeemedReward"
+            }
+          }
+        }
+      },
       "OrganizersPaginatedResponse": {
         "title": "OrganizersPaginatedResponse",
         "type": "object",
@@ -3501,67 +4683,57 @@
         "description": "Person who holds an UiTPAS, the end-user of an UiTPAS. \n\nA `Passholder` can be identified by its `id`. However, there are cases where the passholder identifies using one of its UiTPAS numbers. That number is CardSystem specific, so it can be found under `cardSystemMemberships`. Every passholder should have at least one cardsystem membership.",
         "x-examples": {
           "Example": {
-            "id": "string",
-            "name": "string",
-            "firstName": "string",
-            "inszNumber": "string",
+            "id": "1be0fb53-0695-405b-ac09-deafead650af",
+            "name": "Peeters",
+            "firstName": "Marc",
+            "inszNumber": "00000009007",
+            "dateOfBirth": "2000-01-01",
+            "postalCode": "9300",
+            "address": {
+              "postalCode": "9300",
+              "city": "Aalst"
+            },
+            "creationDate": "2012-08-24T14:15:22Z",
+            "registrationOrganizer": {
+              "id": "1234",
+              "name": "Example UiTPAS Organizer"
+            },
+            "points": 10,
+            "uitidStatus": "UNREGISTERED",
             "cardSystemMemberships": [
               {
                 "cardSystem": {
-                  "id": 12,
-                  "name": "UiTPAS Oostende",
-                  "branding": {
-                    "logo": "https://www.uitpas.be/_nuxt/img/1351557.svg",
-                    "primaryColor": "rgba(0,0,0,1.0)",
-                    "secondaryColor": "rgba(97,166,14,1.0)"
-                  },
-                  "links": {
-                    "website": "https://www.uitpas.be"
-                  },
-                  "cities": [
-                    {
-                      "postalCode": "8400",
-                      "name": "Oostende"
-                    }
-                  ],
-                  "permanent": true
+                          "id": 1,
+                          "name": "UiTPAS Dender",
+                          "branding": {
+                            "logo": "https://www.uitpas.be/_nuxt/img/1351557.svg",
+                            "primaryColor": "rgba(0,0,0,1.0)",
+                            "secondaryColor": "rgba(97,166,14,1.0)"
+                          },
+                          "links": {
+                            "website": "https://www.uitpas.be"
+                          },
+                          "cities": [
+                            {
+                              "postalCode": "9300",
+                              "name": "Aalst"
+                            },
+                            {
+                              "postalCode": "9400",
+                              "name": "Ninove"
+                            }
+                          ],
+                          "permanent": true
                 },
-                "uitpasNumber": "string",
+                "uitpasNumber": "0930012345615",
                 "status": "ACTIVE",
                 "socialTariff": {
-                  "endDate": "2019-08-24T14:15:22Z",
-                  "inGracePeriod": true,
-                  "expired": true
+                  "endDate": "2022-08-24T14:15:22Z",
+                  "inGracePeriod": false,
+                  "expired": false
                 }
               }
-            ],
-            "email": "string",
-            "creationDate": "2019-08-24T14:15:22Z",
-            "dateOfBirth": "2019-08-24",
-            "postalCode": "string",
-            "city": "string",
-            "registrationOrganizer": {
-              "id": "string",
-              "name": "string"
-            },
-            "points": 0,
-            "uitidStatus": "REGISTERED",
-            "address": {
-              "street": "string",
-              "number": "string",
-              "box": "string",
-              "postalCode": "string",
-              "city": "string",
-              "country": "string"
-            },
-            "optInPreferences": {
-              "serviceMails": true,
-              "infoMails": true,
-              "milestoneMails": true,
-              "sms": true,
-              "post": true
-            },
-            "nationality": "string"
+            ]
           }
         },
         "properties": {
@@ -3997,7 +5169,7 @@
         "required": [
           "id"
         ]
-      },
+      },      
       "Report": {
         "type": "object",
         "title": "Report",
@@ -4128,9 +5300,9 @@
           "example-1": {
             "value": {
               "available": {
-                "id": "string",
-                "name": "string",
-                "price": 0,
+                "id": "SOCIALTARIFF-1",
+                "name": "UiTPAS Kansentarief",
+                "price": 1.5,
                 "remaining": 1
               }
             }
@@ -4151,9 +5323,9 @@
       "TariffAvailibility": {
         "x-examples": {
           "Example": {
-            "id": "string",
-            "name": "string",
-            "price": 0,
+            "id": "SOCIALTARIFF-1",
+            "name": "UiTPAS Kansentarief",
+            "price": 1.5,
             "type": "SOCIALTARIFF",
             "remaining": 1
           }
@@ -4181,6 +5353,274 @@
         "x-tags": [
           "Models"
         ]
+      },
+      "Period": {
+        "title": "Period",
+        "type": "object",
+        "x-examples": {
+          "Example": {
+            "begin": "2019-08-24T14:15:22Z",
+            "end": "2019-08-24T14:15:22Z"
+          }
+        },
+        "x-tags": [
+          "Models"
+        ],
+        "description": "Period entity with a begin and end date.",
+        "properties": {
+          "begin": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "end": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "begin",
+          "end"
+        ]
+      },
+      "Reward": {
+        "type": "object",
+        "title": "Reward",
+        "description": "Reward model",
+        "x-tags": [
+          "Models"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "ID of the reward",
+            "readOnly": true
+          },
+          "title": {
+            "type": "string",
+            "description": "Title of the reward"
+          },
+          "type": {
+            "type": "string",
+            "description": "Type of the reward",
+            "enum": [
+              "POINTS",
+              "WELCOME"
+            ]
+          },
+          "promotionalDescription": {
+            "type": "string",
+            "description": "Promotion description"
+          },
+          "publicationPeriod": {
+            "$ref": "#/components/schemas/Period"
+          },
+          "grantingPeriod": {
+            "$ref": "#/components/schemas/Period"
+          },
+          "points": {
+            "type": "number",
+            "description": "Number of points needed to redeem the reward"
+          },
+          "categories": {
+            "type": "array",
+            "description": "List of categories of this reward.",
+            "items": {
+              "type": "string",
+              "enum": [
+                "Eten en drinken",
+                "Doen",
+                "Gadget of item",
+                "Goede doel"
+              ]
+            }
+          },
+          "moreInfoURL": {
+            "type": "string",
+            "description": "URL where a user can find more info about this reward.",
+            "format": "uri"
+          },
+          "redeemType": {
+            "type": "string",
+            "enum": [
+              "PHYSICAL",
+              "ONLINE"
+            ]
+          },
+          "owningCardSystem": {
+            "$ref": "#/components/schemas/CardSystem"
+          },
+          "applicableCardSystems": {
+            "type": "array",
+            "description": "List of CardSystems whose members can redeem this reward. ",
+            "items": {
+              "$ref": "#/components/schemas/CardSystem"
+            }
+          },
+          "allCardSystems": {
+            "type": "boolean",
+            "description": "If set to true, `applicableCardSystems` will always contain all UiTPAS CardSystems."
+          },
+          "organizers": {
+            "type": "array",
+            "description": "List of Organizers where this reward can be redeemed.",
+            "items": {
+              "$ref": "#/components/schemas/Organizer"
+            }
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "INACTIVE",
+              "DELETED"
+            ],
+            "description": "Status of this reward.",
+            "readOnly": true
+          },
+          "maxAvailableUnits": {
+            "type": "integer",
+            "description": "Maximum (total) available units of this reward."
+          },
+          "unitsTaken": {
+            "type": "integer",
+            "description": "Number of rewards already redeemed.",
+            "readOnly": true
+          },
+          "practicalInfo": {
+            "type": "string",
+            "description": "Practical info for passholders who want to redeem this reward."
+          },
+          "pictures": {
+            "type": "array",
+            "description": "List of URLs to zero or more images of this reward.",
+            "items": {
+              "type": "string",
+              "format": "uri"
+            }
+          },
+          "redeemPeriod": {
+            "$ref": "#/components/schemas/Period"
+          },
+          "forKids": {
+            "type": "boolean",
+            "description": "true if this reward is specifically targetted to children."
+          },
+          "sport": {
+            "type": "boolean",
+            "description": "true if this is a sport reward"
+          },
+          "labels": {
+            "type": "string",
+            "description": "Comma separated list of labels."
+          },
+          "usesCodes": {
+            "type": "boolean",
+            "description": "Only for reward of cashinType ONLINE. If set to true this reward will produce a `redeemCode` when redeemed."
+          }
+        },
+        "required": [
+          "title",
+          "type",
+          "promotionalDescription",
+          "publicationPeriod",
+          "grantingPeriod",
+          "points",
+          "categories",
+          "moreInfoURL",
+          "redeemType"
+        ]
+      },
+      "RedeemedReward": {
+        "type": "object",
+        "title": "RedeemedReward",
+        "x-tags": [
+          "Models"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "ID of the redeemed reward."
+          },
+          "reward": {
+            "$ref": "#/components/schemas/Reward"
+          },
+          "redeemDate": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of the redeem action."
+          },
+          "redeemInfo": {
+            "type": "object",
+            "description": "Information about the redeem action.",
+            "properties": {
+              "text": {
+                "type": "string",
+                "description": "Text to show to the user who redeemed this reward."
+              },
+              "link": {
+                "type": "string",
+                "format": "uri",
+                "description": "Link for a call-to-action for the redeemed reward."
+              },
+              "label": {
+                "type": "string",
+                "description": "Label for the call-to-action of the redeemed reward."
+              }
+            }
+          },
+          "redeemCode": {
+            "type": "string",
+            "description": "Redeem code to show to the user who redeemed this reward. (Only applicable for rewards that have `usesCodes=true`)"
+          }
+        },
+        "required": [
+          "id",
+          "reward",
+          "redeemDate"
+        ]
+      },
+      "Facet": {
+        "title": "Facet",
+        "type": "object",
+        "additionalProperties": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "object",
+              "properties": {
+                "nl": {
+                  "type": "string"
+                }
+              }
+            },
+            "count": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "name",
+            "count"
+          ]
+        },
+        "x-tags": [
+          "Models"
+        ],
+        "x-examples": {
+          "Example": {
+            "option1": {
+              "name": {
+                "nl": "Option 1"
+              },
+              "count": 3
+            },
+            "option2": {
+              "name": {
+                "nl": "Option 2"
+              },
+              "count": 4
+            }
+          }
+        }
       },
       "CardSystemsPaginatedCollection": {
         "title": "CardSystemsPaginatedCollection",
@@ -4256,7 +5696,7 @@
       "CLIENT_IDENTIFICATION": {
         "name": "x-client-id",
         "type": "apiKey",
-        "in": "query"
+        "in": "header"
       }
     },
     "parameters": {},

@@ -3304,7 +3304,7 @@
             }
           },
           "400": {
-            "description": "Bad Request. Possible error types:\n\n* https://api.publiq.be/probs/uitpas/invalid-card-system\n\nThe detail property might include more information for the client developer."
+            "description": "Bad Request. Possible error types:\n\n* https://api.publiq.be/probs/body/missing\n* https://api.publiq.be/probs/body/invalid-syntax\n* https://api.publiq.be/probs/body/invalid-data\n* https://api.publiq.be/probs/uitpas/invalid-card-system\n\nThe detail property might include more information for the client developer."
           },
           "401": {
             "$ref": "#/components/responses/Unauthorized"
@@ -3517,7 +3517,7 @@
             }
           },
           "400": {
-            "description": "Bad Request. Possible error types:\n\n* https://api.publiq.be/probs/uitpas/invalid-card-system\n\nThe detail property might include more information for the client developer.",
+            "description": "Bad Request. Possible error types:\n\n* https://api.publiq.be/probs/body/missing\n* https://api.publiq.be/probs/body/invalid-syntax\n* https://api.publiq.be/probs/body/invalid-data\n* https://api.publiq.be/probs/uitpas/invalid-card-system\n\nThe detail property might include more information for the client developer.",
             "content": {
               "application/json": {
                 "schema": {
@@ -3796,7 +3796,7 @@
             }
           },
           "400": {
-            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/social-tariff-expired\n* https://api.publiq.be/probs/uitpas/invalid-uitpas-number\n* https://api.publiq.be/probs/uitpas/passholder-not-found\n* https://api.publiq.be/probs/uitpas/reward-not-found\n* https://api.publiq.be/probs/uitpas/reward-period-constraint\n* https://api.publiq.be/probs/uitpas/reward-volume-constraint\n* https://api.publiq.be/probs/uitpas/reward-passholder-constraint\n"
+            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/body/missing\n* https://api.publiq.be/probs/body/invalid-syntax\n* https://api.publiq.be/probs/body/invalid-data\n* https://api.publiq.be/probs/uitpas/social-tariff-expired\n* https://api.publiq.be/probs/uitpas/invalid-uitpas-number\n* https://api.publiq.be/probs/uitpas/passholder-not-found\n* https://api.publiq.be/probs/uitpas/reward-not-found\n* https://api.publiq.be/probs/uitpas/reward-period-constraint\n* https://api.publiq.be/probs/uitpas/reward-volume-constraint\n* https://api.publiq.be/probs/uitpas/reward-passholder-constraint\n"
           },
           "401": {
             "$ref": "#/components/responses/Unauthorized"
@@ -4948,18 +4948,8 @@
         "type": "object",
         "x-examples": {
           "Example": {
-            "name": "Lastname",
-            "firstName": "Firstname",
-            "cardSystem": {
-              "id": 27
-            },
-            "email": "firstname.lastname@example.com",
-            "dateOfBirth": "1980-01-01",
-            "postalCode": "9000",
-            "city": "Gent",
-            "registrationOrganizer": {
-              "id": "d2f898b1-455e-44ee-b08a-c4c05b1ab900"
-            }
+            "begin": "2019-08-24T14:15:22Z",
+            "end": "2019-08-24T14:15:22Z"
           }
         },
         "x-tags": [

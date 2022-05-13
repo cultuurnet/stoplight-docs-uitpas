@@ -2884,21 +2884,24 @@
                       "totalItems": 0,
                       "member": [
                         {
-                          "id": 0,
-                          "name": "string",
+                          "id": 1,
+                          "name": "UiTPAS Dender",
                           "branding": {
-                            "logo": "string",
-                            "primaryColor": "string",
-                            "secondaryColor": "string"
+                            "logo": "https://www.uitpas.be/_nuxt/img/1351557.svg",
+                            "primaryColor": "rgba(0,0,0,1.0)",
+                            "secondaryColor": "rgba(97,166,14,1.0)"
                           },
                           "links": {
-                            "website": "string",
-                            "terms": "string"
+                            "website": "https://www.uitpas.be"
                           },
                           "cities": [
                             {
-                              "postalCode": "string",
-                              "name": "string"
+                              "postalCode": "9300",
+                              "name": "Aalst"
+                            },
+                            {
+                              "postalCode": "9400",
+                              "name": "Ninove"
                             }
                           ],
                           "permanent": true
@@ -2911,7 +2914,7 @@
             }
           },
           "400": {
-            "description": "Bad Request.Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/invalid-city\n* https://api.publiq.be/probs/uitpas/invalid-postal-code\n\nThe detail property might include more information for the client developer."
+            "description": "Bad Request.Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/invalid-city\n\nThe detail property might include more information for the client developer."
           },
           "401": {
             "$ref": "#/components/responses/Unauthorized"

@@ -2899,6 +2899,9 @@
                             "id": 1,
                             "name": "UiTPAS Dender"
                           },
+                          "categories": [
+                            "Doen"
+                          ],
                           "allCardSystems": true,
                           "status": "ACTIVE",
                           "maxAvailableUnits": 0,
@@ -3327,6 +3330,9 @@
                   "value": {
                     "title": "Free entrance for 10 points on 1 specific event",
                     "type": "POINTS",
+                    "categories": [
+                      "Doen"
+                    ],
                     "promotionalDescription": "this is the mandatory description",
                     "publicationPeriod": {
                       "begin": "2021-08-24T14:15:22Z",
@@ -3554,6 +3560,9 @@
                     "title": "Gratis toegangsticket voor het Design Museum Brussel",
                     "type": "POINTS",
                     "maxAvailableUnits": 1000,
+                    "categories": [
+                      "Doen"
+                    ],
                     "promotionalDescription": "this is the mandatory description",
                     "practicalInfo": "this is an optional extra description",
                     "publicationPeriod": {

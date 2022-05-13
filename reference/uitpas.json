@@ -70,7 +70,7 @@
                     "value": {
                       "available": [
                         {
-                          "id": "SOCIALTARIFF",
+                          "id": "SOCIALTARIFF-1",
                           "name": "Kansentarief",
                           "price": 1.5,
                           "type": "SOCIALTARIFF",
@@ -83,7 +83,7 @@
                     "value": {
                       "available": [
                         {
-                          "id": "SOCIALTARIFF",
+                          "id": "SOCIALTARIFF-1",
                           "name": "Kansentarief",
                           "price": 1.5,
                           "remaining": 1,
@@ -491,17 +491,17 @@
                           "regularPrice": 10,
                           "regularPriceLabel": "Optional descriptive label of the regular price. Used in financial reporting.",
                           "passholder": {
-                            "id": "string",
-                            "name": "string",
-                            "firstName": "string",
-                            "inszNumber": "string",
+                            "id": "1be0fb53-0695-405b-ac09-deafead650af",
+                            "name": "Peeters",
+                            "firstName": "Marc",
+                            "inszNumber": "00000009007",
                             "dateOfBirth": "2000-01-01",
                             "postalCode": "9300",
                             "address": {
                               "postalCode": "9300",
                               "city": "Aalst"
                             },
-                            "creationDate": "2022-08-24T14:15:22Z",
+                            "creationDate": "2012-08-24T14:15:22Z",
                             "registrationOrganizer": {
                               "id": "1234",
                               "name": "Example UiTPAS Organizer"
@@ -514,7 +514,7 @@
                                   "id": 1,
                                   "name": "UiTPAS Dender"
                                 },
-                                "uitpasNumber": "string",
+                                "uitpasNumber": "0930012345615",
                                 "status": "ACTIVE",
                                 "socialTariff": {
                                   "endDate": "2022-08-24T14:15:22Z",
@@ -538,22 +538,22 @@
                           "regularPrice": 10,
                           "regularPriceLabel": "Optional descriptive label of the regular price. Used in financial reporting.",
                           "passholder": {
-                            "id": "string",
-                            "name": "string",
-                            "firstName": "string",
-                            "inszNumber": "string",
+                            "id": "1be0fb53-0695-405b-ac09-deafead650af",
+                            "name": "Peeters",
+                            "firstName": "Marc",
+                            "inszNumber": "00000009007",
                             "dateOfBirth": "2000-01-01",
                             "postalCode": "9300",
                             "address": {
                               "postalCode": "9300",
                               "city": "Aalst"
                             },
-                            "creationDate": "2022-08-24T14:15:22Z",
+                            "creationDate": "2012-08-24T14:15:22Z",
                             "registrationOrganizer": {
                               "id": "1234",
                               "name": "Example UiTPAS Organizer"
                             },
-                            "points": 12,
+                            "points": 10,
                             "uitidStatus": "UNREGISTERED",
                             "cardSystemMemberships": [
                               {
@@ -561,7 +561,7 @@
                                   "id": 1,
                                   "name": "UiTPAS Dender"
                                 },
-                                "uitpasNumber": "string",
+                                "uitpasNumber": "0930012345615",
                                 "status": "ACTIVE",
                                 "socialTariff": {
                                   "endDate": "2022-08-24T14:15:22Z",
@@ -1058,39 +1058,38 @@
                       "totalItems": 1,
                       "member": [
                         {
-                          "id": "string",
-                          "name": "string",
-                          "firstName": "string",
-                          "inszNumber": "string",
+                          "id": "1be0fb53-0695-405b-ac09-deafead650af",
+                          "name": "Peeters",
+                          "firstName": "Marc",
+                          "inszNumber": "00000009007",
                           "dateOfBirth": "2000-01-01",
                           "postalCode": "9300",
                           "address": {
                             "postalCode": "9300",
                             "city": "Aalst"
                           },
-                          "points": 12,
-                          "uitidStatus": "UNREGISTERED",
+                          "creationDate": "2012-08-24T14:15:22Z",
                           "registrationOrganizer": {
                             "id": "1234",
                             "name": "Example UiTPAS Organizer"
                           },
+                          "points": 10,
+                          "uitidStatus": "UNREGISTERED",
                           "cardSystemMemberships": [
                             {
                               "cardSystem": {
-                                "id": 0,
-                                "name": "string"
+                                "id": 1,
+                                "name": "UiTPAS Dender"
                               },
-                              "uitpasNumber": "string",
+                              "uitpasNumber": "0930012345615",
                               "status": "ACTIVE",
                               "socialTariff": {
-                                "endDate": "2019-08-24T14:15:22Z",
-                                "inGracePeriod": true,
-                                "expired": true
+                                "endDate": "2022-08-24T14:15:22Z",
+                                "inGracePeriod": false,
+                                "expired": false
                               }
                             }
-                          ],
-                          "email": "string",
-                          "creationDate": "2019-08-24T14:15:22Z"
+                          ]
                         }
                       ]
                     }
@@ -1242,52 +1241,38 @@
                 "examples": {
                   "Example": {
                     "value": {
-                      "id": "string",
-                      "name": "string",
-                      "firstName": "string",
-                      "lastName": "string",
-                      "inszNumber": "string",
+                      "id": "1be0fb53-0695-405b-ac09-deafead650af",
+                      "name": "Peeters",
+                      "firstName": "Marc",
+                      "inszNumber": "00000009007",
+                      "dateOfBirth": "2000-01-01",
+                      "postalCode": "9300",
+                      "address": {
+                        "postalCode": "9300",
+                        "city": "Aalst"
+                      },
+                      "creationDate": "2012-08-24T14:15:22Z",
+                      "registrationOrganizer": {
+                        "id": "1234",
+                        "name": "Example UiTPAS Organizer"
+                      },
+                      "points": 10,
+                      "uitidStatus": "UNREGISTERED",
                       "cardSystemMemberships": [
                         {
                           "cardSystem": {
                             "id": 1,
-                            "name": "UiTPAS Regio Dender"
+                            "name": "UiTPAS Dender"
                           },
-                          "uitpasNumber": "string",
+                          "uitpasNumber": "0930012345615",
                           "status": "ACTIVE",
                           "socialTariff": {
-                            "endDate": "2019-08-24T14:15:22Z",
-                            "inGracePeriod": true,
-                            "expired": true
+                            "endDate": "2022-08-24T14:15:22Z",
+                            "inGracePeriod": false,
+                            "expired": false
                           }
                         }
-                      ],
-                      "email": "string",
-                      "creationDate": "2019-08-24T14:15:22Z",
-                      "dateOfBirth": "2019-08-24",
-                      "postalCode": "string",
-                      "city": "string",
-                      "registrationOrganizer": {
-                        "id": "abc12345",
-                        "name": "UiTPAS Test Organizer"
-                      },
-                      "points": 3,
-                      "uitidStatus": "REGISTERED",
-                      "address": {
-                        "street": "string",
-                        "number": "string",
-                        "box": "string",
-                        "postalCode": "string",
-                        "city": "string"
-                      },
-                      "optInPreferences": {
-                        "serviceMails": true,
-                        "infoMails": true,
-                        "milestoneMails": true,
-                        "sms": true,
-                        "post": true
-                      },
-                      "nationality": "string"
+                      ]
                     }
                   }
                 }
@@ -1325,21 +1310,21 @@
               "examples": {
                 "Example": {
                   "value": {
-                    "name": "string",
-                    "firstName": "string",
-                    "inszNumber": "string",
-                    "email": "string",
-                    "dateOfBirth": "2019-08-24",
+                    "name": "Peeters",
+                    "firstName": "Marc",
+                    "inszNumber": "00000009007",
+                    "email": "marc.peeters@example.com",
+                    "dateOfBirth": "2000-01-01",
                     "registrationOrganizer": {
                       "id": "abc12345"
                     },
                     "address": {
-                      "street": "string",
-                      "number": "string",
-                      "box": "string",
-                      "postalCode": "1000",
-                      "city": "Brussel",
-                      "country": "string"
+                      "street": "Grote markt",
+                      "number": "12",
+                      "box": "",
+                      "postalCode": "9300",
+                      "city": "Aalst",
+                      "country": "be"
                     },
                     "optInPreferences": {
                       "serviceMails": true,
@@ -1348,7 +1333,7 @@
                       "sms": false,
                       "post": true
                     },
-                    "nationality": "string",
+                    "nationality": "Belg",
                     "legalConsentPaper": false,
                     "legalConsentDigital": true,
                     "parentalConsent": false,
@@ -1943,32 +1928,38 @@
                 "examples": {
                   "Example": {
                     "value": {
-                      "id": "string",
-                      "name": "string",
-                      "firstName": "string",
-                      "inszNumber": "string",
+                      "id": "1be0fb53-0695-405b-ac09-deafead650af",
+                      "name": "Peeters",
+                      "firstName": "Marc",
+                      "inszNumber": "00000009007",
                       "dateOfBirth": "2000-01-01",
                       "postalCode": "9300",
                       "address": {
                         "postalCode": "9300",
                         "city": "Aalst"
                       },
+                      "creationDate": "2012-08-24T14:15:22Z",
                       "registrationOrganizer": {
                         "id": "1234",
                         "name": "Example UiTPAS Organizer"
                       },
+                      "points": 10,
+                      "uitidStatus": "UNREGISTERED",
                       "cardSystemMemberships": [
                         {
                           "cardSystem": {
-                            "id": 0,
-                            "name": "string"
+                            "id": 1,
+                            "name": "UiTPAS Dender"
                           },
-                          "uitpasNumber": "string",
-                          "status": "ACTIVE"
+                          "uitpasNumber": "0930012345615",
+                          "status": "ACTIVE",
+                          "socialTariff": {
+                            "endDate": "2022-08-24T14:15:22Z",
+                            "inGracePeriod": false,
+                            "expired": false
+                          }
                         }
-                      ],
-                      "email": "string",
-                      "creationDate": "2019-08-24T14:15:22Z"
+                      ]
                     }
                   }
                 }
@@ -3717,12 +3708,12 @@
                 "examples": {
                   "Example": {
                     "value": {
-                      "id": "string",
+                      "id": "7982c147-7cf6-4268-acdf-ffbd3d77a2ca",
                       "reward": {
-                        "id": "string",
-                        "title": "string",
+                        "id": "374a166b-9170-4f9e-a797-48fb5bd6840d",
+                        "title": "A great reward",
                         "type": "POINTS",
-                        "promotionalDescription": "string",
+                        "promotionalDescription": "This is a description",
                         "publicationPeriod": {
                           "begin": "2019-08-24T14:15:22Z",
                           "end": "2019-08-24T14:15:22Z"
@@ -3735,26 +3726,20 @@
                         "moreInfoURL": "https://www.uitpas.be/reward/example-more-info",
                         "redeemType": "PHYSICAL",
                         "owningCardSystem": {
-                          "id": 0,
-                          "name": "string"
+                          "id": 1,
+                          "name": "UiTPAS Dender"
                         },
-                        "applicableCardSystems": [
-                          {
-                            "id": 0,
-                            "name": "string"
-                          }
-                        ],
                         "allCardSystems": true,
                         "organizers": [
                           {
-                            "id": "string",
-                            "name": "string"
+                            "id": "abc12345",
+                            "name": "UiTPAS Test Organizer"
                           }
                         ],
                         "status": "ACTIVE",
-                        "maxAvailableUnits": 0,
+                        "maxAvailableUnits": 100,
                         "unitsTaken": 0,
-                        "practicalInfo": "string",
+                        "practicalInfo": "This is information on how to redeem the reward.",
                         "pictures": [
                           "https://www.uitpas.be/default-picture-for-ticketsale-rewards.png"
                         ],
@@ -3767,28 +3752,16 @@
                         ],
                         "forKids": true,
                         "sport": true,
-                        "labels": "string",
-                        "usesCodes": true,
-                        "ticketSaleDiscount": {
-                          "amount": 0,
-                          "type": "ABSOLUTE",
-                          "conditions": [
-                            {
-                              "type": "EVENT",
-                              "values": [
-                                "string"
-                              ]
-                            }
-                          ]
-                        }
+                        "labels": "freetext1,freetext2",
+                        "usesCodes": true
                       },
                       "redeemDate": "2019-08-24T14:15:22Z",
                       "redeemInfo": {
-                        "text": "string",
+                        "text": "Info on how to use the redeem code",
                         "link": "https://example.com/redeem-your-reward-here",
-                        "label": "string"
+                        "label": "Claim your discount"
                       },
-                      "redeemCode": "string"
+                      "redeemCode": "abc123456789"
                     }
                   }
                 }
@@ -3835,8 +3808,8 @@
               "examples": {
                 "Example": {
                   "value": {
-                    "uitpasNumber": "string",
-                    "rewardId": "string"
+                    "uitpasNumber": "0930012345615",
+                    "rewardId": "fce4bd2f-4dca-4a44-9912-6168f0ac7e5e"
                   }
                 }
               }
@@ -3869,12 +3842,12 @@
                       "totalItems": 10,
                       "member": [
                         {
-                          "id": "string",
+                          "id": "7982c147-7cf6-4268-acdf-ffbd3d77a2ca",
                           "reward": {
-                            "id": "string",
-                            "title": "string",
+                            "id": "374a166b-9170-4f9e-a797-48fb5bd6840d",
+                            "title": "A great reward",
                             "type": "POINTS",
-                            "promotionalDescription": "string",
+                            "promotionalDescription": "This is a description",
                             "publicationPeriod": {
                               "begin": "2019-08-24T14:15:22Z",
                               "end": "2019-08-24T14:15:22Z"
@@ -3884,29 +3857,23 @@
                               "end": "2019-08-24T14:15:22Z"
                             },
                             "points": 0,
-                            "moreInfoURL": "https://example.org/more-info-about-this-reward",
+                            "moreInfoURL": "https://www.uitpas.be/reward/example-more-info",
                             "redeemType": "PHYSICAL",
                             "owningCardSystem": {
-                              "id": 0,
-                              "name": "string"
+                              "id": 1,
+                              "name": "UiTPAS Dender"
                             },
-                            "applicableCardSystems": [
-                              {
-                                "id": 0,
-                                "name": "string"
-                              }
-                            ],
                             "allCardSystems": true,
                             "organizers": [
                               {
-                                "id": "string",
-                                "name": "string"
+                                "id": "abc12345",
+                                "name": "UiTPAS Test Organizer"
                               }
                             ],
                             "status": "ACTIVE",
-                            "maxAvailableUnits": 0,
+                            "maxAvailableUnits": 100,
                             "unitsTaken": 0,
-                            "practicalInfo": "string",
+                            "practicalInfo": "This is information on how to redeem the reward.",
                             "pictures": [
                               "https://www.uitpas.be/default-picture-for-ticketsale-rewards.png"
                             ],
@@ -3919,16 +3886,16 @@
                             ],
                             "forKids": true,
                             "sport": true,
-                            "labels": "string",
+                            "labels": "freetext1,freetext2",
                             "usesCodes": true
                           },
                           "redeemDate": "2019-08-24T14:15:22Z",
                           "redeemInfo": {
-                            "text": "string",
+                            "text": "Info on how to use the redeem code",
                             "link": "https://example.com/redeem-your-reward-here",
-                            "label": "string"
+                            "label": "Claim your discount"
                           },
-                          "redeemCode": "string"
+                          "redeemCode": "abc123456789"
                         }
                       ]
                     }
@@ -4018,11 +3985,11 @@
         "description": "The Tariff describes the discounted price a passholder has to pay for a given ticket. ",
         "x-internal": false,
         "x-examples": {
-          "example-1": {
+          "Example": {
             "value": {
-              "id": "string",
-              "name": "string",
-              "price": 0,
+              "id": "SOCIALLTARIFF-1",
+              "name": "UiTPAS Kansentarief",
+              "price": 1.5,
               "type": "SOCIALTARIFF"
             }
           }
@@ -4033,7 +4000,8 @@
         "properties": {
           "id": {
             "type": "string",
-            "description": ""
+            "description": "ID of the tariff",
+            "readOnly": true
           },
           "name": {
             "type": "string",
@@ -4113,10 +4081,10 @@
             "eventId": "CBA2D826-9E85-47BD-8E0B-2BC7882E68FB",
             "uitpasNumber": "1234567890",
             "passholder": {
-              "id": "string",
-              "name": "string",
-              "firstName": "string",
-              "inszNumber": "string",
+              "id": "772ecd3f-dfa3-42ee-8feb-f09dfab71902",
+              "name": "Peeters",
+              "firstName": "Marc",
+              "inszNumber": "00000009007",
               "cardSystemMemberships": [
                 {
                   "cardSystem": {
@@ -4343,52 +4311,38 @@
         "description": "Person who holds an UiTPAS, the end-user of an UiTPAS. \n\nA `Passholder` can be identified by its `id`. However, there are cases where the passholder identifies using one of its UiTPAS numbers. That number is CardSystem specific, so it can be found under `cardSystemMemberships`. Every passholder should have at least one cardsystem membership.",
         "x-examples": {
           "Example": {
-            "id": "string",
-            "name": "string",
-            "firstName": "string",
-            "inszNumber": "string",
+            "id": "1be0fb53-0695-405b-ac09-deafead650af",
+            "name": "Peeters",
+            "firstName": "Marc",
+            "inszNumber": "00000009007",
+            "dateOfBirth": "2000-01-01",
+            "postalCode": "9300",
+            "address": {
+              "postalCode": "9300",
+              "city": "Aalst"
+            },
+            "creationDate": "2012-08-24T14:15:22Z",
+            "registrationOrganizer": {
+              "id": "1234",
+              "name": "Example UiTPAS Organizer"
+            },
+            "points": 10,
+            "uitidStatus": "UNREGISTERED",
             "cardSystemMemberships": [
               {
                 "cardSystem": {
-                  "id": 0,
-                  "name": "string"
+                  "id": 1,
+                  "name": "UiTPAS Dender"
                 },
-                "uitpasNumber": "string",
+                "uitpasNumber": "0930012345615",
                 "status": "ACTIVE",
                 "socialTariff": {
-                  "endDate": "2019-08-24T14:15:22Z",
-                  "inGracePeriod": true,
-                  "expired": true
+                  "endDate": "2022-08-24T14:15:22Z",
+                  "inGracePeriod": false,
+                  "expired": false
                 }
               }
-            ],
-            "email": "string",
-            "creationDate": "2019-08-24T14:15:22Z",
-            "dateOfBirth": "2019-08-24",
-            "postalCode": "string",
-            "city": "string",
-            "registrationOrganizer": {
-              "id": "string",
-              "name": "string"
-            },
-            "points": 0,
-            "uitidStatus": "REGISTERED",
-            "address": {
-              "street": "string",
-              "number": "string",
-              "box": "string",
-              "postalCode": "string",
-              "city": "string",
-              "country": "string"
-            },
-            "optInPreferences": {
-              "serviceMails": true,
-              "infoMails": true,
-              "milestoneMails": true,
-              "sms": true,
-              "post": true
-            },
-            "nationality": "string"
+            ]
           }
         },
         "properties": {
@@ -4889,9 +4843,9 @@
           "example-1": {
             "value": {
               "available": {
-                "id": "string",
-                "name": "string",
-                "price": 0,
+                "id": "SOCIALTARIFF-1",
+                "name": "UiTPAS Kansentarief",
+                "price": 1.5,
                 "remaining": 1
               }
             }
@@ -4912,9 +4866,9 @@
       "TariffAvailibility": {
         "x-examples": {
           "Example": {
-            "id": "string",
-            "name": "string",
-            "price": 0,
+            "id": "SOCIALTARIFF-1",
+            "name": "UiTPAS Kansentarief",
+            "price": 1.5,
             "type": "SOCIALTARIFF",
             "remaining": 1
           }

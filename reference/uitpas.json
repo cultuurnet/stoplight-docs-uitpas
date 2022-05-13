@@ -3662,15 +3662,81 @@
         ],
         "properties": {
           "id": {
-            "type": "integer"
+            "type": "integer",
+            "description": "ID of the card system"
           },
           "name": {
-            "type": "string"
+            "type": "string",
+            "description": "Name of the card system"
+          },
+          "branding": {
+            "type": "object",
+            "description": "Branding information of the card system",
+            "properties": {
+              "logo": {
+                "type": "string",
+                "description": "URL to the logo of the card system"
+              },
+              "primaryColor": {
+                "type": "string",
+                "description": "Color code of the primary branding color."
+              },
+              "secondaryColor": {
+                "type": "string",
+                "description": "Color code of the secondary branding color."
+              }
+            }
+          },
+          "links": {
+            "type": "object",
+            "description": "Links of the card system",
+            "properties": {
+              "website": {
+                "type": "string",
+                "description": "URL of the website of the card system"
+              }
+            }
+          },
+          "cities": {
+            "type": "array",
+            "description": "List of cities that are part of this card system",
+            "items": {
+              "$ref": "#/components/schemas/City"
+            }
+          },
+          "permanent": {
+            "type": "boolean",
+            "description": "Indicates whether this is a permanent card system"
           }
         },
         "required": [
           "id"
-        ]
+        ],
+        "x-examples": {
+          "Example": {
+            "id": 1,
+            "name": "UiTPAS Dender",
+            "branding": {
+              "logo": "https://www.uitpas.be/_nuxt/img/1351557.svg",
+              "primaryColor": "rgba(0,0,0,1.0)",
+              "secondaryColor": "rgba(97,166,14,1.0)"
+            },
+            "links": {
+              "website": "https://www.uitpas.be"
+            },
+            "cities": [
+              {
+                "postalCode": "9300",
+                "name": "Aalst"
+              },
+              {
+                "postalCode": "9400",
+                "name": "Ninove"
+              }
+            ],
+            "permanent": true
+          }
+        }
       },
       "Report": {
         "type": "object",
@@ -3874,6 +3940,33 @@
             }
           }
         }
+      },
+      "City": {
+        "title": "City",
+        "type": "object",
+        "x-tags": [
+          "Models"
+        ],
+        "x-examples": {
+          "Example": {
+            "postalCode": "9300",
+            "name": "Aalst"
+          }
+        },
+        "properties": {
+          "postalCode": {
+            "type": "string",
+            "description": "Postalcode of the city"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the city"
+          }
+        },
+        "required": [
+          "postalCode",
+          "name"
+        ]
       }
     },
     "securitySchemes": {

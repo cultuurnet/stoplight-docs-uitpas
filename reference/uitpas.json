@@ -4009,8 +4009,7 @@
         "properties": {
           "id": {
             "type": "string",
-            "description": "ID of the tariff",
-            "readOnly": true
+            "description": "ID of the tariff"
           },
           "name": {
             "type": "string",

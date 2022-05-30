@@ -514,23 +514,23 @@
                             "cardSystemMemberships": [
                               {
                                 "cardSystem": {
-                    "id": 12,
-                    "name": "UiTPAS Oostende",
-                    "branding": {
-                      "logo": "https://www.uitpas.be/_nuxt/img/1351557.svg",
-                      "primaryColor": "rgba(0,0,0,1.0)",
-                      "secondaryColor": "rgba(97,166,14,1.0)"
-                    },
-                    "links": {
-                      "website": "https://www.uitpas.be"
-                    },
-                    "cities": [
-                      {
-                        "postalCode": "8400",
-                        "name": "Oostende"
-                      }
-                    ],
-                    "permanent": true
+                                  "id": 12,
+                                  "name": "UiTPAS Oostende",
+                                  "branding": {
+                                    "logo": "https://www.uitpas.be/_nuxt/img/1351557.svg",
+                                    "primaryColor": "rgba(0,0,0,1.0)",
+                                    "secondaryColor": "rgba(97,166,14,1.0)"
+                                  },
+                                  "links": {
+                                    "website": "https://www.uitpas.be"
+                                  },
+                                  "cities": [
+                                    {
+                                      "postalCode": "8400",
+                                      "name": "Oostende"
+                                    }
+                                  ],
+                                  "permanent": true
                                 },
                                 "uitpasNumber": "0930012345615",
                                 "status": "ACTIVE",
@@ -576,23 +576,23 @@
                             "cardSystemMemberships": [
                               {
                                 "cardSystem": {
-                    "id": 12,
-                    "name": "UiTPAS Oostende",
-                    "branding": {
-                      "logo": "https://www.uitpas.be/_nuxt/img/1351557.svg",
-                      "primaryColor": "rgba(0,0,0,1.0)",
-                      "secondaryColor": "rgba(97,166,14,1.0)"
-                    },
-                    "links": {
-                      "website": "https://www.uitpas.be"
-                    },
-                    "cities": [
-                      {
-                        "postalCode": "8400",
-                        "name": "Oostende"
-                      }
-                    ],
-                    "permanent": true
+                                  "id": 12,
+                                  "name": "UiTPAS Oostende",
+                                  "branding": {
+                                    "logo": "https://www.uitpas.be/_nuxt/img/1351557.svg",
+                                    "primaryColor": "rgba(0,0,0,1.0)",
+                                    "secondaryColor": "rgba(97,166,14,1.0)"
+                                  },
+                                  "links": {
+                                    "website": "https://www.uitpas.be"
+                                  },
+                                  "cities": [
+                                    {
+                                      "postalCode": "8400",
+                                      "name": "Oostende"
+                                    }
+                                  ],
+                                  "permanent": true
                                 },
                                 "uitpasNumber": "0930012345615",
                                 "status": "ACTIVE",
@@ -1111,23 +1111,23 @@
                           "cardSystemMemberships": [
                             {
                               "cardSystem": {
-                    "id": 12,
-                    "name": "UiTPAS Oostende",
-                    "branding": {
-                      "logo": "https://www.uitpas.be/_nuxt/img/1351557.svg",
-                      "primaryColor": "rgba(0,0,0,1.0)",
-                      "secondaryColor": "rgba(97,166,14,1.0)"
-                    },
-                    "links": {
-                      "website": "https://www.uitpas.be"
-                    },
-                    "cities": [
-                      {
-                        "postalCode": "8400",
-                        "name": "Oostende"
-                      }
-                    ],
-                    "permanent": true
+                                "id": 12,
+                                "name": "UiTPAS Oostende",
+                                "branding": {
+                                  "logo": "https://www.uitpas.be/_nuxt/img/1351557.svg",
+                                  "primaryColor": "rgba(0,0,0,1.0)",
+                                  "secondaryColor": "rgba(97,166,14,1.0)"
+                                },
+                                "links": {
+                                  "website": "https://www.uitpas.be"
+                                },
+                                "cities": [
+                                  {
+                                    "postalCode": "8400",
+                                    "name": "Oostende"
+                                  }
+                                ],
+                                "permanent": true
                               },
                               "uitpasNumber": "0930012345615",
                               "status": "ACTIVE",
@@ -1309,23 +1309,23 @@
                       "cardSystemMemberships": [
                         {
                           "cardSystem": {
-                    "id": 12,
-                    "name": "UiTPAS Oostende",
-                    "branding": {
-                      "logo": "https://www.uitpas.be/_nuxt/img/1351557.svg",
-                      "primaryColor": "rgba(0,0,0,1.0)",
-                      "secondaryColor": "rgba(97,166,14,1.0)"
-                    },
-                    "links": {
-                      "website": "https://www.uitpas.be"
-                    },
-                    "cities": [
-                      {
-                        "postalCode": "8400",
-                        "name": "Oostende"
-                      }
-                    ],
-                    "permanent": true
+                            "id": 12,
+                            "name": "UiTPAS Oostende",
+                            "branding": {
+                              "logo": "https://www.uitpas.be/_nuxt/img/1351557.svg",
+                              "primaryColor": "rgba(0,0,0,1.0)",
+                              "secondaryColor": "rgba(97,166,14,1.0)"
+                            },
+                            "links": {
+                              "website": "https://www.uitpas.be"
+                            },
+                            "cities": [
+                              {
+                                "postalCode": "8400",
+                                "name": "Oostende"
+                              }
+                            ],
+                            "permanent": true
                           },
                           "uitpasNumber": "0930012345615",
                           "status": "ACTIVE",
@@ -1771,23 +1771,23 @@
                       {
                         "price": 5,
                         "cardSystem": {
-                    "id": 12,
-                    "name": "UiTPAS Oostende",
-                    "branding": {
-                      "logo": "https://www.uitpas.be/_nuxt/img/1351557.svg",
-                      "primaryColor": "rgba(0,0,0,1.0)",
-                      "secondaryColor": "rgba(97,166,14,1.0)"
-                    },
-                    "links": {
-                      "website": "https://www.uitpas.be"
-                    },
-                    "cities": [
-                      {
-                        "postalCode": "8400",
-                        "name": "Oostende"
-                      }
-                    ],
-                    "permanent": true
+                          "id": 12,
+                          "name": "UiTPAS Oostende",
+                          "branding": {
+                            "logo": "https://www.uitpas.be/_nuxt/img/1351557.svg",
+                            "primaryColor": "rgba(0,0,0,1.0)",
+                            "secondaryColor": "rgba(97,166,14,1.0)"
+                          },
+                          "links": {
+                            "website": "https://www.uitpas.be"
+                          },
+                          "cities": [
+                            {
+                              "postalCode": "8400",
+                              "name": "Oostende"
+                            }
+                          ],
+                          "permanent": true
                         }
                       },
                       {
@@ -1921,23 +1921,23 @@
                       {
                         "price": 5,
                         "cardSystem": {
-                    "id": 12,
-                    "name": "UiTPAS Oostende",
-                    "branding": {
-                      "logo": "https://www.uitpas.be/_nuxt/img/1351557.svg",
-                      "primaryColor": "rgba(0,0,0,1.0)",
-                      "secondaryColor": "rgba(97,166,14,1.0)"
-                    },
-                    "links": {
-                      "website": "https://www.uitpas.be"
-                    },
-                    "cities": [
-                      {
-                        "postalCode": "8400",
-                        "name": "Oostende"
-                      }
-                    ],
-                    "permanent": true
+                          "id": 12,
+                          "name": "UiTPAS Oostende",
+                          "branding": {
+                            "logo": "https://www.uitpas.be/_nuxt/img/1351557.svg",
+                            "primaryColor": "rgba(0,0,0,1.0)",
+                            "secondaryColor": "rgba(97,166,14,1.0)"
+                          },
+                          "links": {
+                            "website": "https://www.uitpas.be"
+                          },
+                          "cities": [
+                            {
+                              "postalCode": "8400",
+                              "name": "Oostende"
+                            }
+                          ],
+                          "permanent": true
                         }
                       },
                       {

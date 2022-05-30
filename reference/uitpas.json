@@ -3617,12 +3617,12 @@
                     },
                     "reason": {
                       "type": "string",
-                      "description": "If redeemable if false, this field contains the reason why.",
+                      "description": "If redeemable is false, this field contains the reason why:\n- `INVALID_CARD`: the given `uitpasNumber` is not valid.\n- `PASSHOLDER_VOLUME`: maximum number of times this reward can be redeemed per passholder has been reached.\n- `PASSHOLDER_POINTS`: passholder does not have enought points to redeem this reward.\n- `PASSHOLDER_STATUS`: the passholder is not actice or has no active card system memberships\n- `REWARD_PERIOD`: the current date is outside the redeemPeriod of this reward\n- `REWARD_VOLUME`: maximum number of times this reward can be redeemed (in general) has been reached.\n- `PASSHOLDER_APPLICABLE_CARDSYSTEMS`: the passholder is not a member of one of the applicable card systems of this reward.\n- `SOCIAL_TARIFF_EXPIRED`: the social tariff of this passholder expired.\n",
                       "enum": [
                         "INVALID_CARD",
                         "PASSHOLDER_VOLUME",
                         "PASSHOLDER_POINTS",
-                        "PASSHOLDER",
+                        "PASSHOLDER_STATUS",
                         "REWARD_PERIOD",
                         "REWARD_VOLUME",
                         "PASSHOLDER_APPLICABLE_CARDSYSTEMS",

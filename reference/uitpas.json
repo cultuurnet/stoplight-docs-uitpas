@@ -5068,7 +5068,7 @@
             "properties": {
               "volume": {
                 "type": "string",
-                "description": "The maximum number of times this Reward can be redeemed by the same Passholder."
+                "description": "The maximum number of times this reward can be redeemed by the same passholder."
               },
               "period": {
                 "type": "string",

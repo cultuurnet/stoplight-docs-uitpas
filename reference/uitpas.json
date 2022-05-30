@@ -5141,7 +5141,7 @@
           },
           "redeemCode": {
             "type": "string",
-            "description": "Redeem code to show to the user who redeemed this reward. (Only applicable to certain Rewards that are configured in the UiTPAS Card System admin)"
+            "description": "Redeem code to show to the user who redeemed this reward. (Only applicable to certain rewards that are configured in the UiTPAS Card System admin)"
           }
         },
         "required": [

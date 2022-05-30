@@ -5064,7 +5064,7 @@
           },
           "redeemConstraint": {
             "type": "object",
-            "description": "Defines how many times this Reward can be redeemed by the same Passholder in a specific period.",
+            "description": "Defines how many times this reward can be redeemed by the same passholder in a specific period.",
             "properties": {
               "volume": {
                 "type": "string",

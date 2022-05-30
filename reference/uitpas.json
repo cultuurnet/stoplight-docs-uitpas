@@ -5072,7 +5072,7 @@
               },
               "period": {
                 "type": "string",
-                "description": "The calendar period this volume constraint applies to:\n- `ABSOLUTE`: the constraint applies to any period.\n- `DAY`: the constraint applies from 00:00 to 23:59\n- `WEEK`: the constraint applies from Monday 00:00 to Sunday 23:59\n- `MONTH`: the contraint applies from the first of the month at 00:00 to the last day of the month 23:59\n- `QUARTER`: this contraint applies to the first day of the quarter to the last day: January-March, April-June, July-September, October-December.\n- `YEAR`: from the Jan 1st to Dec 31st",
+                "description": "The calendar period this volume constraint applies to:\n- `ABSOLUTE`: the constraint applies to any period.\n- `DAY`: the constraint applies from 00:00 to 23:59\n- `WEEK`: the constraint applies from Monday 00:00 to Sunday 23:59\n- `MONTH`: the constraint applies from the first of the month at 00:00 to the last day of the month 23:59\n- `QUARTER`: this constraint applies to the first day of the quarter to the last day: January-March, April-June, July-September, October-December.\n- `YEAR`: from the Jan 1st to Dec 31st",
                 "enum": [
                   "ABSOLUTE",
                   "DAY",

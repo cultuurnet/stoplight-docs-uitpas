@@ -4238,9 +4238,6 @@
               }
             }
           },
-          "400": {
-            "description": "Bad Request.Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/invalid-city\n\nThe detail property might include more information for the client developer."
-          },
           "401": {
             "$ref": "#/components/responses/Unauthorized"
           },
@@ -5169,7 +5166,7 @@
         "required": [
           "id"
         ]
-      },      
+      },
       "Report": {
         "type": "object",
         "title": "Report",

@@ -2932,8 +2932,7 @@
                           "forKids": false,
                           "sport": false,
                           "labels": "",
-                          "redeemType": "ONLINE",
-                          "usesCodes": false
+                          "redeemType": "ONLINE"
                         }
                       ],
                       "facet": {
@@ -3247,8 +3246,7 @@
                       "forKids": false,
                       "sport": false,
                       "labels": "",
-                      "redeemType": "PHYSICAL",
-                      "usesCodes": false
+                      "redeemType": "PHYSICAL"
                     }
                   },
                   "Welcome reward": {
@@ -3289,8 +3287,7 @@
                       "forKids": false,
                       "sport": false,
                       "labels": "",
-                      "redeemType": "PHYSICAL",
-                      "usesCodes": false
+                      "redeemType": "PHYSICAL"
                     }
                   }
                 }
@@ -3407,8 +3404,7 @@
                       "forKids": false,
                       "sport": false,
                       "labels": "",
-                      "redeemType": "ONLINE",
-                      "usesCodes": false
+                      "redeemType": "ONLINE"
                     }
                   }
                 }
@@ -3505,8 +3501,7 @@
                       "forKids": false,
                       "sport": false,
                       "labels": "",
-                      "redeemType": "ONLINE",
-                      "usesCodes": false
+                      "redeemType": "ONLINE"
                     }
                   }
                 }
@@ -3514,7 +3509,7 @@
             }
           },
           "400": {
-            "description": "Bad Request. Possible error types:\n\n* https://api.publiq.be/probs/body/missing\n* https://api.publiq.be/probs/body/invalid-syntax\n* https://api.publiq.be/probs/body/invalid-data\n* https://api.publiq.be/probs/uitpas/invalid-card-system\n\nThe detail property might include more information for the client developer.",
+            "description": "Bad Request. Possible error types:\n\n* https://api.publiq.be/probs/body/missing\n* https://api.publiq.be/probs/body/invalid-syntax\n* https://api.publiq.be/probs/body/invalid-data\n* https://api.publiq.be/probs/uitpas/invalid-card-system\n* https://api.publiq.be/probs/uitpas/reward-not-editable\n\nThe detail property might include more information for the client developer.",
             "content": {
               "application/json": {
                 "schema": {
@@ -3622,11 +3617,16 @@
                     },
                     "reason": {
                       "type": "string",
-                      "description": "If redeemable if false, this field contains the reason why.",
+                      "description": "If redeemable is false, this field contains the reason why:\n- `INVALID_CARD`: the given `uitpasNumber` is not valid.\n- `PASSHOLDER_VOLUME`: maximum number of times this reward can be redeemed per passholder has been reached.\n- `PASSHOLDER_POINTS`: passholder does not have enough points to redeem this reward.\n- `REWARD_PERIOD`: the current date is outside the redeemPeriod of this reward\n- `REWARD_VOLUME`: maximum number of times this reward can be redeemed (in general) has been reached.\n- `PASSHOLDER_APPLICABLE_CARDSYSTEMS`: the passholder is not a member of one of the applicable card systems of this reward.\n- `PASSHOLDER_NO_ACTIVE_CARDSYSTEMS`: the passholder is not active or has no active card system memberships\n- `SOCIAL_TARIFF_EXPIRED`: the social tariff of this passholder expired.\n",
                       "enum": [
-                        "DATE",
-                        "VOLUME",
-                        "PASSHOLDER"
+                        "INVALID_CARD",
+                        "PASSHOLDER_VOLUME",
+                        "PASSHOLDER_POINTS",
+                        "REWARD_PERIOD",
+                        "REWARD_VOLUME",
+                        "PASSHOLDER_APPLICABLE_CARDSYSTEMS",
+                        "SOCIAL_TARIFF_EXPIRED",
+                        "PASSHOLDER_NO_ACTIVE_CARDSYSTEM"
                       ]
                     },
                     "message": {
@@ -3648,8 +3648,8 @@
                   "Example not redeemable": {
                     "value": {
                       "redeemable": false,
-                      "reason": "PASSHOLDER",
-                      "message": "Je hebt niet genoeg punten om dit voordeel in te wisselen."
+                      "reason": "PASSHOLDER_POINTS",
+                      "message": "Jammer, je hebt nog niet genoeg punten om dit voordeel om te ruilen."
                     }
                   }
                 }
@@ -3657,7 +3657,7 @@
             }
           },
           "400": {
-            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/social-tariff-expired\n* https://api.publiq.be/probs/uitpas/invalid-uitpas-number\n\n",
+            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/uitpas/invalid-uitpas-number\n\n",
             "content": {
               "application/json": {
                 "schema": {
@@ -3761,8 +3761,7 @@
                         ],
                         "forKids": true,
                         "sport": true,
-                        "labels": "freetext1,freetext2",
-                        "usesCodes": true
+                        "labels": "freetext1,freetext2"
                       },
                       "redeemDate": "2019-08-24T14:15:22Z",
                       "redeemInfo": {
@@ -3778,7 +3777,7 @@
             }
           },
           "400": {
-            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/body/missing\n* https://api.publiq.be/probs/body/invalid-syntax\n* https://api.publiq.be/probs/body/invalid-data\n* https://api.publiq.be/probs/uitpas/social-tariff-expired\n* https://api.publiq.be/probs/uitpas/invalid-uitpas-number\n* https://api.publiq.be/probs/uitpas/passholder-not-found\n* https://api.publiq.be/probs/uitpas/reward-not-found\n* https://api.publiq.be/probs/uitpas/reward-period-constraint\n* https://api.publiq.be/probs/uitpas/reward-volume-constraint\n* https://api.publiq.be/probs/uitpas/reward-passholder-constraint\n"
+            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/body/missing\n* https://api.publiq.be/probs/body/invalid-syntax\n* https://api.publiq.be/probs/body/invalid-data\n* https://api.publiq.be/probs/uitpas/invalid-card\n* https://api.publiq.be/probs/uitpas/social-tariff-expired\n* https://api.publiq.be/probs/uitpas/invalid-uitpas-number\n* https://api.publiq.be/probs/uitpas/passholder-not-found\n* https://api.publiq.be/probs/uitpas/reward-not-found\n* https://api.publiq.be/probs/uitpas/reward-period-constraint\n* https://api.publiq.be/probs/uitpas/reward-volume-constraint\n* https://api.publiq.be/probs/uitpas/reward-passholder-volume-constraint\n* https://api.publiq.be/probs/uitpas/reward-passholder-points-constraint\n* https://api.publiq.be/probs/uitpas/reward-passholder-no-applicable-cardsystems\n* https://api.publiq.be/probs/uitpas/passholder-no-active-cardsystems\n"
           },
           "401": {
             "$ref": "#/components/responses/Unauthorized"
@@ -3895,8 +3894,7 @@
                             ],
                             "forKids": true,
                             "sport": true,
-                            "labels": "freetext1,freetext2",
-                            "usesCodes": true
+                            "labels": "freetext1,freetext2"
                           },
                           "redeemDate": "2019-08-24T14:15:22Z",
                           "redeemInfo": {
@@ -4917,7 +4915,7 @@
         "x-tags": [
           "Models"
         ],
-        "description": "Period entity with a begin and end date.",
+        "description": "Period entity with a begin and optional end date.",
         "properties": {
           "begin": {
             "type": "string",
@@ -4929,8 +4927,7 @@
           }
         },
         "required": [
-          "begin",
-          "end"
+          "begin"
         ]
       },
       "Reward": {
@@ -5009,7 +5006,8 @@
           },
           "allCardSystems": {
             "type": "boolean",
-            "description": "If set to true, `applicableCardSystems` will always contain all UiTPAS CardSystems."
+            "description": "If set to true, `applicableCardSystems` will always contain all UiTPAS CardSystems.",
+            "default": true
           },
           "organizers": {
             "type": "array",
@@ -5064,9 +5062,31 @@
             "type": "string",
             "description": "Comma separated list of labels."
           },
-          "usesCodes": {
-            "type": "boolean",
-            "description": "Only for reward of cashinType ONLINE. If set to true this reward will produce a `redeemCode` when redeemed."
+          "redeemConstraint": {
+            "type": "object",
+            "description": "Defines how many times this reward can be redeemed by the same passholder in a specific period.",
+            "properties": {
+              "volume": {
+                "type": "string",
+                "description": "The maximum number of times this reward can be redeemed by the same passholder."
+              },
+              "period": {
+                "type": "string",
+                "description": "The calendar period this volume constraint applies to:\n- `ABSOLUTE`: the constraint applies to any period.\n- `DAY`: the constraint applies from 00:00 to 23:59\n- `WEEK`: the constraint applies from Monday 00:00 to Sunday 23:59\n- `MONTH`: the constraint applies from the first of the month at 00:00 to the last day of the month 23:59\n- `QUARTER`: this constraint applies to the first day of the quarter to the last day: January-March, April-June, July-September, October-December.\n- `YEAR`: from the Jan 1st to Dec 31st",
+                "enum": [
+                  "ABSOLUTE",
+                  "DAY",
+                  "WEEK",
+                  "MONTH",
+                  "QUARTER",
+                  "YEAR"
+                ]
+              }
+            },
+            "required": [
+              "volume",
+              "period"
+            ]
           }
         },
         "required": [
@@ -5121,7 +5141,7 @@
           },
           "redeemCode": {
             "type": "string",
-            "description": "Redeem code to show to the user who redeemed this reward. (Only applicable for rewards that have `usesCodes=true`)"
+            "description": "Redeem code to show to the user who redeemed this reward. (Only applicable to certain rewards that are configured in the UiTPAS Card System admin)"
           }
         },
         "required": [

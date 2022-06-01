@@ -3509,7 +3509,7 @@
             }
           },
           "400": {
-            "description": "Bad Request. Possible error types:\n\n* https://api.publiq.be/probs/body/missing\n* https://api.publiq.be/probs/body/invalid-syntax\n* https://api.publiq.be/probs/body/invalid-data\n* https://api.publiq.be/probs/uitpas/invalid-card-system\n\nThe detail property might include more information for the client developer.",
+            "description": "Bad Request. Possible error types:\n\n* https://api.publiq.be/probs/body/missing\n* https://api.publiq.be/probs/body/invalid-syntax\n* https://api.publiq.be/probs/body/invalid-data\n* https://api.publiq.be/probs/uitpas/invalid-card-system\n* https://api.publiq.be/probs/uitpas/reward-not-editable\n\nThe detail property might include more information for the client developer.",
             "content": {
               "application/json": {
                 "schema": {
@@ -3617,16 +3617,16 @@
                     },
                     "reason": {
                       "type": "string",
-                      "description": "If redeemable is false, this field contains the reason why:\n- `INVALID_CARD`: the given `uitpasNumber` is not valid.\n- `PASSHOLDER_VOLUME`: maximum number of times this reward can be redeemed per passholder has been reached.\n- `PASSHOLDER_POINTS`: passholder does not have enough points to redeem this reward.\n- `PASSHOLDER_STATUS`: the passholder is not active or has no active card system memberships\n- `REWARD_PERIOD`: the current date is outside the redeemPeriod of this reward\n- `REWARD_VOLUME`: maximum number of times this reward can be redeemed (in general) has been reached.\n- `PASSHOLDER_APPLICABLE_CARDSYSTEMS`: the passholder is not a member of one of the applicable card systems of this reward.\n- `SOCIAL_TARIFF_EXPIRED`: the social tariff of this passholder expired.\n",
+                      "description": "If redeemable is false, this field contains the reason why:\n- `INVALID_CARD`: the given `uitpasNumber` is not valid.\n- `PASSHOLDER_VOLUME`: maximum number of times this reward can be redeemed per passholder has been reached.\n- `PASSHOLDER_POINTS`: passholder does not have enough points to redeem this reward.\n- `REWARD_PERIOD`: the current date is outside the redeemPeriod of this reward\n- `REWARD_VOLUME`: maximum number of times this reward can be redeemed (in general) has been reached.\n- `PASSHOLDER_APPLICABLE_CARDSYSTEMS`: the passholder is not a member of one of the applicable card systems of this reward.\n- `PASSHOLDER_NO_ACTIVE_CARDSYSTEMS`: the passholder is not active or has no active card system memberships\n- `SOCIAL_TARIFF_EXPIRED`: the social tariff of this passholder expired.\n",
                       "enum": [
                         "INVALID_CARD",
                         "PASSHOLDER_VOLUME",
                         "PASSHOLDER_POINTS",
-                        "PASSHOLDER_STATUS",
                         "REWARD_PERIOD",
                         "REWARD_VOLUME",
                         "PASSHOLDER_APPLICABLE_CARDSYSTEMS",
-                        "SOCIAL_TARIFF_EXPIRED"
+                        "SOCIAL_TARIFF_EXPIRED",
+                        "PASSHOLDER_NO_ACTIVE_CARDSYSTEM"
                       ]
                     },
                     "message": {
@@ -3777,7 +3777,7 @@
             }
           },
           "400": {
-            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/body/missing\n* https://api.publiq.be/probs/body/invalid-syntax\n* https://api.publiq.be/probs/body/invalid-data\n* https://api.publiq.be/probs/uitpas/social-tariff-expired\n* https://api.publiq.be/probs/uitpas/invalid-uitpas-number\n* https://api.publiq.be/probs/uitpas/passholder-not-found\n* https://api.publiq.be/probs/uitpas/reward-not-found\n* https://api.publiq.be/probs/uitpas/reward-period-constraint\n* https://api.publiq.be/probs/uitpas/reward-volume-constraint\n* https://api.publiq.be/probs/uitpas/reward-passholder-constraint\n"
+            "description": "Bad Request. Possbile error types:\n\n* https://api.publiq.be/probs/body/missing\n* https://api.publiq.be/probs/body/invalid-syntax\n* https://api.publiq.be/probs/body/invalid-data\n* https://api.publiq.be/probs/uitpas/invalid-card\n* https://api.publiq.be/probs/uitpas/social-tariff-expired\n* https://api.publiq.be/probs/uitpas/invalid-uitpas-number\n* https://api.publiq.be/probs/uitpas/passholder-not-found\n* https://api.publiq.be/probs/uitpas/reward-not-found\n* https://api.publiq.be/probs/uitpas/reward-period-constraint\n* https://api.publiq.be/probs/uitpas/reward-volume-constraint\n* https://api.publiq.be/probs/uitpas/reward-passholder-volume-constraint\n* https://api.publiq.be/probs/uitpas/reward-passholder-points-constraint\n* https://api.publiq.be/probs/uitpas/reward-passholder-no-applicable-cardsystems\n* https://api.publiq.be/probs/uitpas/passholder-no-active-cardsystems\n"
           },
           "401": {
             "$ref": "#/components/responses/Unauthorized"

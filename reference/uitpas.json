@@ -21,6 +21,9 @@
   ],
   "tags": [
     {
+      "name": "Card Systems"
+    },
+    {
       "name": "Events"
     },
     {
@@ -511,8 +514,23 @@
                             "cardSystemMemberships": [
                               {
                                 "cardSystem": {
-                                  "id": 1,
-                                  "name": "UiTPAS Dender"
+                                  "id": 12,
+                                  "name": "UiTPAS Oostende",
+                                  "branding": {
+                                    "logo": "https://www.uitpas.be/_nuxt/img/1351557.svg",
+                                    "primaryColor": "rgba(0,0,0,1.0)",
+                                    "secondaryColor": "rgba(97,166,14,1.0)"
+                                  },
+                                  "links": {
+                                    "website": "https://www.uitpas.be"
+                                  },
+                                  "cities": [
+                                    {
+                                      "postalCode": "8400",
+                                      "name": "Oostende"
+                                    }
+                                  ],
+                                  "permanent": true
                                 },
                                 "uitpasNumber": "0930012345615",
                                 "status": "ACTIVE",
@@ -558,8 +576,23 @@
                             "cardSystemMemberships": [
                               {
                                 "cardSystem": {
-                                  "id": 1,
-                                  "name": "UiTPAS Dender"
+                                  "id": 12,
+                                  "name": "UiTPAS Oostende",
+                                  "branding": {
+                                    "logo": "https://www.uitpas.be/_nuxt/img/1351557.svg",
+                                    "primaryColor": "rgba(0,0,0,1.0)",
+                                    "secondaryColor": "rgba(97,166,14,1.0)"
+                                  },
+                                  "links": {
+                                    "website": "https://www.uitpas.be"
+                                  },
+                                  "cities": [
+                                    {
+                                      "postalCode": "8400",
+                                      "name": "Oostende"
+                                    }
+                                  ],
+                                  "permanent": true
                                 },
                                 "uitpasNumber": "0930012345615",
                                 "status": "ACTIVE",
@@ -1078,8 +1111,23 @@
                           "cardSystemMemberships": [
                             {
                               "cardSystem": {
-                                "id": 1,
-                                "name": "UiTPAS Dender"
+                                "id": 12,
+                                "name": "UiTPAS Oostende",
+                                "branding": {
+                                  "logo": "https://www.uitpas.be/_nuxt/img/1351557.svg",
+                                  "primaryColor": "rgba(0,0,0,1.0)",
+                                  "secondaryColor": "rgba(97,166,14,1.0)"
+                                },
+                                "links": {
+                                  "website": "https://www.uitpas.be"
+                                },
+                                "cities": [
+                                  {
+                                    "postalCode": "8400",
+                                    "name": "Oostende"
+                                  }
+                                ],
+                                "permanent": true
                               },
                               "uitpasNumber": "0930012345615",
                               "status": "ACTIVE",
@@ -1261,8 +1309,23 @@
                       "cardSystemMemberships": [
                         {
                           "cardSystem": {
-                            "id": 1,
-                            "name": "UiTPAS Dender"
+                            "id": 12,
+                            "name": "UiTPAS Oostende",
+                            "branding": {
+                              "logo": "https://www.uitpas.be/_nuxt/img/1351557.svg",
+                              "primaryColor": "rgba(0,0,0,1.0)",
+                              "secondaryColor": "rgba(97,166,14,1.0)"
+                            },
+                            "links": {
+                              "website": "https://www.uitpas.be"
+                            },
+                            "cities": [
+                              {
+                                "postalCode": "8400",
+                                "name": "Oostende"
+                              }
+                            ],
+                            "permanent": true
                           },
                           "uitpasNumber": "0930012345615",
                           "status": "ACTIVE",
@@ -1708,22 +1771,75 @@
                       {
                         "price": 5,
                         "cardSystem": {
-                          "id": 1,
-                          "name": "UiTPAS Dender"
+                          "id": 12,
+                          "name": "UiTPAS Oostende",
+                          "branding": {
+                            "logo": "https://www.uitpas.be/_nuxt/img/1351557.svg",
+                            "primaryColor": "rgba(0,0,0,1.0)",
+                            "secondaryColor": "rgba(97,166,14,1.0)"
+                          },
+                          "links": {
+                            "website": "https://www.uitpas.be"
+                          },
+                          "cities": [
+                            {
+                              "postalCode": "8400",
+                              "name": "Oostende"
+                            }
+                          ],
+                          "permanent": true
                         }
                       },
                       {
                         "price": 5,
                         "cardSystem": {
                           "id": 8,
-                          "name": "UiTPAS Gent"
+                          "name": "UiTPAS Gent",
+                          "branding": {
+                            "logo": "https://www.uitpas.be/_nuxt/img/1351557.svg",
+                            "primaryColor": "rgba(0,0,0,1.0)",
+                            "secondaryColor": "rgba(97,166,14,1.0)"
+                          },
+                          "links": {
+                            "website": "https://www.uitpas.be"
+                          },
+                          "cities": [
+                            {
+                              "postalCode": "9000",
+                              "name": "Gent"
+                            },
+                            {
+                              "postalCode": "9050",
+                              "name": "Gent-Brugge"
+                            }
+                          ],
+                          "permanent": true
                         }
                       },
                       {
                         "price": 5,
                         "cardSystem": {
-                          "id": 12,
-                          "name": "UiTPAS Oostende"
+                          "id": 1,
+                          "name": "UiTPAS Dender",
+                          "branding": {
+                            "logo": "https://www.uitpas.be/_nuxt/img/1351557.svg",
+                            "primaryColor": "rgba(0,0,0,1.0)",
+                            "secondaryColor": "rgba(97,166,14,1.0)"
+                          },
+                          "links": {
+                            "website": "https://www.uitpas.be"
+                          },
+                          "cities": [
+                            {
+                              "postalCode": "9300",
+                              "name": "Aalst"
+                            },
+                            {
+                              "postalCode": "9400",
+                              "name": "Ninove"
+                            }
+                          ],
+                          "permanent": true
                         }
                       }
                     ]
@@ -1805,22 +1921,75 @@
                       {
                         "price": 5,
                         "cardSystem": {
-                          "id": 1,
-                          "name": "UiTPAS Dender"
+                          "id": 12,
+                          "name": "UiTPAS Oostende",
+                          "branding": {
+                            "logo": "https://www.uitpas.be/_nuxt/img/1351557.svg",
+                            "primaryColor": "rgba(0,0,0,1.0)",
+                            "secondaryColor": "rgba(97,166,14,1.0)"
+                          },
+                          "links": {
+                            "website": "https://www.uitpas.be"
+                          },
+                          "cities": [
+                            {
+                              "postalCode": "8400",
+                              "name": "Oostende"
+                            }
+                          ],
+                          "permanent": true
                         }
                       },
                       {
                         "price": 5,
                         "cardSystem": {
                           "id": 8,
-                          "name": "UiTPAS Gent"
+                          "name": "UiTPAS Gent",
+                          "branding": {
+                            "logo": "https://www.uitpas.be/_nuxt/img/1351557.svg",
+                            "primaryColor": "rgba(0,0,0,1.0)",
+                            "secondaryColor": "rgba(97,166,14,1.0)"
+                          },
+                          "links": {
+                            "website": "https://www.uitpas.be"
+                          },
+                          "cities": [
+                            {
+                              "postalCode": "9000",
+                              "name": "Gent"
+                            },
+                            {
+                              "postalCode": "9050",
+                              "name": "Gent-Brugge"
+                            }
+                          ],
+                          "permanent": true
                         }
                       },
                       {
                         "price": 5,
                         "cardSystem": {
-                          "id": 12,
-                          "name": "UiTPAS Oostende"
+                          "id": 1,
+                          "name": "UiTPAS Dender",
+                          "branding": {
+                            "logo": "https://www.uitpas.be/_nuxt/img/1351557.svg",
+                            "primaryColor": "rgba(0,0,0,1.0)",
+                            "secondaryColor": "rgba(97,166,14,1.0)"
+                          },
+                          "links": {
+                            "website": "https://www.uitpas.be"
+                          },
+                          "cities": [
+                            {
+                              "postalCode": "9300",
+                              "name": "Aalst"
+                            },
+                            {
+                              "postalCode": "9400",
+                              "name": "Ninove"
+                            }
+                          ],
+                          "permanent": true
                         }
                       }
                     ]
@@ -1949,7 +2118,26 @@
                         {
                           "cardSystem": {
                             "id": 1,
-                            "name": "UiTPAS Dender"
+                            "name": "UiTPAS Dender",
+                            "branding": {
+                              "logo": "https://www.uitpas.be/_nuxt/img/1351557.svg",
+                              "primaryColor": "rgba(0,0,0,1.0)",
+                              "secondaryColor": "rgba(97,166,14,1.0)"
+                            },
+                            "links": {
+                              "website": "https://www.uitpas.be"
+                            },
+                            "cities": [
+                              {
+                                "postalCode": "9300",
+                                "name": "Aalst"
+                              },
+                              {
+                                "postalCode": "9400",
+                                "name": "Ninove"
+                              }
+                            ],
+                            "permanent": true
                           },
                           "uitpasNumber": "0930012345615",
                           "status": "ACTIVE",
@@ -2014,7 +2202,26 @@
                         {
                           "cardSystem": {
                             "id": 27,
-                            "name": "UiTPAS Example Cardsystem"
+                            "name": "UiTPAS Dender",
+                            "branding": {
+                              "logo": "https://www.uitpas.be/_nuxt/img/1351557.svg",
+                              "primaryColor": "rgba(0,0,0,1.0)",
+                              "secondaryColor": "rgba(97,166,14,1.0)"
+                            },
+                            "links": {
+                              "website": "https://www.uitpas.be"
+                            },
+                            "cities": [
+                              {
+                                "postalCode": "9300",
+                                "name": "Aalst"
+                              },
+                              {
+                                "postalCode": "9400",
+                                "name": "Ninove"
+                              }
+                            ],
+                            "permanent": true
                           },
                           "uitpasNumber": "0999100000002",
                           "status": "ACTIVE"
@@ -3982,6 +4189,121 @@
           }
         ]
       }
+    },
+    "/card-systems": {
+      "get": {
+        "summary": "Search card systems",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CardSystemsPaginatedCollection"
+                },
+                "examples": {
+                  "Example": {
+                    "value": {
+                      "totalItems": 0,
+                      "member": [
+                        {
+                          "id": 1,
+                          "name": "UiTPAS Dender",
+                          "branding": {
+                            "logo": "https://www.uitpas.be/_nuxt/img/1351557.svg",
+                            "primaryColor": "rgba(0,0,0,1.0)",
+                            "secondaryColor": "rgba(97,166,14,1.0)"
+                          },
+                          "links": {
+                            "website": "https://www.uitpas.be"
+                          },
+                          "cities": [
+                            {
+                              "postalCode": "9300",
+                              "name": "Aalst"
+                            },
+                            {
+                              "postalCode": "9400",
+                              "name": "Ninove"
+                            }
+                          ],
+                          "permanent": true
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          }
+        },
+        "operationId": "get-card-systems",
+        "description": "Search card systems.\n\nThis caller of this method, identified by client identification, client access token or user access token, does not require any permissions.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "boolean",
+              "default": true
+            },
+            "in": "query",
+            "name": "permanent",
+            "description": "Include only permanent (`true`) card systems or temporary (`false`) card systems."
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "start",
+            "description": "Start index of the results. Default 0"
+          },
+          {
+            "schema": {
+              "type": "integer",
+              "default": 20
+            },
+            "in": "query",
+            "name": "limit",
+            "description": "Maximum number of results"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "city",
+            "description": "Search card systems by city name. Can be included more than once to allow multiple values."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "postalCode",
+            "description": "Search card systems by postal code. Can be included more than once to allow multiple values."
+          }
+        ],
+        "tags": [
+          "Card Systems"
+        ],
+        "security": [
+          {
+            "CLIENT_IDENTIFICATION": []
+          },
+          {
+            "CLIENT_ACCESS_TOKEN": []
+          },
+          {
+            "USER_ACCESS_TOKEN": []
+          }
+        ]
+      }
     }
   },
   "components": {
@@ -4041,7 +4363,26 @@
             "price": 5,
             "cardSystem": {
               "id": 1,
-              "name": "UiTPAS Oostende"
+              "name": "UiTPAS Dender",
+              "branding": {
+                "logo": "https://www.uitpas.be/_nuxt/img/1351557.svg",
+                "primaryColor": "rgba(0,0,0,1.0)",
+                "secondaryColor": "rgba(97,166,14,1.0)"
+              },
+              "links": {
+                "website": "https://www.uitpas.be"
+              },
+              "cities": [
+                {
+                  "postalCode": "9300",
+                  "name": "Aalst"
+                },
+                {
+                  "postalCode": "9400",
+                  "name": "Ninove"
+                }
+              ],
+              "permanent": true
             }
           }
         },
@@ -4095,7 +4436,26 @@
                 {
                   "cardSystem": {
                     "id": 1,
-                    "name": "UiTPAS Dender"
+                    "name": "UiTPAS Dender",
+                    "branding": {
+                      "logo": "https://www.uitpas.be/_nuxt/img/1351557.svg",
+                      "primaryColor": "rgba(0,0,0,1.0)",
+                      "secondaryColor": "rgba(97,166,14,1.0)"
+                    },
+                    "links": {
+                      "website": "https://www.uitpas.be"
+                    },
+                    "cities": [
+                      {
+                        "postalCode": "9300",
+                        "name": "Aalst"
+                      },
+                      {
+                        "postalCode": "9400",
+                        "name": "Ninove"
+                      }
+                    ],
+                    "permanent": true
                   },
                   "uitpasNumber": "0560002524314",
                   "status": "ACTIVE",
@@ -4338,7 +4698,26 @@
               {
                 "cardSystem": {
                   "id": 1,
-                  "name": "UiTPAS Dender"
+                  "name": "UiTPAS Dender",
+                  "branding": {
+                    "logo": "https://www.uitpas.be/_nuxt/img/1351557.svg",
+                    "primaryColor": "rgba(0,0,0,1.0)",
+                    "secondaryColor": "rgba(97,166,14,1.0)"
+                  },
+                  "links": {
+                    "website": "https://www.uitpas.be"
+                  },
+                  "cities": [
+                    {
+                      "postalCode": "9300",
+                      "name": "Aalst"
+                    },
+                    {
+                      "postalCode": "9400",
+                      "name": "Ninove"
+                    }
+                  ],
+                  "permanent": true
                 },
                 "uitpasNumber": "0930012345615",
                 "status": "ACTIVE",
@@ -4707,12 +5086,78 @@
         "x-tags": [
           "Models"
         ],
+        "x-examples": {
+          "Example": {
+            "id": 1,
+            "name": "UiTPAS Dender",
+            "branding": {
+              "logo": "https://www.uitpas.be/_nuxt/img/1351557.svg",
+              "primaryColor": "rgba(0,0,0,1.0)",
+              "secondaryColor": "rgba(97,166,14,1.0)"
+            },
+            "links": {
+              "website": "https://www.uitpas.be"
+            },
+            "cities": [
+              {
+                "postalCode": "9300",
+                "name": "Aalst"
+              },
+              {
+                "postalCode": "9400",
+                "name": "Ninove"
+              }
+            ],
+            "permanent": true
+          }
+        },
         "properties": {
           "id": {
-            "type": "integer"
+            "type": "integer",
+            "description": "ID of the card system"
           },
           "name": {
-            "type": "string"
+            "type": "string",
+            "description": "Name of the card system. This field is always available in responses."
+          },
+          "branding": {
+            "type": "object",
+            "description": "Branding information of the card system",
+            "properties": {
+              "logo": {
+                "type": "string",
+                "description": "URL to the logo of the card system"
+              },
+              "primaryColor": {
+                "type": "string",
+                "description": "Color code of the primary branding color."
+              },
+              "secondaryColor": {
+                "type": "string",
+                "description": "Color code of the secondary branding color."
+              }
+            }
+          },
+          "links": {
+            "type": "object",
+            "description": "Links of the card system",
+            "properties": {
+              "website": {
+                "type": "string",
+                "description": "URL of the website of the card system"
+              }
+            }
+          },
+          "cities": {
+            "type": "array",
+            "description": "List of cities that are part of this card system",
+            "items": {
+              "$ref": "#/components/schemas/City"
+            }
+          },
+          "permanent": {
+            "type": "boolean",
+            "description": "Indicates whether this is a permanent card system"
           }
         },
         "required": [
@@ -5192,6 +5637,52 @@
             }
           }
         }
+      },
+      "CardSystemsPaginatedCollection": {
+        "title": "CardSystemsPaginatedCollection",
+        "type": "object",
+        "x-tags": [
+          "Models"
+        ],
+        "description": "Paginated response object for card systems",
+        "properties": {
+          "totalItems": {
+            "type": "integer"
+          },
+          "member": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CardSystem"
+            }
+          }
+        }
+      },
+      "City": {
+        "title": "City",
+        "type": "object",
+        "x-tags": [
+          "Models"
+        ],
+        "x-examples": {
+          "Example": {
+            "postalCode": "9300",
+            "name": "Aalst"
+          }
+        },
+        "properties": {
+          "postalCode": {
+            "type": "string",
+            "description": "Postalcode of the city"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the city"
+          }
+        },
+        "required": [
+          "postalCode",
+          "name"
+        ]
       }
     },
     "securitySchemes": {
